@@ -20,9 +20,22 @@ class Formulario extends Model {
 	// 						'Asp_ID_Dir_Actual', 'Asp_ID_Area_Interes', 'Asp_Acceso_Biblioteca',
 	// 						'Asp_Acceso_Proc_DatoS', 'Asp_Acceso_Windows', 'Asp_Acceso_Email',
 	// 						'Asp_Utilizacion_Progra_Comp', 'Asp_Conoc_Educacion_Dist',
-	// 						'ID_Prop_Tesis'];
+	// 						'ID_Prop_Tesis', GEN_ID_Usuario];
 
 	public function aspirante(){
 		return $this->belongsTo('User', 'GEN_ID_Usuario');
 	}
+
+	public function informacion_personal(){
+		return $this->hasOne('User', 'GEN_ID_Usuario');
+	}
+
+	public function formularioTieneInformacionPersonal()
+    {
+        return ! is_null(
+            \DB::table('GEN_Info_Personal')
+              	->where('GEN_ID_Usuario', '=',$this->Usu_ID)
+              	->first()
+        );
+    }
 }

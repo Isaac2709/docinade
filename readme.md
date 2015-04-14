@@ -1,3 +1,14 @@
+## DOCINADE
+El DOCINADE es un Programa Interuniversitario de Doctorado de la región mesoamericana, bajo el modelo pedagógico bimodal, que combina actividades académicas tanto presenciales como a distancia y virtual.
+
+Dicho programa académico es coordinado por universidades públicas costarricenses, pero también participan otras universidades latinoamericanas de la región, como socias la Universidad Nacional Autónoma de México (UNAM), la Universidad Autónoma Chapingo, (UACh), la Universidad Nacional Autónoma de Nicaragua (UNAN-León) y otras instituciones mexicanas, de Guatemala y de Cuba.
+
+La convocatoria de admisión en el programa se extiende a todos aquellos profesionales de las áreas científicas y tecnológicas, con grado de Maestría Académica afín o, en casos excepcionales, con Licenciatura afín y experiencia académica en investigación.
+
+Entre estas áreas del saber, son reconocidas Agronomía y Agrícola, Zootecnia y Veterinaria, Biología, Forestales, Ambientales, Química, Física, Farmacia y Medicina, Electrónica, Computación y otras áreas afines a las ciencias y tecnología.
+
+La aplicacion web pretente permitir a los interesados a ingresar al Doctorado de Ciencias Naturales y De... enviar el formulario de ingreso con sus datos para que estos sean comprobados por el personal de DOCINADE.
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)

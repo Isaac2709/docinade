@@ -39,22 +39,20 @@ class FormularioController extends Controller {
 	{
 		// return Auth::user()->Usu_Nombre."<br />"."ID: ".Auth::user()->Usu_ID;
 		$formulario = Auth::user()->formulario();
-		echo "<br />"."TAMANO: ".count(Auth::user()->formulario())."<br />";
 
-		// $data = \DB::table('ASP_Aspirante')
+		if(!Auth::user()->usuarioTieneFormulario()){
+			$formulario = new Formulario();
+		}
+
+		$formulario->Asp_Lugar_Nac = $request->nacionalidad;
+		Auth::user()->formulario()->informacion_personal($informacion_personal);
+		Auth::user()->formulario()->save($formulario);
+
+				// $data = \DB::table('ASP_Aspirante')
   //             	->where('GEN_ID_Usuario', '=',Auth::user()->Usu_ID)
   //             	->first();
   //       dd($data);
 		// $formulario->save();
-		if(Auth::user()->usuarioTieneFormulario()){
-			echo "TIENE";
-		}
-		else{
-			echo "NO TIENE";
-			$formulario = new Formulario();
-			$formulario->Asp_Lugar_Nac = "Panama";
-			Auth::user()->formulario()->save($formulario);
-		}
 		// echo "-> ".Auth::user()->usuarioTieneFormulario();
 		// $data = $request->all();
 		// dd($formulario);
