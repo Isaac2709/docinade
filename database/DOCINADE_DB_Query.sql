@@ -134,6 +134,20 @@ CREATE TABLE ASP_Nacionalidad(
     CONSTRAINT UNQ_Asp_Nac_Nombre UNIQUE (Nac_Nombre)
 );
 
+-- Change
+-- ************************ TABLAS DE USUARIOS ************************ --
+
+CREATE TABLE GEN_Usuario(
+	Usu_ID SMALLINT AUTO_INCREMENT NOT NULL, --UNSIGNED,
+	Usu_Nombre VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(60) NOT NULL,
+	remember_token VARCHAR(100),
+
+    CONSTRAINT PK_Usu_ID PRIMARY KEY (Usu_ID)
+    -- Alter table `asp_aspirante` CHANGE COLUMN `ASP_Usuario` `GEN_ID_Usuario` SMALLINT NOT NULL
+);
+
 CREATE TABLE ASP_Aspirante(
 	Asp_ID SMALLINT AUTO_INCREMENT NOT NULL,
 	Asp_Fecha_Envio DATE,
@@ -330,18 +344,4 @@ CREATE TABLE GEN_Publicacion(
     CONSTRAINT PK_Asp_Pub_ID PRIMARY KEY (Pub_ID),
     CONSTRAINT FK_Asp_Pub_Asp FOREIGN KEY (Pub_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
     CONSTRAINT FK_Asp_Pub_Pais FOREIGN KEY (Pub_ID_Pais) REFERENCES GEN_Pais(Pais_ID)
-);
-
--- Change
--- ************************ TABLAS DE USUARIOS ************************ --
-
-CREATE TABLE GEN_Usuario(
-	Usu_ID SMALLINT AUTO_INCREMENT NOT NULL UNSIGNED,
-	Usu_Nombre VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
-	password VARCHAR(60) NOT NULL,
-	remember_token VARCHAR(100),
-
-    CONSTRAINT PK_Usu_ID PRIMARY KEY (Usu_ID)
-    -- Alter table `asp_aspirante` CHANGE COLUMN `ASP_Usuario` `GEN_ID_Usuario` SMALLINT NOT NULL
 );
