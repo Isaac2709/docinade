@@ -1,5 +1,5 @@
 ## DOCINADE
-El DOCINADE es un Programa Interuniversitario de Doctorado de la región mesoamericana, bajo el modelo pedagógico bimodal, que combina actividades académicas tanto presenciales como a distancia y virtual.
+DOCINADE es un Programa Interuniversitario de Doctorado de la región mesoamericana, bajo el modelo pedagógico bimodal, que combina actividades académicas tanto presenciales como a distancia y virtual.
 
 Dicho programa académico es coordinado por universidades públicas costarricenses, pero también participan otras universidades latinoamericanas de la región, como socias la Universidad Nacional Autónoma de México (UNAM), la Universidad Autónoma Chapingo, (UACh), la Universidad Nacional Autónoma de Nicaragua (UNAN-León) y otras instituciones mexicanas, de Guatemala y de Cuba.
 
