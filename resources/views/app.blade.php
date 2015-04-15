@@ -7,7 +7,6 @@
 	<title>Laravel</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
 	<link href="{{ asset('/css/bootstrap-combobox.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
 

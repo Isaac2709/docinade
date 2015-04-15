@@ -62,7 +62,7 @@ CREATE TABLE GEN_Grado_Acad(
 
 CREATE TABLE GEN_Funcion(
 	Fun_ID SMALLINT AUTO_INCREMENT NOT NULL,
-	Fun_Nombre VARCHAR(300),
+	Fun_Nombre VARCHAR(250),
 
     CONSTRAINT PK_Gen_Fun_ID PRIMARY KEY (Fun_ID),
     CONSTRAINT UNQ_Gen_Fun_Nombre UNIQUE (Fun_Nombre)
@@ -167,9 +167,9 @@ CREATE TABLE ASP_Aspirante(
     CONSTRAINT FK_Asp_Asp_Enfasis FOREIGN KEY (Asp_ID_Enfasis) REFERENCES ASP_Enfasis(Enf_ID),
     CONSTRAINT FK_Asp_Asp_DirAct FOREIGN KEY (Asp_ID_Dir_Actual) REFERENCES ASP_Dir_Actual(DiA_ID),
     CONSTRAINT FK_Asp_Asp_Area_Interes FOREIGN KEY (Asp_ID_Area_Interes) REFERENCES ASP_Area_Interes(Area_ID),
-    CONSTRAINT FK_Asp_Asp_Prop_Tesis FOREIGN KEY (ID_Prop_Tesis) REFERENCES ASP_Prop_Tesis(PTe_ID)
+    CONSTRAINT FK_Asp_Asp_Prop_Tesis FOREIGN KEY (ID_Prop_Tesis) REFERENCES ASP_Prop_Tesis(PTe_ID),
     -- Change
-    CONSTRAINT FK_Asp_Usu FOREIGN KEY (GEN_ID_Usuario) REFERENCES GEN_Usuario(Usu_ID),
+    CONSTRAINT FK_Asp_Usu FOREIGN KEY (GEN_ID_Usuario) REFERENCES GEN_Usuario(Usu_ID)
 );
 
 CREATE TABLE ASP_Biblioteca(
@@ -336,9 +336,9 @@ CREATE TABLE GEN_Publicacion(
 -- ************************ TABLAS DE USUARIOS ************************ --
 
 CREATE TABLE GEN_Usuario(
-	Usu_ID SMALLINT AUTO_INCREMENT NOT NULL UNSIGNED,
-	Usu_Nombre VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
+	Usu_ID SMALLINT AUTO_INCREMENT NOT NULL /*UNSIGNED*/,
+	Usu_Nombre VARCHAR(250) NOT NULL,
+	email VARCHAR(250) NOT NULL,
 	password VARCHAR(60) NOT NULL,
 	remember_token VARCHAR(100),
 

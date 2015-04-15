@@ -1,16 +1,18 @@
 @extends('app')
 
+
+
 @section('content')
 <div class="container">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Home</div>
+				<div class="panel-heading"><h2>Datos Personales</h2></div>
 
 				<div class="panel-body">
 					<!-- TABS -->
 					<ul class="nav nav-tabs" id="myTab">
-				        <li class="active"><a data-toggle="tab" href="#sectionA">Informacion Personal</a></li>
+				        <li class="active"><a data-toggle="tab" href="#informacionPersonal">Informacion Personal</a></li>
 				        <li><a data-toggle="tab" href="#sectionB">Profile</a></li>
 				        <li class="dropdown">
 				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
@@ -22,7 +24,7 @@
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
-				        <div id="sectionA" class="tab-pane fade in active">
+				        <div id="informacionPersonal" class="tab-pane fade in active">
 				        	<form role="form" action="#" method="post" class="form-horizontal"><!-- class="form-horizontal" -->
 				        	<br />
 				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -91,6 +93,18 @@
 											<input type="text" class="form-control" name="telefono">
 										</div>
 									</div>
+									<!--Email-->
+									<div class="form-group">
+					        			<label for="email" class="col-md-4 control-label">Email:</label>
+					        			<div class="col-md-7">
+					        				<input type="text" class="form-control" name="email">
+					        				<br>
+					        				<input id="email2" type="text" class="form-control" name="email2">
+
+					        			</div>
+					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm">+</button>
+					        		</div>
+					        		
 									<!-- Fax -->
 									<div class="form-group">
 										<label for="fax" class="col-md-4 control-label">Fax:</label>
@@ -101,6 +115,7 @@
 
 								</div>
 								<!-- End col-lg-6 -->
+
 	                    		<div class="col-lg-6">
 	                    			<!-- Enfasis de interes -->
 									<div class="form-group">
@@ -172,7 +187,7 @@
 				            <h3>Section B</h3>
 				            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
 				        </div>
-				        <div id="dropdown1" class="tab-pane fade">
+				        <div id="dropdown1" classu="tab-pane fade">
 				            <h3>Dropdown 1</h3>
 				            <p>WInteger convallis, nulla in sollicitudin placerat, ligula enim auctor lectus, in mollis diam dolor at lorem. Sed bibendum nibh sit amet dictum feugiat. Vivamus arcu sem, cursus a feugiat ut, iaculis at erat. Donec vehicula at ligula vitae venenatis. Sed nunc nulla, vehicula non porttitor in, pharetra et dolor. Fusce nec velit velit. Pellentesque consectetur eros.</p>
 				        </div>
@@ -191,6 +206,11 @@
 
 
 @section('scripts')
+
+	<!--el input del email2 escondido desde que se carga la pagina-->
+	<script type="text/javascript">
+		$("#email2").fadeOut("fast");
+	</script>
 	<!-- Lista desplegable -->
 	<script src="/js/bootstrap-combobox.js"></script>
 	<!-- Calendario -->
@@ -220,4 +240,16 @@
   //               }
 		// });
 	</script>
+
+	
+
+	<!--metodo para mostrar y esconder el input para el segundo email-->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#agregarNuevoEmail").click(function(){
+				$("#email2").fadeToggle("slow");
+			});
+		});
+	</script>
+
 @endsection
