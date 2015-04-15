@@ -97,10 +97,14 @@
 									<div class="form-group">
 					        			<label for="email" class="col-md-4 control-label">Email:</label>
 					        			<div class="col-md-7">
-					        				<input type="text" class="form-control" name="email">
-					        				<br>
-					        				<input id="email2" type="text" class="form-control" name="email2">
-
+					        				<div class="input-group">
+						        				<input type="text" class="form-control" name="email">
+						        				<div class="input-group-addon">@</div>
+						        				<input type="text" class="form-control" name="email">
+					        				</div>
+						        				<br>
+						        				<input id="email2" type="email" class="form-control" name="email2">
+					        				
 					        			</div>
 					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm">+</button>
 					        		</div>
