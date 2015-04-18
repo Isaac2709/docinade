@@ -13,12 +13,11 @@
 					<!-- TABS -->
 					<ul class="nav nav-tabs" id="myTab">
 				        <li class="active"><a data-toggle="tab" href="#informacionPersonal">Informacion Personal</a></li>
-				        <li><a data-toggle="tab" href="#sectionB">Profile</a></li>
 				        <li class="dropdown">
-				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
+				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Edu. Superior / Exp. Profesional<b class="caret"></b></a>
 				            <ul class="dropdown-menu">
-				                <li><a data-toggle="tab" href="#dropdown1">Dropdown1</a></li>
-				                <li><a data-toggle="tab" href="#dropdown2">Dropdown2</a></li>
+				                <li><a data-toggle="tab" href="#educacionSuperior">Educacion Superior</a></li>
+				                <li><a data-toggle="tab" href="#dropdown2">Experiencia Profesional</a></li>
 				            </ul>
 				        </li>
 				    </ul>
@@ -26,7 +25,7 @@
 				    	<!-- PERSONAL INFO -->
 				        <div id="informacionPersonal" class="tab-pane fade in active">
 				        	<form role="form" action="#" method="post" class="form-horizontal"><!-- class="form-horizontal" -->
-				        	<br />
+				        	<br/>
 				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				        	<div class="row">
 		                    	<div class="col-lg-6">
@@ -37,6 +36,7 @@
 											<input type="text" class="form-control" name="name">
 										</div>
 					        		</div>
+
 					        		<!-- Last name of aspirant -->
 					        		<div class="form-group">
 					        			<label for="last_name" class="col-md-4 control-label">Apellidos:</label>
@@ -97,14 +97,9 @@
 									<div class="form-group">
 					        			<label for="email" class="col-md-4 control-label">Email:</label>
 					        			<div class="col-md-7">
-					        				<div class="input-group">
-						        				<input type="text" class="form-control" name="email">
-						        				<div class="input-group-addon">@</div>
-						        				<input type="text" class="form-control" name="email">
-					        				</div>
+						        				<input type="email" class="form-control" name="email">
 						        				<br>
 						        				<input id="email2" type="email" class="form-control" name="email2">
-					        				
 					        			</div>
 					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm">+</button>
 					        		</div>
@@ -187,13 +182,22 @@
 
 				        </div>
 				        <!-- PERSONAL  -->
-				        <div id="sectionB" class="tab-pane fade">
-				            <h3>Section B</h3>
-				            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
-				        </div>
-				        <div id="dropdown1" classu="tab-pane fade">
-				            <h3>Dropdown 1</h3>
-				            <p>WInteger convallis, nulla in sollicitudin placerat, ligula enim auctor lectus, in mollis diam dolor at lorem. Sed bibendum nibh sit amet dictum feugiat. Vivamus arcu sem, cursus a feugiat ut, iaculis at erat. Donec vehicula at ligula vitae venenatis. Sed nunc nulla, vehicula non porttitor in, pharetra et dolor. Fusce nec velit velit. Pellentesque consectetur eros.</p>
+				        <div id="educacionSuperior" class="tab-pane fade">
+				            <form role="form" action="#" method="post" class="form-horizontal">
+				            	<br/>
+				        		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				        		<div class="row">
+				        			<div class="col-lg-6">
+				        				<div class="form-group">
+				        					<label for="name" class="col-md-4 control-label">Institución:</label>
+				        					<div class="col-md-8">
+				        						<input type="text" class="form-control" name="name">
+				        					</div>
+				        				</div>
+				        			</div>
+				        		</div>
+				            </form>
+
 				        </div>
 				        <div id="dropdown2" class="tab-pane fade">
 				            <h3>Dropdown 2</h3>
