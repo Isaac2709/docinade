@@ -55,7 +55,7 @@
 									<div class="form-group">
 										<label for="gender" class="col-md-4 control-label">Género:</label>
 										<div class="col-md-8">
-											<select name="" id="" class="form-control">
+											<select name="gender"  class="form-control">
 												<option value="a" selected> Seleccione su género</option>
 				                                <option value="a"> Másculino</option>
 				                                <option value="b"> Femenino </option>
@@ -163,38 +163,80 @@
 		                    			</div>
 		                    		</div>
 	                    		</div>
+
 	                    		<!-- End col-lg-6 -->
-					        </div>
-					        <!-- End row -->
-					        <div class="row">
-					        	<div class="form-group">
-						        	<label for="direccion_correspondencia" class="col-md-10 control-label"></label>
-						        	<!-- name_control -->
-						        	<div class="col-md-2">
-						        		<div class="form-group">
-						        			<input type="submit" class="btn btn-success">
-						        		</div>
-						        	</div>
+	                    		<div class="col-md-6">
+				        			<button type="submit" class="btn btn-success btn-lg pull-right">Guardar</button>
 					        	</div>
 					        </div>
+					        <!-- End row -->
 				        	</form>
 				        	<!-- End Form -->
 
 				        </div>
-				        <!-- PERSONAL  -->
+
+				        <!-- Educacioin Superior-->
 				        <div id="educacionSuperior" class="tab-pane fade">
 				            <form role="form" action="#" method="post" class="form-horizontal">
 				            	<br/>
 				        		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				        		<div class="row">
 				        			<div class="col-lg-6">
+				        				<!--Institucion -->
 				        				<div class="form-group">
-				        					<label for="name" class="col-md-4 control-label">Institución:</label>
+				        					<label for="institucion" class="col-md-4 control-label">Institución:</label>
 				        					<div class="col-md-8">
-				        						<input type="text" class="form-control" name="name">
+				        						<input type="text" class="form-control" name="institucion">
 				        					</div>
 				        				</div>
+
+				        				<!--Pais-->
+				        				<div class="form-group">
+				        					<label for="pais" class="col-md-4 control-label">País:</label>
+				        					<div class="col-md-8">
+				        						<input type="text" class="form-control" name="pais">
+				        					</div>
+				        				</div>
+
+				        				<!--Año de graduacion-->
+				        				<div class="form-group">
+				        					<label for="añoG" class="col-md-4 control-label">Año de graduación:</label>
+				        					<div class="col-md-8">
+				        						<input type="date" class="form-control" name="añoG">
+				        					</div>
+				        				</div>
+			        				</div>
+			        				<!--Termina class="col-lg-6"-->
+
+			        				<div class="col-lg-6">
+				        				<!--Titulo obtenido -->
+				        				<div class="form-group">
+				        					<label for="titulo" class="col-md-4 control-label">Título obtenido:</label>
+				        					<div class="col-md-8">
+				        						<input type="text" class="form-control" name="titulo">
+				        					</div>
+				        				</div>
+
+				        				<!-- Grado academico -->
+										<div class="form-group">
+											<label for="gradoA" class="col-md-4 control-label">Grado académico:</label>
+											<div class="col-md-8">
+												<select name="gradoA" class="form-control">
+													<option value="z" selected> Seleccione su género</option>
+					                                <option value="a">Bachiller</option>
+					                                <option value="b">Doctorado</option>
+					                                <option value="c">Maestría</option>
+					                            </select>
+				                            </div>
+						        		</div>
+						        		
 				        			</div>
+				        			<!--termina col-lg-6 -->
+
+				        			<div class="col-md-6">
+					        			<button id="agregarEduSup" type="button" class="btn btn-success btn-lg pull-right">+</button>
+				        			</div>
+
 				        		</div>
 				            </form>
 
