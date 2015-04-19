@@ -17,7 +17,7 @@
 				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Edu. Superior / Exp. Profesional<b class="caret"></b></a>
 				            <ul class="dropdown-menu">
 				                <li><a data-toggle="tab" href="#educacionSuperior">Educacion Superior</a></li>
-				                <li><a data-toggle="tab" href="#dropdown2">Experiencia Profesional</a></li>
+				                <li><a data-toggle="tab" href="#experienciaProfesional">Experiencia Profesional</a></li>
 				            </ul>
 				        </li>
 				    </ul>
@@ -67,8 +67,8 @@
 					        			<label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
 					        			<div class="col-md-8">
 					        				<!-- <input type="text" class="datepicker_control form-control"> -->
-					        				<div class="input-group date">
-											  <input type="text" class="datepicker_control form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+					        				<div class="input-group date datepicker_control">
+											  <input type="text" class=" form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 											</div>
 					        			</div>
 					        		</div>
@@ -88,7 +88,7 @@
 									</div>
 									<!-- Teléfono -->
 									<div class="form-group">
-										<label for="telefono" class="col-md-4 control-label">Teléfono</label>
+										<label for="telefono" class="col-md-4 control-label">Teléfono:</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" name="telefono">
 										</div>
@@ -118,7 +118,7 @@
 	                    		<div class="col-lg-6">
 	                    			<!-- Enfasis de interes -->
 									<div class="form-group">
-										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes</label>
+										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes:</label>
 										<div class="col-md-8">
 											<select name="" id="" class="form-control">
 												<option value="a" selected> Énfasis</option>
@@ -133,17 +133,18 @@
 											<textarea name="area_investigacion" class="form-control " rows="3"></textarea>
 										</div>
 					        		</div>
-					        		<strong>Dirección actual</strong>
+					        		<h4><u>Dirección actual</u></h4>
+					        		
 		                    		<!-- Pais de Residencia -->
 		                    		<div class="form-group">
-		                    			<label for="pais_residencia" class="col-md-4 control-label">País de residencia</label>
+		                    			<label for="pais_residencia" class="col-md-4 control-label">País de residencia:</label>
 		                    			<div class="col-md-8">
 		                    				<input type="text" class="form-control" name="pais_residencia">
 		                    			</div>
 		                    		</div>
 		                    		<!-- Ciudad -->
 		                    		<div class="form-group">
-		                    			<label for="ciudad" class="col-md-4 control-label">Ciudad</label>
+		                    			<label for="ciudad" class="col-md-4 control-label">Ciudad:</label>
 		                    			<div class="col-md-8">
 		                    				<input type="text" class="form-control" name="ciudad">
 		                    			</div>
@@ -157,13 +158,13 @@
 		                    		</div>
 		                    		<!-- Direccion para el envio de correspondencia -->
 		                    		<div class="form-group">
-		                    			<label for="direccion_correspondencia" class="col-md-4 control-label">Direccion para el envio de correspondencia:</label>
+		                    			<label for="direccion_correspondencia" class="col-md-4 control-label">Dirección para el envío de correspondencia:</label>
 		                    			<div class="col-md-8">
 		                    				<textarea name="direccion_correspondencia" class="form-control " rows="2"></textarea>
 		                    			</div>
 		                    		</div>
 	                    		</div>
-
+	                    		<br/>
 	                    		<!-- End col-lg-6 -->
 	                    		<div class="col-md-6">
 				        			<button type="submit" class="btn btn-success btn-lg pull-right">Guardar</button>
@@ -201,8 +202,11 @@
 				        				<!--Año de graduacion-->
 				        				<div class="form-group">
 				        					<label for="añoG" class="col-md-4 control-label">Año de graduación:</label>
-				        					<div class="col-md-8">
-				        						<input type="date" class="form-control" name="añoG">
+				        					
+				        					<div class="col-md-8 ">
+				        					<div class="input-group date datepicker_control">
+				        						<input type="text" class="form-control " name="añoG"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+			        						</div>
 				        					</div>
 				        				</div>
 			        				</div>
@@ -234,16 +238,52 @@
 				        			<!--termina col-lg-6 -->
 
 				        			<div class="col-md-6">
-					        			<button id="agregarEduSup" type="button" class="btn btn-success btn-lg pull-right">+</button>
+					        			<button id="agregarEduSup" type="submit" class="btn btn-success btn-lg pull-right">+</button>
 				        			</div>
 
 				        		</div>
 				            </form>
 
 				        </div>
-				        <div id="dropdown2" class="tab-pane fade">
-				            <h3>Dropdown 2</h3>
-				            <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis dis parturient.</p>
+				        <!-- Termina Educacion Superior-->
+				        <div id="experienciaProfesional" class="tab-pane fade">
+				            <form role="form" action="#" method="post" class="form-horizontal">
+				            	<br/>
+				            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				            	<div class="row">
+				            		<div class="col-md-6">
+				            			<!--Empresa centro o institucion-->
+				            			<div class="form-group">
+				            				<label for="empresa" class="col-md-4 control-label">Empresa, centro o institución:</label>
+				            				<div class="col-md-8">
+				            					<input type="text" class="form-control" name="empresa">
+				            				</div>
+				            			</div>
+
+				            			<!--Ocupacion o posicion-->
+				            			<div class="form-group">
+				            				<label for="ocupacion" class="col-md-4 control-label">Ocupación o posición:</label>
+				            				<div class="col-md-8">
+				            					<input type="text" class="form-control" name="ocupacion">
+				            				</div>
+				            			</div>
+				            			<!--Años de experiencia -->
+				            			<div class="form-group">
+				            				<label for="añosExp" class="col-md-4 control-label">Años de experiencia:</label>
+				            				<div class="col-md-8 ">
+					            			<div class="input-group" name="añosExp">
+					            				<span class="input-group-addon" >De</span>
+					            				<input type"text" class="form-control datepicker_control"  >
+					            				<span class="input-group-addon" >a</span>
+					            				<input type"text" class="form-control datepicker_control" >
+					            			</div>
+					            			</div>
+				            			</div>
+
+
+				            		</div>
+				            	</div>
+				            </form>
 				        </div>
 				    </div>
 					<!-- End Tabs -->
