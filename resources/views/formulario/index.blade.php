@@ -267,6 +267,7 @@
 				            					<input type="text" class="form-control" name="ocupacion">
 				            				</div>
 				            			</div>
+
 				            			<!--Años de experiencia -->
 				            			<div class="form-group">
 				            				<label for="añosExp" class="col-md-4 control-label">Años de experiencia:</label>
@@ -279,8 +280,22 @@
 					            			</div>
 					            			</div>
 				            			</div>
+			            			</div>
+			            			<!--Termina col-md-6 -->
 
+			            			<div class="col-md-6">
+				            			<!--Descripcion-->
+				            			<label for="descripcion" class="control-label">Para el trabajo actual, describa brevemente las funciones que realiza:</label>
+				            			<div class="form-group">
+				            				<div class="col-md-12">
+				            					<textarea  class="form-control" name="descripcion" rows="4"></textarea>
+				            				</div>
+				            			</div>
+				            		</div>
+				            		<!--Termina col-md-6 -->
 
+				            		<div class="col-md-6">
+				            			<button type="submit" class="btn btn-success btn-lg pull-right">+</button>
 				            		</div>
 				            	</div>
 				            </form>
