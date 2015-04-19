@@ -20,6 +20,7 @@
 				                <li><a data-toggle="tab" href="#experienciaProfesional">Experiencia Profesional</a></li>
 				            </ul>
 				        </li>
+				        <li><a data-toggle="tab" href="#experienciaEnInvestigacion">Experiencia en Investigación</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
@@ -179,8 +180,10 @@
 				        <!-- Educacioin Superior-->
 				        <div id="educacionSuperior" class="tab-pane fade">
 				            <form role="form" action="#" method="post" class="form-horizontal">
-				            	<br/>
 				        		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				        		<div class="col-md-12">
+				        			<h1><small> Educación Superior</small></h1>
+				        		</div>
 				        		<div class="row">
 				        			<div class="col-lg-6">
 				        				<!--Institucion -->
@@ -246,10 +249,13 @@
 
 				        </div>
 				        <!-- Termina Educacion Superior-->
+
 				        <div id="experienciaProfesional" class="tab-pane fade">
 				            <form role="form" action="#" method="post" class="form-horizontal">
-				            	<br/>
 				            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				            	<div class="col-md-12">
+				        			<h1><small>Experiencia Profesional</small></h1>
+				        		</div>
 				            	<div class="row">
 				            		<div class="col-md-6">
 				            			<!--Empresa centro o institucion-->
@@ -300,6 +306,16 @@
 				            	</div>
 				            </form>
 				        </div>
+				        <!--Termina  Experiencia profesional-->
+
+				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
+					    	<form role="form" action="#" method="post" class="form-horizontal">
+					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					    		<div class="row">
+					    			<h2>hola mundo</h2>
+					    		</div>
+					    	</form>
+				    	</div>
 				    </div>
 					<!-- End Tabs -->
 				</div>
