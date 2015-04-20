@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use App\DB;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -46,7 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*
 	*/
 	public function formulario(){
-		return $this->hasOne('App\Formulario', 'IPe_ID'); //IPe_ID
+		return $this->hasOne('App\Formulario', 'GEN_ID_Usuario'); //IPe_ID
 	}
 
 	public function usuarioTieneFormulario()
