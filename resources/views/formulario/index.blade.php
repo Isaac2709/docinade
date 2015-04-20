@@ -242,7 +242,7 @@
 				        			<!--termina col-lg-6 -->
 
 				        			<div class="col-md-6">
-					        			<button id="agregarEduSup" type="submit" class="btn btn-success btn-lg pull-right">+</button>
+					        			<button id="agregarEduSup" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 				        			</div>
 
 				        		</div>
@@ -250,14 +250,15 @@
 
 				        </div>
 				        <!-- Termina Educacion Superior-->
-
+				        
+				        <!--Experiencia profesional-->
 				        <div id="experienciaProfesional" class="tab-pane fade">
 				            <form role="form" action="#" method="post" class="form-horizontal">
 				            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				            	<div class="col-md-12">
 				        			<h1><small>Experiencia Profesional</small></h1>
 				        		</div>
-				            	<div class="row">
+				            	<div class="row" id="jeank">
 				            		<div class="col-md-6">
 				            			<!--Empresa centro o institucion-->
 				            			<div class="form-group">
@@ -301,8 +302,8 @@
 				            		</div>
 				            		<!--Termina col-md-6 -->
 
-				            		<div class="col-md-6">
-				            			<button type="submit" class="btn btn-success btn-lg pull-right">+</button>
+				            		<div class="col-md-6 ">
+				            			<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 				            		</div>
 				            	</div>
 				            </form>
@@ -313,14 +314,14 @@
 					    	<form role="form" action="#" method="post" class="form-horizontal">
 					    		<br/>
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					    		<div class="row">
-					    			<div class="col-md-6">
 
+					    		<div id="formularioExpInv1" class="row blockExpInvestigacion">
+					    			<div  class="col-md-6">
 					    				<!--Experiencia en Investigacion-->
 					    				<div class="form-group">
-					    					<label for="expEnInv" class="col-md-4 control-label">Nombre de proyecto o actividad principal:</label>
+					    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
 					    					<div class="col-md-8">
-					    						<input type="text" class="form-control" name="expEnInv">
+					    						<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
 					    					</div>
 					    				</div>
 
@@ -347,16 +348,18 @@
 					    				<div class="form-group">
 					    					<label for="año" class="col-md-4 control-label">Año:</label>
 					    					<div class="col-md-8 " id="añoI" >
-					    					<div class="input-group date año">
-					    						<input type="text"  class="form-control" name="año" id="año">
-					    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
-				    						</div>
+						    					<div class="input-group date año">
+						    						<input type="text"  class="form-control" name="año" id="año">
+						    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+					    						</div>
+					    					</div>
 					    				</div>
-					    			</div>
+				    				</div>
 					    			<!--Termina col-md-6-->
 					    			<div class="col-md-6" >
-				            			<button type="submit" class="btn btn-success btn-lg pull-right">+</button>
+				            			<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 				            		</div>
+
 					    	</form>
 				    	</div>
 				    </div>
@@ -370,6 +373,10 @@
 
 
 @section('scripts')
+	
+	<!--para agregar y remover divs-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 
 	<!--el input del email2 escondido desde que se carga la pagina-->
 	<script type="text/javascript">
@@ -391,20 +398,11 @@
 		    autoclose: true,
 		    todayHighlight: true
 		});
-		// $('.datepicker_control').datepicker({
-		//     startDate: "1/01/1910",
-		//     language: "es",
-		//     autoclose: true,
-		//     todayHighlight: true,
-		//     icons: {
-  //                   time: "fa fa-clock-o",
-  //                   date: "fa fa-calendar",
-  //                   up: "fa fa-arrow-up",
-  //                   down: "fa fa-arrow-down"
-  //               }
-		// });
+		
 		
 	</script>
+
+	<!-- -->
 	<script type="text/javascript">
         $('.año').datepicker( {
 	    format: ' yyyy',
@@ -415,14 +413,6 @@
 
 	</script>
 
-	<!--<script type="text/javascript">
-		$("#añoI").datepicker(
-	        {dateFormat 'years',
-        	//minViewMode: 'years',
-	         format: 'yyyy'
-    	});
-	</script> -->
-	
 
 	<!--metodo para mostrar y esconder el input para el segundo email-->
 	<script type="text/javascript">
@@ -432,5 +422,85 @@
 			});
 		});
 	</script>
+
+
+
+
+	<script type="text/javascript">
+
+		$(function () {
+		    $('#btnAgregarExpInvestigacion').click(function () {
+		        var num     = $('.blockExpInvestigacion').length, // how many "duplicatable" input fields we currently have
+		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
+		            newElem = $('#formularioExpInv' + num).clone().attr('id', 'formularioExpInv' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
+		    /*// manipulate the name/id values of the input inside the new element
+		        // H2 - section
+		        newElem.find('.heading-reference').attr('id', 'ID' + newNum + '_reference').attr('name', 'ID' + newNum + '_reference').html('Entry #' + newNum);
+		 
+		        // Title - select
+		        newElem.find('.label_ttl').attr('for', 'ID' + newNum + '_title');
+		        newElem.find('.select_ttl').attr('id', 'ID' + newNum + '_title').attr('name', 'ID' + newNum + '_title').val('');
+		 
+		        // First name - text
+		        newElem.find('.label_fn').attr('for', 'ID' + newNum + '_first_name');
+		        newElem.find('.input_fn').attr('id', 'ID' + newNum + '_first_name').attr('name', 'ID' + newNum + '_first_name').val('');*/
+
+		        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
+		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+		 
+		       /* // Last name - text
+		        newElem.find('.label_ln').attr('for', 'ID' + newNum + '_last_name');
+		        newElem.find('.input_ln').attr('id', 'ID' + newNum + '_last_name').attr('name', 'ID' + newNum + '_last_name').val('');
+		 
+		        // Color - checkbox
+		        newElem.find('.label_checkboxitem').attr('for', 'ID' + newNum + '_checkboxitem');
+		        newElem.find('.input_checkboxitem').attr('id', 'ID' + newNum + '_checkboxitem').attr('name', 'ID' + newNum + '_checkboxitem').val([]);
+		 
+		        // Skate - radio
+		        newElem.find('.label_radio').attr('for', 'ID' + newNum + '_radioitem');
+		        newElem.find('.input_radio').attr('id', 'ID' + newNum + '_radioitem').attr('name', 'ID' + newNum + '_radioitem').val([]);
+		 
+		        // Email - text
+		        newElem.find('.label_email').attr('for', 'ID' + newNum + '_email_address');
+		        newElem.find('.input_email').attr('id', 'ID' + newNum + '_email_address').attr('name', 'ID' + newNum + '_email_address').val('');*/
+		 
+		    // insert the new element after the last "duplicatable" input field
+		        $('#formularioExpInv' + num).after(newElem);
+		        $('#ID' + newNum + '_title').focus();
+		 
+		    // enable the "remove" button
+		        //$('#btnDel').attr('disabled', false);
+		 
+		    // right now you can only add 5 sections. change '5' below to the max number of times the form can be duplicated
+		        if (newNum == 5)
+		        $('#btnAgregarExpInvestigacion').attr('disabled', true).prop('value', "You've reached the limit");
+		    });
+		 
+		    /*$('#btnDel').click(function () {
+		    // confirmation
+		        if (confirm("Are you sure you wish to remove this section? This cannot be undone."))
+		            {
+		                var num = $('.clonedInput').length;
+		                // how many "duplicatable" input fields we currently have
+		                $('#entry' + num).slideUp('slow', function () {$(this).remove(); 
+		                // if only one element remains, disable the "remove" button
+		                    if (num -1 === 1)
+		                $('#btnDel').attr('disabled', true);
+		                // enable the "add" button
+		                $('#btnAdd').attr('disabled', false).prop('value', "add section");});
+		            }
+		        return false;
+		             // remove the last element
+		 
+		    // enable the "add" button
+		        $('#btnAdd').attr('disabled', false);
+		    });
+		 
+		    $('#btnDel').attr('disabled', true);*/
+ 
+});
+
+	</script>
+
 
 @endsection
