@@ -207,8 +207,9 @@
 				        					<label for="añoG" class="col-md-4 control-label">Año de graduación:</label>
 				        					
 				        					<div class="col-md-8 ">
-				        					<div class="input-group date datepicker_control">
-				        						<input type="text" class="form-control " name="añoG"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+				        					<div class="input-group date año">
+				        						<input type="text" class="form-control " name="añoG">
+				        						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
 			        						</div>
 				        					</div>
 				        				</div>
@@ -279,10 +280,10 @@
 				            				<label for="añosExp" class="col-md-4 control-label">Años de experiencia:</label>
 				            				<div class="col-md-8 ">
 					            			<div class="input-group" name="añosExp">
-					            				<span class="input-group-addon" >De</span>
-					            				<input type"text" class="form-control datepicker_control"  >
+					            				<span class="input-group-addon" >Del</span>
+					            				<input type"text" class="form-control año"  >
 					            				<span class="input-group-addon" >a</span>
-					            				<input type"text" class="form-control datepicker_control" >
+					            				<input type"text" class="form-control año" >
 					            			</div>
 					            			</div>
 				            			</div>
