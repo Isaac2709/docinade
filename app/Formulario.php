@@ -23,7 +23,7 @@ class Formulario extends Model {
 	}
 
 	public function informacion_aspirante(){
-		return $this->hasOne('InformacionAspirante', 'Asp_ID_InfoPer');
+		return $this->hasOne('App\InformacionAspirante', 'Asp_ID_InfoPer');
 	}
 
 	public function formularioTieneInformacionPersonal()
