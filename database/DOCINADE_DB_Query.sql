@@ -12,6 +12,20 @@ CREATE TABLE GEN_Pais(
     CONSTRAINT UNQ_Gen_Pais_Nombre UNIQUE (Pais_Nombre)
 );
 
+-- Change
+-- ************************ TABLAS DE USUARIOS ************************ --
+
+CREATE TABLE GEN_Usuario(
+	Usu_ID SMALLINT AUTO_INCREMENT NOT NULL,
+	Usu_Nombre VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(60) NOT NULL,
+	remember_token VARCHAR(100),
+
+    CONSTRAINT PK_Usu_ID PRIMARY KEY (Usu_ID)
+    -- Alter table `asp_aspirante` CHANGE COLUMN `ASP_Usuario` `GEN_ID_Usuario` SMALLINT NOT NULL
+);
+
 CREATE TABLE GEN_Info_Personal(
 	IPe_ID SMALLINT AUTO_INCREMENT NOT NULL,
 	IPe_Nombre VARCHAR(50) NOT NULL, -- Posibilidad de 2 nombres.
@@ -22,10 +36,18 @@ CREATE TABLE GEN_Info_Personal(
 	IPe_ID_PaisRes SMALLINT, -- País Residencia.
 	IPe_Telefono VARCHAR(20),
 	IPe_Fax VARCHAR(20),
+	-- Change
+	GEN_ID_Usuario SMALLINT NOT NULL,
+
 
     CONSTRAINT PK_Gen_IPe_ID PRIMARY KEY (IPe_ID),
-    CONSTRAINT FK_Gen_IPe_PaisRes FOREIGN KEY (IPe_ID_PaisRes) REFERENCES GEN_Pais(Pais_ID)
+    CONSTRAINT FK_Gen_IPe_PaisRes FOREIGN KEY (IPe_ID_PaisRes) REFERENCES GEN_Pais(Pais_ID),
+    -- Change
+    CONSTRAINT FK_GEN_IPe_Usu FOREIGN KEY (GEN_ID_Usuario) REFERENCES GEN_Usuario(Usu_ID)
 );
+-- CHANGES
+-- ALTER TABLE `GEN_Info_Personal` DROP FOREIGN KEY `FK_Gen_IPe_PaisRes`;
+-- ALTER TABLE `GEN_Info_Personal` ADD CONSTRAINT `FK_GEN_IPe_Usu` FOREIGN KEY (`GEN_ID_Usuario`) REFERENCES `DOCINADE_DB`.`gen_usuario`(`Usu_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE GEN_Email(
 	Email_ID SMALLINT AUTO_INCREMENT NOT NULL,
@@ -134,20 +156,6 @@ CREATE TABLE ASP_Nacionalidad(
     CONSTRAINT UNQ_Asp_Nac_Nombre UNIQUE (Nac_Nombre)
 );
 
--- Change
--- ************************ TABLAS DE USUARIOS ************************ --
-
-CREATE TABLE GEN_Usuario(
-	Usu_ID SMALLINT AUTO_INCREMENT NOT NULL, --UNSIGNED,
-	Usu_Nombre VARCHAR(255) NOT NULL,
-	email VARCHAR(255) NOT NULL,
-	password VARCHAR(60) NOT NULL,
-	remember_token VARCHAR(100),
-
-    CONSTRAINT PK_Usu_ID PRIMARY KEY (Usu_ID)
-    -- Alter table `asp_aspirante` CHANGE COLUMN `ASP_Usuario` `GEN_ID_Usuario` SMALLINT NOT NULL
-);
-
 CREATE TABLE ASP_Aspirante(
 	Asp_ID SMALLINT AUTO_INCREMENT NOT NULL,
 	Asp_Fecha_Envio DATE,
@@ -170,8 +178,6 @@ CREATE TABLE ASP_Aspirante(
 	Asp_Acceso_Email BOOLEAN,
 	Asp_Utilizacion_Progra_Comp BOOLEAN,
 	Asp_Conoc_Educacion_Dist BOOLEAN,
-	-- Change
-	GEN_ID_Usuario SMALLINT NOT NULL,
 
 	ID_Prop_Tesis SMALLINT,
 
@@ -182,8 +188,6 @@ CREATE TABLE ASP_Aspirante(
     CONSTRAINT FK_Asp_Asp_DirAct FOREIGN KEY (Asp_ID_Dir_Actual) REFERENCES ASP_Dir_Actual(DiA_ID),
     CONSTRAINT FK_Asp_Asp_Area_Interes FOREIGN KEY (Asp_ID_Area_Interes) REFERENCES ASP_Area_Interes(Area_ID),
     CONSTRAINT FK_Asp_Asp_Prop_Tesis FOREIGN KEY (ID_Prop_Tesis) REFERENCES ASP_Prop_Tesis(PTe_ID)
-    -- Change
-    CONSTRAINT FK_Asp_Usu FOREIGN KEY (GEN_ID_Usuario) REFERENCES GEN_Usuario(Usu_ID),
 );
 
 CREATE TABLE ASP_Biblioteca(

@@ -1,1 +1,3 @@
 *.sqlite
+sqlite
+DOCINADE_DB_Query.txt
