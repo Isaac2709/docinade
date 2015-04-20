@@ -5,6 +5,7 @@ use App\User;
 use App\Formulario;
 use App\Pais;
 use App\InformacionAspirante;
+use App\Enfasis;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -30,29 +31,35 @@ class FormularioController extends Controller {
 	 */
 	public function getIndex()
 	{
-		// $users = User::all();
-		// return "".$users;
-		// return "".$users;
-		// $var = cnsulta;
 		$paises = Pais::all()->lists('Pais_Nombre');
+		$enfasis = Enfasis::all();
 		$user = User::find(Auth::user()->Usu_ID);
-		return view('formulario.index')->with('paises', json_encode($paises))->with('user', $user);
+		if(!$user->usuarioTieneFormulario()){
+			$formulario = new Formulario();
+			$user->formulario()->save($formulario);
+
+			$formulario = Formulario::find($user->formulario->IPe_ID);
+			$informacion_aspirante = new InformacionAspirante();
+			$formulario->informacion_aspirante()->save($informacion_aspirante);
+		}
+
+		// dd($user);
+
+
+		// dd($formulario->informacion_aspirante());
+		return view('formulario.index')->with('paises', json_encode($paises))->with('enfasis', $enfasis)->with('user', $user);
 	}
 
 	public function postIndex(Request $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 
-		if(!Auth::user()->usuarioTieneFormulario()){
-			$formulario = new Formulario();
-			$informacion_aspirante = new InformacionAspirante();
-			$user->formulario->save($formulario);
-		}
 		$pais_residencia = $request->pais_residencia;
 		if(!empty($pais_residencia)){
 			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
 			$formulario->IPe_ID_PaisRes = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
 		}
+		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
 		$user->formulario->IPe_Apellido = $request->apellidos;
 		$user->formulario->IPe_Genero = $request->genero;
@@ -67,6 +74,10 @@ class FormularioController extends Controller {
 		$user->formulario->IPe_Telefono = $request->telefono;
 		$user->formulario->IPe_Fax = $request->fax;
 		$user->formulario->save();
+
+		// Informacion del Aspirante
+		$user->formulario->informacion_aspirante->Asp_Lugar_Nac = $request->lugar_nacimiento;
+		$user->formulario->informacion_aspirante->save();
 		// $date = date_create('2000-01-01');
 
 		return redirect()->back()->withInput();

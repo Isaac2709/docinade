@@ -120,7 +120,7 @@
 										<label for="genero" class="col-md-4 control-label">Género:</label>
 										<div class="col-md-8">
 											<select name="genero" id="" class="form-control">
-												@if(is_null($user->formulario->IPe_Genero))
+												@if(is_null($user->formulario->IPe_Genero) || empty($user->formulario->IPe_Genero))
 													<option value="" selected> Seleccione su género</option>
 					                                <option value="F"> Femenino</option>
 					                                <option value="M"> Másculino</option>
@@ -144,7 +144,12 @@
 					        					@if($user->formulario->IPe_Fecha_Nac == "0000-00-00")
 					        						<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="">
 					        					@else
-													<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="{{ $user->formulario->IPe_Fecha_Nac }}">
+					        						<!-- Conversión del formato de la fecha -->
+					        						<?php
+														$date_obj = date_create_from_format('Y-m-d',$user->formulario->IPe_Fecha_Nac);
+														$fecha_nacimiento = date_format($date_obj, 'd/m/Y');
+					        						?>
+													<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="{{ $fecha_nacimiento }}">
 												@endif
 												<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 											</div>
@@ -154,28 +159,28 @@
 									<div class="form-group">
 										<label for="lugarNacimiento" class="col-md-4 control-label">Lugar de nacimiento:</label>
 										<div class="col-md-8">
-											<input type="text" class="form-control" name="lugar_nacimiento">
+											<input type="text" class="form-control" name="lugar_nacimiento" value="{{ $user->formulario->informacion_aspirante->Asp_Lugar_Nac }}">
 										</div>
 									</div>
 									<!-- Nacionalidad -->
 									<div class="form-group">
 										<label for="nacionalidad" class="col-md-4 control-label">Nacionalidad:</label>
 										<div class="col-md-8">
-											<input type="text" class="form-control" name="nacionalidad">
+											<input type="text" class="form-control" name="nacionalidad" value=" "><!-- $user->formulario->Asp_ID_Nac->Asp_Lugar_Nac -->
 										</div>
 									</div>
 									<!-- Teléfono -->
 									<div class="form-group">
 										<label for="telefono" class="col-md-4 control-label">Teléfono</label>
 										<div class="col-md-8">
-											<input type="text" class="form-control" name="telefono">
+											<input type="text" class="form-control" name="telefono" value="{{ $user->formulario->IPe_Telefono }}">
 										</div>
 									</div>
 									<!-- Fax -->
 									<div class="form-group">
 										<label for="fax" class="col-md-4 control-label">Fax:</label>
 										<div class="col-md-8">
-											<input type="text" class="form-control" name="fax">
+											<input type="text" class="form-control" name="fax" value="{{ $user->formulario->IPe_Fax }}">
 										</div>
 									</div>
 
@@ -187,9 +192,11 @@
 										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes</label>
 										<div class="col-md-8">
 											<select name="" id="" class="form-control">
-												<option value="a" selected> Énfasis</option>
-				                                <option value="a"> SPA</option>
-				                                <option value="b"> Femenino </option>
+												<option value="" selected> Énfasis</option>
+				                                <option value="SPA"> Sistemas de producción agrícola(SPA)</option>
+				                                <option value="GRN"> Gestión de recursos naturales (GRN)</option>
+				                                <option value="GCA"> Gestión y cultura ambiental (GCA)</option>
+				                                <option value="TEA"> Tecnologías electrónicas aplicadas (TEA)</option>
 				                            </select>
 										</div>
 									</div>
@@ -244,7 +251,7 @@
 						        	<!-- name_control -->
 						        	<div class="col-md-2">
 						        		<div class="form-group">
-						        			<input type="submit" class="btn btn-success">
+						        			<input type="submit" class="btn btn-success" value="Actualizar">
 						        		</div>
 						        	</div>
 					        	</div>
