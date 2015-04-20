@@ -310,10 +310,52 @@
 
 				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
 					    	<form role="form" action="#" method="post" class="form-horizontal">
+					    		<br/>
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					    		<div class="row">
-					    			<h2>hola mundo</h2>
-					    		</div>
+					    			<div class="col-md-6">
+
+					    				<!--Experiencia en Investigacion-->
+					    				<div class="form-group">
+					    					<label for="expEnInv" class="col-md-4 control-label">Nombre de proyecto o actividad principal:</label>
+					    					<div class="col-md-8">
+					    						<input type="text" class="form-control" name="expEnInv">
+					    					</div>
+					    				</div>
+
+					    				<!--Institucion-->
+					    				<div class="form-group">
+					    					<label for="institucion" class="col-md-4 control-label">Institución:</label>
+					    					<div class="col-md-8">
+					    						<input type="text" class="form-control" name="institucion">
+					    					</div>
+					    				</div>
+				    				</div>
+				    				<!--Termina col-md-6-->
+
+				    				<div class="col-md-6">
+					    				<!--Lugar-->
+					    				<div class="form-group">
+					    					<label for="lugar" class="col-md-4 control-label">Lugar:</label>
+					    					<div class="col-md-8">
+					    						<input type="text" class="form-control" name="lugar">
+					    					</div>
+					    				</div>
+
+					    				<!--Año-->
+					    				<div class="form-group">
+					    					<label for="año" class="col-md-4 control-label">Año:</label>
+					    					<div class="col-md-8 " id="añoI" >
+					    					<div class="input-group date año">
+					    						<input type="text"  class="form-control" name="año" id="año">
+					    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+				    						</div>
+					    				</div>
+					    			</div>
+					    			<!--Termina col-md-6-->
+					    			<div class="col-md-6" >
+				            			<button type="submit" class="btn btn-success btn-lg pull-right">+</button>
+				            		</div>
 					    	</form>
 				    	</div>
 				    </div>
@@ -360,8 +402,25 @@
   //                   down: "fa fa-arrow-down"
   //               }
 		// });
+		
+	</script>
+	<script type="text/javascript">
+        $('.año').datepicker( {
+	    format: ' yyyy',
+	    viewMode: 'years',
+	    minViewMode: 'years',
+	    autoclose:true
+	  });
+
 	</script>
 
+	<!--<script type="text/javascript">
+		$("#añoI").datepicker(
+	        {dateFormat 'years',
+        	//minViewMode: 'years',
+	         format: 'yyyy'
+    	});
+	</script> -->
 	
 
 	<!--metodo para mostrar y esconder el input para el segundo email-->
