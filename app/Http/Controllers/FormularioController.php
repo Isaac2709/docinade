@@ -3,6 +3,8 @@
 use Auth;
 use App\User;
 use App\Formulario;
+use App\Pais;
+use App\InformacionAspirante;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -32,31 +34,45 @@ class FormularioController extends Controller {
 		// return "".$users;
 		// return "".$users;
 		// $var = cnsulta;
-		return view('formulario.index');
+		$paises = Pais::all()->lists('Pais_Nombre');
+		$user = User::find(Auth::user()->Usu_ID);
+		return view('formulario.index')->with('paises', json_encode($paises))->with('user', $user);
 	}
 
 	public function postIndex(Request $request)
 	{
-		// return Auth::user()->Usu_Nombre."<br />"."ID: ".Auth::user()->Usu_ID;
-		$formulario = Auth::user()->formulario();
+		$user = User::find(Auth::user()->Usu_ID);
 
 		if(!Auth::user()->usuarioTieneFormulario()){
 			$formulario = new Formulario();
 			$informacion_aspirante = new InformacionAspirante();
-			$pais_residencia = Pais::find($request->pais_residencia);
+			$user->formulario->save($formulario);
 		}
-		$formulario->IPe_Nombre = $request->nombre;
-		$formulario->IPe_Apellido = $request->apellidos;
-		$formulario->IPe_Genero = $request->genero;
-		$formulario->IPe_Fecha_Nac = $request->fecha_nacimiento;
-		$formulario->IPe_ID_PaisRes = $request->pais_residencia; //ID de la tabla GEN_Pais
-		$formulario->IPe_Telefono = $request->telefono;
-		$formulario->IPe_Fax = $request->fax;
+		$pais_residencia = $request->pais_residencia;
+		if(!empty($pais_residencia)){
+			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
+			$formulario->IPe_ID_PaisRes = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
+		}
+		$user->formulario->IPe_Nombre = $request->nombre;
+		$user->formulario->IPe_Apellido = $request->apellidos;
+		$user->formulario->IPe_Genero = $request->genero;
+		$user->formulario->IPe_Pasaporte = $request->id;
 
-		$formulario->Asp_Lugar_Nac = $request->nacionalidad;
-		Auth::user()->formulario()->informacion_personal($informacion_personal);
-		Auth::user()->formulario()->save($formulario);
+		$fecha_nacimiento = $request->fecha_nacimiento;
+		$date_obj = date_create_from_format('d/m/Y',$fecha_nacimiento);
+		$date = date_format($date_obj, 'Y-m-d');
 
+		$user->formulario->IPe_Fecha_Nac = $date;
+
+		$user->formulario->IPe_Telefono = $request->telefono;
+		$user->formulario->IPe_Fax = $request->fax;
+		$user->formulario->save();
+		// $date = date_create('2000-01-01');
+
+		return redirect()->back()->withInput();
+		// dd($formulario);
+		// $user->formulario()->save($formulario);
+		// Auth::user()->formulario()->informacion_aspirante($informacion_aspirante);
 				// $data = \DB::table('ASP_Aspirante')
   //             	->where('GEN_ID_Usuario', '=',Auth::user()->Usu_ID)
   //             	->first();
