@@ -25,4 +25,8 @@ class InformacionAspirante extends Model {
 	public function formulario(){
 		return $this->belongsTo('Formulario', 'IPe_ID');
 	}
+
+	public function direccion_actual(){
+		return $this->belongsTo('App\DireccionActual', 'Asp_ID_Dir_Actual');
+	}
 }
