@@ -6,6 +6,7 @@ use App\Formulario;
 use App\Pais;
 use App\InformacionAspirante;
 use App\Enfasis;
+use App\DireccionActual;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -41,12 +42,17 @@ class FormularioController extends Controller {
 			$formulario = Formulario::find($user->formulario->IPe_ID);
 			$informacion_aspirante = new InformacionAspirante();
 			$formulario->informacion_aspirante()->save($informacion_aspirante);
+
+			// Crear y guardar direccion actual
+			$direccion_actual = new DireccionActual();
+			$direccion_actual->save();
+
+			// Asociar la direccion actual al formulario del aspirante
+			$informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
+			$informacion_aspirante->direccion_actual()->associate($direccion_actual);
+			$informacion_aspirante->save();
 		}
 
-		// dd($user);
-
-
-		// dd($formulario->informacion_aspirante());
 		return view('formulario.index')->with('paises', json_encode($paises))->with('enfasis', $enfasis)->with('user', $user);
 	}
 
@@ -77,8 +83,20 @@ class FormularioController extends Controller {
 
 		// Informacion del Aspirante
 		$user->formulario->informacion_aspirante->Asp_Lugar_Nac = $request->lugar_nacimiento;
+		$user->formulario->informacion_aspirante->Asp_ID_Enfasis = $request->enfasis;
+		// $user->formulario->informacion_aspirante->Asp_ID_Enfasis = $request->enfasis;
 		$user->formulario->informacion_aspirante->save();
-		// $date = date_create('2000-01-01');
+
+
+		// Direccion Actual del Aspirante
+		if(!empty($request->pais_residencia)){
+			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
+			$user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
+		}
+		$user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad = $request->ciudad;
+		$user->formulario->informacion_aspirante->direccion_actual->DiA_Cod_Postal = $request->codigo_postal;
+		$user->formulario->informacion_aspirante->direccion_actual->DiA_Dir_Corresp = $request->direccion_correspondencia;
+		$user->formulario->informacion_aspirante->direccion_actual->save();
 
 		return redirect()->back()->withInput();
 		// dd($formulario);
