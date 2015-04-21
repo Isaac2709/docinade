@@ -91,7 +91,7 @@ CREATE TABLE GEN_Funcion(
 );
 
 -- ******************************* TABLAS ASPIRANTES ******************************** --
-
+--
 CREATE TABLE ASP_Enfasis(
 	Enf_ID SMALLINT AUTO_INCREMENT NOT NULL,
 	Enf_Nombre VARCHAR(100) NOT NULL,
