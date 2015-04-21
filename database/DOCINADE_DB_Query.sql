@@ -102,7 +102,7 @@ CREATE TABLE ASP_Enfasis(
 
 CREATE TABLE ASP_Dir_Actual(
 	DiA_ID SMALLINT AUTO_INCREMENT NOT NULL,
-	DiA_ID_Pais SMALLINT NOT NULL,
+	DiA_ID_Pais SMALLINT, -- NOT NULL,
 	DiA_Ciudad VARCHAR(30),
 	DiA_Cod_Postal VARCHAR(12),
 	DiA_Dir_Corresp VARCHAR(250), -- Señas Exactas de la Dirección de Correspondencia.
@@ -110,6 +110,9 @@ CREATE TABLE ASP_Dir_Actual(
     CONSTRAINT PK_Asp_DiA_ID PRIMARY KEY (DiA_ID),
     CONSTRAINT FK_Asp_DiA_Pais FOREIGN KEY (DiA_ID_Pais) REFERENCES GEN_Pais(Pais_ID)
 );
+-- CHANGE
+-- ALTER TABLE `asp_dir_actual` CHANGE `DiA_ID_Pais` `DiA_ID_Pais` SMALLINT(6) NULL;
+
 
 CREATE TABLE ASP_Area_Interes(
 	Area_ID SMALLINT AUTO_INCREMENT NOT NULL,
