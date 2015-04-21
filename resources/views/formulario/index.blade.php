@@ -191,15 +191,25 @@
 									<div class="form-group">
 										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes</label>
 										<div class="col-md-8">
-											<select name="" id="" class="form-control">
-												<option value="" selected> Énfasis</option>
-				                                <option value="SPA"> Sistemas de producción agrícola(SPA)</option>
-				                                <option value="GRN"> Gestión de recursos naturales (GRN)</option>
-				                                <option value="GCA"> Gestión y cultura ambiental (GCA)</option>
-				                                <option value="TEA"> Tecnologías electrónicas aplicadas (TEA)</option>
+											<select name="enfasis" id="" class="form-control">
+												@if(is_null($user->formulario->informacion_aspirante->Asp_ID_Enfasis) || empty($user->formulario->informacion_aspirante->Asp_ID_Enfasis))
+													<option value="" selected> Énfasis</option>
+													@foreach($enfasis as $enfasi)
+														<option value="{{ $enfasi->Enf_ID }}"> {{ $enfasi->Enf_Nombre }}</option>
+													@endforeach
+					                            @else
+					                            	@foreach($enfasis as $enfasi)
+					                            		@if($enfasi->Enf_ID == $user->formulario->informacion_aspirante->Enf_ID)
+					                            			<option value="{{ $enfasi->Enf_ID }}" selected> {{ $enfasi->Enf_Nombre }}</option>
+					                            		@else
+					                            			<option value="{{ $enfasi->Enf_ID }}"> {{ $enfasi->Enf_Nombre }}</option>
+					                            		@endif
+													@endforeach
+					                            @endif
 				                            </select>
 										</div>
 									</div>
+									<!-- Área en que le interesa desarrollar el tema de investigación -->
 									<div class="form-group">
 					        			<label for="area_investigacion" class="col-md-4 control-label">Aréa en que le interesaría desarrollar el tema de investigación:</label>
 					        			<div class="col-md-8">
@@ -224,21 +234,21 @@
 		                    		<div class="form-group">
 		                    			<label for="ciudad" class="col-md-4 control-label">Ciudad</label>
 		                    			<div class="col-md-8">
-		                    				<input type="text" class="form-control" name="ciudad">
+		                    				<input type="text" class="form-control" name="ciudad" value="{{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad }}">
 		                    			</div>
 		                    		</div>
 		                    		<!-- Codigo Postal -->
 		                    		<div class="form-group">
 		                    			<label for="codigo_postal" class="col-md-4 control-label">Código postal:</label>
 		                    			<div class="col-md-8">
-		                    				<input type="text" class="form-control" name="codigo_postal">
+		                    				<input type="text" class="form-control" name="codigo_postal" value="{{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Cod_Postal }}">
 		                    			</div>
 		                    		</div>
 		                    		<!-- Direccion para el envio de correspondencia -->
 		                    		<div class="form-group">
 		                    			<label for="direccion_correspondencia" class="col-md-4 control-label">Direccion para el envio de correspondencia:</label>
 		                    			<div class="col-md-8">
-		                    				<textarea name="direccion_correspondencia" class="form-control " rows="2"></textarea>
+		                    				<textarea name="direccion_correspondencia" class="form-control " rows="2">{{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Dir_Corresp }}</textarea>
 		                    			</div>
 		                    		</div>
 	                    		</div>
