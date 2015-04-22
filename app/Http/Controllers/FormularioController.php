@@ -60,11 +60,6 @@ class FormularioController extends Controller {
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 
-		$pais_residencia = $request->pais_residencia;
-		if(!empty($pais_residencia)){
-			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
-			$formulario->IPe_ID_PaisRes = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
-		}
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
 		$user->formulario->IPe_Apellido = $request->apellidos;
