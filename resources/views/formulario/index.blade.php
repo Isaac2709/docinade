@@ -314,7 +314,6 @@
 					    	<form role="form" action="#" method="post" class="form-horizontal">
 					    		<br/>
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
 					    		<div id="formularioExpInv1" class="row blockExpInvestigacion">
 					    			<div  class="col-md-6">
 					    				<!--Experiencia en Investigacion-->
@@ -356,10 +355,22 @@
 					    				</div>
 				    				</div>
 					    			<!--Termina col-md-6-->
-					    			<div class="col-md-6" >
-				            			<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-				            		</div>
-
+					    			<div>
+					    				<li class="divider-h"></li>
+					    				<br/>
+					    			</div>
+			            		</div>
+			            		<!--BOTONES para agregar y remover formulario-->
+			            		<div  class="col-md-12">
+			            			<div >
+			            				<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+			            			</div>
+			            			<div class="col-md-11">
+			            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>	
+			            			</div>
+			            		</div>
+			            		
+			            		<br/>
 					    	</form>
 				    	</div>
 				    </div>
@@ -445,9 +456,9 @@
 		        newElem.find('.label_fn').attr('for', 'ID' + newNum + '_first_name');
 		        newElem.find('.input_fn').attr('id', 'ID' + newNum + '_first_name').attr('name', 'ID' + newNum + '_first_name').val('');*/
 
-		        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
+		        newElem.find('.btnAgregarExpInvestigacion').attr('for','ID'+newNum+'_nombre');
 		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
-		 
+		 		
 		       /* // Last name - text
 		        newElem.find('.label_ln').attr('for', 'ID' + newNum + '_last_name');
 		        newElem.find('.input_ln').attr('id', 'ID' + newNum + '_last_name').attr('name', 'ID' + newNum + '_last_name').val('');
@@ -466,37 +477,47 @@
 		 
 		    // insert the new element after the last "duplicatable" input field
 		        $('#formularioExpInv' + num).after(newElem);
-		        $('#ID' + newNum + '_title').focus();
+		        //$('#ID' + newNum + '_title').focus();
 		 
 		    // enable the "remove" button
-		        //$('#btnDel').attr('disabled', false);
+		        $('#btnRemoverExpInvestigacion').attr('disabled', false);
 		 
 		    // right now you can only add 5 sections. change '5' below to the max number of times the form can be duplicated
 		        if (newNum == 5)
-		        $('#btnAgregarExpInvestigacion').attr('disabled', true).prop('value', "You've reached the limit");
+		        $('#btnAgregarExpInvestigacion').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
+
+		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
+			    $('.año').datepicker( {
+				    format: ' yyyy',
+				    viewMode: 'years',
+				    minViewMode: 'years',
+				    autoclose:true
+			  	});
 		    });
+
+			
 		 
-		    /*$('#btnDel').click(function () {
+		    $('#btnRemoverExpInvestigacion').click(function () {
 		    // confirmation
 		        if (confirm("Are you sure you wish to remove this section? This cannot be undone."))
 		            {
-		                var num = $('.clonedInput').length;
+		                var num = $('.blockExpInvestigacion').length;
 		                // how many "duplicatable" input fields we currently have
-		                $('#entry' + num).slideUp('slow', function () {$(this).remove(); 
+		                $('#formularioExpInv' + num).slideUp('slow', function () {$(this).remove(); 
 		                // if only one element remains, disable the "remove" button
 		                    if (num -1 === 1)
-		                $('#btnDel').attr('disabled', true);
-		                // enable the "add" button
-		                $('#btnAdd').attr('disabled', false).prop('value', "add section");});
+		                		$('#btnRemoverExpInvestigacion').attr('disabled', true);
+			                // enable the "add" button
+			                $('#btnAgregarExpInvestigacion').attr('disabled', false).prop('value', "add section");});
 		            }
 		        return false;
 		             // remove the last element
 		 
 		    // enable the "add" button
-		        $('#btnAdd').attr('disabled', false);
+		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
 		    });
 		 
-		    $('#btnDel').attr('disabled', true);*/
+		    $('#btnRemoverExpInvestigacion').attr('disabled', true);
  
 });
 

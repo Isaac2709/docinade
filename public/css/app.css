@@ -6231,3 +6231,11 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+
+.divider-h{
+  border-bottom: 1px solid #C0C0C0;
+  padding: 20px;
+  
+}
+
+
