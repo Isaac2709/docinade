@@ -33,7 +33,7 @@ CREATE TABLE GEN_Info_Personal(
 	IPe_Genero CHAR, -- F=Femenino | M=Masculino
 	IPe_Pasaporte VARCHAR(25), -- Pasaporte/Cédula.
 	IPe_Fecha_Nac DATE,
-	IPe_ID_PaisRes SMALLINT, -- País Residencia.
+	-- IPe_ID_PaisRes SMALLINT, -- País Residencia.
 	IPe_Telefono VARCHAR(20),
 	IPe_Fax VARCHAR(20),
 	-- Change
@@ -41,13 +41,15 @@ CREATE TABLE GEN_Info_Personal(
 
 
     CONSTRAINT PK_Gen_IPe_ID PRIMARY KEY (IPe_ID),
-    CONSTRAINT FK_Gen_IPe_PaisRes FOREIGN KEY (IPe_ID_PaisRes) REFERENCES GEN_Pais(Pais_ID),
+    -- CONSTRAINT FK_Gen_IPe_PaisRes FOREIGN KEY (IPe_ID_PaisRes) REFERENCES GEN_Pais(Pais_ID),
     -- Change
     CONSTRAINT FK_GEN_IPe_Usu FOREIGN KEY (GEN_ID_Usuario) REFERENCES GEN_Usuario(Usu_ID)
 );
 -- CHANGES
 -- ALTER TABLE `GEN_Info_Personal` DROP FOREIGN KEY `FK_Gen_IPe_PaisRes`;
 -- ALTER TABLE `GEN_Info_Personal` ADD CONSTRAINT `FK_GEN_IPe_Usu` FOREIGN KEY (`GEN_ID_Usuario`) REFERENCES `DOCINADE_DB`.`gen_usuario`(`Usu_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- ALTER TABLE `gen_info_personal` DROP FOREIGN KEY `FK_Gen_IPe_PaisRes`;
+-- ALTER TABLE `gen_info_personal` DROP `IPe_ID_PaisRes`;
 
 CREATE TABLE GEN_Email(
 	Email_ID SMALLINT AUTO_INCREMENT NOT NULL,
@@ -91,7 +93,6 @@ CREATE TABLE GEN_Funcion(
 );
 
 -- ******************************* TABLAS ASPIRANTES ******************************** --
---
 CREATE TABLE ASP_Enfasis(
 	Enf_ID SMALLINT AUTO_INCREMENT NOT NULL,
 	Enf_Nombre VARCHAR(100) NOT NULL,
