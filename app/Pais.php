@@ -28,5 +28,9 @@ class Pais extends Model {
 	 */
 	//protected $fillable = [ 'Pais_Nombre']
 
+	public function direcciones(){
+		return $this->hasMany('App\DireccionActual', 'DiA_ID_Pais');
+	}
+
 
 }

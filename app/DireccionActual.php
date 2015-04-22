@@ -32,4 +32,8 @@ class DireccionActual extends Model {
 		return $this->hasOne('App\InformacionAspirante', 'Asp_ID_Dir_Actual');
 	}
 
+	public function pais_residencia(){
+		return $this->belongsTo('App\Pais', 'DiA_ID_Pais');
+	}
+
 }

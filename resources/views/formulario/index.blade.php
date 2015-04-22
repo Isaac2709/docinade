@@ -226,7 +226,11 @@
 											  	<input class="typeahead form-control" type="text" placeholder="Countries" data-provide="typeahead" name="pais_residencia">
 											</div> -->
 											<div class="bs-example">
-										        <input type="text" name="pais_residencia" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false">
+												@if(!is_null($user->formulario->informacion_aspirante->direccion_actual->pais_residencia))
+													<input type="text" name="pais_residencia" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false" value="{{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}">
+												@else
+													<input type="text" name="pais_residencia" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false">
+												@endif
 										    </div>
 		                    			</div>
 		                    		</div>

@@ -84,13 +84,20 @@ class FormularioController extends Controller {
 
 
 		// Direccion Actual del Aspirante
-		if(!empty($request->pais_residencia)){
+		$pais_residencia = $request->pais_residencia;
+		if(!empty($pais_residencia)){
+			echo "".($pais_residencia);
 			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
+			if(is_null($pais_residencia)){
+				return redirect()->back()->withErrors();
+			}
 			$user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
+
 		}
 		$user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad = $request->ciudad;
 		$user->formulario->informacion_aspirante->direccion_actual->DiA_Cod_Postal = $request->codigo_postal;
 		$user->formulario->informacion_aspirante->direccion_actual->DiA_Dir_Corresp = $request->direccion_correspondencia;
+
 		$user->formulario->informacion_aspirante->direccion_actual->save();
 
 		return redirect()->back()->withInput();
