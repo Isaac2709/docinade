@@ -7,6 +7,9 @@ use App\Pais;
 use App\InformacionAspirante;
 use App\Enfasis;
 use App\DireccionActual;
+use App\AreaInteres;
+use App\Nacionalidad;
+use App\Email;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -33,6 +36,7 @@ class FormularioController extends Controller {
 	public function getIndex()
 	{
 		$paises = Pais::all()->lists('Pais_Nombre');
+		$nacionalidades = Nacionalidad::all()->lists('Nac_Nombre');
 		$enfasis = Enfasis::all();
 		$user = User::find(Auth::user()->Usu_ID);
 		if(!$user->usuarioTieneFormulario()){
@@ -51,9 +55,18 @@ class FormularioController extends Controller {
 			$informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
 			$informacion_aspirante->direccion_actual()->associate($direccion_actual);
 			$informacion_aspirante->save();
+
+			// Crear y guardar área de interes
+			$area_interes = new AreaInteres();
+			$area_interes->save();
+
+			// Asociar el área de interes al formulario del aspirante
+			$informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
+			$informacion_aspirante->area_interes()->associate($area_interes);
+			$informacion_aspirante->save();
 		}
 
-		return view('formulario.index')->with('paises', json_encode($paises))->with('enfasis', $enfasis)->with('user', $user);
+		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('enfasis', $enfasis)->with('user', $user);
 	}
 
 	public function postIndex(Request $request)
@@ -66,31 +79,57 @@ class FormularioController extends Controller {
 		$user->formulario->IPe_Genero = $request->genero;
 		$user->formulario->IPe_Pasaporte = $request->id;
 
+		// Revisa si la fecha de nacimiento es enviada
 		$fecha_nacimiento = $request->fecha_nacimiento;
-		$date_obj = date_create_from_format('d/m/Y',$fecha_nacimiento);
-		$date = date_format($date_obj, 'Y-m-d');
+		if(!empty($fecha_nacimiento)){
+			$date_obj = date_create_from_format('d/m/Y',$fecha_nacimiento);
+			$date = date_format($date_obj, 'Y-m-d');
 
-		$user->formulario->IPe_Fecha_Nac = $date;
+			$user->formulario->IPe_Fecha_Nac = $date;
+		}
 
+		$nacionalidad = $request->nacionalidad;
+		if(!empty($nacionalidad)){
+			// Consulta a la base de datos si el país existe
+			$nacionalidad = Nacionalidad::where('Nac_Nombre', '=', $request->nacionalidad)->first();
+			if(is_null($nacionalidad)){
+				// Si el país no existe, regresa a la página anterior con los errores
+				return redirect()->back()->withErrors();
+			}
+			// Guarda el ID del país de residencia en la tabla del aspirante
+			$user->formulario->informacion_aspirante->Asp_ID_Nac = $nacionalidad->Nac_ID; //ID de la tabla GEN_Pais
+		}
 		$user->formulario->IPe_Telefono = $request->telefono;
 		$user->formulario->IPe_Fax = $request->fax;
-		$user->formulario->save();
+
+		$email = $request->email;
+		if(!empty($email)){
+			if(!$user->formulario->formularioTieneEmail($email)){
+				$email = new Email();
+				$email->Email_Email = $request->email;
+				$user->formulario->emails()->save($email);
+			}
+		}
 
 		// Informacion del Aspirante
 		$user->formulario->informacion_aspirante->Asp_Lugar_Nac = $request->lugar_nacimiento;
-		$user->formulario->informacion_aspirante->Asp_ID_Enfasis = $request->enfasis;
-		// $user->formulario->informacion_aspirante->Asp_ID_Enfasis = $request->enfasis;
+		$enfasis = $request->enfasis;
+		if(!empty($enfasis)){
+			$user->formulario->informacion_aspirante->Asp_ID_Enfasis = $request->enfasis;
+		}
 		$user->formulario->informacion_aspirante->save();
 
 
 		// Direccion Actual del Aspirante
 		$pais_residencia = $request->pais_residencia;
 		if(!empty($pais_residencia)){
-			echo "".($pais_residencia);
+			// Consulta a la base de datos si el país existe
 			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
 			if(is_null($pais_residencia)){
+				// Si el país no existe, regresa a la página anterior con los errores
 				return redirect()->back()->withErrors();
 			}
+			// Guarda el ID del país de residencia en la tabla del aspirante
 			$user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
 
 		}
@@ -99,6 +138,14 @@ class FormularioController extends Controller {
 		$user->formulario->informacion_aspirante->direccion_actual->DiA_Dir_Corresp = $request->direccion_correspondencia;
 
 		$user->formulario->informacion_aspirante->direccion_actual->save();
+		// Fin de la direccion actual
+
+		// Area de interés para desarrollar el tema de investigación
+		$user->formulario->informacion_aspirante->area_interes->Area_Nombre = $request->area_investigacion;
+
+		$user->formulario->informacion_aspirante->area_interes->save();
+		// Fin del área de interés
+		// Fin de la Información personal del aspirante
 
 		return redirect()->back()->withInput();
 		// dd($formulario);
