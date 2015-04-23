@@ -316,7 +316,7 @@
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					    		<div id="formularioExpInv1" class="row blockExpInvestigacion">
 					    			<div  class="col-md-6">
-					    				<!--Experiencia en Investigacion-->
+					    				<!--Nombre-->
 					    				<div class="form-group">
 					    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
 					    					<div class="col-md-8">
@@ -326,9 +326,9 @@
 
 					    				<!--Institucion-->
 					    				<div class="form-group">
-					    					<label for="institucion" class="col-md-4 control-label">Institución:</label>
+					    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
 					    					<div class="col-md-8">
-					    						<input type="text" class="form-control" name="institucion">
+					    						<input type="text" class="form-control inputInstitucion" name="institucion" id="institucion">
 					    					</div>
 					    				</div>
 				    				</div>
@@ -337,18 +337,18 @@
 				    				<div class="col-md-6">
 					    				<!--Lugar-->
 					    				<div class="form-group">
-					    					<label for="lugar" class="col-md-4 control-label">Lugar:</label>
+					    					<label for="lugar" class="col-md-4 control-label labelLugar">Lugar:</label>
 					    					<div class="col-md-8">
-					    						<input type="text" class="form-control" name="lugar">
+					    						<input type="text" class="form-control inputLugar" name="lugar" id="lugar">
 					    					</div>
 					    				</div>
 
 					    				<!--Año-->
 					    				<div class="form-group">
-					    					<label for="año" class="col-md-4 control-label">Año:</label>
+					    					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
 					    					<div class="col-md-8 " id="añoI" >
 						    					<div class="input-group date año">
-						    						<input type="text"  class="form-control" name="año" id="año">
+						    						<input type="text"  class="form-control inputAño" name="año" id="año">
 						    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
 					    						</div>
 					    					</div>
@@ -444,45 +444,36 @@
 		        var num     = $('.blockExpInvestigacion').length, // how many "duplicatable" input fields we currently have
 		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
 		            newElem = $('#formularioExpInv' + num).clone().attr('id', 'formularioExpInv' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
-		    /*// manipulate the name/id values of the input inside the new element
-		        // H2 - section
-		        newElem.find('.heading-reference').attr('id', 'ID' + newNum + '_reference').attr('name', 'ID' + newNum + '_reference').html('Entry #' + newNum);
-		 
-		        // Title - select
-		        newElem.find('.label_ttl').attr('for', 'ID' + newNum + '_title');
-		        newElem.find('.select_ttl').attr('id', 'ID' + newNum + '_title').attr('name', 'ID' + newNum + '_title').val('');
-		 
-		        // First name - text
-		        newElem.find('.label_fn').attr('for', 'ID' + newNum + '_first_name');
-		        newElem.find('.input_fn').attr('id', 'ID' + newNum + '_first_name').attr('name', 'ID' + newNum + '_first_name').val('');*/
+		   
+		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+		    // este no vaya con los atributos de los inputs anteriores
 
-		        newElem.find('.btnAgregarExpInvestigacion').attr('for','ID'+newNum+'_nombre');
+		        //Nombre - text
+		        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
 		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+
+		        //Institucion - text
+		        newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
+		        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
 		 		
-		       /* // Last name - text
-		        newElem.find('.label_ln').attr('for', 'ID' + newNum + '_last_name');
-		        newElem.find('.input_ln').attr('id', 'ID' + newNum + '_last_name').attr('name', 'ID' + newNum + '_last_name').val('');
-		 
-		        // Color - checkbox
-		        newElem.find('.label_checkboxitem').attr('for', 'ID' + newNum + '_checkboxitem');
-		        newElem.find('.input_checkboxitem').attr('id', 'ID' + newNum + '_checkboxitem').attr('name', 'ID' + newNum + '_checkboxitem').val([]);
-		 
-		        // Skate - radio
-		        newElem.find('.label_radio').attr('for', 'ID' + newNum + '_radioitem');
-		        newElem.find('.input_radio').attr('id', 'ID' + newNum + '_radioitem').attr('name', 'ID' + newNum + '_radioitem').val([]);
-		 
-		        // Email - text
-		        newElem.find('.label_email').attr('for', 'ID' + newNum + '_email_address');
-		        newElem.find('.input_email').attr('id', 'ID' + newNum + '_email_address').attr('name', 'ID' + newNum + '_email_address').val('');*/
+		 		//Lugar - text
+		        newElem.find('.labelLugar').attr('for','ID'+newNum+'_lugar');
+		        newElem.find('.inputLugar').attr('id','ID'+newNum+'_lugar').attr('name','ID'+newNum+'_lugar').val('');
+
+		        //Año - text
+		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
+		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+
 		 
 		    // insert the new element after the last "duplicatable" input field
+		    //insertar nuevo elemento despues del ultimo input duplicado
 		        $('#formularioExpInv' + num).after(newElem);
 		        //$('#ID' + newNum + '_title').focus();
 		 
-		    // enable the "remove" button
+		    // habilita el boton de remover
 		        $('#btnRemoverExpInvestigacion').attr('disabled', false);
 		 
-		    // right now you can only add 5 sections. change '5' below to the max number of times the form can be duplicated
+		    // condicion de cuantas duplicaciones estan permitidas hacer
 		        if (newNum == 5)
 		        $('#btnAgregarExpInvestigacion').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
 
@@ -495,32 +486,24 @@
 			  	});
 		    });
 
-			
-		 
 		    $('#btnRemoverExpInvestigacion').click(function () {
-		    // confirmation
-		        if (confirm("Are you sure you wish to remove this section? This cannot be undone."))
+		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
 		            {
 		                var num = $('.blockExpInvestigacion').length;
-		                // how many "duplicatable" input fields we currently have
+		                // cuantos inputs duplicados se tiene hasta el momento
 		                $('#formularioExpInv' + num).slideUp('slow', function () {$(this).remove(); 
-		                // if only one element remains, disable the "remove" button
+		               
 		                    if (num -1 === 1)
 		                		$('#btnRemoverExpInvestigacion').attr('disabled', true);
-			                // enable the "add" button
+			                
 			                $('#btnAgregarExpInvestigacion').attr('disabled', false).prop('value', "add section");});
 		            }
 		        return false;
-		             // remove the last element
-		 
-		    // enable the "add" button
+
 		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
 		    });
 		 
-		    $('#btnRemoverExpInvestigacion').attr('disabled', true);
- 
-});
-
+		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
 	</script>
 
 
