@@ -148,7 +148,7 @@
 					        		<div class="form-group">
 					        			<label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
 					        			<div class="col-md-8">
-					        				<div class="input-group date">
+					        				<div class="input-group date datepicker_control">
 					        					@if($user->formulario->IPe_Fecha_Nac == "0000-00-00" || is_null($user->formulario->IPe_Fecha_Nac))
 					        						<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="">
 					        					@else
@@ -160,10 +160,6 @@
 													<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="{{ $fecha_nacimiento }}">
 												@endif
 												<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-
-					        				<!-- <input type="text" class="datepicker_control form-control"> -->
-					        				<div class="input-group date datepicker_control">
-											  <input type="text" class=" form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 											</div>
 					        			</div>
 					        		</div>
@@ -313,14 +309,14 @@
 						        			<input type="submit" class="btn btn-success" value="Actualizar">
 						        		</div>
 						        	</div>
-	                    		<div class="col-md-6">
-				        			<button type="submit" class="btn btn-success btn-lg pull-right">Guardar</button>
-					        	</div>
+		                    		<div class="col-md-6">
+					        			<button type="submit" class="btn btn-success btn-lg pull-right">Guardar</button>
+						        	</div>
+						        </div>
 					        </div>
 					        <!-- End row -->
 				        	</form>
 				        	<!-- End Form -->
-
 				        </div>
 
 				        <!-- Educacioin Superior-->
