@@ -315,6 +315,7 @@
 					    		<br/>
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					    		<div id="formularioExpInv1" class="row blockExpInvestigacion">
+					    			<div class="row divider-h" >
 					    			<div  class="col-md-6">
 					    				<!--Nombre-->
 					    				<div class="form-group">
@@ -353,12 +354,12 @@
 					    						</div>
 					    					</div>
 					    				</div>
+					    				
 				    				</div>
 					    			<!--Termina col-md-6-->
-					    			<div>
-					    				<li class="divider-h"></li>
-					    				<br/>
+					    			
 					    			</div>
+					    			
 			            		</div>
 			            		<!--BOTONES para agregar y remover formulario-->
 			            		<div  class="col-md-12">
