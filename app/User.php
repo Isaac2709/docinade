@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use App\DB;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -32,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['Usu_Nombre', 'email', 'password'];
+	protected $fillable = ['Usu_Nombre', 'email', 'password'];//GEN_ID_Usuario
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -46,13 +45,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*
 	*/
 	public function formulario(){
-		return $this->hasOne('App\Formulario', 'GEN_ID_Usuario'); //GEN_ID_Usuario
+		return $this->hasOne('App\Formulario', 'GEN_ID_Usuario'); //IPe_ID
 	}
 
 	public function usuarioTieneFormulario()
     {
         return ! is_null(
-            \DB::table('ASP_Aspirante')
+            \DB::table('GEN_Info_Personal')
               	->where('GEN_ID_Usuario', '=',$this->Usu_ID)
               	->first()
         );
