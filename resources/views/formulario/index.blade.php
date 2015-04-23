@@ -114,6 +114,9 @@
 					        			<div class="col-md-8">
 					        				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
 					        			</div>
+					        			<div class="col-md-4 col-md-offset-4">
+                                            <input type="file" name="id_file">
+                                        </div>
 					        		</div>
 					        		<!-- Genero del(la) aspirante -->
 									<div class="form-group">
