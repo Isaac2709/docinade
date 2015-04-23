@@ -193,8 +193,12 @@ CREATE TABLE ASP_Aspirante(
     CONSTRAINT FK_Asp_Asp_Naci FOREIGN KEY (Asp_ID_Nac) REFERENCES ASP_Nacionalidad(Nac_ID),
     CONSTRAINT FK_Asp_Asp_Enfasis FOREIGN KEY (Asp_ID_Enfasis) REFERENCES ASP_Enfasis(Enf_ID),
     CONSTRAINT FK_Asp_Asp_DirAct FOREIGN KEY (Asp_ID_Dir_Actual) REFERENCES ASP_Dir_Actual(DiA_ID),
+
     -- CONSTRAINT FK_Asp_Asp_Area_Interes FOREIGN KEY (Asp_ID_Area_Interes) REFERENCES ASP_Area_Interes(Area_ID),
     CONSTRAINT FK_Asp_Asp_Prop_Tesis FOREIGN KEY (ID_Prop_Tesis) REFERENCES ASP_Prop_Tesis(PTe_ID)
+    -- Change
+    -- CONSTRAINT FK_Asp_Usu FOREIGN KEY (GEN_ID_Usuario) REFERENCES GEN_Usuario(Usu_ID)
+
 );
 -- CHANGES
 -- ALTER TABLE `Asp_Aspirante` DROP FOREIGN KEY `FK_Asp_Asp_Naci`;
