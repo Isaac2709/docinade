@@ -56,9 +56,9 @@ class FormularioController extends Controller {
 			$informacion_aspirante->direccion_actual()->associate($direccion_actual);
 			$informacion_aspirante->save();
 
-			// Crear y guardar área de interes
-			$area_interes = new AreaInteres();
-			$area_interes->save();
+			// // Crear y guardar área de interes
+			// $area_interes = new AreaInteres();
+			// $area_interes->save();
 
 			// Asociar el área de interes al formulario del aspirante
 			$informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
@@ -117,6 +117,9 @@ class FormularioController extends Controller {
 		if(!empty($enfasis)){
 			$user->formulario->informacion_aspirante->Asp_ID_Enfasis = $request->enfasis;
 		}
+		// Area de interés para desarrollar el tema de investigación
+		$user->formulario->informacion_aspirante->Asp_Area_Interes = $request->area_investigacion;
+
 		$user->formulario->informacion_aspirante->save();
 
 
@@ -140,11 +143,6 @@ class FormularioController extends Controller {
 		$user->formulario->informacion_aspirante->direccion_actual->save();
 		// Fin de la direccion actual
 
-		// Area de interés para desarrollar el tema de investigación
-		$user->formulario->informacion_aspirante->area_interes->Area_Nombre = $request->area_investigacion;
-
-		$user->formulario->informacion_aspirante->area_interes->save();
-		// Fin del área de interés
 		// Fin de la Información personal del aspirante
 
 		return redirect()->back()->withInput();
