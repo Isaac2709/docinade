@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use \App\Nacionalidad;
-use \App\Pais;
 
 class NacionalidadTableSeeder extends Seeder {
 
@@ -13,7 +12,6 @@ class NacionalidadTableSeeder extends Seeder {
 
         Nacionalidad::create(['Nac_Nombre' => 'Afgano/na']);
         Nacionalidad::create(['Nac_Nombre' => 'Albanés/sa']);
-        Nacionalidad::create(['Nac_Nombre' => 'Alemán/na']);
         Nacionalidad::create(['Nac_Nombre' => 'Alemán/na']);
         Nacionalidad::create(['Nac_Nombre' => 'Andorrano/na']);
         Nacionalidad::create(['Nac_Nombre' => 'Angolano/na']);
@@ -56,6 +54,29 @@ class NacionalidadTableSeeder extends Seeder {
         Nacionalidad::create(['Nac_Nombre' => 'Vaticano/na']);
         Nacionalidad::create(['Nac_Nombre' => 'Colombiano/a']);
         Nacionalidad::create(['Nac_Nombre' => 'Comorense']);
+        Nacionalidad::create(['Nac_Nombre' => 'Norcoreano/na']);
+
+        Nacionalidad::create(['Nac_Nombre' => 'Surcoreano/na']);
+        Nacionalidad::create(['Nac_Nombre' => 'Marfileño/ña']);
+        Nacionalidad::create(['Nac_Nombre' => 'Costarricense']);
+        Nacionalidad::create(['Nac_Nombre' => 'Croata']);
+        Nacionalidad::create(['Nac_Nombre' => 'Cubano/a']);
+        Nacionalidad::create(['Nac_Nombre' => 'Danés/sa']);
+        Nacionalidad::create(['Nac_Nombre' => 'Dominiqués']);
+        Nacionalidad::create(['Nac_Nombre' => 'Ecuatoriano/a']);
+        Nacionalidad::create(['Nac_Nombre' => 'Egipcio/cia']);
+        Nacionalidad::create(['Nac_Nombre' => 'Salvadoreño/ña']);
+        Nacionalidad::create(['Nac_Nombre' => 'Emiratí']);
+        Nacionalidad::create(['Nac_Nombre' => 'Eritreo/a']);
+        Nacionalidad::create(['Nac_Nombre' => 'Eslovaco/ca']);
+        Nacionalidad::create(['Nac_Nombre' => 'Esloveno/na']);
+        Nacionalidad::create(['Nac_Nombre' => 'Español/la']);
+        Nacionalidad::create(['Nac_Nombre' => 'Estadounidense']);
+        Nacionalidad::create(['Nac_Nombre' => 'Estonio/nia']);
+        Nacionalidad::create(['Nac_Nombre' => 'Etíope']);
+        Nacionalidad::create(['Nac_Nombre' => 'Filipino/na']);
+        Nacionalidad::create(['Nac_Nombre' => 'Finlandés/sa']);
+        Nacionalidad::create(['Nac_Nombre' => 'Fiyiano/na']);
     }
 }
 
@@ -106,6 +127,8 @@ class NacionalidadTableSeeder extends Seeder {
 // Filipinas: Filipino/na
 // Finlandia: Finlandés/sa
 // Fiyi: Fiyiano/na
+//
+// hasta aqui
 // Francia: Francés/sa
 // Gabón: Gabonés/sa
 // Gambia: Gambiano/na
