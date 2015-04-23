@@ -232,7 +232,7 @@
 									<div class="form-group">
 					        			<label for="area_investigacion" class="col-md-4 control-label">Aréa en que le interesaría desarrollar el tema de investigación:</label>
 					        			<div class="col-md-8">
-											<textarea name="area_investigacion" class="form-control " rows="3">{{ $user->formulario->informacion_aspirante->area_interes->Area_Nombre }}</textarea>
+											<textarea name="area_investigacion" class="form-control " rows="3">{{ $user->formulario->informacion_aspirante->Asp_Area_Interes }}</textarea>
 										</div>
 					        		</div>
 					        		<strong>Dirección actual</strong>
