@@ -7,7 +7,7 @@
 	position: relative;
 	margin: 100px;
 }*/
-.typeahead, .tt-query, .tt-hint {
+.typeahead, .typeahead2, .tt-query, .tt-hint {
 	border: 1px solid #CCCCCC;
 	/*border-radius: 8px;*/
 	font-size: 14px;
@@ -20,7 +20,7 @@
 .tt-query, .tt-hint {
 	padding: 4px 12px;
 }
-.typeahead {
+.typeahead, .typeahead2 {
 	background-color: #FFFFFF;
 }
 /*.typeahead:focus {
@@ -141,7 +141,7 @@
 					        			<label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
 					        			<div class="col-md-8">
 					        				<div class="input-group date">
-					        					@if($user->formulario->IPe_Fecha_Nac == "0000-00-00")
+					        					@if($user->formulario->IPe_Fecha_Nac == "0000-00-00" || is_null($user->formulario->IPe_Fecha_Nac))
 					        						<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="">
 					        					@else
 					        						<!-- Conversión del formato de la fecha -->
@@ -166,7 +166,13 @@
 									<div class="form-group">
 										<label for="nacionalidad" class="col-md-4 control-label">Nacionalidad:</label>
 										<div class="col-md-8">
-											<input type="text" class="form-control" name="nacionalidad" value=" "><!-- $user->formulario->Asp_ID_Nac->Asp_Lugar_Nac -->
+											<div class="bs-example">
+												@if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Nac))
+													<input type="text" name="nacionalidad" class="form-control typeahead2 tt-query" autocomplete="off" spellcheck="false" value="{{ $user->formulario->informacion_aspirante->nacionalidad->Nac_Nombre }}" id="#nacionalidad">
+												@else
+													<input type="text" name="nacionalidad" class="form-control typeahead2 tt-query" autocomplete="off" spellcheck="false" id="#nacionalidad">
+												@endif
+										    </div>
 										</div>
 									</div>
 									<!-- Teléfono -->
@@ -183,7 +189,20 @@
 											<input type="text" class="form-control" name="fax" value="{{ $user->formulario->IPe_Fax }}">
 										</div>
 									</div>
+									<!-- Email -->
+									<div class="form-group">
+										<label for="email" class="col-md-4 control-label">Email:</label>
+										<div class="col-md-8">
+											@if($user->formulario->emails->isEmpty())
+												<input type="email" class="form-control" name="email">
+											@else
+												@foreach($user->formulario->emails as $email)
+													<input type="email" class="form-control" name="email" value="{{ $email->Email_Email }}">
+												@endforeach
+											@endif
 
+										</div>
+									</div>
 								</div>
 								<!-- End col-lg-6 -->
 	                    		<div class="col-lg-6">
@@ -199,7 +218,7 @@
 													@endforeach
 					                            @else
 					                            	@foreach($enfasis as $enfasi)
-					                            		@if($enfasi->Enf_ID == $user->formulario->informacion_aspirante->Enf_ID)
+					                            		@if($enfasi->Enf_ID == $user->formulario->informacion_aspirante->Asp_ID_Enfasis)
 					                            			<option value="{{ $enfasi->Enf_ID }}" selected> {{ $enfasi->Enf_Nombre }}</option>
 					                            		@else
 					                            			<option value="{{ $enfasi->Enf_ID }}"> {{ $enfasi->Enf_Nombre }}</option>
@@ -213,7 +232,7 @@
 									<div class="form-group">
 					        			<label for="area_investigacion" class="col-md-4 control-label">Aréa en que le interesaría desarrollar el tema de investigación:</label>
 					        			<div class="col-md-8">
-											<textarea name="area_investigacion" class="form-control " rows="3"></textarea>
+											<textarea name="area_investigacion" class="form-control " rows="3">{{ $user->formulario->informacion_aspirante->area_interes->Area_Nombre }}</textarea>
 										</div>
 					        		</div>
 					        		<strong>Dirección actual</strong>
@@ -227,7 +246,7 @@
 											</div> -->
 											<div class="bs-example">
 												@if(!is_null($user->formulario->informacion_aspirante->direccion_actual->pais_residencia))
-													<input type="text" name="pais_residencia" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false" value="{{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}">
+													<input type="text" name="pais_residencia" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false" value="{{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}" id="pais_residencia">
 												@else
 													<input type="text" name="pais_residencia" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false">
 												@endif
@@ -337,9 +356,14 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var paises = <?php echo "".($paises); ?>;
+		var nacionalidades = <?php echo "".($nacionalidades); ?>;
 		$('input.typeahead').typeahead({
-			name: 'accounts',
+			name: 'pais_residencia',
 			local:  paises
+		});
+		$('input.typeahead2').typeahead({
+			name: 'nacionalidad',
+			local:  nacionalidades
 		});
 	});
 	</script>
