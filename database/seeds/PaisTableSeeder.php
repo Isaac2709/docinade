@@ -30,6 +30,44 @@ class PaisTableSeeder extends Seeder {
         Pais::create(['Pais_Nombre' => 'Bangladesh']);
         Pais::create(['Pais_Nombre' => 'Barbados']);
         Pais::create(['Pais_Nombre' => 'Belarus']);
+        Pais::create(['Pais_Nombre' => 'Belgium']);
+        Pais::create(['Pais_Nombre' => 'Belize']);
+        Pais::create(['Pais_Nombre' => 'Benin']);
+        Pais::create(['Pais_Nombre' => 'Bermuda']);
+        Pais::create(['Pais_Nombre' => 'Bhutan']);
+        Pais::create(['Pais_Nombre' => 'Bolivia']);
+        Pais::create(['Pais_Nombre' => 'Bosnia and Herzegovina']);
+        Pais::create(['Pais_Nombre' => 'Botswana']);
+        Pais::create(['Pais_Nombre' => 'Bouvet Island']);
+        Pais::create(['Pais_Nombre' => 'Brazil']);
+        Pais::create(['Pais_Nombre' => 'British lndian Ocean Territory']);
+        Pais::create(['Pais_Nombre' => 'Brunei Darussalam']);
+        Pais::create(['Pais_Nombre' => 'Bulgaria']);
+        Pais::create(['Pais_Nombre' => 'Burkina Faso']);
+        Pais::create(['Pais_Nombre' => 'Burundi']);
+        Pais::create(['Pais_Nombre' => 'Cambodia']);
+        Pais::create(['Pais_Nombre' => 'Cameroon']);
+        Pais::create(['Pais_Nombre' => 'Cape Verde']);
+        Pais::create(['Pais_Nombre' => 'Cayman Islands']);
+        Pais::create(['Pais_Nombre' => 'Central African Republic']);
+        Pais::create(['Pais_Nombre' => 'Chad']);
+        Pais::create(['Pais_Nombre' => 'Chile']);
+        Pais::create(['Pais_Nombre' => 'China']);
+        Pais::create(['Pais_Nombre' => 'Christmas Island']);
+        Pais::create(['Pais_Nombre' => 'Cocos (Keeling) Islands']);
+        Pais::create(['Pais_Nombre' => 'Colombia']);
+        Pais::create(['Pais_Nombre' => 'Comoros']);
+        Pais::create(['Pais_Nombre' => 'Congo']);
+        Pais::create(['Pais_Nombre' => 'Cook Islands']);
+        Pais::create(['Pais_Nombre' => 'Costa Rica']);
+        Pais::create(['Pais_Nombre' => 'Croatia (Hrvatska)']);
+        Pais::create(['Pais_Nombre' => 'Cuba']);
+        Pais::create(['Pais_Nombre' => 'Cyprus']);
+        Pais::create(['Pais_Nombre' => 'Czech Republic']);
+        Pais::create(['Pais_Nombre' => 'Denmark']);
+        Pais::create(['Pais_Nombre' => 'Djibouti']);
+        Pais::create(['Pais_Nombre' => 'Dominica']);
+        Pais::create(['Pais_Nombre' => 'Dominican Republic']);
     }
 }
 
@@ -71,6 +109,7 @@ class PaisTableSeeder extends Seeder {
 //     {"BN":"Brunei Darussalam"},
 //     {"BG":"Bulgaria"},
 //     {"BF":"Burkina Faso"},
+//
 //     {"BI":"Burundi"},
 //     {"KH":"Cambodia"},
 //     {"CM":"Cameroon"},
