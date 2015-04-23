@@ -115,13 +115,16 @@ CREATE TABLE ASP_Dir_Actual(
 -- ALTER TABLE `asp_dir_actual` CHANGE `DiA_ID_Pais` `DiA_ID_Pais` SMALLINT(6) NULL;
 
 
-CREATE TABLE ASP_Area_Interes(
-	Area_ID SMALLINT AUTO_INCREMENT NOT NULL,
-	Area_Nombre VARCHAR(150) NOT NULL,
+-- CREATE TABLE ASP_Area_Interes(
+-- 	Area_ID SMALLINT AUTO_INCREMENT NOT NULL,
+-- 	Area_Nombre VARCHAR(150) NOT NULL,
 
-    CONSTRAINT PK_Asp_Area_ID PRIMARY KEY (Area_ID),
-    CONSTRAINT UNQ_Asp_Area_Nombre UNIQUE (Area_Nombre)
-);
+--     CONSTRAINT PK_Asp_Area_ID PRIMARY KEY (Area_ID),
+--     CONSTRAINT UNQ_Asp_Area_Nombre UNIQUE (Area_Nombre)
+-- );
+-- CHANGES
+-- DROP TABLE 'ASP_Area_Interes';
+
 
 CREATE TABLE ASP_Prop_Tesis(
 	PTe_ID SMALLINT AUTO_INCREMENT NOT NULL,
@@ -174,7 +177,7 @@ CREATE TABLE ASP_Aspirante(
 	Asp_ID_Nac SMALLINT, -- País de Nacimiento.
 	Asp_ID_Enfasis SMALLINT,
 	Asp_ID_Dir_Actual SMALLINT,
-	Asp_ID_Area_Interes SMALLINT,
+	Asp_Area_Interes VARCHAR(150),
 
 	Asp_Acceso_Biblioteca BOOLEAN,
 	Asp_Acceso_Proc_DatoS BOOLEAN,
@@ -190,12 +193,14 @@ CREATE TABLE ASP_Aspirante(
     CONSTRAINT FK_Asp_Asp_Naci FOREIGN KEY (Asp_ID_Nac) REFERENCES ASP_Nacionalidad(Nac_ID),
     CONSTRAINT FK_Asp_Asp_Enfasis FOREIGN KEY (Asp_ID_Enfasis) REFERENCES ASP_Enfasis(Enf_ID),
     CONSTRAINT FK_Asp_Asp_DirAct FOREIGN KEY (Asp_ID_Dir_Actual) REFERENCES ASP_Dir_Actual(DiA_ID),
-    CONSTRAINT FK_Asp_Asp_Area_Interes FOREIGN KEY (Asp_ID_Area_Interes) REFERENCES ASP_Area_Interes(Area_ID),
+    -- CONSTRAINT FK_Asp_Asp_Area_Interes FOREIGN KEY (Asp_ID_Area_Interes) REFERENCES ASP_Area_Interes(Area_ID),
     CONSTRAINT FK_Asp_Asp_Prop_Tesis FOREIGN KEY (ID_Prop_Tesis) REFERENCES ASP_Prop_Tesis(PTe_ID)
 );
 -- CHANGES
 -- ALTER TABLE `Asp_Aspirante` DROP FOREIGN KEY `FK_Asp_Asp_Naci`;
 -- ALTER TABLE `Asp_Aspirante` ADD CONSTRAINT `FK_Asp_Asp_Naci` FOREIGN KEY (`Asp_ID_Nac`) REFERENCES `DOCINADE_DB`.`Asp_Nacionalidad`(`Nac_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `Asp_Aspirante` DROP FOREIGN KEY `FK_Asp_Asp_Area_Interes`;
+-- ALTER TABLE `Asp_Aspirante` CHANGE `Asp_ID_Area_Interes` `Asp_Area_Interes` VARCHAR(150) NULL DEFAULT NULL;
 
 CREATE TABLE ASP_Biblioteca(
 	Bib_ID SMALLINT AUTO_INCREMENT NOT NULL,
