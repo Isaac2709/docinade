@@ -28,4 +28,8 @@ class Nacionalidad extends Model {
 	*/
 	// protected $fillable = [ 'Nac_Nombre']
 
+	public function informacion_aspirante(){
+		return $this->hasOne('App\InformacionAspirante', 'Nac_ID');
+	}
+
 }

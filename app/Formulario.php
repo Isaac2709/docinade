@@ -34,4 +34,12 @@ class Formulario extends Model {
               	->first()
         );
     }
+
+    public function emails(){
+    	return $this->hasMany('App\Email', 'Email_ID_InfoPer');
+    }
+
+    public function formularioTieneEmail($input_email){
+    	return !is_null($this->emails()->where('Email_Email', '=', $input_email)->first());
+    }
 }

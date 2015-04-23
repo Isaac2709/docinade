@@ -29,4 +29,12 @@ class InformacionAspirante extends Model {
 	public function direccion_actual(){
 		return $this->belongsTo('App\DireccionActual', 'Asp_ID_Dir_Actual');
 	}
+
+	public function area_interes(){
+		return $this->belongsTo('App\AreaInteres', 'Asp_ID_Area_Interes');
+	}
+
+	public function nacionalidad(){
+		return $this->belongsTo('App\Nacionalidad', 'Asp_ID_Nac');
+	}
 }
