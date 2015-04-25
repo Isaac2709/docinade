@@ -13,9 +13,13 @@ use App\Email;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+// use Illuminate\Support\Facades\Request;
+
 use Illuminate\Http\Request;
 
 class FormularioController extends Controller {
+
+	private $destinationPath = "";
 
 	/**
 	 * Create a new controller instance.
@@ -25,6 +29,7 @@ class FormularioController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->destinationPath = public_path().'/storage';
 	}
 
 
@@ -71,13 +76,25 @@ class FormularioController extends Controller {
 
 	public function postIndex(Request $request)
 	{
-		$user = User::find(Auth::user()->Usu_ID);/
+		$user = User::find(Auth::user()->Usu_ID);
 
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
 		$user->formulario->IPe_Apellido = $request->apellidos;
 		$user->formulario->IPe_Genero = $request->genero;
 		$user->formulario->IPe_Pasaporte = $request->id;
+
+		// Archivo adjunto de la cédula o pasaporte
+		if ($request->hasFile('id_file')) {
+            $file = $request->file('id_file');
+	        $name_file = $file->getClientOriginalName();
+	        // dd($file->getClientMimeType() );
+	        $trozos = explode(".", $name_file);
+	        $extension = end($trozos);
+	        $id_filename = $user->Usu_Nombre.'_'.rand(10, 99999999).'.'.$file->getClientOriginalName();
+	        \Illuminate\Support\Facades\Request::file('id_file')->move($this->destinationPath.'/images/', $id_filename);
+            $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj = $id_filename;
+        }
 
 		// Revisa si la fecha de nacimiento es enviada
 		$fecha_nacimiento = $request->fecha_nacimiento;
@@ -103,11 +120,43 @@ class FormularioController extends Controller {
 		$user->formulario->IPe_Fax = $request->fax;
 
 		$email = $request->email;
+		$email2 = $request->email2;
 		if(!empty($email)){
-			if(!$user->formulario->formularioTieneEmail($email)){
+			if($user->formulario->emails->isEmpty()){
 				$email = new Email();
 				$email->Email_Email = $request->email;
 				$user->formulario->emails()->save($email);
+			}
+			else{
+				$email = Email::find($user->formulario->emails()->first()->Email_ID);
+				if($email->Email_Email != $request->email){
+					$email->Email_Email = $request->email;
+					$email->save();
+				}
+			}
+		}
+		if(!empty($email2)){
+			if($user->formulario->emails->isEmpty()){
+				$email = new Email();
+				$email->Email_Email = $request->email;
+				$user->formulario->emails()->save($email);
+			}
+			else{
+				if(!empty($user->formulario->emails[1])){
+					$email = Email::find($user->formulario->emails[1]->Email_ID);
+					$email->Email_Email = $request->email2;
+					$email->save();
+				}
+				else{
+					$email = new Email();
+					$email->Email_Email = $request->email2;
+					$user->formulario->emails()->save($email);
+				}
+			}
+		}
+		else{
+			if($user->formulario->emails()->count() > 1){
+				Email::destroy($user->formulario->emails[1]->Email_ID);
 			}
 		}
 

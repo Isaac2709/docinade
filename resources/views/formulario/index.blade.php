@@ -63,6 +63,8 @@
 	Formulario de admisión
 @endsection
 
+
+
 @section('content')
 <!-- <div class="container">
 	<div class="row">
@@ -71,26 +73,27 @@
 	    <div class="widget-main2">
 	    <!-- <div class="widget-inner"> -->
 			<div class="panel panel-default">
-				<!-- <div class="panel-heading">Home</div> -->
+
+				<div class="panel-heading"><h2>Datos Personales</h2></div>
 
 				<div class="panel-body">
 					<!-- TABS -->
 					<ul class="nav nav-tabs" id="myTab">
-				        <li class="active"><a data-toggle="tab" href="#sectionA">Informacion Personal</a></li>
-				        <li><a data-toggle="tab" href="#sectionB">Profile</a></li>
+				        <li class="active"><a data-toggle="tab" href="#informacionPersonal">Informacion Personal</a></li>
 				        <li class="dropdown">
-				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
+				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Edu. Superior / Exp. Profesional<b class="caret"></b></a>
 				            <ul class="dropdown-menu">
-				                <li><a data-toggle="tab" href="#dropdown1">Dropdown1</a></li>
-				                <li><a data-toggle="tab" href="#dropdown2">Dropdown2</a></li>
+				                <li><a data-toggle="tab" href="#educacionSuperior">Educacion Superior</a></li>
+				                <li><a data-toggle="tab" href="#experienciaProfesional">Experiencia Profesional</a></li>
 				            </ul>
 				        </li>
+				        <li><a data-toggle="tab" href="#experienciaEnInvestigacion">Experiencia en Investigación</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
-				        <div id="sectionA" class="tab-pane fade in active">
-				        	<form role="form" action="#" method="post" class="form-horizontal"><!-- class="form-horizontal" -->
-				        	<br />
+				        <div id="informacionPersonal" class="tab-pane fade in active">
+				        	<form role="form" action="#" method="post" class="form-horizontal" enctype="multipart/form-data"><!-- class="form-horizontal" -->
+				        	<br/>
 				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				        	<div class="row">
 		                    	<div class="col-lg-6">
@@ -101,7 +104,9 @@
 											<input type="text" class="form-control" name="nombre" value="{{ $user->formulario->IPe_Nombre }}">
 										</div>
 					        		</div>
+
 					        		<!-- Apellidos del aspirante -->
+
 					        		<div class="form-group">
 					        			<label for="apellidos" class="col-md-4 control-label">Apellidos:</label>
 					        			<div class="col-md-8">
@@ -115,7 +120,11 @@
 					        				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
 					        			</div>
 					        			<div class="col-md-4 col-md-offset-4">
-                                            <input type="file" name="id_file">
+					        				@if(!empty($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
+					        					<a class="btn btn-link"  target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}">{{ $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj }}</a>
+					        				@else
+                                            	<input type="file" name="id_file" id="id_file">
+                                            @endif
                                         </div>
 					        		</div>
 					        		<!-- Genero del(la) aspirante -->
@@ -143,7 +152,7 @@
 					        		<div class="form-group">
 					        			<label for="fecha_nacimiento" class="col-md-4 control-label">Fecha de Nacimiento</label>
 					        			<div class="col-md-8">
-					        				<div class="input-group date">
+					        				<div class="input-group date datepicker_control">
 					        					@if($user->formulario->IPe_Fecha_Nac == "0000-00-00" || is_null($user->formulario->IPe_Fecha_Nac))
 					        						<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="">
 					        					@else
@@ -180,11 +189,26 @@
 									</div>
 									<!-- Teléfono -->
 									<div class="form-group">
-										<label for="telefono" class="col-md-4 control-label">Teléfono</label>
+										<label for="telefono" class="col-md-4 control-label">Teléfono:</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" name="telefono" value="{{ $user->formulario->IPe_Telefono }}">
 										</div>
 									</div>
+									<!--Emil-->
+									<div class="form-group">
+					        			<label for="email" class="col-md-4 control-label">Email:</label>
+					        			<div class="col-md-7">
+						        				<input type="email" class="form-control" name="email" value="{{ $user->formulario->emails()->first()->Email_Email }}">
+						        				<br>
+						        				@if(!is_null($user->formulario->emails) && $user->formulario->emails()->count() > 1)
+						        					<input id="email2" type="email" class="form-control" name="email2" value="{{ $user->formulario->emails[1]->Email_Email }}">
+						        				@else
+						        					<input id="email2" type="email" class="form-control" name="email2">
+						        				@endif
+					        			</div>
+					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm">+</button>
+					        		</div>
+
 									<!-- Fax -->
 									<div class="form-group">
 										<label for="fax" class="col-md-4 control-label">Fax:</label>
@@ -192,26 +216,13 @@
 											<input type="text" class="form-control" name="fax" value="{{ $user->formulario->IPe_Fax }}">
 										</div>
 									</div>
-									<!-- Email -->
-									<div class="form-group">
-										<label for="email" class="col-md-4 control-label">Email:</label>
-										<div class="col-md-8">
-											@if($user->formulario->emails->isEmpty())
-												<input type="email" class="form-control" name="email">
-											@else
-												@foreach($user->formulario->emails as $email)
-													<input type="email" class="form-control" name="email" value="{{ $email->Email_Email }}">
-												@endforeach
-											@endif
-
-										</div>
-									</div>
 								</div>
 								<!-- End col-lg-6 -->
+
 	                    		<div class="col-lg-6">
 	                    			<!-- Enfasis de interes -->
 									<div class="form-group">
-										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes</label>
+										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes:</label>
 										<div class="col-md-8">
 											<select name="enfasis" id="" class="form-control">
 												@if(is_null($user->formulario->informacion_aspirante->Asp_ID_Enfasis) || empty($user->formulario->informacion_aspirante->Asp_ID_Enfasis))
@@ -238,10 +249,11 @@
 											<textarea name="area_investigacion" class="form-control " rows="3">{{ $user->formulario->informacion_aspirante->Asp_Area_Interes }}</textarea>
 										</div>
 					        		</div>
-					        		<strong>Dirección actual</strong>
+					        		<h4><u>Dirección actual</u></h4>
+
 		                    		<!-- Pais de Residencia -->
 		                    		<div class="form-group">
-		                    			<label for="pais_residencia" class="col-md-4 control-label">País de residencia</label>
+		                    			<label for="pais_residencia" class="col-md-4 control-label">País de residencia:</label>
 		                    			<div class="col-md-8">
 		                    				<!-- <input type="text" class="form-control" name="pais_residencia"> -->
 		                    				<!-- <div id="prefetch">
@@ -258,7 +270,7 @@
 		                    		</div>
 		                    		<!-- Ciudad -->
 		                    		<div class="form-group">
-		                    			<label for="ciudad" class="col-md-4 control-label">Ciudad</label>
+		                    			<label for="ciudad" class="col-md-4 control-label">Ciudad:</label>
 		                    			<div class="col-md-8">
 		                    				<input type="text" class="form-control" name="ciudad" value="{{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad }}">
 		                    			</div>
@@ -272,12 +284,13 @@
 		                    		</div>
 		                    		<!-- Direccion para el envio de correspondencia -->
 		                    		<div class="form-group">
-		                    			<label for="direccion_correspondencia" class="col-md-4 control-label">Direccion para el envio de correspondencia:</label>
+		                    			<label for="direccion_correspondencia" class="col-md-4 control-label">Dirección para el envío de correspondencia:</label>
 		                    			<div class="col-md-8">
 		                    				<textarea name="direccion_correspondencia" class="form-control " rows="2">{{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Dir_Corresp }}</textarea>
 		                    			</div>
 		                    		</div>
 	                    		</div>
+	                    		<br/>
 	                    		<!-- End col-lg-6 -->
 					        </div>
 					        <!-- End row -->
@@ -290,25 +303,213 @@
 						        			<input type="submit" class="btn btn-success" value="Actualizar">
 						        		</div>
 						        	</div>
-					        	</div>
+		                    		<!-- <div class="col-md-6">
+					        			<button type="submit" class="btn btn-success btn-lg pull-right">Guardar</button>
+						        	</div> -->
+						        </div>
 					        </div>
+					        <!-- End row -->
 				        	</form>
 				        	<!-- End Form -->
+				        </div>
+
+				        <!-- Educacioin Superior-->
+				        <div id="educacionSuperior" class="tab-pane fade">
+				            <form role="form" action="#" method="post" class="form-horizontal">
+				        		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				        		<div class="col-md-12">
+				        			<h1><small> Educación Superior</small></h1>
+				        		</div>
+				        		<div class="row">
+				        			<div class="col-lg-6">
+				        				<!--Institucion -->
+				        				<div class="form-group">
+				        					<label for="institucion" class="col-md-4 control-label">Institución:</label>
+				        					<div class="col-md-8">
+				        						<input type="text" class="form-control" name="institucion">
+				        					</div>
+				        				</div>
+
+				        				<!--Pais-->
+				        				<div class="form-group">
+				        					<label for="pais" class="col-md-4 control-label">País:</label>
+				        					<div class="col-md-8">
+				        						<input type="text" class="form-control" name="pais">
+				        					</div>
+				        				</div>
+
+				        				<!--Año de graduacion-->
+				        				<div class="form-group">
+				        					<label for="añoG" class="col-md-4 control-label">Año de graduación:</label>
+
+				        					<div class="col-md-8 ">
+				        					<div class="input-group date año">
+				        						<input type="text" class="form-control " name="añoG">
+				        						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+			        						</div>
+				        					</div>
+				        				</div>
+			        				</div>
+			        				<!--Termina class="col-lg-6"-->
+
+			        				<div class="col-lg-6">
+				        				<!--Titulo obtenido -->
+				        				<div class="form-group">
+				        					<label for="titulo" class="col-md-4 control-label">Título obtenido:</label>
+				        					<div class="col-md-8">
+				        						<input type="text" class="form-control" name="titulo">
+				        					</div>
+				        				</div>
+
+				        				<!-- Grado academico -->
+										<div class="form-group">
+											<label for="gradoA" class="col-md-4 control-label">Grado académico:</label>
+											<div class="col-md-8">
+												<select name="gradoA" class="form-control">
+													<option value="z" selected> Seleccione su género</option>
+					                                <option value="a">Bachiller</option>
+					                                <option value="b">Doctorado</option>
+					                                <option value="c">Maestría</option>
+					                            </select>
+				                            </div>
+						        		</div>
+
+				        			</div>
+				        			<!--termina col-lg-6 -->
+
+				        			<div class="col-md-6">
+					        			<button id="agregarEduSup" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+				        			</div>
+
+				        		</div>
+				            </form>
 
 				        </div>
-				        <!-- PERSONAL  -->
-				        <div id="sectionB" class="tab-pane fade">
-				            <h3>Section B</h3>
-				            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+				        <!-- Termina Educacion Superior-->
+
+				        <!--Experiencia profesional-->
+				        <div id="experienciaProfesional" class="tab-pane fade">
+				            <form role="form" action="#" method="post" class="form-horizontal">
+				            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				            	<div class="col-md-12">
+				        			<h1><small>Experiencia Profesional</small></h1>
+				        		</div>
+				            	<div class="row" id="jeank">
+				            		<div class="col-md-6">
+				            			<!--Empresa centro o institucion-->
+				            			<div class="form-group">
+				            				<label for="empresa" class="col-md-4 control-label">Empresa, centro o institución:</label>
+				            				<div class="col-md-8">
+				            					<input type="text" class="form-control" name="empresa">
+				            				</div>
+				            			</div>
+
+				            			<!--Ocupacion o posicion-->
+				            			<div class="form-group">
+				            				<label for="ocupacion" class="col-md-4 control-label">Ocupación o posición:</label>
+				            				<div class="col-md-8">
+				            					<input type="text" class="form-control" name="ocupacion">
+				            				</div>
+				            			</div>
+
+				            			<!--Años de experiencia -->
+				            			<div class="form-group">
+				            				<label for="añosExp" class="col-md-4 control-label">Años de experiencia:</label>
+				            				<div class="col-md-8 ">
+					            			<div class="input-group" name="añosExp">
+					            				<span class="input-group-addon" >Del</span>
+					            				<input type"text" class="form-control año"  >
+					            				<span class="input-group-addon" >a</span>
+					            				<input type"text" class="form-control año" >
+					            			</div>
+					            			</div>
+				            			</div>
+			            			</div>
+			            			<!--Termina col-md-6 -->
+
+			            			<div class="col-md-6">
+				            			<!--Descripcion-->
+				            			<label for="descripcion" class="control-label">Para el trabajo actual, describa brevemente las funciones que realiza:</label>
+				            			<div class="form-group">
+				            				<div class="col-md-12">
+				            					<textarea  class="form-control" name="descripcion" rows="4"></textarea>
+				            				</div>
+				            			</div>
+				            		</div>
+				            		<!--Termina col-md-6 -->
+
+				            		<div class="col-md-6 ">
+				            			<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+				            		</div>
+				            	</div>
+				            </form>
 				        </div>
-				        <div id="dropdown1" class="tab-pane fade">
-				            <h3>Dropdown 1</h3>
-				            <p>WInteger convallis, nulla in sollicitudin placerat, ligula enim auctor lectus, in mollis diam dolor at lorem. Sed bibendum nibh sit amet dictum feugiat. Vivamus arcu sem, cursus a feugiat ut, iaculis at erat. Donec vehicula at ligula vitae venenatis. Sed nunc nulla, vehicula non porttitor in, pharetra et dolor. Fusce nec velit velit. Pellentesque consectetur eros.</p>
-				        </div>
-				        <div id="dropdown2" class="tab-pane fade">
-				            <h3>Dropdown 2</h3>
-				            <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis dis parturient.</p>
-				        </div>
+				        <!--Termina  Experiencia profesional-->
+
+				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
+					    	<form role="form" action="#" method="post" class="form-horizontal">
+					    		<br/>
+					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					    		<div id="formularioExpInv1" class="row blockExpInvestigacion">
+					    			<div class="row divider-h" >
+					    			<div  class="col-md-6">
+					    				<!--Nombre-->
+					    				<div class="form-group">
+					    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
+					    					<div class="col-md-8">
+					    						<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
+					    					</div>
+					    				</div>
+
+					    				<!--Institucion-->
+					    				<div class="form-group">
+					    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
+					    					<div class="col-md-8">
+					    						<input type="text" class="form-control inputInstitucion" name="institucion" id="institucion">
+					    					</div>
+					    				</div>
+				    				</div>
+				    				<!--Termina col-md-6-->
+
+				    				<div class="col-md-6">
+					    				<!--Lugar-->
+					    				<div class="form-group">
+					    					<label for="lugar" class="col-md-4 control-label labelLugar">Lugar:</label>
+					    					<div class="col-md-8">
+					    						<input type="text" class="form-control inputLugar" name="lugar" id="lugar">
+					    					</div>
+					    				</div>
+
+					    				<!--Año-->
+					    				<div class="form-group">
+					    					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
+					    					<div class="col-md-8 " id="añoI" >
+						    					<div class="input-group date año">
+						    						<input type="text"  class="form-control inputAño" name="año" id="año">
+						    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+					    						</div>
+					    					</div>
+					    				</div>
+
+				    				</div>
+					    			<!--Termina col-md-6-->
+
+					    			</div>
+
+			            		</div>
+			            		<!--BOTONES para agregar y remover formulario-->
+			            		<div  class="col-md-12">
+			            			<div >
+			            				<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+			            			</div>
+			            			<div class="col-md-11">
+			            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+			            			</div>
+			            		</div>
+
+			            		<br/>
+					    	</form>
+				    	</div>
 				    </div>
 					<!-- End Tabs -->
 				</div>
@@ -321,6 +522,15 @@
 
 
 @section('scripts')
+
+	<!--para agregar y remover divs-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+	<!--el input del email2 escondido desde que se carga la pagina-->
+	<!-- <script type="text/javascript">
+		$("#email2").fadeOut("fast");
+	</script> -->
 	<!-- Lista desplegable -->
 	<script src="/js/bootstrap-combobox.js"></script>
 	<!-- Calendario -->
@@ -340,20 +550,20 @@
 		    autoclose: true,
 		    todayHighlight: true
 		});
-		// $('.datepicker_control').datepicker({
-		//     startDate: "1/01/1910",
-		//     language: "es",
-		//     autoclose: true,
-		//     todayHighlight: true,
-		//     icons: {
-  //                   time: "fa fa-clock-o",
-  //                   date: "fa fa-calendar",
-  //                   up: "fa fa-arrow-up",
-  //                   down: "fa fa-arrow-down"
-  //               }
-		// });
+
+
 	</script>
 
+	<!-- -->
+	<script type="text/javascript">
+        $('.año').datepicker( {
+	    format: ' yyyy',
+	    viewMode: 'years',
+	    minViewMode: 'years',
+	    autoclose:true
+	  });
+
+	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script  type="text/javascript" src="typeahead.js"></script>
 	<script type="text/javascript">
@@ -368,6 +578,18 @@
 			name: 'nacionalidad',
 			local:  nacionalidades
 		});
+
+		// <!--metodo para mostrar y esconder el input para el segundo email-->
+		$("#agregarNuevoEmail").click(function(){
+			$("#email2").fadeToggle("slow");
+			$("#email2").val(null);
+		});
+		if($("#email2").val()==null || $("#email2").val()==""){
+			$("#email2").hide();
+		}
+		else{
+			$("#email2").show();
+		}
 	});
 	</script>
 
@@ -402,4 +624,76 @@
 			source: countries.ttAdapter()
 		});
 	</script> -->
+
+
+
+
+	<script type="text/javascript">
+
+		$(function () {
+		    $('#btnAgregarExpInvestigacion').click(function () {
+		        var num     = $('.blockExpInvestigacion').length, // how many "duplicatable" input fields we currently have
+		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
+		            newElem = $('#formularioExpInv' + num).clone().attr('id', 'formularioExpInv' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
+
+		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+		    // este no vaya con los atributos de los inputs anteriores
+
+		        //Nombre - text
+		        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
+		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+
+		        //Institucion - text
+		        newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
+		        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
+
+		 		//Lugar - text
+		        newElem.find('.labelLugar').attr('for','ID'+newNum+'_lugar');
+		        newElem.find('.inputLugar').attr('id','ID'+newNum+'_lugar').attr('name','ID'+newNum+'_lugar').val('');
+
+		        //Año - text
+		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
+		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+
+
+		    // insert the new element after the last "duplicatable" input field
+		    //insertar nuevo elemento despues del ultimo input duplicado
+		        $('#formularioExpInv' + num).after(newElem);
+		        //$('#ID' + newNum + '_title').focus();
+
+		    // habilita el boton de remover
+		        $('#btnRemoverExpInvestigacion').attr('disabled', false);
+
+		    // condicion de cuantas duplicaciones estan permitidas hacer
+		        if (newNum == 5)
+		        $('#btnAgregarExpInvestigacion').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
+
+		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
+			    $('.año').datepicker( {
+				    format: ' yyyy',
+				    viewMode: 'years',
+				    minViewMode: 'years',
+				    autoclose:true
+			  	});
+		    });
+
+		    $('#btnRemoverExpInvestigacion').click(function () {
+		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
+		            {
+		                var num = $('.blockExpInvestigacion').length;
+		                // cuantos inputs duplicados se tiene hasta el momento
+		                $('#formularioExpInv' + num).slideUp('slow', function () {$(this).remove();
+
+		                    if (num -1 === 1)
+		                		$('#btnRemoverExpInvestigacion').attr('disabled', true);
+
+			                $('#btnAgregarExpInvestigacion').attr('disabled', false).prop('value', "add section");});
+		            }
+		        return false;
+
+		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
+		    });
+
+		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
+	</script>
 @endsection
