@@ -7,6 +7,44 @@
 	position: relative;
 	margin: 100px;
 }*/
+
+/*bloque para usar los iconos*/
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-th-large:before {
+  content: "\e010";
+}
+.glyphicon-th:before {
+  content: "\e011";
+}
+.glyphicon-th-list:before {
+  content: "\e012";
+}
+
+/*funcion para la etiqueta <hr> personalizada*/
+hr.soften {
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
+  border: 0;
+}
+
 .typeahead, .typeahead2, .tt-query, .tt-hint {
 	border: 1px solid #CCCCCC;
 	/*border-radius: 8px;*/
@@ -193,12 +231,16 @@
 										<div class="col-md-8">
 											<input type="text" class="form-control" name="telefono" value="{{ $user->formulario->IPe_Telefono }}">
 										</div>
-									</div>
+									</div>									
 									<!--Emil-->
 									<div class="form-group">
 					        			<label for="email" class="col-md-4 control-label">Email:</label>
 					        			<div class="col-md-7">
-						        				<input type="email" class="form-control" name="email" value="{{ $user->formulario->emails()->first()->Email_Email }}">
+					        					@if(!$user->formulario->emails->isEmpty())
+						        					<input type="email" class="form-control" name="email" value="{{ $user->formulario->emails()->first()->Email_Email }}">						        				
+						        				@else
+						        					<input type="email" class="form-control" name="email">
+						        				@endif
 						        				<br>
 						        				@if(!is_null($user->formulario->emails) && $user->formulario->emails()->count() > 1)
 						        					<input id="email2" type="email" class="form-control" name="email2" value="{{ $user->formulario->emails[1]->Email_Email }}">
@@ -451,7 +493,7 @@
 					    		<br/>
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					    		<div id="formularioExpInv1" class="row blockExpInvestigacion">
-					    			<div class="row divider-h" >
+					    			<div class="row" >
 					    			<div  class="col-md-6">
 					    				<!--Nombre-->
 					    				<div class="form-group">
@@ -486,7 +528,7 @@
 					    					<div class="col-md-8 " id="añoI" >
 						    					<div class="input-group date año">
 						    						<input type="text"  class="form-control inputAño" name="año" id="año">
-						    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+						    						<span class="input-group-addon "><i class="glyphicon glyphicon-th"></i></span>
 					    						</div>
 					    					</div>
 					    				</div>
@@ -494,8 +536,9 @@
 				    				</div>
 					    			<!--Termina col-md-6-->
 
-					    			</div>
 
+					    			</div>
+					    			<hr class="soften">
 			            		</div>
 			            		<!--BOTONES para agregar y remover formulario-->
 			            		<div  class="col-md-12">
@@ -568,7 +611,7 @@
 	<script  type="text/javascript" src="typeahead.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		var paises = <?php echo "".($paises); ?>;
+		var paises = <?php echo "".($paises); ?>;		
 		var nacionalidades = <?php echo "".($nacionalidades); ?>;
 		$('input.typeahead').typeahead({
 			name: 'pais_residencia',
