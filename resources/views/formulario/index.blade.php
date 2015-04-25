@@ -92,7 +92,7 @@
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
 				        <div id="informacionPersonal" class="tab-pane fade in active">
-				        	<form role="form" action="#" method="post" class="form-horizontal"><!-- class="form-horizontal" -->
+				        	<form role="form" action="#" method="post" class="form-horizontal" enctype="multipart/form-data"><!-- class="form-horizontal" -->
 				        	<br/>
 				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				        	<div class="row">
@@ -120,7 +120,11 @@
 					        				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
 					        			</div>
 					        			<div class="col-md-4 col-md-offset-4">
-                                            <input type="file" name="id_file">
+					        				@if(!empty($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
+					        					<a class="btn btn-link"  target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}">{{ $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj }}</a>
+					        				@else
+                                            	<input type="file" name="id_file" id="id_file">
+                                            @endif
                                         </div>
 					        		</div>
 					        		<!-- Genero del(la) aspirante -->
@@ -190,13 +194,17 @@
 											<input type="text" class="form-control" name="telefono" value="{{ $user->formulario->IPe_Telefono }}">
 										</div>
 									</div>
-									<!--Email-->
+									<!--Emil-->
 									<div class="form-group">
 					        			<label for="email" class="col-md-4 control-label">Email:</label>
 					        			<div class="col-md-7">
-						        				<input type="email" class="form-control" name="email">
+						        				<input type="email" class="form-control" name="email" value="{{ $user->formulario->emails()->first()->Email_Email }}">
 						        				<br>
-						        				<input id="email2" type="email" class="form-control" name="email2">
+						        				@if(!is_null($user->formulario->emails) && $user->formulario->emails()->count() > 1)
+						        					<input id="email2" type="email" class="form-control" name="email2" value="{{ $user->formulario->emails[1]->Email_Email }}">
+						        				@else
+						        					<input id="email2" type="email" class="form-control" name="email2">
+						        				@endif
 					        			</div>
 					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm">+</button>
 					        		</div>
@@ -206,20 +214,6 @@
 										<label for="fax" class="col-md-4 control-label">Fax:</label>
 										<div class="col-md-8">
 											<input type="text" class="form-control" name="fax" value="{{ $user->formulario->IPe_Fax }}">
-										</div>
-									</div>
-									<!-- Email -->
-									<div class="form-group">
-										<label for="email" class="col-md-4 control-label">Email:</label>
-										<div class="col-md-8">
-											@if($user->formulario->emails->isEmpty())
-												<input type="email" class="form-control" name="email">
-											@else
-												@foreach($user->formulario->emails as $email)
-													<input type="email" class="form-control" name="email" value="{{ $email->Email_Email }}">
-												@endforeach
-											@endif
-
 										</div>
 									</div>
 								</div>
@@ -309,9 +303,9 @@
 						        			<input type="submit" class="btn btn-success" value="Actualizar">
 						        		</div>
 						        	</div>
-		                    		<div class="col-md-6">
+		                    		<!-- <div class="col-md-6">
 					        			<button type="submit" class="btn btn-success btn-lg pull-right">Guardar</button>
-						        	</div>
+						        	</div> -->
 						        </div>
 					        </div>
 					        <!-- End row -->
@@ -534,9 +528,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 
 	<!--el input del email2 escondido desde que se carga la pagina-->
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$("#email2").fadeOut("fast");
-	</script>
+	</script> -->
 	<!-- Lista desplegable -->
 	<script src="/js/bootstrap-combobox.js"></script>
 	<!-- Calendario -->
@@ -584,6 +578,18 @@
 			name: 'nacionalidad',
 			local:  nacionalidades
 		});
+
+		// <!--metodo para mostrar y esconder el input para el segundo email-->
+		$("#agregarNuevoEmail").click(function(){
+			$("#email2").fadeToggle("slow");
+			$("#email2").val(null);
+		});
+		if($("#email2").val()==null || $("#email2").val()==""){
+			$("#email2").hide();
+		}
+		else{
+			$("#email2").show();
+		}
 	});
 	</script>
 
@@ -618,15 +624,6 @@
 			source: countries.ttAdapter()
 		});
 	</script> -->
-
-	<!--metodo para mostrar y esconder el input para el segundo email-->
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#agregarNuevoEmail").click(function(){
-				$("#email2").fadeToggle("slow");
-			});
-		});
-	</script>
 
 
 
