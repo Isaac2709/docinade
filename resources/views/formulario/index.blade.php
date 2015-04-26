@@ -248,7 +248,7 @@ hr.soften {
 						        					<input id="email2" type="email" class="form-control" name="email2">
 						        				@endif
 					        			</div>
-					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm agregarQuitarNuevoMail" onClick="cambiarTextoDeBoton(this.id);">+</button>
+					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm agregarQuitarNuevoMail" onClick="cambiarTextoDeBoton(this.id)">+</button>
 					        		</div>
 
 									<!-- Fax -->
@@ -582,9 +582,13 @@ hr.soften {
 
 @section('scripts')
 
+
+
 	<!--para agregar y remover divs-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 	<!--el input del email2 escondido desde que se carga la pagina-->
 	<!-- <script type="text/javascript">
@@ -597,22 +601,14 @@ hr.soften {
 	<!-- Diccionario en español para el calendario -->
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
 
 	<script type="text/javascript">
-	// CHANGE
-		// $(document).ready(function(){
-		// 	$('.combobox').combobox();
-		// });
-	// END
-		// http://eternicode.github.io/bootstrap-datepicker/?markup=input&format=&weekStart=&startDate=&endDate=&startView=0&minViewMode=0&todayBtn=false&clearBtn=false&language=en&orientation=auto&multidate=&multidateSeparator=&keyboardNavigation=on&forceParse=on#sandbox
 	 	$('.datepicker_control').datepicker({
 		    language: "es",
 		    autoclose: true,
 		    todayHighlight: true
 		});
-
-
 	</script>
 
 	<!-- -->
@@ -627,19 +623,30 @@ hr.soften {
 	</script>
 
 	<script type="text/javascript">
+
 		function cambiarTextoDeBoton(button_id) 
 		{
-		   var el = document.getElementById(button_id);
-		   if (el.firstChild.data == "+" || $('#email2').) 
-		   {
-		       el.firstChild.data = "-";
-		       $(el).removeClass("btn-primary").addClass("btn-danger");
-		   }
-		   else 
-		   {
-		     el.firstChild.data = "+";
-		     $(el).removeClass("btn-danger").addClass("btn-primary");
-		   }
+			
+			   var el = document.getElementById(button_id);
+			   if (el.firstChild.data == "+") 
+			   {
+			       el.firstChild.data = "-";
+			       $(el).removeClass("btn-primary").addClass("btn-danger");
+			       $("#email2").fadeToggle("slow");
+					$("#email2").val(null);
+			   }
+			   else 
+			   {
+			   		if (confirm("¿Esta seguro(a) que quiere remover esta sección?")) {
+					    el.firstChild.data = "+";
+					    $(el).removeClass("btn-danger").addClass("btn-primary");
+					    $("#email2").fadeToggle("slow");
+						$("#email2").val(null);
+				    };
+			   }
+
+			   
+		
 		}
 	</script>
 
@@ -652,7 +659,7 @@ $(document).ready(function(){
 </script>-->
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
 	<script  type="text/javascript" src="typeahead.js"></script>
 
 	<script type="text/javascript">
@@ -667,22 +674,28 @@ $(document).ready(function(){
 			name: 'nacionalidad',
 			local:  nacionalidades
 		});
-		});
+		
 
 		var boleano;
 		// <!--metodo para mostrar y esconder el input para el segundo email-->
-		$("#agregarNuevoEmail").click(function(){
+		//$("#agregarNuevoEmail").click(function(){
 
-		
-				$("#email2").fadeToggle("slow");
-				$("#email2").val(null);
-		});
+				//$("#email2").fadeToggle("slow");
+				//$("#email2").val(null);
+				
+		//});
+
 		if($("#email2").val()==null || $("#email2").val()==""){
 			$("#email2").hide();
+			$("#agregarNuevoEmail").removeClass("btn-danger").addClass("btn-primary");
+			$("#agregarNuevoEmail").text('+');
 		}
 		else{
 			$("#email2").show();
+			$("#agregarNuevoEmail").removeClass("btn-primary").addClass("btn-danger");
+			$("#agregarNuevoEmail").text('-');
 		}
+		});
 	
 	</script>
 

@@ -77,7 +77,6 @@ class FormularioController extends Controller {
 	public function postIndex(Request $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
-		dd($request);
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
 		$user->formulario->IPe_Apellido = $request->apellidos;
