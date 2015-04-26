@@ -37,4 +37,8 @@ class InformacionAspirante extends Model {
 	public function nacionalidad(){
 		return $this->belongsTo('App\Nacionalidad', 'Asp_ID_Nac');
 	}
+
+	public function experiencias_investigaciones(){
+		return $this->hasMany('App\ExperienciaInvestigacion', 'Inv_ID_Asp');
+	}
 }
