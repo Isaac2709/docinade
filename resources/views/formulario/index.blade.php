@@ -397,16 +397,17 @@
 
 				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
 					    	<form role="form" action="expInvestigacion" method="post" class="form-horizontal">
-					    		<br/>
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					    		@if($user->formulario->informacion_aspirante->experiencias_investigaciones->isEmpty())
 					    		<div id="formularioExpInv1" class="blockExpInvestigacion">
 					    			<div class="row divider-h" >
-						    			<div class="col-lg-6">
+					    				<div class="col-lg-6">
+						    				<input type="hidden" name="id_exp_inv[]">
 						    				<!--Nombre-->
 						    				<div class="form-group">
 						    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
 						    					<div class="col-md-8">
-						    						<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
+						    						<input type="text" class="form-control inputNombre" name="nombre[]" id="nombre">
 						    					</div>
 						    				</div>
 
@@ -414,18 +415,19 @@
 						    				<div class="form-group">
 						    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
 						    					<div class="col-md-8">
-						    						<input type="text" class="form-control inputInstitucion" name="institucion" id="institucion">
+						    						<input type="text" class="form-control inputInstitucion" name="institucion[]" id="institucion">
+						    						<input type="hidden" name="id_institucion[]">
 						    					</div>
 						    				</div>
 					    				</div>
-					    				<!--Termina col-md-6-->
+					    				<!--Termina col-lg-6-->
 
 				    					<div class="col-lg-6">
 					    					<!--Lugar-->
 					    					<div class="form-group">
 					    						<label for="lugar" class="col-md-4 control-label labelLugar">Lugar:</label>
 					    						<div class="col-md-8">
-					    							<input type="text" class="form-control inputLugar" name="lugar" id="lugar">
+					    							<input type="text" class="form-control inputLugar" name="lugar[]" id="lugar">
 					    						</div>
 					    					</div>
 
@@ -434,27 +436,78 @@
 						    					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
 						    					<div class="col-md-8 " id="añoI" >
 							    					<div class="input-group date año">
-							    						<input type="text"  class="form-control inputAño" name="año" id="año">
+							    						<input type="text"  class="form-control inputAño" name="año[]" id="año">
 							    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
 						    						</div>
 						    					</div>
 						    				</div>
-				    					</div>
-					    				<!--Termina col-md-6-->
-					    			</div>
-					    			<!-- Termina row divider-h -->
-			            		</div>
-			            		<!-- Termina row blockExpInvestigacion -->
+						    			</div>
+						    		</div>
+						    	</div>
+
+				    			@else
+				    				@foreach($user->formulario->informacion_aspirante->experiencias_investigaciones as $investigacion)
+					    				<div id="formularioExpInv1" class="blockExpInvestigacion">
+				    						<div class="row divider-h" >
+						    					<div class="col-lg-6">
+							    					<input type="hidden" name="id_exp_inv[]" value="{{ $investigacion->Inv_ID }}">
+								    				<!--Nombre-->
+								    				<div class="form-group">
+								    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
+								    					<div class="col-md-8">
+								    						<input type="text" class="form-control inputNombre" name="nombre[]" id="nombre"value="{{ $investigacion->Inv_Proyecto }}">
+								    					</div>
+								    				</div>
+
+								    				<!--Institucion-->
+								    				<div class="form-group">
+								    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
+								    					<div class="col-md-8">
+								    						<input type="text" class="form-control inputInstitucion" name="institucion[]" id="institucion" >
+								    						<input type="hidden" name="id_institucion[]" value="{{ $investigacion->Inv_ID_Institucion }}">
+								    					</div>
+								    				</div>
+							    				</div>
+						    					<!--Termina col-lg-6-->
+
+							    				<div class="col-lg-6">
+							    					<!--Lugar-->
+							    					<div class="form-group">
+							    						<label for="lugar" class="col-md-4 control-label labelLugar">Lugar:</label>
+							    						<div class="col-md-8">
+							    							<input type="text" class="form-control inputLugar" name="lugar[]" id="lugar" value="{{ $investigacion->Inv_Lugar }}">
+							    						</div>
+							    					</div>
+
+								    				<!--Año-->
+								    				<div class="form-group">
+								    					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
+								    					<div class="col-md-8 " id="añoI" >
+									    					<div class="input-group date año">
+									    						<input type="text"  class="form-control inputAño" name="año[]" id="año" value="{{ $investigacion->Inv_Anio }}">
+									    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+								    						</div>
+								    					</div>
+								    				</div>
+								    			</div>
+						    					<!--Termina col-lg-6-->
+					    					</div>
+							    			<!-- Termina row divider-h -->
+					            		</div>
+					            		<!-- Termina row blockExpInvestigacion -->
+					    			@endforeach
+				    			@endif
+
 			            		<div class="row">
-			            		<!--BOTONES para agregar y remover formulario-->
-			            		<div  class="col-md-12">
-			            			<div >
-			            				<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
-			            			</div>
-			            			<div class="col-md-11">
-			            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-			            			</div>
-			            		</div>
+				            		<!--BOTONES para agregar y remover formulario-->
+				            		<div  class="col-md-12">
+				            			<div >
+				            				<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+				            			</div>
+				            			<div class="col-md-11">
+				            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+				            			</div>
+				            		</div>
 			            		</div>
 
 			            		<br/>
@@ -483,6 +536,7 @@
 	</div>
 </div> -->
 </div></div>
+
 @endsection
 
 
