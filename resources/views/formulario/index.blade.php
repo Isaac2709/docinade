@@ -1,62 +1,7 @@
 @extends('index')
 
 @section('styles')
-	<style type="text/css">
-/*.bs-example{
-	font-family: sans-serif;
-	position: relative;
-	margin: 100px;
-}*/
-.typeahead, .typeahead2, .tt-query, .tt-hint {
-	border: 1px solid #CCCCCC;
-	/*border-radius: 8px;*/
-	font-size: 14px;
-	/*height: 30px;*/
-	/*line-height: 30px;*/
-	outline: medium none;
-
-	/*width: 148%;*/
-}
-.tt-query, .tt-hint {
-	padding: 4px 12px;
-}
-.typeahead, .typeahead2 {
-	background-color: #FFFFFF;
-}
-/*.typeahead:focus {
-	border: 2px solid #0097CF;
-}*/
-.tt-query {
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-}
-.tt-hint {
-	color: #999999;
-}
-.tt-dropdown-menu {
-	background-color: #FFFFFF;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 8px;
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-	margin-top: 12px;
-	/*padding: 4px 0;*/
-	width: 422px;
-}
-.tt-suggestion {
-	font-size: 16px;
-	line-height: 24px;
-	padding: 3px 20px;
-}
-.tt-suggestion.tt-is-under-cursor {
-	background-color: #0097CF;
-	color: #FFFFFF;border-radius: 8px;
-}
-.tt-suggestion p {
-	margin: 0;
-}
-.widget-main2{
-	margin-top: 30px;
-}
-</style>
+	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
 @endsection
 
 @section('page_title')
@@ -198,7 +143,11 @@
 									<div class="form-group">
 					        			<label for="email" class="col-md-4 control-label">Email:</label>
 					        			<div class="col-md-7">
-						        				<input type="email" class="form-control" name="email" value="{{ $user->formulario->emails()->first()->Email_Email }}">
+					        					@if(!$user->formulario->emails->isEmpty())
+						        					<input type="email" class="form-control" name="email" value="{{ $user->formulario->emails()->first()->Email_Email }}">
+						        				@else
+													<input type="email" class="form-control" name="email">
+						        				@endif
 						        				<br>
 						        				@if(!is_null($user->formulario->emails) && $user->formulario->emails()->count() > 1)
 						        					<input id="email2" type="email" class="form-control" name="email2" value="{{ $user->formulario->emails[1]->Email_Email }}">
@@ -380,8 +329,8 @@
 				        			<div class="col-md-6">
 					        			<button id="agregarEduSup" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 				        			</div>
-
 				        		</div>
+				        		<!-- End row -->
 				            </form>
 
 				        </div>
@@ -447,56 +396,56 @@
 				        <!--Termina  Experiencia profesional-->
 
 				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
-					    	<form role="form" action="#" method="post" class="form-horizontal">
+					    	<form role="form" action="expInvestigacion" method="post" class="form-horizontal">
 					    		<br/>
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					    		<div id="formularioExpInv1" class="row blockExpInvestigacion">
+					    		<div id="formularioExpInv1" class="blockExpInvestigacion">
 					    			<div class="row divider-h" >
-					    			<div  class="col-md-6">
-					    				<!--Nombre-->
-					    				<div class="form-group">
-					    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
-					    					<div class="col-md-8">
-					    						<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
-					    					</div>
-					    				</div>
+						    			<div class="col-lg-6">
+						    				<!--Nombre-->
+						    				<div class="form-group">
+						    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
+						    					<div class="col-md-8">
+						    						<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
+						    					</div>
+						    				</div>
 
-					    				<!--Institucion-->
-					    				<div class="form-group">
-					    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
-					    					<div class="col-md-8">
-					    						<input type="text" class="form-control inputInstitucion" name="institucion" id="institucion">
-					    					</div>
+						    				<!--Institucion-->
+						    				<div class="form-group">
+						    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
+						    					<div class="col-md-8">
+						    						<input type="text" class="form-control inputInstitucion" name="institucion" id="institucion">
+						    					</div>
+						    				</div>
 					    				</div>
-				    				</div>
-				    				<!--Termina col-md-6-->
+					    				<!--Termina col-md-6-->
 
-				    				<div class="col-md-6">
-					    				<!--Lugar-->
-					    				<div class="form-group">
-					    					<label for="lugar" class="col-md-4 control-label labelLugar">Lugar:</label>
-					    					<div class="col-md-8">
-					    						<input type="text" class="form-control inputLugar" name="lugar" id="lugar">
-					    					</div>
-					    				</div>
-
-					    				<!--Año-->
-					    				<div class="form-group">
-					    					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
-					    					<div class="col-md-8 " id="añoI" >
-						    					<div class="input-group date año">
-						    						<input type="text"  class="form-control inputAño" name="año" id="año">
-						    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+				    					<div class="col-lg-6">
+					    					<!--Lugar-->
+					    					<div class="form-group">
+					    						<label for="lugar" class="col-md-4 control-label labelLugar">Lugar:</label>
+					    						<div class="col-md-8">
+					    							<input type="text" class="form-control inputLugar" name="lugar" id="lugar">
 					    						</div>
 					    					</div>
-					    				</div>
 
-				    				</div>
-					    			<!--Termina col-md-6-->
-
+						    				<!--Año-->
+						    				<div class="form-group">
+						    					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
+						    					<div class="col-md-8 " id="añoI" >
+							    					<div class="input-group date año">
+							    						<input type="text"  class="form-control inputAño" name="año" id="año">
+							    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+						    						</div>
+						    					</div>
+						    				</div>
+				    					</div>
+					    				<!--Termina col-md-6-->
 					    			</div>
-
+					    			<!-- Termina row divider-h -->
 			            		</div>
+			            		<!-- Termina row blockExpInvestigacion -->
+			            		<div class="row">
 			            		<!--BOTONES para agregar y remover formulario-->
 			            		<div  class="col-md-12">
 			            			<div >
@@ -506,8 +455,24 @@
 			            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			            			</div>
 			            		</div>
+			            		</div>
 
 			            		<br/>
+			            		<div class="row">
+						        	<div class="form-group">
+							        	<label for="direccion_correspondencia" class="col-md-10 control-label"></label>
+							        	<!-- name_control -->
+							        	<div class="col-md-2">
+							        		<div class="form-group">
+							        			<input type="submit" class="btn btn-success" value="Actualizar">
+							        		</div>
+							        	</div>
+			                    		<!-- <div class="col-md-6">
+						        			<button type="submit" class="btn btn-success btn-lg pull-right">Guardar</button>
+							        	</div> -->
+							        </div>
+						        </div>
+					        	<!-- End row -->
 					    	</form>
 				    	</div>
 				    </div>
@@ -526,6 +491,7 @@
 	<!--para agregar y remover divs-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 	<!--el input del email2 escondido desde que se carga la pagina-->
 	<!-- <script type="text/javascript">
@@ -556,7 +522,7 @@
 
 	<!-- -->
 	<script type="text/javascript">
-        $('.año').datepicker( {
+        $('.inputAño').datepicker( {
 	    format: ' yyyy',
 	    viewMode: 'years',
 	    minViewMode: 'years',
@@ -564,7 +530,7 @@
 	  });
 
 	</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 	<script  type="text/javascript" src="typeahead.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -641,19 +607,19 @@
 
 		        //Nombre - text
 		        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
-		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').val('');
 
 		        //Institucion - text
 		        newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
-		        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
+		        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').val('');
 
 		 		//Lugar - text
 		        newElem.find('.labelLugar').attr('for','ID'+newNum+'_lugar');
-		        newElem.find('.inputLugar').attr('id','ID'+newNum+'_lugar').attr('name','ID'+newNum+'_lugar').val('');
+		        newElem.find('.inputLugar').attr('id','ID'+newNum+'_lugar').val('');
 
 		        //Año - text
 		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
-		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').val('');
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -669,12 +635,12 @@
 		        $('#btnAgregarExpInvestigacion').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
 
 		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
-			    $('.año').datepicker( {
+			    $('.inputAño').datepicker( {
 				    format: ' yyyy',
 				    viewMode: 'years',
 				    minViewMode: 'years',
 				    autoclose:true
-			  	});
+				  });
 		    });
 
 		    $('#btnRemoverExpInvestigacion').click(function () {
