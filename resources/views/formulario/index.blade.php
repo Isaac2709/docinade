@@ -232,7 +232,7 @@ hr.soften {
 											<input type="text" class="form-control" name="telefono" value="{{ $user->formulario->IPe_Telefono }}">
 										</div>
 									</div>									
-									<!--Emil-->
+									<!--Email-->
 									<div class="form-group">
 					        			<label for="email" class="col-md-4 control-label">Email:</label>
 					        			<div class="col-md-7">
@@ -248,7 +248,7 @@ hr.soften {
 						        					<input id="email2" type="email" class="form-control" name="email2">
 						        				@endif
 					        			</div>
-					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm">+</button>
+					        			<button id="agregarNuevoEmail" type="button" class="btn btn-primary btn-sm agregarQuitarNuevoMail" onClick="cambiarTextoDeBoton(this.id);">+</button>
 					        		</div>
 
 									<!-- Fax -->
@@ -291,7 +291,7 @@ hr.soften {
 											<textarea name="area_investigacion" class="form-control " rows="3">{{ $user->formulario->informacion_aspirante->Asp_Area_Interes }}</textarea>
 										</div>
 					        		</div>
-					        		<h4><u>Dirección actual</u></h4>
+					        		<h3><u>Dirección actual</u></h3>
 
 		                    		<!-- Pais de Residencia -->
 		                    		<div class="form-group">
@@ -355,38 +355,38 @@ hr.soften {
 				        	<!-- End Form -->
 				        </div>
 
-				        <!-- Educacioin Superior-->
+				        <!-- Educacion Superior-->
 				        <div id="educacionSuperior" class="tab-pane fade">
 				            <form role="form" action="#" method="post" class="form-horizontal">
 				        		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				        		<div class="col-md-12">
 				        			<h1><small> Educación Superior</small></h1>
 				        		</div>
+			        		<div id="formularioEducacionSuperior1" class="row blockEducacionSuperior">
 				        		<div class="row">
 				        			<div class="col-lg-6">
 				        				<!--Institucion -->
 				        				<div class="form-group">
-				        					<label for="institucion" class="col-md-4 control-label">Institución:</label>
+				        					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
 				        					<div class="col-md-8">
-				        						<input type="text" class="form-control" name="institucion">
+				        						<input type="text" class="form-control inputInstitucion" name="institucion" id="institucion">
 				        					</div>
 				        				</div>
 
 				        				<!--Pais-->
 				        				<div class="form-group">
-				        					<label for="pais" class="col-md-4 control-label">País:</label>
+				        					<label for="pais" class="col-md-4 control-label labelPais">País:</label>
 				        					<div class="col-md-8">
-				        						<input type="text" class="form-control" name="pais">
+				        						<input type="text" class="form-control inputPais" name="pais" id="pais">
 				        					</div>
 				        				</div>
 
 				        				<!--Año de graduacion-->
 				        				<div class="form-group">
-				        					<label for="añoG" class="col-md-4 control-label">Año de graduación:</label>
-
+				        					<label for="añoG" class="col-md-4 control-label labelAñoG">Año de graduación:</label>
 				        					<div class="col-md-8 ">
 				        					<div class="input-group date año">
-				        						<input type="text" class="form-control " name="añoG">
+				        						<input type="text" class="form-control inputAñoG" name="añoG" id="añoG">
 				        						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
 			        						</div>
 				        					</div>
@@ -397,17 +397,17 @@ hr.soften {
 			        				<div class="col-lg-6">
 				        				<!--Titulo obtenido -->
 				        				<div class="form-group">
-				        					<label for="titulo" class="col-md-4 control-label">Título obtenido:</label>
+				        					<label for="titulo" class="col-md-4 control-label labelTituloObtenido">Título obtenido:</label>
 				        					<div class="col-md-8">
-				        						<input type="text" class="form-control" name="titulo">
+				        						<input type="text" class="form-control inputTituloObtenido" name="titulo" id="titulo">
 				        					</div>
 				        				</div>
 
 				        				<!-- Grado academico -->
 										<div class="form-group">
-											<label for="gradoA" class="col-md-4 control-label">Grado académico:</label>
+											<label for="gradoA" class="col-md-4 control-label labelGradoA">Grado académico:</label>
 											<div class="col-md-8">
-												<select name="gradoA" class="form-control">
+												<select id="gradoA" name="gradoA" class="form-control comboboxGradoAcademico">
 													<option value="z" selected> Seleccione su género</option>
 					                                <option value="a">Bachiller</option>
 					                                <option value="b">Doctorado</option>
@@ -418,14 +418,20 @@ hr.soften {
 
 				        			</div>
 				        			<!--termina col-lg-6 -->
-
-				        			<div class="col-md-6">
-					        			<button id="agregarEduSup" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-				        			</div>
-
 				        		</div>
+				        		<hr class="soften">
+			        		</div>
+			        		<!--BOTONES para agregar y remover formulario-->
+			            		<div  class="col-md-12">
+			            			<div >
+			            				<button id="btnRemoverEducacionSuperior" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+			            			</div>
+			            			<div class="col-md-11">
+			            				<button id="btnAgregarEducacionSuperior" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+			            			</div>
+			            		</div>
+			            		<br/>
 				            </form>
-
 				        </div>
 				        <!-- Termina Educacion Superior-->
 
@@ -436,29 +442,30 @@ hr.soften {
 				            	<div class="col-md-12">
 				        			<h1><small>Experiencia Profesional</small></h1>
 				        		</div>
-				            	<div class="row" id="jeank">
+			        		<div id="formularioExpProfesional1" class="row blockExpProfesional">
+				            	<div class="row">
 				            		<div class="col-md-6">
 				            			<!--Empresa centro o institucion-->
 				            			<div class="form-group">
-				            				<label for="empresa" class="col-md-4 control-label">Empresa, centro o institución:</label>
+				            				<label for="empresa" class="col-md-4 control-label labelEmpresa">Empresa, centro o institución:</label>
 				            				<div class="col-md-8">
-				            					<input type="text" class="form-control" name="empresa">
+				            					<input type="text" class="form-control inputEmpresa" name="empresa" id="empresa">
 				            				</div>
 				            			</div>
 
 				            			<!--Ocupacion o posicion-->
 				            			<div class="form-group">
-				            				<label for="ocupacion" class="col-md-4 control-label">Ocupación o posición:</label>
+				            				<label for="ocupacion" class="col-md-4 control-label labelOcupacion">Ocupación o posición:</label>
 				            				<div class="col-md-8">
-				            					<input type="text" class="form-control" name="ocupacion">
+				            					<input type="text" class="form-control inputOcupacion" name="ocupacion" id="ocupacion">
 				            				</div>
 				            			</div>
 
 				            			<!--Años de experiencia -->
 				            			<div class="form-group">
-				            				<label for="añosExp" class="col-md-4 control-label">Años de experiencia:</label>
+				            				<label for="añosExp" class="col-md-4 control-label labelAñosExp">Años de experiencia:</label>
 				            				<div class="col-md-8 ">
-					            			<div class="input-group" name="añosExp">
+					            			<div class="input-group inputAñosExp" name="añosExp" id="añosExp">
 					            				<span class="input-group-addon" >Del</span>
 					            				<input type"text" class="form-control año"  >
 					            				<span class="input-group-addon" >a</span>
@@ -471,19 +478,27 @@ hr.soften {
 
 			            			<div class="col-md-6">
 				            			<!--Descripcion-->
-				            			<label for="descripcion" class="control-label">Para el trabajo actual, describa brevemente las funciones que realiza:</label>
+				            			<label for="descripcion" class="control-label labelDescripcion">Para el trabajo actual, describa brevemente las funciones que realiza:</label>
 				            			<div class="form-group">
 				            				<div class="col-md-12">
-				            					<textarea  class="form-control" name="descripcion" rows="4"></textarea>
+				            					<textarea  class="form-control textareaDescripcion" name="descripcion" id="descripcion" rows="4"></textarea>
 				            				</div>
 				            			</div>
 				            		</div>
 				            		<!--Termina col-md-6 -->
-
-				            		<div class="col-md-6 ">
-				            			<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-				            		</div>
 				            	</div>
+				            	<hr class="soften">
+			        		</div>
+			        		<!--BOTONES para agregar y remover formulario-->
+			            		<div  class="col-md-12">
+			            			<div >
+			            				<button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+			            			</div>
+			            			<div class="col-md-11">
+			            				<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+			            			</div>
+			            		</div>
+			            		<br/>
 				            </form>
 				        </div>
 				        <!--Termina  Experiencia profesional-->
@@ -560,7 +575,8 @@ hr.soften {
 		<!-- </div>
 	</div>
 </div> -->
-</div></div>
+</div>
+</div>
 @endsection
 
 
@@ -580,6 +596,8 @@ hr.soften {
 	<script src="/js/bootstrap-datepicker.js"></script>
 	<!-- Diccionario en español para el calendario -->
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 	<script type="text/javascript">
 	// CHANGE
@@ -607,8 +625,36 @@ hr.soften {
 	  });
 
 	</script>
+
+	<script type="text/javascript">
+		function cambiarTextoDeBoton(button_id) 
+		{
+		   var el = document.getElementById(button_id);
+		   if (el.firstChild.data == "+" || $('#email2').) 
+		   {
+		       el.firstChild.data = "-";
+		       $(el).removeClass("btn-primary").addClass("btn-danger");
+		   }
+		   else 
+		   {
+		     el.firstChild.data = "+";
+		     $(el).removeClass("btn-danger").addClass("btn-primary");
+		   }
+		}
+	</script>
+
+<!-- <script>
+$(document).ready(function(){
+    $("#agregarNuevoEmail").click(function(){
+        $("#agregarNuevoEmail").removeClass("btn-primary").addClass("btn-danger");
+    });
+});
+</script>-->
+
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script  type="text/javascript" src="typeahead.js"></script>
+
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var paises = <?php echo "".($paises); ?>;		
@@ -621,11 +667,15 @@ hr.soften {
 			name: 'nacionalidad',
 			local:  nacionalidades
 		});
+		});
 
+		var boleano;
 		// <!--metodo para mostrar y esconder el input para el segundo email-->
 		$("#agregarNuevoEmail").click(function(){
-			$("#email2").fadeToggle("slow");
-			$("#email2").val(null);
+
+		
+				$("#email2").fadeToggle("slow");
+				$("#email2").val(null);
 		});
 		if($("#email2").val()==null || $("#email2").val()==""){
 			$("#email2").hide();
@@ -633,44 +683,11 @@ hr.soften {
 		else{
 			$("#email2").show();
 		}
-	});
+	
 	</script>
 
-	<!-- <script type="text/javascript">
-		var countries = new Bloodhound({
-		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-		queryTokenizer: Bloodhound.tokenizers.whitespace,
-		limit: 10,
-		prefetch: {
-			// url points to a json file that contains an array of country names, see
-			// https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
-			url: '../data/countries.json',
-			// the json file contains an array of strings, but the Bloodhound
-			// suggestion engine expects JavaScript objects so this converts all of
-			// those strings
-			filter: function(list) {
-				return $.map(list, function(country) { return { name: country }; });
-			}
-		}
-		});
 
-		// kicks off the loading/processing of `local` and `prefetch`
-		countries.initialize();
-
-		// passing in `null` for the `options` arguments will result in the default
-		// options being used
-		$('#prefetch .typeahead').typeahead(null, {
-			name: 'countries',
-			displayKey: 'name',
-			// `ttAdapter` wraps the suggestion engine in an adapter that
-			// is compatible with the typeahead jQuery plugin
-			source: countries.ttAdapter()
-		});
-	</script> -->
-
-
-
-
+<!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_EN_INVESTIGACION-->
 	<script type="text/javascript">
 
 		$(function () {
@@ -739,4 +756,155 @@ hr.soften {
 
 		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
 	</script>
+
+
+<!--FUNCION DE LOS BOTONES DE LA VISTA ECUACION_SUPERIOR-->
+<script type="text/javascript">
+
+		$(function () {
+		    $('#btnAgregarEducacionSuperior').click(function () {
+		        var num     = $('.blockEducacionSuperior').length, // how many "duplicatable" input fields we currently have
+		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
+		            newElem = $('#formularioEducacionSuperior' + num).clone().attr('id', 'formularioEducacionSuperior' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
+
+		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+		    // este no vaya con los atributos de los inputs anteriores
+
+		        
+
+		        //Institucion - text
+		        newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
+		        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
+
+		        //Pais - text
+		        newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
+		        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').attr('name','ID'+newNum+'_pais').val('');
+
+		        //Año de graduacion - text
+		        newElem.find('.labelAñoG').attr('for','ID'+newNum+'_añoG');
+		        newElem.find('.inputAñoG').attr('id','ID'+newNum+'_añoG').attr('name','ID'+newNum+'_añoG').val('');
+
+		 		//Titulo Obtenido - text
+		        newElem.find('.labelTituloObtenido').attr('for','ID'+newNum+'_titulo');
+		        newElem.find('.inputTituloObtenido').attr('id','ID'+newNum+'_titulo').attr('name','ID'+newNum+'_titulo').val('');
+
+				//Grado academico - text
+		        newElem.find('.labelGradoA').attr('for','ID'+newNum+'_gradoA');
+		        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('');		        
+
+
+		    // insert the new element after the last "duplicatable" input field
+		    //insertar nuevo elemento despues del ultimo input duplicado
+		        $('#formularioEducacionSuperior' + num).after(newElem);
+		        //$('#ID' + newNum + '_title').focus();
+
+		    // habilita el boton de remover
+		        $('#btnRemoverEducacionSuperior').attr('disabled', false);
+
+		    // condicion de cuantas duplicaciones estan permitidas hacer
+		        if (newNum == 5)
+		        $('#btnAgregarEducacionSuperior').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
+
+		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
+			    $('.año').datepicker( {
+				    format: ' yyyy',
+				    viewMode: 'years',
+				    minViewMode: 'years',
+				    autoclose:true
+			  	});
+		    });
+
+		    $('#btnRemoverEducacionSuperior').click(function () {
+		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
+		            {
+		                var num = $('.blockEducacionSuperior').length;
+		                // cuantos inputs duplicados se tiene hasta el momento
+		                $('#formularioEducacionSuperior' + num).slideUp('slow', function () {$(this).remove();
+
+		                    if (num -1 === 1)
+		                		$('#btnRemoverEducacionSuperior').attr('disabled', true);
+
+			                $('#btnAgregarEducacionSuperior').attr('disabled', false).prop('value', "add section");});
+		            }
+		        return false;
+
+		        $('#btnAgregarEducacionSuperior').attr('disabled', false);
+		    });
+
+		    $('#btnRemoverEducacionSuperior').attr('disabled', true);});
+	</script>
+
+<!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_PROFESIONAL-->
+	<script type="text/javascript">
+
+		$(function () {
+		    $('#btnAgregarExpProfesional').click(function () {
+		        var num     = $('.blockExpProfesional').length, // how many "duplicatable" input fields we currently have
+		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
+		            newElem = $('#formularioExpProfesional' + num).clone().attr('id', 'formularioExpProfesional' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
+
+		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+		    // este no vaya con los atributos de los inputs anteriores
+
+		        //Empresa - text
+		        newElem.find('.labelEmpresa').attr('for','ID'+newNum+'_empresa');
+		        newElem.find('.inputEmpresa').attr('id','ID'+newNum+'_empresa').attr('name','ID'+newNum+'_empresa').val('');
+
+		        //Ocupacion - text
+		        newElem.find('.labelOcupacion').attr('for','ID'+newNum+'_ocupacion');
+		        newElem.find('.inputOcupacion').attr('id','ID'+newNum+'_ocupacion').attr('name','ID'+newNum+'_ocupacion').val('');
+
+		        //Años de experiencia - text
+		        newElem.find('.labelAñosExp').attr('for','ID'+newNum+'_añosExp');
+		        newElem.find('.año').attr('id','ID'+newNum+'_añosExp').attr('name','ID'+newNum+'_añosExp').val('');
+
+		 		//Descripcion - text
+		        newElem.find('.labelDescripcion').attr('for','ID'+newNum+'_descripcion');
+		        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').attr('name','ID'+newNum+'_descripcion').val('');
+
+		        
+
+
+		    // insert the new element after the last "duplicatable" input field
+		    //insertar nuevo elemento despues del ultimo input duplicado
+		        $('#formularioExpProfesional' + num).after(newElem);
+		        //$('#ID' + newNum + '_title').focus();
+
+		    // habilita el boton de remover
+		        $('#btnRemoverExpProfesional').attr('disabled', false);
+
+		    // condicion de cuantas duplicaciones estan permitidas hacer
+		        if (newNum == 5)
+		        $('#btnAgregarExpProfesional').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
+
+		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
+			    $('.año').datepicker( {
+				    format: ' yyyy',
+				    viewMode: 'years',
+				    minViewMode: 'years',
+				    autoclose:true
+			  	});
+		    });
+
+		    $('#btnRemoverExpProfesional').click(function () {
+		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
+		            {
+		                var num = $('.blockExpProfesional').length;
+		                // cuantos inputs duplicados se tiene hasta el momento
+		                $('#formularioExpProfesional' + num).slideUp('slow', function () {$(this).remove();
+
+		                    if (num -1 === 1)
+		                		$('#btnRemoverExpProfesional').attr('disabled', true);
+
+			                $('#btnAgregarExpProfesional').attr('disabled', false).prop('value', "add section");});
+		            }
+		        return false;
+
+		        $('#btnAgregarExpProfesional').attr('disabled', false);
+		    });
+
+		    $('#btnRemoverExpProfesional').attr('disabled', true);});
+	</script>
+
+
 @endsection
