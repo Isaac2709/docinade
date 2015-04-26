@@ -10,6 +10,7 @@ use App\DireccionActual;
 use App\AreaInteres;
 use App\Nacionalidad;
 use App\Email;
+use App\ExperienciaInvestigacion;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -198,8 +199,30 @@ class FormularioController extends Controller {
 	}
 
 	public function postExpInvestigacion(Request $request){
-
-		dd($request->nombre[1]);
+		$user = User::find(Auth::user()->Usu_ID);
+		$pos = 0;
+		foreach ($request->nombre as $nombre) {
+			$experiencia_investigacion = null;
+			if(!empty($request->id_exp_inv[$pos])){
+				$experiencia_investigacion = ExperienciaInvestigacion::find($request->id_exp_inv[$pos]);
+				$experiencia_investigacion->Inv_Proyecto = $request->nombre[$pos];
+			}
+			else{
+				$experiencia_investigacion = new ExperienciaInvestigacion();
+				$experiencia_investigacion->Inv_Proyecto = $request->nombre[$pos];
+				// dd($user->formulario->informacion_aspirante);
+				$user->formulario->informacion_aspirante->experiencias_investigaciones()->save($experiencia_investigacion);
+				die("Mal");
+			}
+			// $experiencia_investigacion->Inv_ID_Institucion = $request->institucion[$pos];
+			$experiencia_investigacion->Inv_Lugar = $request->lugar[$pos];
+			if(!empty($request->año[$pos])){
+				$experiencia_investigacion->Inv_Anio = $request->año[$pos];
+			}
+			$experiencia_investigacion->save();
+			$pos = $pos + 1;
+		}
+		return redirect()->back()->withInput();
 
 	}
 
