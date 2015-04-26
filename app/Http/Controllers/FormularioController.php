@@ -66,9 +66,9 @@ class FormularioController extends Controller {
 			// $area_interes->save();
 
 			// Asociar el área de interes al formulario del aspirante
-			$informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
-			$informacion_aspirante->area_interes()->associate($area_interes);
-			$informacion_aspirante->save();
+			// $informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
+			// $informacion_aspirante->area_interes()->associate($area_interes);
+			// $informacion_aspirante->save();
 		}
 
 		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('enfasis', $enfasis)->with('user', $user);
@@ -191,28 +191,16 @@ class FormularioController extends Controller {
 
 		$user->formulario->informacion_aspirante->direccion_actual->save();
 		// Fin de la direccion actual
-
+		$user->formulario->save();
 		// Fin de la Información personal del aspirante
 
 		return redirect()->back()->withInput();
-		// dd($formulario);
-		// $user->formulario()->save($formulario);
-		// Auth::user()->formulario()->informacion_aspirante($informacion_aspirante);
-				// $data = \DB::table('ASP_Aspirante')
-  //             	->where('GEN_ID_Usuario', '=',Auth::user()->Usu_ID)
-  //             	->first();
-  //       dd($data);
-		// $formulario->save();
-		// echo "-> ".Auth::user()->usuarioTieneFormulario();
-		// $data = $request->all();
-		// dd($formulario);
-		// echo "<br />"."USUARIO"."<br />";
-		// dd(Auth::user());
-		// $users = User::all();
-		// return "".$users;
-		// return "".$users;
-		// $var = cnsulta;
-		// return view('formulario.index');
+	}
+
+	public function postExpInvestigacion(Request $request){
+
+		dd($request->nombre[1]);
+
 	}
 
 
