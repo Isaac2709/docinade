@@ -41,4 +41,12 @@ class InformacionAspirante extends Model {
 	public function experiencias_investigaciones(){
 		return $this->hasMany('App\ExperienciaInvestigacion', 'Inv_ID_Asp');
 	}
+
+	public function scopeSeleccionarInvestigacionesAEliminar($query, $id_investigaciones){
+		$investigaciones = $this->experiencias_investigaciones();
+		foreach ($id_investigaciones as $id_investigacion) {
+			$investigaciones = $investigaciones->where('Inv_ID', '!=', $id_investigacion);
+		}
+		return $investigaciones->get();
+	}
 }

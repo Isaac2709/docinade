@@ -8,8 +8,6 @@
 	Formulario de admisión
 @endsection
 
-
-
 @section('content')
 <!-- <div class="container">
 	<div class="row">
@@ -20,8 +18,25 @@
 			<div class="panel panel-default">
 
 				<div class="panel-heading"><h2>Datos Personales</h2></div>
-
 				<div class="panel-body">
+					@if (count($errors) > 0)
+						<div class="alert alert-danger">
+							<strong>Whoops!</strong> Tuvimos algunos problemas con sus entradas<br><br>
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
+						</div>
+					@else
+						@if (session()->has('successMessage'))
+							<div class="alert alert-success">
+							@foreach(session('successMessage') as $message)
+								<li>{{ $message }}</li>
+							@endforeach
+							</div>
+						@endif
+					@endif
 					<!-- TABS -->
 					<ul class="nav nav-tabs" id="myTab">
 				        <li class="active"><a data-toggle="tab" href="#informacionPersonal">Informacion Personal</a></li>
@@ -393,8 +408,8 @@
 				            	</div>
 				            </form>
 				        </div>
-				        <!--Termina  Experiencia profesional-->
-
+				        <!-- Termina  Experiencia profesional -->
+						<!-- Experiencia en Investigación -->
 				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
 					    	<form role="form" action="expInvestigacion" method="post" class="form-horizontal">
 					    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -402,7 +417,7 @@
 					    		<div id="formularioExpInv1" class="blockExpInvestigacion">
 					    			<div class="row divider-h" >
 					    				<div class="col-lg-6">
-						    				<input type="hidden" name="id_exp_inv[]">
+						    				<input type="hidden" name="id_exp_inv[]" class="id_exp_inv">
 						    				<!--Nombre-->
 						    				<div class="form-group">
 						    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
@@ -415,8 +430,10 @@
 						    				<div class="form-group">
 						    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
 						    					<div class="col-md-8">
-						    						<input type="text" class="form-control inputInstitucion" name="institucion[]" id="institucion">
-						    						<input type="hidden" name="id_institucion[]">
+						    						<div class="bs-example">
+							    						<input type="text" name="institucion[]" class="form-control typeahead_institucion inputInstitucion tt-query" autocomplete="off" spellcheck="false" id="institucion">
+														<input type="hidden" name="id_institucion[]"class="id_institucion">
+							    					</div>
 						    					</div>
 						    				</div>
 					    				</div>
@@ -446,11 +463,12 @@
 						    	</div>
 
 				    			@else
+				    				<?php $count = 1; ?>
 				    				@foreach($user->formulario->informacion_aspirante->experiencias_investigaciones as $investigacion)
-					    				<div id="formularioExpInv1" class="blockExpInvestigacion">
+					    				<div id="formularioExpInv{{ $count }}" class="blockExpInvestigacion">
 				    						<div class="row divider-h" >
 						    					<div class="col-lg-6">
-							    					<input type="hidden" name="id_exp_inv[]" value="{{ $investigacion->Inv_ID }}">
+							    					<input type="hidden" name="id_exp_inv[]" value="{{ $investigacion->Inv_ID }}" class="id_exp_inv">
 								    				<!--Nombre-->
 								    				<div class="form-group">
 								    					<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
@@ -463,8 +481,16 @@
 								    				<div class="form-group">
 								    					<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
 								    					<div class="col-md-8">
-								    						<input type="text" class="form-control inputInstitucion" name="institucion[]" id="institucion" >
-								    						<input type="hidden" name="id_institucion[]" value="{{ $investigacion->Inv_ID_Institucion }}">
+								    					<div class="bs-example">
+								    						<!-- <input type="text" class="form-control inputInstitucion" name="institucion[]" id="institucion" > -->
+															@if(!is_null($investigacion->Inv_ID_Institucion))
+																<input type="text" name="institucion[]" class="form-control typeahead_institucion inputInstitucion tt-query" autocomplete="off" spellcheck="false" value="{{ $investigacion->institucion->Ins_Nombre }}" id="institucion">
+																<input type="hidden" name="id_institucion[]" value="{{ $investigacion->Inv_ID_Institucion }}" class="id_institucion">
+															@else
+																<input type="text" name="institucion[]" class="form-control typeahead_institucion inputInstitucion tt-query" autocomplete="off" spellcheck="false" id="institucion">
+																<input type="hidden" name="id_institucion[]" class="id_institucion">
+															@endif
+														</div>
 								    					</div>
 								    				</div>
 							    				</div>
@@ -495,6 +521,7 @@
 							    			<!-- Termina row divider-h -->
 					            		</div>
 					            		<!-- Termina row blockExpInvestigacion -->
+					            		<?php $count = $count + 1; ?>
 					    			@endforeach
 				    			@endif
 
@@ -547,10 +574,6 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-	<!--el input del email2 escondido desde que se carga la pagina-->
-	<!-- <script type="text/javascript">
-		$("#email2").fadeOut("fast");
-	</script> -->
 	<!-- Lista desplegable -->
 	<script src="/js/bootstrap-combobox.js"></script>
 	<!-- Calendario -->
@@ -559,11 +582,6 @@
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 
 	<script type="text/javascript">
-	// CHANGE
-		// $(document).ready(function(){
-		// 	$('.combobox').combobox();
-		// });
-	// END
 		// http://eternicode.github.io/bootstrap-datepicker/?markup=input&format=&weekStart=&startDate=&endDate=&startView=0&minViewMode=0&todayBtn=false&clearBtn=false&language=en&orientation=auto&multidate=&multidateSeparator=&keyboardNavigation=on&forceParse=on#sandbox
 	 	$('.datepicker_control').datepicker({
 		    language: "es",
@@ -589,6 +607,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var paises = <?php echo "".($paises); ?>;
+		var instituciones = <?php echo "".($instituciones); ?>;
 		var nacionalidades = <?php echo "".($nacionalidades); ?>;
 		$('input.typeahead').typeahead({
 			name: 'pais_residencia',
@@ -597,6 +616,10 @@
 		$('input.typeahead2').typeahead({
 			name: 'nacionalidad',
 			local:  nacionalidades
+		});
+		$('input.typeahead_institucion').typeahead({
+			name: 'institucion',
+			local:  instituciones
 		});
 
 		// <!--metodo para mostrar y esconder el input para el segundo email-->
@@ -610,46 +633,11 @@
 		else{
 			$("#email2").show();
 		}
+
 	});
 	</script>
 
-	<!-- <script type="text/javascript">
-		var countries = new Bloodhound({
-		datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-		queryTokenizer: Bloodhound.tokenizers.whitespace,
-		limit: 10,
-		prefetch: {
-			// url points to a json file that contains an array of country names, see
-			// https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
-			url: '../data/countries.json',
-			// the json file contains an array of strings, but the Bloodhound
-			// suggestion engine expects JavaScript objects so this converts all of
-			// those strings
-			filter: function(list) {
-				return $.map(list, function(country) { return { name: country }; });
-			}
-		}
-		});
-
-		// kicks off the loading/processing of `local` and `prefetch`
-		countries.initialize();
-
-		// passing in `null` for the `options` arguments will result in the default
-		// options being used
-		$('#prefetch .typeahead').typeahead(null, {
-			name: 'countries',
-			displayKey: 'name',
-			// `ttAdapter` wraps the suggestion engine in an adapter that
-			// is compatible with the typeahead jQuery plugin
-			source: countries.ttAdapter()
-		});
-	</script> -->
-
-
-
-
 	<script type="text/javascript">
-
 		$(function () {
 		    $('#btnAgregarExpInvestigacion').click(function () {
 		        var num     = $('.blockExpInvestigacion').length, // how many "duplicatable" input fields we currently have
@@ -675,8 +663,10 @@
 		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').val('');
 
+		        newElem.find('.id_institucion').attr('value','');
+		        newElem.find('.id_exp_inv').attr('value','');
 
-		    // insert the new element after the last "duplicatable" input field
+
 		    //insertar nuevo elemento despues del ultimo input duplicado
 		        $('#formularioExpInv' + num).after(newElem);
 		        //$('#ID' + newNum + '_title').focus();
@@ -685,7 +675,7 @@
 		        $('#btnRemoverExpInvestigacion').attr('disabled', false);
 
 		    // condicion de cuantas duplicaciones estan permitidas hacer
-		        if (newNum == 5)
+		        if (newNum == 10)
 		        $('#btnAgregarExpInvestigacion').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
 
 		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
@@ -695,6 +685,11 @@
 				    minViewMode: 'years',
 				    autoclose:true
 				  });
+				var instituciones = <?php echo "".($instituciones); ?>;
+			    $('input.typeahead_institucion').typeahead({
+					name: 'institucion',
+					local:  instituciones
+				});
 		    });
 
 		    $('#btnRemoverExpInvestigacion').click(function () {
@@ -713,7 +708,13 @@
 
 		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
 		    });
-
-		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
+		    if($('.blockExpInvestigacion').length < 2){
+		    	$('#btnRemoverExpInvestigacion').attr('disabled', true);
+			}
+		 //    if($('.blockExpInvestigacion').length > 1){
+			// 	// habilita el boton de remover
+			//     $('#btnRemoverExpInvestigacion').attr('disabled', false);
+			// }
+		});
 	</script>
 @endsection
