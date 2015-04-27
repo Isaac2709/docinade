@@ -135,6 +135,8 @@ hr.soften {
 				        </li>
 				        <li><a data-toggle="tab" href="#experienciaEnInvestigacion">Experiencia en Investigación</a></li>
 				        <li><a data-toggle="tab" href="#trabajosPublicados">Trabajos e Investigaciones Publicadas</a></li>
+				        <li><a data-toggle="tab" href="#cursosMasRelevantes">Cursos y Seminarios más Relevantes</a></li>
+				        <li><a data-toggle="tab" href="#conocimientoDeIdiomas">Conocimiento de Idiomas Distintos al Materno</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
@@ -499,16 +501,16 @@ hr.soften {
 				            	<hr class="soften">
 			        		</div>
 			        		<!--BOTONES para agregar y remover formulario-->
-			            		<div  class="col-md-12">
-			            			<div >
-			            				<button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right">-</button>
-			            			</div>
-			            			<div class="col-md-11">
-			            				<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-			            			</div>
-			            		</div>
-			            		<br/>
-				            </form>
+		            		<div  class="col-md-12">
+		            			<div >
+		            				<button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+		            			</div>
+		            			<div class="col-md-11">
+		            				<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+		            			</div>
+		            		</div>
+		            		<br/>
+			            </form>
 				        </div>
 				        <!--Termina  Experiencia profesional-->
 
@@ -640,7 +642,145 @@ hr.soften {
 					    		<br/>
 				    		</form>
 				    	</div>
+				    	<!--Termina Trabajos Publicados-->
 
+				    	<div id="cursosMasRelevantes" class="tab-pane fade">
+				    		<form role="form" action="#" method="post" class="form-horizontal">
+				    			<br/>
+				    			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				    			<div id="formularioCursosMasRelevantes1" class="row blockCursosMasRelevantes">
+				    				<div class="row">
+				    					<div class="col-md-6">
+				    						<!--Nombre de actividad-->
+				    						<div class="form-group">
+				    							<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de actividad:</label>
+				    							<div class="col-md-8">
+				    								<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
+				    							</div>
+				    						</div>
+
+				    						<!--Institucion-->
+											<div class="form-group">
+												<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control inputInstitucion" name="institucion" id="institucion">
+												</div>
+											</div>
+										</div>
+										<!--Termina col-md6-->
+
+										<div class="col-md-6">
+											<!--Lugar-->
+											<div class="form-group">
+												<label for="lugar" class="col-md-4 control-label labelLugar">Lugar:</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control inputLugar" name="lugar" id="lugar">
+												</div>
+											</div>
+
+											<!--Año-->
+											<div class="form-group">
+												<label for="año" class="col-md-4 control-label labelAño">Año:</label>
+												<div class="col-md-8 " id="añoI" >
+							    					<div class="input-group date año">
+							    						<input type="text"  class="form-control inputAño" name="año" id="año">
+							    						<span class="input-group-addon "><i class="glyphicon glyphicon-th"></i></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--Termina col-md-6-->
+				    				</div>	
+				    				<hr class="soften">
+				    			</div>
+				    			<!--BOTONES para agregar y remover formulario-->
+								<div  class="col-md-12">
+									<div >
+										<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+									</div>
+									<div class="col-md-11">
+										<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+									</div>
+								</div>
+								<br/>
+				    		</form>
+				    	</div>
+				    	<!--Termina Cursos mas Relevantes -->
+
+				    	<div id="conocimientoDeIdiomas" class="tab-pane fade">
+				    		<form role="form" action="#" method="post" class="form-horizontal">
+					    		<br/>
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">	
+								<div id="formularioConocimientoDeIdiomas1" class="row blockconocimientoDeIdiomas">
+									<div class="row">
+										<div class="col-md-6">
+											<!--Nombre-->
+											<div class="form-group">
+												<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
+												</div>
+											</div>
+
+											<!--Nivel de escritura-->
+											<div class="form-group">
+											<label for="nivelEscritura" class="col-md-4 control-label labelNivelEscritura">Nivel de escritura:</label>
+												<div class="col-md-8">
+													<select name="nivelEscritura" id="nivelEscritura" class="form-control comboboxNivelEscritura">
+															<option value="" selected>Nivel</option>
+															<option value="">Basico</option>
+										        			<option value="">Itermedio</option>
+										        			<option value="">Avanzado</option>
+												    </select>
+												</div>
+											</div>											
+										</div>
+										<!--Termina col-md-6-->
+
+										
+										<div class="col-md-6">
+											<!--Nivel de lectura-->
+											<div class="form-group">
+											<label for="nivelLectura" class="col-md-4 control-label labelNivelLectura">Nivel de lectura:</label>
+												<div class="col-md-8">
+													<select name="nivelLectura" id="nivelLectura" class="form-control comboboxNivelLectura">
+															<option value="" selected>Nivel</option>
+															<option value="">Basico</option>
+										        			<option value="">Itermedio</option>
+										        			<option value="">Avanzado</option>
+												    </select>
+												</div>
+											</div>
+
+											<!--Nivel conversacional-->
+											<div class="form-group">
+											<label for="nivelConversacional" class="col-md-4 control-label labelNivelConversacional">Nivel conversacional:</label>
+												<div class="col-md-8">
+													<select name="nivelCoversacional" id="nivelConversacional" class="form-control comboboxNivelConversacional">
+															<option value="" selected>Nivel</option>
+															<option value="">Basico</option>
+										        			<option value="">Itermedio</option>
+										        			<option value="">Avanzado</option>
+												    </select>
+												</div>
+											</div>	
+										</div>
+										<!--Termina col-md-6-->
+									</div>
+									<hr class="soften">
+								</div>
+								<!--BOTONES para agregar y remover formulario-->
+								<div  class="col-md-12">
+									<div >
+										<button id="btnRemoverConocimientoDeIdiomas" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+									</div>
+									<div class="col-md-11">
+										<button id="btnAgregarConocimientoDeIdiomas" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+									</div>
+								</div>
+								<br/>
+				    		</form>
+				    	</div>
 				    </div>
 					<!-- End Tabs -->
 				</div>
