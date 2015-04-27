@@ -634,6 +634,10 @@
 			$("#email2").show();
 		}
 
+		// $("#informacionPersonal").find('input').change(function(){
+
+  //       });
+
 	});
 	</script>
 

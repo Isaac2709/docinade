@@ -113,8 +113,8 @@ class FormularioController extends Controller {
 			// Consulta a la base de datos si el país existe
 			$nacionalidad = Nacionalidad::where('Nac_Nombre', '=', $request->nacionalidad)->first();
 			if(is_null($nacionalidad)){
-				// Si el país no existe, regresa a la página anterior con los errores
-				return redirect()->back()->withErrors();
+				// Si la nacionaidad no existe, regresa a la página anterior con los errores
+				return redirect()->back()->withErrors(['La nacionaidad no existe']);
 			}
 			// Guarda el ID del país de residencia en la tabla del aspirante
 			$user->formulario->informacion_aspirante->Asp_ID_Nac = $nacionalidad->Nac_ID; //ID de la tabla GEN_Pais
@@ -182,7 +182,7 @@ class FormularioController extends Controller {
 			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
 			if(is_null($pais_residencia)){
 				// Si el país no existe, regresa a la página anterior con los errores
-				return redirect()->back()->withErrors();
+				return redirect()->back()->withErrors(['El país de residencia no existe']);
 			}
 			// Guarda el ID del país de residencia en la tabla del aspirante
 			$user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
