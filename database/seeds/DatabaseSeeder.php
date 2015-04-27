@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('PaisTableSeeder');
+		$this->call('EnfasisTableSeeder');
 
 		$this->command->info('Table seeded!');
 	}
