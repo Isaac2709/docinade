@@ -32,4 +32,13 @@ class ExperienciaInvestigacion extends Model {
 		return $this->belongsTo('App\InformacionAspirante', 'Inv_ID_Asp');
 	}
 
+	public function institucion(){
+		return $this->belongsTo('App\Institucion', 'Inv_ID_Institucion');
+	}
+
+	public function scopeSeleccionarInvestigacionesAEliminar($query, $id_investigaciones){
+		// $investigaciones = ExperienciaInvestigacion::distinc()-select('Ins_ID')->where('Ins_ID', '=', $id_investigaciones[0])->get();
+		return $query->where('Ins_ID', '!=', $id_investigaciones[0])->get();
+	}
+
 }
