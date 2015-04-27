@@ -80,7 +80,6 @@ class FormularioController extends Controller {
 	public function postIndex(Request $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
-
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
 		$user->formulario->IPe_Apellido = $request->apellidos;
@@ -172,7 +171,7 @@ class FormularioController extends Controller {
 		// Area de interés para desarrollar el tema de investigación
 		$user->formulario->informacion_aspirante->Asp_Area_Interes = $request->area_investigacion;
 
-		$user->formulario->informacion_aspirante->save();
+		$user->formulario->informacion_aspirante->save();		
 
 
 		// Direccion Actual del Aspirante

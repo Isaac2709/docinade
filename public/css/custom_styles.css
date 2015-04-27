@@ -1,15 +1,44 @@
-.divider-h{
-  border-bottom: 1px solid #C0C0C0;
-  padding: 20px;
-/*  margin-left: 0;
-  margin-right: 0;*/
+.espacio {
+  margin-bottom: 6px;
 }
 
-/*.bs-example{
-  font-family: sans-serif;
+/*bloque para usar los iconos*/
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
   position: relative;
-  margin: 100px;
-}*/
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-th-large:before {
+  content: "\e010";
+}
+.glyphicon-th:before {
+  content: "\e011";
+}
+.glyphicon-th-list:before {
+  content: "\e012";
+}
+
+/*funcion para la etiqueta <hr> personalizada*/
+hr.soften {
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
+  border: 0;
+}
+
 .typeahead, .typeahead2, .tt-query, .tt-hint {
   border: 1px solid #CCCCCC;
   /*border-radius: 8px;*/
@@ -20,8 +49,12 @@
 
   /*width: 148%;*/
 }
+.twitter-typeahead{
+  width: 100%;
+}
 .tt-query, .tt-hint {
   padding: 4px 12px;
+  width: 100%;
 }
 .typeahead, .typeahead2 {
   background-color: #FFFFFF;
