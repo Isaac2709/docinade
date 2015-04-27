@@ -8,6 +8,10 @@
 	margin: 100px;
 }*/
 
+.espacio {
+	margin-bottom: 6px;
+}
+
 /*bloque para usar los iconos*/
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -38,10 +42,10 @@
 /*funcion para la etiqueta <hr> personalizada*/
 hr.soften {
   height: 1px;
-  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
-  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
-  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
-  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,.8), rgba(0,0,0,0));
+  background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
+  background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
+  background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
+  background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(67, 168, 22, 0.9), rgba(0,0,0,0));
   border: 0;
 }
 
@@ -55,8 +59,12 @@ hr.soften {
 
 	/*width: 148%;*/
 }
+.twitter-typeahead{
+	width: 100%;
+}
 .tt-query, .tt-hint {
 	padding: 4px 12px;
+	width: 100%;
 }
 .typeahead, .typeahead2 {
 	background-color: #FFFFFF;
@@ -126,6 +134,7 @@ hr.soften {
 				            </ul>
 				        </li>
 				        <li><a data-toggle="tab" href="#experienciaEnInvestigacion">Experiencia en Investigación</a></li>
+				        <li><a data-toggle="tab" href="#trabajosPublicados">Trabajos e Investigaciones Publicadas</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
@@ -135,6 +144,15 @@ hr.soften {
 				        	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				        	<div class="row">
 		                    	<div class="col-lg-6">
+		                    		<!--Seleccion de la foto-->
+				        			<div class="col-md-5 col-md-offset-4 espacio">
+				        				@if(!empty($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
+				        					<!-- <a class="btn btn-link"  target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}">{{ $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj }}</a>-->
+				        					<img src="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}" class="img-thumbnail">
+				        				@else
+                                        	<input type="file" name="id_file" id="id_file">
+                                        @endif
+                                    </div>
 					        		<!-- Name of aspirant -->
 					        		<div class="form-group">
 					        			<label for="name" class="col-md-4 control-label">Nombre:</label>
@@ -151,19 +169,14 @@ hr.soften {
 											<input type="text" class="form-control" name="apellidos" value="{{ $user->formulario->IPe_Apellido }}">
 										</div>
 					        		</div>
+
 					        		<!-- ID or passport of aspirant -->
 					        		<div class="form-group">
 					        			<label for="id" class="col-md-4 control-label">Cedula o Pasaporte:</label>
 					        			<div class="col-md-8">
 					        				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
 					        			</div>
-					        			<div class="col-md-4 col-md-offset-4">
-					        				@if(!empty($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
-					        					<a class="btn btn-link"  target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}">{{ $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj }}</a>
-					        				@else
-                                            	<input type="file" name="id_file" id="id_file">
-                                            @endif
-                                        </div>
+					        			
 					        		</div>
 					        		<!-- Genero del(la) aspirante -->
 									<div class="form-group">
@@ -297,10 +310,6 @@ hr.soften {
 		                    		<div class="form-group">
 		                    			<label for="pais_residencia" class="col-md-4 control-label">País de residencia:</label>
 		                    			<div class="col-md-8">
-		                    				<!-- <input type="text" class="form-control" name="pais_residencia"> -->
-		                    				<!-- <div id="prefetch">
-											  	<input class="typeahead form-control" type="text" placeholder="Countries" data-provide="typeahead" name="pais_residencia">
-											</div> -->
 											<div class="bs-example">
 												@if(!is_null($user->formulario->informacion_aspirante->direccion_actual->pais_residencia))
 													<input type="text" name="pais_residencia" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false" value="{{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}" id="pais_residencia">
@@ -568,6 +577,70 @@ hr.soften {
 			            		<br/>
 					    	</form>
 				    	</div>
+				    	<!--Termina Experiencia en Investigacion-->
+
+				    	<div id="trabajosPublicados" class="tab-pane fade">
+				    		<form role="form" action="#" method="post" class="form-horizontal">
+				    			<br/>
+				    			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				    			<div id="formularioTrabajosPublicados1" class="row blockTrabajosPublicados">
+					    			<div class="row">
+					    				<div class="col-md-6">
+					    					<!--Titulo de Publicacion-->
+						    				<div class="form-group">
+						    					<label for="tituloP" class="col-md-4 control-label labelTituloP">Título de la publicación:</label>
+						    					<div class="col-md-8">
+						    						<input type="text" class="form-control inputTituloP" name="tituloP" id="tituloP">
+						    					</div>
+						    				</div>
+
+						    				<!--Titulo del medio de publicacion-->
+						    				<div class="form-group">
+						    					<label for="tituloMP" class="col-md-4 control-label labelTituloMP">Título del medio de publicación:</label>
+						    					<div class="col-md-8">
+						    						<input type="text" class="form-control inputTituloMP" name="tituloMP" id="tituloMP">
+						    					</div>
+						    				</div>
+					    				</div>
+					    				<!--Termina col-md-6-->
+
+					    				<div class="col-md-6">
+					    					<!--Pais de publicacion-->
+						    				<div class="form-group">
+						    					<label for="pais" class="col-md-4 control-label labelPais">País de publicación:</label>
+						    					<div class="col-md-8">
+						    						<input type="text" class="form-control inputPais" name="pais" id="pais">
+						    					</div>
+						    				</div>
+
+						    				<!--Año-->
+						    				<div class="form-group">
+						    					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
+						    					<div class="col-md-8 " id="añoT" >
+							    					<div class="input-group date año">
+							    						<input type="text"  class="form-control inputAño" name="año" id="año">
+							    						<span class="input-group-addon "><i class="glyphicon glyphicon-th"></i></span>
+						    						</div>
+						    					</div>
+					    					</div>
+					    				</div>
+					    				<!--Termina col-md-6-->
+					    			</div>
+					    			<hr class="soften">
+				    			</div>
+				    			<!--BOTONES para agregar y remover formulario-->
+					    		<div  class="col-md-12">
+					    			<div >
+					    				<button id="btnRemoverTrabajosPublicados" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+					    			</div>
+					    			<div class="col-md-11">
+					    				<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+					    			</div>
+					    		</div>
+					    		<br/>
+				    		</form>
+				    	</div>
+
 				    </div>
 					<!-- End Tabs -->
 				</div>
@@ -623,7 +696,7 @@ hr.soften {
 	</script>
 
 	<script type="text/javascript">
-
+	//funcion para cambiar texto del boton de email
 		function cambiarTextoDeBoton(button_id) 
 		{
 			
@@ -644,22 +717,10 @@ hr.soften {
 						$("#email2").val(null);
 				    };
 			   }
-
-			   
-		
 		}
 	</script>
 
-<!-- <script>
-$(document).ready(function(){
-    $("#agregarNuevoEmail").click(function(){
-        $("#agregarNuevoEmail").removeClass("btn-primary").addClass("btn-danger");
-    });
-});
-</script>-->
 
-
-	
 	<script  type="text/javascript" src="typeahead.js"></script>
 
 	<script type="text/javascript">
@@ -676,14 +737,6 @@ $(document).ready(function(){
 		});
 		
 
-		var boleano;
-		// <!--metodo para mostrar y esconder el input para el segundo email-->
-		//$("#agregarNuevoEmail").click(function(){
-
-				//$("#email2").fadeToggle("slow");
-				//$("#email2").val(null);
-				
-		//});
 
 		if($("#email2").val()==null || $("#email2").val()==""){
 			$("#email2").hide();
@@ -698,6 +751,79 @@ $(document).ready(function(){
 		});
 	
 	</script>
+
+
+<!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_EN_INVESTIGACION-->
+	<script type="text/javascript">
+
+		$(function () {
+		    $('#btnAgregarTrabajosPublicados').click(function () {
+		        var num     = $('.blockTrabajosPublicados').length, // how many "duplicatable" input fields we currently have
+		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
+		            newElem = $('#formularioTrabajosPublicados' + num).clone().attr('id', 'formularioTrabajosPublicados' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
+
+		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+		    // este no vaya con los atributos de los inputs anteriores
+
+		        //Titulo de la publicacion - text
+		        newElem.find('.labelTituloP').attr('for','ID'+newNum+'_tituloP');
+		        newElem.find('.inputTituloP').attr('id','ID'+newNum+'_tituloP').attr('name','ID'+newNum+'_tituloP').val('');
+
+		        //Titulo del medio de publicacion - text
+		        newElem.find('.labelTituloMP').attr('for','ID'+newNum+'_tituloMP');
+		        newElem.find('.inputTituloMP').attr('id','ID'+newNum+'_tituloMP').attr('name','ID'+newNum+'_tituloMP').val('');
+
+		 		//Pais de publicacion - text
+		        newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
+		        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').attr('name','ID'+newNum+'_pais').val('');
+
+		        //Año - text
+		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
+		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+
+
+		    // insert the new element after the last "duplicatable" input field
+		    //insertar nuevo elemento despues del ultimo input duplicado
+		        $('#formularioTrabajosPublicados' + num).after(newElem);
+		        //$('#ID' + newNum + '_title').focus();
+
+		    // habilita el boton de remover
+		        $('#btnRemoverTrabajosPublicados').attr('disabled', false);
+
+		    // condicion de cuantas duplicaciones estan permitidas hacer
+		        if (newNum == 5)
+		        $('#btnAgregarTrabajosPublicados').attr('disabled', true).prop('value', "No se puede agregar mas formularios");
+
+		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
+			    $('.año').datepicker( {
+				    format: ' yyyy',
+				    viewMode: 'years',
+				    minViewMode: 'years',
+				    autoclose:true
+			  	});
+		    });
+
+		    $('#btnRemoverTrabajosPublicados').click(function () {
+		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
+		            {
+		                var num = $('.blockTrabajosPublicados').length;
+		                // cuantos inputs duplicados se tiene hasta el momento
+		                $('#formularioTrabajosPublicados' + num).slideUp('slow', function () {$(this).remove();
+
+		                    if (num -1 === 1)
+		                		$('#btnRemoverTrabajosPublicados').attr('disabled', true);
+
+			                $('#btnAgregarTrabajosPublicados').attr('disabled', false).prop('value', "add section");});
+		            }
+		        return false;
+
+		        $('#btnAgregarTrabajosPublicados').attr('disabled', false);
+		    });
+
+		    $('#btnRemoverTrabajosPublicados').attr('disabled', true);});
+	</script>
+
+
 
 
 <!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_EN_INVESTIGACION-->
