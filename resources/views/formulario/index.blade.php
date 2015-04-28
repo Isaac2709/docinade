@@ -515,6 +515,7 @@
 						    				</div>
 						    			</div>
 						    		</div>
+						    		<hr class="soften">
 						    	</div>
 
 				    			@else
