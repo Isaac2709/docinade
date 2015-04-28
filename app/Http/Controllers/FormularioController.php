@@ -10,8 +10,11 @@ use App\DireccionActual;
 use App\AreaInteres;
 use App\Nacionalidad;
 use App\Email;
+use App\ExperienciaInvestigacion;
+use App\Institucion;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Vsmoraes\Pdf\Pdf;
 
 // use Illuminate\Support\Facades\Request;
 
@@ -20,14 +23,15 @@ use Illuminate\Http\Request;
 class FormularioController extends Controller {
 
 	private $destinationPath = "";
-
+	private $pdf;
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Pdf $pdf)
 	{
+		$this->pdf = $pdf;
 		$this->middleware('auth');
 		$this->destinationPath = public_path().'/storage';
 	}
@@ -43,6 +47,7 @@ class FormularioController extends Controller {
 		$paises = Pais::all()->lists('Pais_Nombre');
 		$nacionalidades = Nacionalidad::all()->lists('Nac_Nombre');
 		$enfasis = Enfasis::all();
+		$instituciones = Institucion::all()->lists('Ins_Nombre');
 		$user = User::find(Auth::user()->Usu_ID);
 		if(!$user->usuarioTieneFormulario()){
 			$formulario = new Formulario();
@@ -71,7 +76,7 @@ class FormularioController extends Controller {
 			// $informacion_aspirante->save();
 		}
 
-		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('enfasis', $enfasis)->with('user', $user);
+		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('user', $user);
 	}
 
 	public function postIndex(Request $request)
@@ -95,6 +100,19 @@ class FormularioController extends Controller {
             $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj = $id_filename;
         }
 
+        // Fotografía adjunta del aspirante
+		if ($request->hasFile('photo_file')) {
+            $file = $request->file('photo_file');
+	        $name_file = $file->getClientOriginalName();
+	        // dd($file->getClientMimeType() );
+	        $trozos = explode(".", $name_file);
+	        $extension = end($trozos);
+	        $id_filename = $user->Usu_Nombre.'_'.rand(10, 99999999).'.'.$file->getClientOriginalName();
+	        \Illuminate\Support\Facades\Request::file('photo_file')->move($this->destinationPath.'/images/', $id_filename);
+            $user->formulario->informacion_aspirante->Asp_Fotografia = $id_filename;
+        }
+
+
 		// Revisa si la fecha de nacimiento es enviada
 		$fecha_nacimiento = $request->fecha_nacimiento;
 		if(!empty($fecha_nacimiento)){
@@ -109,8 +127,8 @@ class FormularioController extends Controller {
 			// Consulta a la base de datos si el país existe
 			$nacionalidad = Nacionalidad::where('Nac_Nombre', '=', $request->nacionalidad)->first();
 			if(is_null($nacionalidad)){
-				// Si el país no existe, regresa a la página anterior con los errores
-				return redirect()->back()->withErrors();
+				// Si la nacionaidad no existe, regresa a la página anterior con los errores
+				return redirect()->back()->withErrors(['La nacionaidad no existe']);
 			}
 			// Guarda el ID del país de residencia en la tabla del aspirante
 			$user->formulario->informacion_aspirante->Asp_ID_Nac = $nacionalidad->Nac_ID; //ID de la tabla GEN_Pais
@@ -168,7 +186,7 @@ class FormularioController extends Controller {
 		// Area de interés para desarrollar el tema de investigación
 		$user->formulario->informacion_aspirante->Asp_Area_Interes = $request->area_investigacion;
 
-		$user->formulario->informacion_aspirante->save();		
+		$user->formulario->informacion_aspirante->save();
 
 
 		// Direccion Actual del Aspirante
@@ -178,7 +196,7 @@ class FormularioController extends Controller {
 			$pais_residencia = Pais::where('Pais_Nombre', '=', $request->pais_residencia)->first();
 			if(is_null($pais_residencia)){
 				// Si el país no existe, regresa a la página anterior con los errores
-				return redirect()->back()->withErrors();
+				return redirect()->back()->withErrors(['El país de residencia no existe']);
 			}
 			// Guarda el ID del país de residencia en la tabla del aspirante
 			$user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais = $pais_residencia->Pais_ID; //ID de la tabla GEN_Pais
@@ -193,27 +211,67 @@ class FormularioController extends Controller {
 		$user->formulario->save();
 		// Fin de la Información personal del aspirante
 
-		return redirect()->back()->withInput();
-		// dd($formulario);
-		// $user->formulario()->save($formulario);
-		// Auth::user()->formulario()->informacion_aspirante($informacion_aspirante);
-				// $data = \DB::table('ASP_Aspirante')
-  //             	->where('GEN_ID_Usuario', '=',Auth::user()->Usu_ID)
-  //             	->first();
-  //       dd($data);
-		// $formulario->save();
-		// echo "-> ".Auth::user()->usuarioTieneFormulario();
-		// $data = $request->all();
-		// dd($formulario);
-		// echo "<br />"."USUARIO"."<br />";
-		// dd(Auth::user());
-		// $users = User::all();
-		// return "".$users;
-		// return "".$users;
-		// $var = cnsulta;
-		// return view('formulario.index');
+		$message = 'Sus datos han sido actualizados.';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
+	public function postExpInvestigacion(Request $request){
+		$user = User::find(Auth::user()->Usu_ID);
+
+		$experiencias_investigaciones_a_eliminar = $user->formulario->informacion_aspirante->seleccionarInvestigacionesAEliminar($request->id_exp_inv);
+		foreach ($experiencias_investigaciones_a_eliminar as $investigacion) {
+			// echo "Elimino: ".$investigacion->Inv_Proyecto."<br />";
+			$investigacion->delete();
+		}
+
+		$pos = 0;
+		// For each para recorrer todas las experiencias en investigaciones
+		foreach ($request->nombre as $nombre) {
+			$experiencia_investigacion = null;
+			// Revisa si existe la experiencia
+			if(!empty($request->id_exp_inv[$pos])){
+				// Si existe, entonces la consulta y actualiza el nombre del Proyecto.
+				$experiencia_investigacion = ExperienciaInvestigacion::find($request->id_exp_inv[$pos]);
+				$experiencia_investigacion->Inv_Proyecto = $request->nombre[$pos];
+			}
+			else{
+				// Si no existe, crea un nuevo modelo, le asigna el nombre del proyecto y lo guarda en la base de datos.
+				$experiencia_investigacion = new ExperienciaInvestigacion();
+				$experiencia_investigacion->Inv_Proyecto = $request->nombre[$pos];
+				$user->formulario->informacion_aspirante->experiencias_investigaciones()->save($experiencia_investigacion);
+			}
+			// Revisa si se envia una institución en la investigación
+			if(!empty($request->institucion[$pos])){
+				// Si se envia, consulta si existe en la base de datos, dicha institución
+				$institucion = Institucion::where('Ins_Nombre', '=', trim($request->institucion[$pos], " \t."))->first();
+				if(is_null($institucion)){
+					// Si la institución no existe, la crea y la guarda en la base de datos.
+					$institucion = new Institucion();
+					$institucion->Ins_Nombre = trim($request->institucion[$pos], " \t.");
+					$institucion->save();
+				}
+				// Finalmente le asigna la institución a la experiencia en investigación
+				$experiencia_investigacion->Inv_ID_Institucion = $institucion->Ins_ID;
+			}
+			// Actualiza los datos faltantes
+			$experiencia_investigacion->Inv_Lugar = $request->lugar[$pos];
+			if(!empty($request->año[$pos])){
+				$experiencia_investigacion->Inv_Anio = $request->año[$pos];
+			}
+			$experiencia_investigacion->save();
+			$pos = $pos + 1;
+		}
+		$message = 'Sus datos han sido actualizados.';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
+	}
+
+	public function getPdfformulario(){
+		$user = User::find(Auth::user()->Usu_ID);
+    	$html = view('formulario.pdf')->with('user',$user)->render();
+        return $this->pdf
+            ->load($html, 'Letter', 'portrait')
+            ->show();
+	}
 
 	/**
 	 * Show the form for creating a new resource.

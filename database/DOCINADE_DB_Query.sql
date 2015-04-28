@@ -168,7 +168,7 @@ CREATE TABLE ASP_Aspirante(
 	Asp_Fecha_Envio DATE,
 	-- Asp_Fotografia LONGBLOB,
 	Asp_Fotografia VARCHAR(300),
-	Asp_Pasaporte_Adj LONGBLOB,
+	Asp_Pasaporte_Adj VARCHAR(300),
 	-- Change
     -- Asp_ID_InfoPer SMALLINT NOT NULL,
     Asp_ID_InfoPer SMALLINT,
@@ -207,6 +207,7 @@ CREATE TABLE ASP_Aspirante(
 -- ALTER TABLE `Asp_Aspirante` DROP FOREIGN KEY `FK_Asp_Asp_Area_Interes`;
 -- ALTER TABLE `Asp_Aspirante` CHANGE `Asp_ID_Area_Interes` `Asp_Area_Interes` VARCHAR(150) NULL DEFAULT NULL;
 -- ALTER TABLE `asp_aspirante` CHANGE `Asp_Pasaporte_Adj` `Asp_Pasaporte_Adj` VARCHAR(300) NULL DEFAULT NULL;
+-- ALTER TABLE `asp_aspirante` CHANGE `Asp_Fotografia` `Asp_Fotografia` VARCHAR(300) NULL DEFAULT NULL;
 
 CREATE TABLE ASP_Biblioteca(
 	Bib_ID SMALLINT AUTO_INCREMENT NOT NULL,
