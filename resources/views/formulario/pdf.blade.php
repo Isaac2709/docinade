@@ -71,11 +71,13 @@
 				<tr>
 			<td><b>Fecha de Nacimiento: </b>
 				<!-- Conversión del formato de la fecha -->
-				<?php
-					$date_obj = date_create_from_format('Y-m-d',$user->formulario->IPe_Fecha_Nac);
-					$fecha_nacimiento = date_format($date_obj, 'd/m/Y');
-				?>
-				{{ $fecha_nacimiento }}
+				@if(!is_null($user->formulario->IPe_Fecha_Nac) && $user->formulario->IPe_Fecha_Nac != "0000-00-00")
+					<?php
+						$date_obj = date_create_from_format('Y-m-d',$user->formulario->IPe_Fecha_Nac);
+						$fecha_nacimiento = date_format($date_obj, 'd/m/Y');
+					?>
+					{{ $fecha_nacimiento }}
+				@endif
 			</td>
 			<td colspan=2><b>Lugar de Nacimiento: </b> {{ $user->formulario->informacion_aspirante->Asp_Lugar_Nac }} </td>
 		</tr>
@@ -96,7 +98,9 @@
 		</tr>
 		<tr>
 			<td colspan=3><b>Énsasis de Interés: </b>
-				{{ $user->formulario->informacion_aspirante->enfasis->Enf_Nombre }}
+				@if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Enfasis))
+					{{ $user->formulario->informacion_aspirante->enfasis->Enf_Nombre }}
+				@endif
 			</td>
 		</tr>
 		<tr>
