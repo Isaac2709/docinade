@@ -181,9 +181,12 @@ $(function () {
 	$('.show-change-button').parent('.form-group').mouseleave(function() {
 	    $(this).find('.btn-change').hide();
 	  });
-	$('.show-change-button').parent('.form-group').find('.btn-change').click(function() {
-		$('.show-change-button').parent('.form-group').html('<input type="file" name="id_file" id="id_file">');
+	$('#photo_file').parent('.form-group').find('.btn-change').click(function() {
+		$('#photo_file').parent('.form-group').html('<input type="file" name="photo_file" id="photo_file">');
 	});
+    $('#id_file').parent('.form-group').find('.btn-change').click(function() {
+        $('#id_file').parent('.form-group').html('<input type="file" name="id_file" id="id_file">');
+    });
 });
 
 

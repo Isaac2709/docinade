@@ -47,6 +47,14 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Relacion de pertenencia de uno a uno entre los modelos InformacionAspirante y AreaInteres
+	 * @return [arrayEloquent] [El modelo AreaInteres al que pertenece InformacionAspirante]
+	 */
+	public function enfasis(){
+		return $this->belongsTo('App\Enfasis', 'Asp_ID_Enfasis');
+	}
+
+	/**
 	 * Relacion de pertenencia de uno a uno entre los modelos InformacionAspirante y Nacionalidad
 	 * @return [arrayEloquent] [El modelo Nacionalidad al que pertenece InformacionAspirante]
 	 */

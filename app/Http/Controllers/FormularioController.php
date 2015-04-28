@@ -14,6 +14,7 @@ use App\ExperienciaInvestigacion;
 use App\Institucion;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Vsmoraes\Pdf\Pdf;
 
 // use Illuminate\Support\Facades\Request;
 
@@ -22,14 +23,15 @@ use Illuminate\Http\Request;
 class FormularioController extends Controller {
 
 	private $destinationPath = "";
-
+	private $pdf;
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Pdf $pdf)
 	{
+		$this->pdf = $pdf;
 		$this->middleware('auth');
 		$this->destinationPath = public_path().'/storage';
 	}
@@ -97,6 +99,19 @@ class FormularioController extends Controller {
 	        \Illuminate\Support\Facades\Request::file('id_file')->move($this->destinationPath.'/images/', $id_filename);
             $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj = $id_filename;
         }
+
+        // Fotografía adjunta del aspirante
+		if ($request->hasFile('photo_file')) {
+            $file = $request->file('photo_file');
+	        $name_file = $file->getClientOriginalName();
+	        // dd($file->getClientMimeType() );
+	        $trozos = explode(".", $name_file);
+	        $extension = end($trozos);
+	        $id_filename = $user->Usu_Nombre.'_'.rand(10, 99999999).'.'.$file->getClientOriginalName();
+	        \Illuminate\Support\Facades\Request::file('photo_file')->move($this->destinationPath.'/images/', $id_filename);
+            $user->formulario->informacion_aspirante->Asp_Fotografia = $id_filename;
+        }
+
 
 		// Revisa si la fecha de nacimiento es enviada
 		$fecha_nacimiento = $request->fecha_nacimiento;
@@ -171,7 +186,7 @@ class FormularioController extends Controller {
 		// Area de interés para desarrollar el tema de investigación
 		$user->formulario->informacion_aspirante->Asp_Area_Interes = $request->area_investigacion;
 
-		$user->formulario->informacion_aspirante->save();		
+		$user->formulario->informacion_aspirante->save();
 
 
 		// Direccion Actual del Aspirante
@@ -250,6 +265,13 @@ class FormularioController extends Controller {
 		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
+	public function getPdfformulario(){
+		$user = User::find(Auth::user()->Usu_ID);
+    	$html = view('formulario.pdf')->with('user',$user)->render();
+        return $this->pdf
+            ->load($html, 'Letter', 'portrait')
+            ->show();
+	}
 
 	/**
 	 * Show the form for creating a new resource.

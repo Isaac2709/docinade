@@ -49,6 +49,7 @@
 				        </li>
 				        <li><a data-toggle="tab" href="#experienciaEnInvestigacion">Experiencia en Investigación</a></li>
 				        <li><a data-toggle="tab" href="#trabajosPublicados">Trabajos e Investigaciones Publicadas</a></li>
+				        <li><a data-toggle="tab" href="#exportar">Exportar</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
@@ -79,10 +80,10 @@
 					        			<div class="col-md-8">
 					        				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
 					        			</div>
-					        			<div class="col-md-8 col-md-offset-4">
+					        			<div class="col-md-8 col-md-offset-4" style="height: 30px;">
 					        				@if(!empty($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
 					        				<div class="form-group">
-					        					<div class="col-md-4 show-change-button">
+					        					<div class="col-md-4 show-change-button" id="id_file">
 					        					<a class="btn btn-link"  target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}">Archivo adjunto</a></div>
 					        					<div class="col-md-4">
 					        					<a class="btn btn-warning btn-sm btn-change">Actualizar el archivo adjunto</a>
@@ -189,6 +190,22 @@
 								<!-- End col-lg-6 -->
 
 	                    		<div class="col-lg-6">
+	                    			<!-- Fotografía -->
+					        		<div class="form-group">
+					        			<label for="id" class="col-md-4 control-label">Fotografía:</label>
+					        			<div class="col-md-8" style="height: 34px;">
+					        				@if(!empty($user->formulario->informacion_aspirante->Asp_Fotografia))
+					        				<div class="form-group">
+					        					<div class="col-md-4 show-change-button" id="photo_file">
+					        					<a class="btn btn-link" target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Fotografia}}">Foto adjunta</a></div>
+					        					<div class="col-md-4">
+					        					<a class="btn btn-warning btn-sm btn-change">Actualizar la fotografía</a>
+					        					</div></div>
+					        				@else
+                                            	<input type="file" name="photo_file" id="photo_file">
+                                            @endif
+                                        </div>
+					        		</div>
 	                    			<!-- Enfasis de interes -->
 									<div class="form-group">
 										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes:</label>
@@ -639,7 +656,7 @@
 				    			<!--BOTONES para agregar y remover formulario-->
 					    		<div  class="col-md-12">
 					    			<div >
-					    				<button id="btnRemoverTrabajosPublicados" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+					    				<button id="btnRemoverTrabajosPublicados" type="button" class="btn btn-danger btn-læg pull-right">-</button>
 					    			</div>
 					    			<div class="col-md-11">
 					    				<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right">+</button>
@@ -655,7 +672,11 @@
 			            		</div>
 				    		</form>
 				    	</div>
-
+						<div id="exportar" class="tab-pane fade in active">
+							<div class="form-group">
+								<a class="btn btn-success btn-lg" href="formulario/pdfformulario" target="_blank" >Exportar formulario</a>
+							</div>
+						</div>
 				    </div>
 					<!-- End Tabs -->
 				</div>
