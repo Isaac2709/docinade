@@ -83,4 +83,8 @@ class InformacionAspirante extends Model {
 		}
 		return $investigaciones->get();
 	}
+
+	public function educacion_superior(){
+		return $this->hasMany('App\EducacionSuperior', 'Sup_ID_Asp');
+	}
 }

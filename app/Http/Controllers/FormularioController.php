@@ -15,6 +15,11 @@ use App\Institucion;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Vsmoraes\Pdf\Pdf;
+use Carbon\Carbon;
+
+// REQUESTS
+use App\Http\Requests\CrearFormularioRequest;
+use App\Http\Requests\CrearExperienciaInvestigacionRequest;
 
 // use Illuminate\Support\Facades\Request;
 
@@ -79,8 +84,10 @@ class FormularioController extends Controller {
 		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('user', $user);
 	}
 
-	public function postIndex(Request $request)
+	public function postIndex(CrearFormularioRequest $request)
 	{
+		$message = 'Sus datos han sido actualizados.';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
 		$user = User::find(Auth::user()->Usu_ID);
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
@@ -215,7 +222,7 @@ class FormularioController extends Controller {
 		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
-	public function postExpInvestigacion(Request $request){
+	public function postExpInvestigacion(CrearExperienciaInvestigacionRequest $request){
 		$user = User::find(Auth::user()->Usu_ID);
 
 		$experiencias_investigaciones_a_eliminar = $user->formulario->informacion_aspirante->seleccionarInvestigacionesAEliminar($request->id_exp_inv);
@@ -263,6 +270,10 @@ class FormularioController extends Controller {
 		}
 		$message = 'Sus datos han sido actualizados.';
 		return redirect()->back()->withInput()->with('successMessage', [$message]);
+	}
+
+	public function postEduSuperior(Request $request){
+		return null;
 	}
 
 	public function getPdfformulario(){

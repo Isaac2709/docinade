@@ -17,11 +17,11 @@
 	    <!-- <div class="widget-inner"> -->
 			<div class="panel panel-default">
 
-				<div class="panel-heading"><h2>Datos Personales</h2></div>
+				<!-- <div class="panel-heading"><h2>Datos Personales</h2></div> -->
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
-							<strong>Whoops!</strong> Tuvimos algunos problemas con sus entradas<br><br>
+							<strong>Whoops!</strong> Tuvimos algunos problemas con sus entradas<br>
 							<ul>
 								@foreach ($errors->all() as $error)
 									<li>{{ $error }}</li>
@@ -31,9 +31,11 @@
 					@else
 						@if (session()->has('successMessage'))
 							<div class="alert alert-success">
-							@foreach(session('successMessage') as $message)
-								<li>{{ $message }}</li>
-							@endforeach
+							<!-- <ul> -->
+								@foreach(session('successMessage') as $message)
+									<center><strong>{{ $message }}</strong></center>
+								@endforeach
+							<!-- </ul> -->
 							</div>
 						@endif
 					@endif
@@ -54,34 +56,34 @@
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
 				        <div id="informacionPersonal" class="tab-pane fade in active">
-							@include('formulario.informacionPersonal')
+							@include('formulario.tabs.informacionPersonal')
 				        </div>
 
 				        <!-- Educacion Superior-->
 				        <div id="educacionSuperior" class="tab-pane fade">
-							@include('formulario.educacionSuperior')
+							@include('formulario.tabs.educacionSuperior')
 				        </div>
 				        <!-- Termina Educacion Superior-->
 
 				        <!--Experiencia profesional-->
 				        <div id="experienciaProfesional" class="tab-pane fade">
-				        	@include('formulario.experienciaProfesional')
+				        	@include('formulario.tabs.experienciaProfesional')
 
 				        </div>
 				        <!-- Termina  Experiencia profesional -->
 
 						<!-- Experiencia en Investigación -->
 				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
-					    	@include('formulario.experienciaEnInvestigacion')
+					    	@include('formulario.tabs.experienciaEnInvestigacion')
 				    	</div>
 				    	<!--Termina Experiencia en Investigacion-->
 
 						<!-- Trabajos Publicados -->
 				    	<div id="trabajosPublicados" class="tab-pane fade">
-				    		@include('formulario.trabajosPublicados')
+				    		@include('formulario.tabs.trabajosPublicados')
 				    	</div>
 				    	<!--Termina Experiencia en Investigacion-->
-						<div id="exportar" class="tab-pane fade in active">
+						<div id="exportar" class="tab-pane fade">
 							<div class="form-group">
 								<a class="btn btn-success btn-lg" href="formulario/pdfformulario" target="_blank" >Exportar formulario</a>
 							</div>
