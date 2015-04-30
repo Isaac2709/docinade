@@ -561,16 +561,17 @@ hr.soften {
 
 				    				</div>
 					    			<!--Termina col-md-6-->
-
-
+					    			<div >
+			            				<button id="btnRemoverExpInvestigacion" type="button" style="display:none" class="btn btn-danger btn-md  col-sm-offset-11 claseBotonRemover" onclick="removerFormulario(this.id);">-</button>
+			            			</div>
 					    			</div>
 					    			<hr class="soften">
 			            		</div>
 			            		<!--BOTONES para agregar y remover formulario-->
 			            		<div  class="col-md-12">
-			            			<div >
+			            			<!-- <div >
 			            				<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
-			            			</div>
+			            			</div>-->
 			            			<div class="col-md-11">
 			            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			            			</div>
@@ -893,7 +894,7 @@ hr.soften {
 	</script>
 
 
-<!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_EN_INVESTIGACION-->
+<!--FUNCION DE LOS BOTONES DE LA VISTA TRABAJOS PUBLICADOS-->
 	<script type="text/javascript">
 
 		$(function () {
@@ -994,6 +995,9 @@ hr.soften {
 		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
+		        //Boton - remover
+		        newElem.find('.claseBotonRemover').attr('style','').attr('disabled', false).attr('id','btnRemoverExpInvestigacion'+newNum);
+
 
 		    // insert the new element after the last "duplicatable" input field
 		    //insertar nuevo elemento despues del ultimo input duplicado
@@ -1001,7 +1005,7 @@ hr.soften {
 		        //$('#ID' + newNum + '_title').focus();
 
 		    // habilita el boton de remover
-		        $('#btnRemoverExpInvestigacion').attr('disabled', false);
+		        //$('#btnRemoverExpInvestigacion').attr('disabled', true);
 
 		    // condicion de cuantas duplicaciones estan permitidas hacer
 		        if (newNum == 5)
@@ -1016,24 +1020,30 @@ hr.soften {
 			  	});
 		    });
 
-		    $('#btnRemoverExpInvestigacion').click(function () {
-		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
+		    
+
+		    });
+	</script>
+
+	<script type="text/javascript">
+		function removerFormulario(id){
+				if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
 		            {
 		                var num = $('.blockExpInvestigacion').length;
-		                // cuantos inputs duplicados se tiene hasta el momento
-		                $('#formularioExpInv' + num).slideUp('slow', function () {$(this).remove();
-
-		                    if (num -1 === 1)
-		                		$('#btnRemoverExpInvestigacion').attr('disabled', true);
-
-			                $('#btnAgregarExpInvestigacion').attr('disabled', false).prop('value', "add section");});
+		                for (var i = 2; i <= num; i++) {
+		                	//var formulario='btnRemoverExpInvestigacion'+i;
+		                	var formulario=document.getElementById("btnRemoverExpInvestigacion"+num).id;
+		                	if (id == formulario) {
+		                		alert("hola");
+		                		$('#formularioExpInv' + i).slideUp('slow', function () {$('#formularioExpInv'+i).remove();
+		                		//i=num;
+		                	});
+		                };
+		                
 		            }
-		        return false;
-
-		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
-		    });
-
-		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
+				}
+				//return false;
+			}
 	</script>
 
 
