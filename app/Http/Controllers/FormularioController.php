@@ -327,10 +327,15 @@ class FormularioController extends Controller {
 			if(!empty($request->añoG[$pos])){
 				$educacion_superior->Sup_Anio_Grad = $request->añoG[$pos];
 			}
-			dd($educacion_superior);
-			die();
-			$educacion_superior->save();
-			$user->formulario->informacion_aspirante->educacion_superior()->save($educacion_superior);
+			// Falta AREA DE ESPECIALIDAD
+			//
+			if(!empty($request->id_edu_sup[$pos])){
+				// Si existe, entonces la consulta y actualiza el nombre del Proyecto.
+				$educacion_superior->save();
+			}
+			else{
+				$user->formulario->informacion_aspirante->educacion_superior()->save($educacion_superior);
+			}
 			$pos = $pos + 1;
 		}
 		$message = 'Sus datos han sido actualizados.';

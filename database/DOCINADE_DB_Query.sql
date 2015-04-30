@@ -298,6 +298,7 @@ CREATE TABLE ASP_Educ_Sup(
     CONSTRAINT FK_Asp_Sup_Area FOREIGN KEY (Sup_ID_Area_Esp) REFERENCES ASP_Area_Esp(Esp_ID),
     CONSTRAINT FK_Asp_Sup_Grado FOREIGN KEY (Sup_ID_Grado_Acad) REFERENCES GEN_Grado_Acad(Gra_ID)
 );
+-- ALTER TABLE `asp_educ_sup` CHANGE `Sup_ID_Area_Esp` `Sup_ID_Area_Esp` SMALLINT(6) NULL;
 
 CREATE TABLE ASP_Exp_Invest(
 	Inv_ID SMALLINT AUTO_INCREMENT NOT NULL,

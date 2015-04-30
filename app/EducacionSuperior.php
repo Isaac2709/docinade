@@ -40,5 +40,12 @@ class EducacionSuperior extends Model {
 		return $this->belongsTo('App\AreaEspecialidad', 'Sup_ID_Area_Esp');
 	}
 
+	public function institucion(){
+		return $this->belongsTo('App\Institucion', 'Sup_ID_Institucion');
+	}
+
+	public function pais(){
+		return $this->belongsTo('App\Pais', 'Sup_ID_Pais');
+	}
 
 }

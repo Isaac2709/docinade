@@ -32,5 +32,9 @@ class Pais extends Model {
 		return $this->hasMany('App\DireccionActual', 'DiA_ID_Pais');
 	}
 
+	public function paises(){
+		return $this->hasMany('App\Pais', 'Sup_ID_Pais');
+	}
+
 
 }

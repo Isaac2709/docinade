@@ -32,4 +32,8 @@ class Institucion extends Model {
 		return $this->hasOne('App\ExperienciaInvestigacion', 'Inv_ID');
 	}
 
+	public function educacion_superior(){
+		return $this->hasOne('App\EducacionSuperior', 'Inv_ID');
+	}
+
 }

@@ -200,28 +200,25 @@ $(function () {
     //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
     // este no vaya con los atributos de los inputs anteriores
 
-
-
         //Institucion - text
         newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
-        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
+        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').val('');
 
         //Pais - text
         newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
-        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').attr('name','ID'+newNum+'_pais').val('');
+        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').val('');
 
         //Año de graduacion - text
         newElem.find('.labelAñoG').attr('for','ID'+newNum+'_añoG');
-        newElem.find('.inputAñoG').attr('id','ID'+newNum+'_añoG').attr('name','ID'+newNum+'_añoG').val('');
+        newElem.find('.inputAñoG').attr('id','ID'+newNum+'_añoG').val('');
 
  		//Titulo Obtenido - text
         newElem.find('.labelTituloObtenido').attr('for','ID'+newNum+'_titulo');
-        newElem.find('.inputTituloObtenido').attr('id','ID'+newNum+'_titulo').attr('name','ID'+newNum+'_titulo').val('');
+        newElem.find('.inputTituloObtenido').attr('id','ID'+newNum+'_titulo').val('');
 
 		//Grado academico - text
         newElem.find('.labelGradoA').attr('for','ID'+newNum+'_gradoA');
-        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('');
-
+        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').val('');
 
     // insert the new element after the last "duplicatable" input field
     //insertar nuevo elemento despues del ultimo input duplicado

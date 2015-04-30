@@ -71,8 +71,76 @@
 	<!-- Termina formularioEducacionSuperior1 -->
 	@else
 		<?php $count = 1; ?>
-		@foreach($user->formulario->informacion_aspirante->experiencias_investigaciones as $investigacion)
-			<?php $count = 1; ?>
+		@foreach($user->formulario->informacion_aspirante->educacion_superior as $educacion)
+			<div id="formularioEducacionSuperior1" class="row blockEducacionSuperior">
+			<div class="row">
+				<div class="col-lg-6">
+					<input type="hidden" name="id_edu_sup[]" class="id_edu_sup" value="{{ $educacion->Sup_ID }}">
+					<!--Institucion -->
+					<div class="form-group">
+						<label for="institucion" class="col-md-4 control-label labelInstitucion">Institución:</label>
+						<div class="col-md-8">
+							<div class="bs-example">
+	    						<input type="text" name="institucion[]" class="form-control typeahead_institucion inputInstitucion tt-query" autocomplete="off" spellcheck="false" id="institucion" value="{{ $educacion->institucion->Ins_Nombre }}" >
+								<input type="hidden" name="id_institucion[]" value="{{ $educacion->Sup_ID_Institucion }}" class="id_institucion">
+	    					</div>
+						</div>
+					</div>
+
+					<!--Pais-->
+					<div class="form-group">
+						<label for="pais" class="col-md-4 control-label labelPais">País:</label>
+						<div class="col-md-8">
+							<input type="text" name="pais[]" id="pais" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false" value="{{ $educacion->pais->Pais_Nombre }}">
+						</div>
+					</div>
+
+					<!--Año de graduacion-->
+					<div class="form-group">
+						<label for="añoG" class="col-md-4 control-label labelAñoG">Año de graduación:</label>
+						<div class="col-md-8 ">
+	    					<div class="input-group date año">
+	    						<input type="text" class="form-control inputAñoG" name="añoG[]" id="añoG" value="{{ $educacion->Sup_Anio_Grad }}">
+	    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Termina class="col-lg-6"-->
+
+				<div class="col-lg-6">
+					<!--Titulo obtenido -->
+					<div class="form-group">
+						<label for="titulo" class="col-md-4 control-label labelTituloObtenido">Título obtenido:</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control inputTituloObtenido" name="titulo[]" id="titulo">
+						</div>
+					</div>
+
+					<!-- Grado academico -->
+					<div class="form-group">
+						<label for="gradoA" class="col-md-4 control-label labelGradoA">Grado académico:</label>
+						<div class="col-md-8">
+							<select id="gradoA" name="gradoA[]" class="form-control comboboxGradoAcademico">
+								@foreach($grados_academicos as $grado)
+	                        		@if($grado->Gra_ID == $educacion->grado_academico->Asp_ID_Enfasis)
+	                        			<option value="{{ $grado->Gra_ID }}" selected> {{ $grado->Gra_Nombre }}</option>
+	                        		@else
+	                        			<option value="{{ $grado->Gra_ID }}"> {{ $grado->Gra_Nombre }}</option>
+	                        		@endif
+								@endforeach
+	                        </select>
+	                    </div>
+	        		</div>
+
+				</div>
+				<!--termina col-lg-6 -->
+			</div>
+			<!-- End row -->
+			<hr class="soften">
+		</div>
+		<!-- Termina formularioEducacionSuperior1 -->
+			<?php $count = $count + 1; ?>
 		@endforeach
 	@endif
 
