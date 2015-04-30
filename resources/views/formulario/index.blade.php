@@ -430,6 +430,9 @@ hr.soften {
 				        			</div>
 				        			<!--termina col-lg-6 -->
 				        		</div>
+				        		<div class="col-md-offset-11">
+				    				<input type="checkbox" name="checkBox1" class="claseCheckboxEduSuperior" id="checkbox1" style="display:none">
+				    			</div>
 				        		<hr class="soften">
 			        		</div>
 			        		<!--BOTONES para agregar y remover formulario-->
@@ -563,8 +566,8 @@ hr.soften {
 					    			<!--Termina col-md-6-->
 
 					    			</div>
-					    			<div class="checkbox col-md-offset-11">
-					    				<input type="checkbox" name="checkBox1" class="claseCheckbox" id="checkbox1" style="display:none">
+					    			<div class="col-md-offset-11">
+					    				<input type="checkbox" name="checkBox1" class="claseCheckboxExpInvestigacion" id="checkbox1" style="display:none">
 					    			</div>
 					    			<hr class="soften">
 			            		</div>
@@ -997,7 +1000,7 @@ hr.soften {
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckbox').attr('style','').attr('id','checkbox'+newNum);
+		        newElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkbox'+newNum);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1059,7 +1062,7 @@ hr.soften {
 										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
 
 										        //Checkbox - remover
-										        nElem.find('.claseCheckbox').attr('style','').attr('id','checkbox'+cont);
+										        nElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkbox'+cont);
 
 						                		cont++;
 		                					};
@@ -1075,6 +1078,9 @@ hr.soften {
 		    });
 		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
 	</script>
+
+
+
 
 	<!-- <script type="text/javascript">
 		function removerFormulario(id){
@@ -1098,8 +1104,8 @@ hr.soften {
 	</script>-->
 
 
-<!--FUNCION DE LOS BOTONES DE LA VISTA ECUACION_SUPERIOR-->
-<script type="text/javascript">
+<!--FUNCION DE LOS BOTONES DE LA VISTA EDUCACION_SUPERIOR-->
+  <script type="text/javascript">
 
 		$(function () {
 		    $('#btnAgregarEducacionSuperior').click(function () {
@@ -1109,9 +1115,6 @@ hr.soften {
 
 		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
 		    // este no vaya con los atributos de los inputs anteriores
-
-		        
-
 		        //Institucion - text
 		        newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
 		        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
@@ -1131,6 +1134,9 @@ hr.soften {
 				//Grado academico - text
 		        newElem.find('.labelGradoA').attr('for','ID'+newNum+'_gradoA');
 		        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('');		        
+
+		        //Checkbox - remover
+		        newElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkbox'+newNum);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1154,18 +1160,57 @@ hr.soften {
 			  	});
 		    });
 
-		    $('#btnRemoverEducacionSuperior').click(function () {
-		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
-		            {
+		     	$('#btnRemoverEducacionSuperior').click(function () {
+		        
 		                var num = $('.blockEducacionSuperior').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
-		                $('#formularioEducacionSuperior' + num).slideUp('slow', function () {$(this).remove();
 
-		                    if (num -1 === 1)
-		                		$('#btnRemoverEducacionSuperior').attr('disabled', true);
+		                for (var i = 2; i <= num; i++) {
+		                	if ($('#checkbox'+i).is(':checked')) {
+		                		if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+		                			$('#formularioEducacionSuperior' + i).slideUp('slow', function () {$(this).remove();
 
-			                $('#btnAgregarEducacionSuperior').attr('disabled', false).prop('value', "add section");});
-		            }
+				                    if (num -1 === 1)
+				                		$('#btnRemoverEducacionSuperior').attr('disabled', true);
+
+					                $('#btnAgregarEducacionSuperior').attr('disabled', false).prop('value', "add section");
+ 
+					                var cont=2;
+					                for (var i = 2; i <= 5; i++) {
+					                	var elemento=document.getElementById('formularioEducacionSuperior'+i);
+					                	if (elemento!=null) {
+					                		nElem=$('#formularioEducacionSuperior'+i).attr('id', 'formularioEducacionSuperior' + cont);
+
+					                		//Institucion - text
+									        nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
+									        nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+
+									        //Pais - text
+									        nElem.find('.labelPais').attr('for','ID'+cont+'_pais');
+									        nElem.find('.inputPais').attr('id','ID'+cont+'_pais').attr('name','ID'+cont+'_pais');
+
+									        //Año de graduacion - text
+									        nElem.find('.labelAñoG').attr('for','ID'+cont+'_añoG');
+									        nElem.find('.inputAñoG').attr('id','ID'+cont+'_añoG').attr('name','ID'+cont+'_añoG');
+
+									 		//Titulo Obtenido - text
+									        nElem.find('.labelTituloObtenido').attr('for','ID'+cont+'_titulo');
+									        nElem.find('.inputTituloObtenido').attr('id','ID'+cont+'_titulo').attr('name','ID'+cont+'_titulo');
+
+											//Grado academico - text
+									        nElem.find('.labelGradoA').attr('for','ID'+cont+'_gradoA');
+									        nElem.find('.comboboxGradoAcademico').attr('id','ID'+cont+'_gradoA').attr('name','ID'+cont+'_gradoA');		        
+
+									        //Checkbox - remover
+									        nElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkbox'+cont);
+
+									        cont++;
+					                	};
+					                };
+					            });    
+	                		};
+	                	};
+	                };
 		        return false;
 
 		        $('#btnAgregarEducacionSuperior').attr('disabled', false);
