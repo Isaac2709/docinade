@@ -32,4 +32,13 @@ class EducacionSuperior extends Model {
 		return $this->belongsTo('App\InformacionAspirante', 'Sup_ID_Asp');
 	}
 
+	public function grado_academico(){
+		return $this->belongsTo('App\GradoAcademico', 'Sup_ID_Grado_Acad');
+	}
+
+	public function area_especialidad(){
+		return $this->belongsTo('App\AreaEspecialidad', 'Sup_ID_Area_Esp');
+	}
+
+
 }

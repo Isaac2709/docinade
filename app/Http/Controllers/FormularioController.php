@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+// MODELS
 use Auth;
 use App\User;
 use App\Formulario;
@@ -12,17 +13,24 @@ use App\Nacionalidad;
 use App\Email;
 use App\ExperienciaInvestigacion;
 use App\Institucion;
-use App\Http\Requests;
+use App\GradoAcademico;
+use App\EducacionSuperior;
+use App\AreaEspecialidad;
 use App\Http\Controllers\Controller;
+
+// PDFGenerate
 use Vsmoraes\Pdf\Pdf;
+
+// CARBON
 use Carbon\Carbon;
 
 // REQUESTS
+use App\Http\Requests;
 use App\Http\Requests\CrearFormularioRequest;
 use App\Http\Requests\CrearExperienciaInvestigacionRequest;
+use App\Http\Requests\CrearEducacionSuperiorRequest;
 
 // use Illuminate\Support\Facades\Request;
-
 use Illuminate\Http\Request;
 
 class FormularioController extends Controller {
@@ -52,6 +60,7 @@ class FormularioController extends Controller {
 		$paises = Pais::all()->lists('Pais_Nombre');
 		$nacionalidades = Nacionalidad::all()->lists('Nac_Nombre');
 		$enfasis = Enfasis::all();
+		$grados_academicos = GradoAcademico::all();
 		$instituciones = Institucion::all()->lists('Ins_Nombre');
 		$user = User::find(Auth::user()->Usu_ID);
 		if(!$user->usuarioTieneFormulario()){
@@ -70,18 +79,9 @@ class FormularioController extends Controller {
 			$informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
 			$informacion_aspirante->direccion_actual()->associate($direccion_actual);
 			$informacion_aspirante->save();
-
-			// // Crear y guardar área de interes
-			// $area_interes = new AreaInteres();
-			// $area_interes->save();
-
-			// Asociar el área de interes al formulario del aspirante
-			// $informacion_aspirante = InformacionAspirante::find($formulario->informacion_aspirante->Asp_ID);
-			// $informacion_aspirante->area_interes()->associate($area_interes);
-			// $informacion_aspirante->save();
 		}
 
-		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('user', $user);
+		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('grados_academicos', $grados_academicos)->with('user', $user);
 	}
 
 	public function postIndex(CrearFormularioRequest $request)
@@ -272,8 +272,69 @@ class FormularioController extends Controller {
 		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
-	public function postEduSuperior(Request $request){
-		return null;
+	public function postEduSuperior(CrearEducacionSuperiorRequest $request){
+		$user = User::find(Auth::user()->Usu_ID);
+
+		$educacion_superior_a_eliminar = $user->formulario->informacion_aspirante->seleccionarEducacionSuperiorAEliminar($request->id_edu_sup);
+		foreach ($educacion_superior_a_eliminar as $educacion) {
+			$educacion->delete();
+		}
+
+		$pos = 0;
+		// For each para recorrer toda la educacion superarior
+		foreach ($request->institucion as $nombre) {
+			$educacion_superior = null;
+			// Revisa si existe la experiencia
+			if(!empty($request->id_edu_sup[$pos])){
+				// Si existe, entonces la consulta y actualiza el nombre del Proyecto.
+				$educacion_superior = EducacionSuperior::find($request->id_edu_sup[$pos]);
+				// $educacion_superior->Inv_Proyecto = $request->nombre[$pos];
+			}
+			else{
+				// Si no existe, crea un nuevo modelo, le asigna el nombre del proyecto y lo guarda en la base de datos.
+				$educacion_superior = new EducacionSuperior();
+				// $educacion_superior->Inv_Proyecto = $request->nombre[$pos];
+				// $user->formulario->informacion_aspirante->experiencias_investigaciones()->save($experiencia_investigacion);
+			}
+			// Revisa si se envia una institución en la investigación
+			if(!empty($request->institucion[$pos])){
+				// Si se envia, consulta si existe en la base de datos, dicha institución
+				$institucion = Institucion::where('Ins_Nombre', '=', trim($request->institucion[$pos], " \t."))->first();
+				if(is_null($institucion)){
+					// Si la institución no existe, la crea y la guarda en la base de datos.
+					$institucion = new Institucion();
+					$institucion->Ins_Nombre = trim($request->institucion[$pos], " \t.");
+					$institucion->save();
+				}
+				// Finalmente le asigna la institución a la experiencia en investigación
+				$educacion_superior->Sup_ID_Institucion = $institucion->Ins_ID;
+			}
+			// PAIS
+			$pais = $request->pais[$pos];
+			if(!empty($pais)){
+				// Consulta a la base de datos si el país existe
+				$pais = Pais::where('Pais_Nombre', '=', $request->pais)->first();
+				if(is_null($pais)){
+					// Si el país no existe, regresa a la página anterior con los errores
+					return redirect()->back()->withErrors(['El país de residencia no existe']);
+				}
+				// Guarda el ID del país de residencia en la tabla del aspirante
+				$educacion_superior->Sup_ID_Pais = $pais->Pais_ID; //ID de la tabla GEN_Pais
+
+			}
+			// Actualiza los datos faltantes
+			$educacion_superior->Sup_ID_Grado_Acad = $request->gradoA[$pos];
+			if(!empty($request->añoG[$pos])){
+				$educacion_superior->Sup_Anio_Grad = $request->añoG[$pos];
+			}
+			dd($educacion_superior);
+			die();
+			$educacion_superior->save();
+			$user->formulario->informacion_aspirante->educacion_superior()->save($educacion_superior);
+			$pos = $pos + 1;
+		}
+		$message = 'Sus datos han sido actualizados.';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
 	public function getPdfformulario(){

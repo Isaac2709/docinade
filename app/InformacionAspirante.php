@@ -71,6 +71,14 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y EducacionSuperior
+	 * @return [arrayEloquent] [Los modelos de EducacionSuperior que pertenecen a InformacionAspirante]
+	 */
+	public function educacion_superior(){
+		return $this->hasMany('App\EducacionSuperior', 'Sup_ID_Asp');
+	}
+
+	/**
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              	[description]
 	 * @param  [array] $id_investigaciones 	[los id de las investigaciones que aun se mantienen]
@@ -84,7 +92,21 @@ class InformacionAspirante extends Model {
 		return $investigaciones->get();
 	}
 
-	public function educacion_superior(){
-		return $this->hasMany('App\EducacionSuperior', 'Sup_ID_Asp');
+	/**
+	 * Devuelve las experiencias en investigaciones que se van a eliminar
+	 * @param  [type] $query              		[description]
+	 * @param  [array] $id_educacion_superior 	[los id de las educaciones que aun se mantienen]
+	 * @return [arrayEloquent]            		[los modelos de las educaciones que se van a eliminar]
+	 */
+	public function scopeSeleccionarEducacionSuperiorAEliminar($query, $id_educacion_superior){
+		$educacion = $this->educacion_superior();
+		foreach ($id_educacion_superior as $id_educacion) {
+			$educacion = $educacion->where('Sup_ID', '!=', $id_educacion);
+		}
+		return $educacion->get();
 	}
+
+
+
+
 }
