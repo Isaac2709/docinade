@@ -1028,7 +1028,7 @@ hr.soften {
 		                for (var i = 2 ; i<=num; i++) {
 		                	if ($('#checkbox'+i).is(':checked')) {
 								//alert('chequeado');
-								if (confirm("¿Esta seguro(a) que quiere remover esta sección?")){
+								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
 									$('#formularioExpInv' + i).slideUp('slow', function () {$(this).remove();
 
 					                    if (num -1 === 1)
@@ -1037,50 +1037,43 @@ hr.soften {
 						                $('#btnAgregarExpInvestigacion').attr('disabled', false).prop('value', "add section");
 
 						                var cont=2;
-		                for (var i = 2; i <= 5; i++) {
-		                	var elemento=document.getElementById('formularioExpInv'+i);
-		                	if (elemento!=null) {
-		                		nElem=$('#formularioExpInv'+i).attr('id', 'formularioExpInv' + cont);
+						                for (var i = 2; i <= 5; i++) {
+						                	var elemento=document.getElementById('formularioExpInv'+i);
+						                	if (elemento!=null) {
+						                		nElem=$('#formularioExpInv'+i).attr('id', 'formularioExpInv' + cont);
 
-		                		//Nombre - text
-						        nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
-						        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+						                		//Nombre - text
+										        nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
+										        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
 
-						        //Institucion - text
-						        nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
-						        nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+										        //Institucion - text
+										        nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
+										        nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
 
-						 		//Lugar - text
-						        nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
-						        nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
+										 		//Lugar - text
+										        nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
+										        nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
 
-						        //Año - text
-						        nElem.find('.labelAño').attr('for','ID'+cont+'_año');
-						        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+										        //Año - text
+										        nElem.find('.labelAño').attr('for','ID'+cont+'_año');
+										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
 
-						        //Checkbox - remover
-						        nElem.find('.claseCheckbox').attr('style','').attr('id','checkbox'+cont);
+										        //Checkbox - remover
+										        nElem.find('.claseCheckbox').attr('style','').attr('id','checkbox'+cont);
 
-		                		cont++;
-		                	};
+						                		cont++;
+		                					};
 
-		                };
+		                				};
 						            });
 								}
 		                	};
 
 		                };
-
-		                
-		            
 		        return false;
 		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
-
 		    });
-
 		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
-
-		    
 	</script>
 
 	<!-- <script type="text/javascript">
