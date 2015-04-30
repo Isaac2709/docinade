@@ -561,17 +561,18 @@ hr.soften {
 
 				    				</div>
 					    			<!--Termina col-md-6-->
-					    			<div >
-			            				<button id="btnRemoverExpInvestigacion" type="button" style="display:none" class="btn btn-danger btn-md  col-sm-offset-11 claseBotonRemover" onclick="removerFormulario(this.id);">-</button>
-			            			</div>
+
+					    			</div>
+					    			<div class="checkbox col-md-offset-11">
+					    				<input type="checkbox" name="checkBox1" class="claseCheckbox" id="checkbox1" style="display:none">
 					    			</div>
 					    			<hr class="soften">
 			            		</div>
 			            		<!--BOTONES para agregar y remover formulario-->
 			            		<div  class="col-md-12">
-			            			<!-- <div >
+			            			 <div >
 			            				<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
-			            			</div>-->
+			            			</div>
 			            			<div class="col-md-11">
 			            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			            			</div>
@@ -995,8 +996,8 @@ hr.soften {
 		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
-		        //Boton - remover
-		        newElem.find('.claseBotonRemover').attr('style','').attr('disabled', false).attr('id','btnRemoverExpInvestigacion'+newNum);
+		        //Checkbox - remover
+		        newElem.find('.claseCheckbox').attr('style','').attr('id','checkbox'+newNum);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1005,7 +1006,7 @@ hr.soften {
 		        //$('#ID' + newNum + '_title').focus();
 
 		    // habilita el boton de remover
-		        //$('#btnRemoverExpInvestigacion').attr('disabled', true);
+		        $('#btnRemoverExpInvestigacion').attr('disabled', false);
 
 		    // condicion de cuantas duplicaciones estan permitidas hacer
 		        if (newNum == 5)
@@ -1020,23 +1021,80 @@ hr.soften {
 			  	});
 		    });
 
-		    
+		$('#btnRemoverExpInvestigacion').click(function () {
+		        
+		                var num = $('.blockExpInvestigacion').length;
+		                // cuantos inputs duplicados se tiene hasta el momento
+		                for (var i = 2 ; i<=num; i++) {
+		                	if ($('#checkbox'+i).is(':checked')) {
+								//alert('chequeado');
+								if (confirm("¿Esta seguro(a) que quiere remover esta sección?")){
+									$('#formularioExpInv' + i).slideUp('slow', function () {$(this).remove();
+
+					                    if (num -1 === 1)
+					                		$('#btnRemoverExpInvestigacion').attr('disabled', true);
+
+						                $('#btnAgregarExpInvestigacion').attr('disabled', false).prop('value', "add section");
+
+						                var cont=2;
+		                for (var i = 2; i <= 5; i++) {
+		                	var elemento=document.getElementById('formularioExpInv'+i);
+		                	if (elemento!=null) {
+		                		nElem=$('#formularioExpInv'+i).attr('id', 'formularioExpInv' + cont);
+
+		                		//Nombre - text
+						        nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
+						        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+
+						        //Institucion - text
+						        nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
+						        nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+
+						 		//Lugar - text
+						        nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
+						        nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
+
+						        //Año - text
+						        nElem.find('.labelAño').attr('for','ID'+cont+'_año');
+						        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+
+						        //Checkbox - remover
+						        nElem.find('.claseCheckbox').attr('style','').attr('id','checkbox'+cont);
+
+		                		cont++;
+		                	};
+
+		                };
+						            });
+								}
+		                	};
+
+		                };
+
+		                
+		            
+		        return false;
+		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
 
 		    });
+
+		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
+
+		    
 	</script>
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		function removerFormulario(id){
 				if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
 		            {
 		                var num = $('.blockExpInvestigacion').length;
 		                for (var i = 2; i <= num; i++) {
 		                	//var formulario='btnRemoverExpInvestigacion'+i;
-		                	var formulario=document.getElementById("btnRemoverExpInvestigacion"+num).id;
+		                	var formulario=document.getElementById(id).id;
 		                	if (id == formulario) {
 		                		alert("hola");
 		                		$('#formularioExpInv' + i).slideUp('slow', function () {$('#formularioExpInv'+i).remove();
-		                		//i=num;
+		                		i=num+1;
 		                	});
 		                };
 		                
@@ -1044,7 +1102,7 @@ hr.soften {
 				}
 				//return false;
 			}
-	</script>
+	</script>-->
 
 
 <!--FUNCION DE LOS BOTONES DE LA VISTA ECUACION_SUPERIOR-->
