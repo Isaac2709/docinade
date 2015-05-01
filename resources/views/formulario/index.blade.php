@@ -431,7 +431,7 @@ hr.soften {
 				        			<!--termina col-lg-6 -->
 				        		</div>
 				        		<div class="col-md-offset-11">
-				    				<input type="checkbox" name="checkBox1" class="claseCheckboxEduSuperior" id="checkbox1" style="display:none">
+				    				<input type="checkbox" name="checkBox1" class="claseCheckboxEduSuperior" id="checkboxEduSuperior1" style="display:none">
 				    			</div>
 				        		<hr class="soften">
 			        		</div>
@@ -501,6 +501,9 @@ hr.soften {
 				            		</div>
 				            		<!--Termina col-md-6 -->
 				            	</div>
+				            	<div class="col-md-offset-11">
+				    				<input type="checkbox" name="checkBox1" class="claseCheckboxExpProfesional" id="checkboxExpProfesional1" style="display:none">
+				    			</div>
 				            	<hr class="soften">
 			        		</div>
 			        		<!--BOTONES para agregar y remover formulario-->
@@ -517,6 +520,7 @@ hr.soften {
 				        </div>
 				        <!--Termina  Experiencia profesional-->
 
+				        <!--Experiencia en Investigacion-->
 				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
 					    	<form role="form" action="#" method="post" class="form-horizontal">
 					    		<br/>
@@ -567,7 +571,7 @@ hr.soften {
 
 					    			</div>
 					    			<div class="col-md-offset-11">
-					    				<input type="checkbox" name="checkBox1" class="claseCheckboxExpInvestigacion" id="checkbox1" style="display:none">
+					    				<input type="checkbox" name="checkBox1" class="claseCheckboxExpInvestigacion" id="checkboxExpInvestigacion1" style="display:none">
 					    			</div>
 					    			<hr class="soften">
 			            		</div>
@@ -586,6 +590,7 @@ hr.soften {
 				    	</div>
 				    	<!--Termina Experiencia en Investigacion-->
 
+				    	<!--Trabajos publicados-->
 				    	<div id="trabajosPublicados" class="tab-pane fade">
 				    		<form role="form" action="#" method="post" class="form-horizontal">
 				    			<br/>
@@ -649,6 +654,7 @@ hr.soften {
 				    	</div>
 				    	<!--Termina Trabajos Publicados-->
 
+				    	<!--Cursos mas relevantes-->
 				    	<div id="cursosMasRelevantes" class="tab-pane fade">
 				    		<form role="form" action="#" method="post" class="form-horizontal">
 				    			<br/>
@@ -1000,7 +1006,7 @@ hr.soften {
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkbox'+newNum);
+		        newElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkboxExpInvestigacion'+newNum).attr('checked',false);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1029,7 +1035,7 @@ hr.soften {
 		                var num = $('.blockExpInvestigacion').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
 		                for (var i = 2 ; i<=num; i++) {
-		                	if ($('#checkbox'+i).is(':checked')) {
+		                	if ($('#checkboxExpInvestigacion'+i).is(':checked')) {
 								//alert('chequeado');
 								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
 									$('#formularioExpInv' + i).slideUp('slow', function () {$(this).remove();
@@ -1062,7 +1068,7 @@ hr.soften {
 										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
 
 										        //Checkbox - remover
-										        nElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkbox'+cont);
+										        nElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkboxExpInvestigacion'+cont);
 
 						                		cont++;
 		                					};
@@ -1136,7 +1142,7 @@ hr.soften {
 		        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('');		        
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkbox'+newNum);
+		        newElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkboxEduSuperior'+newNum).attr('checked',false);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1166,7 +1172,7 @@ hr.soften {
 		                // cuantos inputs duplicados se tiene hasta el momento
 
 		                for (var i = 2; i <= num; i++) {
-		                	if ($('#checkbox'+i).is(':checked')) {
+		                	if ($('#checkboxEduSuperior'+i).is(':checked')) {
 		                		if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
 		                			$('#formularioEducacionSuperior' + i).slideUp('slow', function () {$(this).remove();
 
@@ -1202,7 +1208,7 @@ hr.soften {
 									        nElem.find('.comboboxGradoAcademico').attr('id','ID'+cont+'_gradoA').attr('name','ID'+cont+'_gradoA');		        
 
 									        //Checkbox - remover
-									        nElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkbox'+cont);
+									        nElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkboxEduSuperior'+cont);
 
 									        cont++;
 					                	};
@@ -1228,8 +1234,8 @@ hr.soften {
 		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
 		            newElem = $('#formularioExpProfesional' + num).clone().attr('id', 'formularioExpProfesional' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
 
-		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
-		    // este no vaya con los atributos de los inputs anteriores
+			    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+			    // este no vaya con los atributos de los inputs anteriores
 
 		        //Empresa - text
 		        newElem.find('.labelEmpresa').attr('for','ID'+newNum+'_empresa');
@@ -1247,10 +1253,9 @@ hr.soften {
 		        newElem.find('.labelDescripcion').attr('for','ID'+newNum+'_descripcion');
 		        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').attr('name','ID'+newNum+'_descripcion').val('');
 
-		        
+		        //Checkbox - remover
+	        	newElem.find('.claseCheckboxExpProfesional').attr('style','').attr('id','checkboxExpProfesional'+newNum).attr('checked',false);
 
-
-		    // insert the new element after the last "duplicatable" input field
 		    //insertar nuevo elemento despues del ultimo input duplicado
 		        $('#formularioExpProfesional' + num).after(newElem);
 		        //$('#ID' + newNum + '_title').focus();
@@ -1272,19 +1277,55 @@ hr.soften {
 		    });
 
 		    $('#btnRemoverExpProfesional').click(function () {
-		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
-		            {
+		        
 		                var num = $('.blockExpProfesional').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
-		                $('#formularioExpProfesional' + num).slideUp('slow', function () {$(this).remove();
+		                for (var i = 2 ; i<=num; i++) {
+		                	if ($('#checkboxExpProfesional'+i).is(':checked')) {
+								//alert('chequeado');
+								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+									$('#formularioExpProfesional' + i).slideUp('slow', function () {$(this).remove();
 
-		                    if (num -1 === 1)
-		                		$('#btnRemoverExpProfesional').attr('disabled', true);
+					                    if (num -1 === 1)
+					                		$('#btnRemoverExpProfesional').attr('disabled', true);
 
-			                $('#btnAgregarExpProfesional').attr('disabled', false).prop('value', "add section");});
-		            }
+						                $('#btnAgregarExpProfesional').attr('disabled', false).prop('value', "add section");
+
+						                var cont=2;
+						                for (var i = 2; i <= 5; i++) {
+						                	var elemento=document.getElementById('formularioExpProfesional'+i);
+						                	if (elemento!=null) {
+						                		nElem=$('#formularioExpProfesional'+i).attr('id', 'formularioExpProfesional' + cont);
+
+						                		//Empresa - text
+										        nElem.find('.labelEmpresa').attr('for','ID'+cont+'_empresa');
+										        nElem.find('.inputEmpresa').attr('id','ID'+cont+'_empresa').attr('name','ID'+cont+'_empresa');
+
+										        //Ocupacion - text
+										        nElem.find('.labelOcupacion').attr('for','ID'+cont+'_ocupacion');
+										        nElem.find('.inputOcupacion').attr('id','ID'+cont+'_ocupacion').attr('name','ID'+cont+'_ocupacion');
+
+										        //Años de experiencia - text
+										        nElem.find('.labelAñosExp').attr('for','ID'+cont+'_añosExp');
+										        nElem.find('.año').attr('id','ID'+cont+'_añosExp').attr('name','ID'+cont+'_añosExp');
+
+										 		//Descripcion - text
+										        nElem.find('.labelDescripcion').attr('for','ID'+cont+'_descripcion');
+										        nElem.find('.textareaDescripcion').attr('id','ID'+cont+'_descripcion').attr('name','ID'+cont+'_descripcion');
+
+										        //Checkbox - remover
+										        nElem.find('.claseCheckboxExpProfesional').attr('style','').attr('id','checkboxExpProfesional'+cont);
+
+						                		cont++;
+		                					};
+
+		                				};
+						            });
+								}
+		                	};
+
+		                };
 		        return false;
-
 		        $('#btnAgregarExpProfesional').attr('disabled', false);
 		    });
 
