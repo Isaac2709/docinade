@@ -102,6 +102,11 @@ hr.soften {
 .widget-main2{
 	margin-top: 30px;
 }
+
+.nav-pills > li.active > a, .nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
+    background-color:#6A913E;
+}
+
 </style>
 @endsection
 
@@ -124,7 +129,7 @@ hr.soften {
 
 				<div class="panel-body">
 					<!-- TABS -->
-					<ul class="nav nav-tabs" id="myTab">
+					<ul class="nav nav-pills nav-justified" id="myTab">
 				        <li class="active"><a data-toggle="tab" href="#informacionPersonal">Informacion Personal</a></li>
 				        <li class="dropdown">
 				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Edu. Superior / Exp. Profesional<b class="caret"></b></a>
@@ -1331,6 +1336,8 @@ hr.soften {
 
 		    $('#btnRemoverExpProfesional').attr('disabled', true);});
 	</script>
+
+
 
 
 @endsection
