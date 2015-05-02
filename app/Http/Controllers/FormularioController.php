@@ -61,6 +61,7 @@ class FormularioController extends Controller {
 		$nacionalidades = Nacionalidad::all()->lists('Nac_Nombre');
 		$enfasis = Enfasis::all();
 		$grados_academicos = GradoAcademico::all();
+		$areas_especialidad = AreaEspecialidad::all();
 		$instituciones = Institucion::all()->lists('Ins_Nombre');
 		$user = User::find(Auth::user()->Usu_ID);
 		if(!$user->usuarioTieneFormulario()){
@@ -80,8 +81,8 @@ class FormularioController extends Controller {
 			$informacion_aspirante->direccion_actual()->associate($direccion_actual);
 			$informacion_aspirante->save();
 		}
-
-		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('grados_academicos', $grados_academicos)->with('user', $user);
+		// dd($areas_especialidad);
+		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('areas_especialidad', json_encode($areas_especialidad))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('grados_academicos', $grados_academicos)->with('user', $user);
 	}
 
 	public function postIndex(CrearFormularioRequest $request)
@@ -266,76 +267,6 @@ class FormularioController extends Controller {
 				$experiencia_investigacion->Inv_Anio = $request->año[$pos];
 			}
 			$experiencia_investigacion->save();
-			$pos = $pos + 1;
-		}
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
-	}
-
-	public function postEduSuperior(CrearEducacionSuperiorRequest $request){
-		$user = User::find(Auth::user()->Usu_ID);
-
-		$educacion_superior_a_eliminar = $user->formulario->informacion_aspirante->seleccionarEducacionSuperiorAEliminar($request->id_edu_sup);
-		foreach ($educacion_superior_a_eliminar as $educacion) {
-			$educacion->delete();
-		}
-
-		$pos = 0;
-		// For each para recorrer toda la educacion superarior
-		foreach ($request->institucion as $nombre) {
-			$educacion_superior = null;
-			// Revisa si existe la experiencia
-			if(!empty($request->id_edu_sup[$pos])){
-				// Si existe, entonces la consulta y actualiza el nombre del Proyecto.
-				$educacion_superior = EducacionSuperior::find($request->id_edu_sup[$pos]);
-				// $educacion_superior->Inv_Proyecto = $request->nombre[$pos];
-			}
-			else{
-				// Si no existe, crea un nuevo modelo, le asigna el nombre del proyecto y lo guarda en la base de datos.
-				$educacion_superior = new EducacionSuperior();
-				// $educacion_superior->Inv_Proyecto = $request->nombre[$pos];
-				// $user->formulario->informacion_aspirante->experiencias_investigaciones()->save($experiencia_investigacion);
-			}
-			// Revisa si se envia una institución en la investigación
-			if(!empty($request->institucion[$pos])){
-				// Si se envia, consulta si existe en la base de datos, dicha institución
-				$institucion = Institucion::where('Ins_Nombre', '=', trim($request->institucion[$pos], " \t."))->first();
-				if(is_null($institucion)){
-					// Si la institución no existe, la crea y la guarda en la base de datos.
-					$institucion = new Institucion();
-					$institucion->Ins_Nombre = trim($request->institucion[$pos], " \t.");
-					$institucion->save();
-				}
-				// Finalmente le asigna la institución a la experiencia en investigación
-				$educacion_superior->Sup_ID_Institucion = $institucion->Ins_ID;
-			}
-			// PAIS
-			$pais = $request->pais[$pos];
-			if(!empty($pais)){
-				// Consulta a la base de datos si el país existe
-				$pais = Pais::where('Pais_Nombre', '=', $request->pais)->first();
-				if(is_null($pais)){
-					// Si el país no existe, regresa a la página anterior con los errores
-					return redirect()->back()->withErrors(['El país de residencia no existe']);
-				}
-				// Guarda el ID del país de residencia en la tabla del aspirante
-				$educacion_superior->Sup_ID_Pais = $pais->Pais_ID; //ID de la tabla GEN_Pais
-
-			}
-			// Actualiza los datos faltantes
-			$educacion_superior->Sup_ID_Grado_Acad = $request->gradoA[$pos];
-			if(!empty($request->añoG[$pos])){
-				$educacion_superior->Sup_Anio_Grad = $request->añoG[$pos];
-			}
-			// Falta AREA DE ESPECIALIDAD
-			//
-			if(!empty($request->id_edu_sup[$pos])){
-				// Si existe, entonces la consulta y actualiza el nombre del Proyecto.
-				$educacion_superior->save();
-			}
-			else{
-				$user->formulario->informacion_aspirante->educacion_superior()->save($educacion_superior);
-			}
 			$pos = $pos + 1;
 		}
 		$message = 'Sus datos han sido actualizados.';
