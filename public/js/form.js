@@ -187,6 +187,12 @@ $(function () {
     $('#id_file').parent('.form-group').find('.btn-change').click(function() {
         $('#id_file').parent('.form-group').html('<input type="file" name="id_file" id="id_file">');
     });
+    $('.btn-change.title_array').click(function() {
+        $(this).parent('div').parent('.form-group').html('<input type="file" name="title_file[]">');
+    });
+    // $('.btn-change').click(function() {
+    //     $(this).parent('div').parent('.form-group').html('<input type="file" name="id_file" id="id_file">');
+    // });
 });
 
 
@@ -220,6 +226,18 @@ $(function () {
         newElem.find('.labelGradoA').attr('for','ID'+newNum+'_gradoA');
         newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').val('');
 
+        //Area de especialidad - text
+        newElem.find('.labelAreaEspecialidad').attr('for','ID'+newNum+'_areaEspecialidad');
+        newElem.find('.inputAreaEspecialidad').attr('id','ID'+newNum+'_areaEspecialidad').val('');
+
+        //Titulo obtenido - file
+        newElem.find('.labelAreaEspecialidad').attr('for','ID'+newNum+'_areaEspecialidad');
+        newElem.find('.div_title_file').html('<input type="file" name="title_file[]" id="title_file">');
+
+        // Formateo los ID
+        newElem.find('.id_edu_sup').attr('value','');
+
+
     // insert the new element after the last "duplicatable" input field
     //insertar nuevo elemento despues del ultimo input duplicado
         $('#formularioEducacionSuperior' + num).after(newElem);
@@ -239,6 +257,21 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        var areas_especialidad = areas_especialidadGlobal;
+        $('input.typeahead_area_especialidad').typeahead({
+            name: 'area_especialidad',
+            local:  areas_especialidad
+        });
+        var paises = paisesGlobal;
+        $('input.typeahead').typeahead({
+            name: 'pais',
+            local:  paises
+        });
+        var instituciones = institucionesGlobal;
+        $('input.typeahead_institucion').typeahead({
+            name: 'institucion',
+            local:  instituciones
+        });
     });
 
     $('#btnRemoverEducacionSuperior').click(function () {
@@ -257,8 +290,9 @@ $(function () {
 
         $('#btnAgregarEducacionSuperior').attr('disabled', false);
     });
-
-    $('#btnRemoverEducacionSuperior').attr('disabled', true);
+    if($('.blockEducacionSuperior').length < 2){
+        $('#btnRemoverEducacionSuperior').attr('disabled', true);
+    }
 });
 
 
