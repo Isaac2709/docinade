@@ -125,7 +125,7 @@ hr.soften {
 	    <!-- <div class="widget-inner"> -->
 			<div class="panel panel-default">
 
-				<div class="panel-heading"><h2>Datos Personales</h2></div>
+				<div class="panel-heading"><h2>Formulario de Aspirante a Doctorado</h2></div>
 
 				<div class="panel-body">
 					<!-- TABS -->
@@ -643,6 +643,9 @@ hr.soften {
 					    				</div>
 					    				<!--Termina col-md-6-->
 					    			</div>
+					    			<div class="col-md-offset-11">
+					    				<input type="checkbox" name="checkBox1" class="claseCheckboxTrabajosPublicados" id="checkboxTrabajosPublicados1" style="display:none">
+					    			</div>
 					    			<hr class="soften">
 				    			</div>
 				    			<!--BOTONES para agregar y remover formulario-->
@@ -723,6 +726,7 @@ hr.soften {
 				    	</div>
 				    	<!--Termina Cursos mas Relevantes -->
 
+				    	<!-- Conocimiento de idiomas-->
 				    	<div id="conocimientoDeIdiomas" class="tab-pane fade">
 				    		<form role="form" action="#" method="post" class="form-horizontal">
 					    		<br/>
@@ -797,6 +801,7 @@ hr.soften {
 								<br/>
 				    		</form>
 				    	</div>
+				    	<!-- Termina Conocimiento de Idiomas-->
 				    </div>
 					<!-- End Tabs -->
 				</div>
@@ -937,6 +942,9 @@ hr.soften {
 		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
+		        //Checkbox - remover
+		        newElem.find('.claseCheckboxTrabajosPublicados').attr('style','').attr('id','checkboxTrabajosPublicados'+newNum);
+
 
 		    // insert the new element after the last "duplicatable" input field
 		    //insertar nuevo elemento despues del ultimo input duplicado
@@ -960,22 +968,57 @@ hr.soften {
 		    });
 
 		    $('#btnRemoverTrabajosPublicados').click(function () {
-		        if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
-		            {
+		        
 		                var num = $('.blockTrabajosPublicados').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
-		                $('#formularioTrabajosPublicados' + num).slideUp('slow', function () {$(this).remove();
+		                for (var i = 2 ; i<=num; i++) {
+		                	if ($('#checkboxTrabajosPublicados'+i).is(':checked')) {
+								//alert('chequeado');
+								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+									$('#formularioTrabajosPublicados' + i).slideUp('slow', function () {$(this).remove();
 
-		                    if (num -1 === 1)
-		                		$('#btnRemoverTrabajosPublicados').attr('disabled', true);
+					                    if (num -1 === 1)
+					                		$('#btnRemoverTrabajosPublicados').attr('disabled', true);
 
-			                $('#btnAgregarTrabajosPublicados').attr('disabled', false).prop('value', "add section");});
-		            }
+						                $('#btnAgregarTrabajosPublicados').attr('disabled', false).prop('value', "add section");
+
+						                var cont=2;
+						                for (var i = 2; i <= 5; i++) {
+						                	var elemento=document.getElementById('formularioTrabajosPublicados'+i);
+						                	if (elemento!=null) {
+						                		nElem=$('#formularioTrabajosPublicados'+i).attr('id', 'formularioTrabajosPublicados' + cont);
+
+						                		//Titulo de la publicacion - text
+										        nElem.find('.labelTituloP').attr('for','ID'+cont+'_tituloP');
+										        nElem.find('.inputTituloP').attr('id','ID'+cont+'_tituloP').attr('name','ID'+cont+'_tituloP');
+
+										        //Titulo del medio de publicacion - text
+										        nElem.find('.labelTituloMP').attr('for','ID'+cont+'_tituloMP');
+										        nElem.find('.inputTituloMP').attr('id','ID'+cont+'_tituloMP').attr('name','ID'+cont+'_tituloMP');
+
+										 		//Pais de publicacion - text
+										        nElem.find('.labelPais').attr('for','ID'+cont+'_pais');
+										        nElem.find('.inputPais').attr('id','ID'+cont+'_pais').attr('name','ID'+cont+'_pais');
+
+										        //Año - text
+										        nElem.find('.labelAño').attr('for','ID'+cont+'_año');
+										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+
+										        //Checkbox - remover
+										        nElem.find('.claseCheckboxTrabajosPublicados').attr('style','').attr('id','checkboxTrabajosPublicados'+cont);
+
+						                		cont++;
+		                					};
+
+		                				};
+						            });
+								}
+		                	};
+
+		                };
 		        return false;
-
 		        $('#btnAgregarTrabajosPublicados').attr('disabled', false);
 		    });
-
 		    $('#btnRemoverTrabajosPublicados').attr('disabled', true);});
 	</script>
 
@@ -1089,30 +1132,6 @@ hr.soften {
 		    });
 		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
 	</script>
-
-
-
-
-	<!-- <script type="text/javascript">
-		function removerFormulario(id){
-				if (confirm("¿Esta seguro(a) que quiere remover esta sección?"))
-		            {
-		                var num = $('.blockExpInvestigacion').length;
-		                for (var i = 2; i <= num; i++) {
-		                	//var formulario='btnRemoverExpInvestigacion'+i;
-		                	var formulario=document.getElementById(id).id;
-		                	if (id == formulario) {
-		                		alert("hola");
-		                		$('#formularioExpInv' + i).slideUp('slow', function () {$('#formularioExpInv'+i).remove();
-		                		i=num+1;
-		                	});
-		                };
-		                
-		            }
-				}
-				//return false;
-			}
-	</script>-->
 
 
 <!--FUNCION DE LOS BOTONES DE LA VISTA EDUCACION_SUPERIOR-->
