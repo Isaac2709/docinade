@@ -96,7 +96,6 @@
 	</div>
 </div> -->
 </div></div>
-
 @endsection
 
 
@@ -127,12 +126,12 @@
 
 	<!-- -->
 	<script type="text/javascript">
-        $('.inputAño').datepicker( {
-	    format: ' yyyy',
-	    viewMode: 'years',
-	    minViewMode: 'years',
-	    autoclose:true
-	  });
+        $('.año').datepicker( {
+		    format: ' yyyy',
+		    viewMode: 'years',
+		    minViewMode: 'years',
+		    autoclose:true
+	  	});
 
 	</script>
 
@@ -141,6 +140,7 @@ $(document).ready(function(){
 		var instituciones = <?php echo "".($instituciones); ?>;
 		var paises = <?php echo "".($paises); ?>;
 		var nacionalidades = <?php echo "".($nacionalidades); ?>;
+		var areas_especialidad = <?php echo "".($areas_especialidad); ?>;
 		$('input.typeahead').typeahead({
 			name: 'pais_residencia',
 			local:  paises
@@ -153,8 +153,10 @@ $(document).ready(function(){
 			name: 'institucion',
 			local:  instituciones
 		});
-
-
+		$('input.typeahead_area_especialidad').typeahead({
+			name: 'area_especialidad',
+			local:  areas_especialidad
+		});
 		if($("#email2").val()==null || $("#email2").val()==""){
 			$("#email2").hide();
 			$("#agregarNuevoEmail").removeClass("btn-danger").addClass("btn-primary");
@@ -175,6 +177,9 @@ $(document).ready(function(){
 <script  type="text/javascript" src="typeahead.js"></script>
 
 <script type="text/javascript">
+	var institucionesGlobal = <?php echo "".($instituciones); ?>;
+	var areas_especialidadGlobal = <?php echo "".($areas_especialidad); ?>;
+	var paisesGlobal = <?php echo "".($paises); ?>;
 	var institucionesGlobal = <?php echo "".($instituciones); ?>;
 </script>
 <script  type="text/javascript" src="js/form.js"></script>
