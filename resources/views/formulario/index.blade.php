@@ -750,7 +750,7 @@ hr.soften {
 										<div class="col-md-6">
 											<!--Nombre-->
 											<div class="form-group">
-												<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de proyecto o actividad principal:</label>
+												<label for="nombre" class="col-md-4 control-label labelNombre">Idioma:</label>
 												<div class="col-md-8">
 													<input type="text" class="form-control inputNombre" name="nombre" id="nombre">
 												</div>
@@ -801,6 +801,10 @@ hr.soften {
 										</div>
 										<!--Termina col-md-6-->
 									</div>
+									<div class="col-md-offset-11">
+				    					<!-- <span class="glyphicon glyphicon-remove-sign"></span>-->
+					    				<input type="checkbox" name="checkBox1" class="claseCheckboxConocimientoDeIdiomas" id="checkboxConocimientoDeIdiomas1" style="display:none">
+					    			</div>
 									<hr class="soften">
 								</div>
 								<!--BOTONES para agregar y remover formulario-->
@@ -931,6 +935,118 @@ hr.soften {
 	</script>
 
 
+<!--FUNCION DE LOS BOTONES DE LA VISTA CONOCIMIENTO DE IDIOMAS-->
+	<script type="text/javascript">
+		$(function () {
+		    $('#btnAgregarConocimientoDeIdiomas').click(function () {
+		        var num     = $('.blockconocimientoDeIdiomas').length, // how many "duplicatable" input fields we currently have
+		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
+		            newElem = $('#formularioConocimientoDeIdiomas' + num).clone().attr('id', 'formularioConocimientoDeIdiomas' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
+
+		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+		    // este no vaya con los atributos de los inputs anteriores
+
+		        //Nombre - text
+		        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
+		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+
+		        //Nivel de escritura - combobox
+		        newElem.find('.labelNivelEscritura').attr('for','ID'+newNum+'_nivelEscritura');
+		        newElem.find('.comboboxNivelEscritura').attr('id','ID'+newNum+'_nivelEscritura').attr('name','ID'+newNum+'_nivelEscritura').val('0');
+
+		 		//Nivel de lectura - text
+		        newElem.find('.labelNivelLectura').attr('for','ID'+newNum+'_nivelLectura');
+		        newElem.find('.comboboxNivelLectura').attr('id','ID'+newNum+'_nivelLectura').attr('name','ID'+newNum+'_nivelLectura').val('0');
+
+		        //Nivel conversacional - text
+		        newElem.find('.labelNivelConversacional').attr('for','ID'+newNum+'_nivelConversacional');
+		        newElem.find('.comboboxNivelConversacional').attr('id','ID'+newNum+'_nivelConversacional').attr('name','ID'+newNum+'_nivelConversacional').val('0');
+
+		        //Checkbox - remover
+		        newElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+newNum).attr('checked',false);
+
+		    // insert the new element after the last "duplicatable" input field
+		    //insertar nuevo elemento despues del ultimo input duplicado
+		        $('#formularioConocimientoDeIdiomas' + num).after(newElem);
+		        //$('#ID' + newNum + '_title').focus();
+
+		    // habilita el boton de remover
+		        $('#btnRemoverConocimientoDeIdiomas').attr('disabled', false);
+
+		    // condicion de cuantas duplicaciones estan permitidas hacer
+		        if (newNum == 5)
+		        $('#btnAgregarConocimientoDeIdiomas').attr('disabled', true);
+
+		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
+			    $('.año').datepicker( {
+				    format: ' yyyy',
+				    viewMode: 'years',
+				    minViewMode: 'years',
+				    autoclose:true
+			  	});
+
+			  	$(".combobox").change(function () {
+			    if($(this).val() == "0") $(this).addClass("empty");
+			    else $(this).removeClass("empty")
+				});
+				$(".combobox").change();
+				    });
+
+		    $('#btnRemoverConocimientoDeIdiomas').click(function () {
+		        
+		                var num = $('.blockconocimientoDeIdiomas').length;
+		                // cuantos inputs duplicados se tiene hasta el momento
+		                var eliminados=0;
+		                for (var i = 2 ; i<=num; i++) {
+		                	if ($('#checkboxConocimientoDeIdiomas'+i).is(':checked')) {
+								//alert('chequeado');
+								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+									eliminados++;
+									$('#formularioConocimientoDeIdiomas' + i).slideUp('slow', function () {$(this).remove();
+										
+						                $('#btnAgregarConocimientoDeIdiomas').attr('disabled', false);
+
+						                var cont=2;
+						                for (var i = 2; i <= 5; i++) {
+						                	var elemento=document.getElementById('formularioConocimientoDeIdiomas'+i);
+						                	if (elemento!=null) {
+						                		nElem=$('#formularioConocimientoDeIdiomas'+i).attr('id', 'formularioConocimientoDeIdiomas' + cont);
+
+						                		//Nombre - text
+										        nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
+										        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+
+										        //Nivel de escritura - combobox
+										        nElem.find('.labelNivelEscritura').attr('for','ID'+cont+'_nivelEscritura');
+										        nElem.find('.comboboxNivelEscritura').attr('id','ID'+cont+'_nivelEscritura').attr('name','ID'+cont+'_nivelEscritura');
+
+										 		//Nivel de lectura - text
+										        nElem.find('.labelNivelLectura').attr('for','ID'+cont+'_nivelLectura');
+										        nElem.find('.comboboxNivelLectura').attr('id','ID'+cont+'_nivelLectura').attr('name','ID'+cont+'_nivelLectura');
+
+										        //Nivel conversacional - text
+										        nElem.find('.labelNivelConversacional').attr('for','ID'+cont+'_nivelConversacional');
+										        nElem.find('.comboboxNivelConversacional').attr('id','ID'+cont+'_nivelConversacional').attr('name','ID'+cont+'_nivelConversacional');
+
+										        //Checkbox - remover
+										        nElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+cont);
+
+						                		cont++;
+		                					};
+
+		                				};
+						            });
+								}
+								if (num - eliminados === 1)
+					                $('#btnRemoverConocimientoDeIdiomas').attr('disabled', true);
+		                	};
+		                };
+		        return false;
+		        $('#btnAgregarConocimientoDeIdiomas').attr('disabled', false);
+		    });
+			$('#btnRemoverConocimientoDeIdiomas').attr('disabled', true);});
+	</script>
+
 <!--FUNCION DE LOS BOTONES DE LA VISTA CURSOS Y SEMINARIOS MAS RELEVANTES-->
 	<script type="text/javascript">
 		$(function () {
@@ -1037,7 +1153,7 @@ hr.soften {
 		    });
 			$('#btnRemoverCursosMasRelevantes').attr('disabled', true);});
 	</script>
-	</script>
+	
 
 <!--FUNCION DE LOS BOTONES DE LA VISTA TRABAJOS PUBLICADOS-->
 	<script type="text/javascript">
@@ -1289,7 +1405,7 @@ hr.soften {
 
 				//Grado academico - text
 		        newElem.find('.labelGradoA').attr('for','ID'+newNum+'_gradoA');
-		        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('');		        
+		        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('0');		        
 
 		        //Checkbox - remover
 		        newElem.find('.claseCheckboxEduSuperior').attr('style','cursor:pointer').attr('id','checkboxEduSuperior'+newNum).attr('checked',false);
@@ -1314,7 +1430,13 @@ hr.soften {
 				    minViewMode: 'years',
 				    autoclose:true
 			  	});
-		    });
+			  	//funcion para hacer como placeholder la primera opcion de cada combobox
+			  	$(".combobox").change(function () {
+			    if($(this).val() == "0") $(this).addClass("empty");
+			    else $(this).removeClass("empty")
+				});
+					$(".combobox").change();
+				});
 
 		     	$('#btnRemoverEducacionSuperior').click(function () {
 		        
