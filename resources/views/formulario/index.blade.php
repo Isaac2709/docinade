@@ -710,15 +710,18 @@ hr.soften {
 										</div>
 										<!--Termina col-md-6-->
 				    				</div>	
+				    				<div class="col-md-offset-11">
+					    				<input type="checkbox" name="checkBox1" class="claseCheckboxCursosMasRelevantes" id="checkboxCursosMasRelevantes1" style="display:none">
+					    			</div>
 				    				<hr class="soften">
 				    			</div>
 				    			<!--BOTONES para agregar y remover formulario-->
 								<div  class="col-md-12">
 									<div >
-										<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+										<button id="btnRemoverCursosMasRelevantes" type="button" class="btn btn-danger btn-lg pull-right">-</button>
 									</div>
 									<div class="col-md-11">
-										<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+										<button id="btnAgregarCursosMasRelevantes" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 									</div>
 								</div>
 								<br/>
@@ -914,6 +917,114 @@ hr.soften {
 	</script>
 
 
+<!--FUNCION DE LOS BOTONES DE LA VISTA CURSOS Y SEMINARIOS MAS RELEVANTES-->
+	<script type="text/javascript">
+		$(function () {
+		    $('#btnAgregarCursosMasRelevantes').click(function () {
+		        var num     = $('.blockCursosMasRelevantes').length, // how many "duplicatable" input fields we currently have
+		            newNum  = new Number(num + 1),      // the numeric ID of the new input field being added
+		            newElem = $('#formularioCursosMasRelevantes' + num).clone().attr('id', 'formularioCursosMasRelevantes' + newNum).fadeIn('slow'); // create the new element via clone(), and manipulate it's ID using newNum value
+
+		    //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
+		    // este no vaya con los atributos de los inputs anteriores
+
+		        //Nombre - text
+		        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
+		        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+
+		        //Institucion - text
+		        newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
+		        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
+
+		 		//Lugar - text
+		        newElem.find('.labelLugar').attr('for','ID'+newNum+'_lugar');
+		        newElem.find('.inputLugar').attr('id','ID'+newNum+'_lugar').attr('name','ID'+newNum+'_lugar').val('');
+
+		        //Año - text
+		        newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
+		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+
+		        //Checkbox - remover
+		        newElem.find('.claseCheckboxCursosMasRelevantes').attr('style','').attr('id','checkboxCursosMasRelevantes'+newNum).attr('checked',false);
+
+
+		    // insert the new element after the last "duplicatable" input field
+		    //insertar nuevo elemento despues del ultimo input duplicado
+		        $('#formularioCursosMasRelevantes' + num).after(newElem);
+		        //$('#ID' + newNum + '_title').focus();
+
+		    // habilita el boton de remover
+		        $('#btnRemoverCursosMasRelevantes').attr('disabled', false);
+
+		    // condicion de cuantas duplicaciones estan permitidas hacer
+		        if (newNum == 5)
+		        $('#btnAgregarCursosMasRelevantes').attr('disabled', true);
+
+		    	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
+			    $('.año').datepicker( {
+				    format: ' yyyy',
+				    viewMode: 'years',
+				    minViewMode: 'years',
+				    autoclose:true
+			  	});
+		    });
+
+		    $('#btnRemoverCursosMasRelevantes').click(function () {
+		        
+		                var num = $('.blockCursosMasRelevantes').length;
+		                // cuantos inputs duplicados se tiene hasta el momento
+		                var eliminados=0;
+		                for (var i = 2 ; i<=num; i++) {
+		                	if ($('#checkboxCursosMasRelevantes'+i).is(':checked')) {
+								//alert('chequeado');
+								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+									eliminados++;
+									$('#formularioCursosMasRelevantes' + i).slideUp('slow', function () {$(this).remove();
+										
+						                $('#btnAgregarCursosMasRelevantes').attr('disabled', false);
+
+						                var cont=2;
+						                for (var i = 2; i <= 5; i++) {
+						                	var elemento=document.getElementById('formularioCursosMasRelevantes'+i);
+						                	if (elemento!=null) {
+						                		nElem=$('#formularioCursosMasRelevantes'+i).attr('id', 'formularioCursosMasRelevantes' + cont);
+
+						                		//Nombre - text
+										        nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
+										        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+
+										        //Institucion - text
+										        nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
+										        nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+
+										 		//Lugar - text
+										        nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
+										        nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
+
+										        //Año - text
+										        nElem.find('.labelAño').attr('for','ID'+cont+'_año');
+										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+
+										        //Checkbox - remover
+										        nElem.find('.claseCheckboxCursosMasRelevantes').attr('style','').attr('id','checkboxCursosMasRelevantes'+cont);
+
+						                		cont++;
+		                					};
+
+		                				};
+						            });
+								}
+								if (num - eliminados === 1)
+					                $('#btnRemoverCursosMasRelevantes').attr('disabled', true);
+		                	};
+		                };
+		        return false;
+		        $('#btnAgregarCursosMasRelevantes').attr('disabled', false);
+		    });
+			$('#btnRemoverCursosMasRelevantes').attr('disabled', true);});
+	</script>
+	</script>
+
 <!--FUNCION DE LOS BOTONES DE LA VISTA TRABAJOS PUBLICADOS-->
 	<script type="text/javascript">
 
@@ -943,7 +1054,7 @@ hr.soften {
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckboxTrabajosPublicados').attr('style','').attr('id','checkboxTrabajosPublicados'+newNum);
+		        newElem.find('.claseCheckboxTrabajosPublicados').attr('style','').attr('id','checkboxTrabajosPublicados'+newNum).attr('checked',false);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -971,10 +1082,12 @@ hr.soften {
 		        
 		                var num = $('.blockTrabajosPublicados').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
+		                var eliminados=0;
 		                for (var i = 2 ; i<=num; i++) {
 		                	if ($('#checkboxTrabajosPublicados'+i).is(':checked')) {
 								//alert('chequeado');
 								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+									eliminados++;
 									$('#formularioTrabajosPublicados' + i).slideUp('slow', function () {$(this).remove();
 
 					                    if (num -1 === 1)
@@ -1013,16 +1126,15 @@ hr.soften {
 		                				};
 						            });
 								}
+								if (num - eliminados === 1)
+					                $('#btnRemoverTrabajosPublicados').attr('disabled', true);
 		                	};
-
 		                };
 		        return false;
 		        $('#btnAgregarTrabajosPublicados').attr('disabled', false);
 		    });
-		    $('#btnRemoverTrabajosPublicados').attr('disabled', true);});
+			$('#btnRemoverTrabajosPublicados').attr('disabled', true);});
 	</script>
-
-
 
 
 <!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_EN_INVESTIGACION-->
@@ -1130,7 +1242,7 @@ hr.soften {
 		        return false;
 		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
 		    });
-		    $('#btnRemoverExpInvestigacion').attr('disabled', true);});
+			$('#btnRemoverExpInvestigacion').attr('disabled', true);});
 	</script>
 
 
@@ -1242,11 +1354,9 @@ hr.soften {
 	                	};
 	                };
 		        return false;
-
 		        $('#btnAgregarEducacionSuperior').attr('disabled', false);
 		    });
-
-		    $('#btnRemoverEducacionSuperior').attr('disabled', true);});
+			$('#btnRemoverEducacionSuperior').attr('disabled', true);});
 	</script>
 
 <!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_PROFESIONAL-->
@@ -1352,8 +1462,7 @@ hr.soften {
 		        return false;
 		        $('#btnAgregarExpProfesional').attr('disabled', false);
 		    });
-
-		    $('#btnRemoverExpProfesional').attr('disabled', true);});
+			$('#btnRemoverExpProfesional').attr('disabled', true);});
 	</script>
 
 
