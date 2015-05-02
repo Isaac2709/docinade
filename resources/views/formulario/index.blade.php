@@ -1194,14 +1194,13 @@ hr.soften {
 		        
 		                var num = $('.blockExpInvestigacion').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
+		                var eliminados=0;
 		                for (var i = 2 ; i<=num; i++) {
 		                	if ($('#checkboxExpInvestigacion'+i).is(':checked')) {
 								//alert('chequeado');
 								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+									eliminados++;
 									$('#formularioExpInv' + i).slideUp('slow', function () {$(this).remove();
-
-					                    if (num -1 === 1)
-					                		$('#btnRemoverExpInvestigacion').attr('disabled', true);
 
 						                $('#btnAgregarExpInvestigacion').attr('disabled', false).prop('value', "add section");
 
@@ -1236,8 +1235,9 @@ hr.soften {
 		                				};
 						            });
 								}
+								if (num - eliminados === 1)
+					                $('#btnRemoverExpInvestigacion').attr('disabled', true);
 		                	};
-
 		                };
 		        return false;
 		        $('#btnAgregarExpInvestigacion').attr('disabled', false);
@@ -1306,14 +1306,12 @@ hr.soften {
 		        
 		                var num = $('.blockEducacionSuperior').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
-
+		                var eliminados=0;
 		                for (var i = 2; i <= num; i++) {
 		                	if ($('#checkboxEduSuperior'+i).is(':checked')) {
 		                		if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+		                			eliminados++;
 		                			$('#formularioEducacionSuperior' + i).slideUp('slow', function () {$(this).remove();
-
-				                    if (num -1 === 1)
-				                		$('#btnRemoverEducacionSuperior').attr('disabled', true);
 
 					                $('#btnAgregarEducacionSuperior').attr('disabled', false).prop('value', "add section");
  
@@ -1351,6 +1349,8 @@ hr.soften {
 					                };
 					            });    
 	                		};
+	                		if (num - eliminados === 1)
+				                $('#btnRemoverEducacionSuperior').attr('disabled', true);
 	                	};
 	                };
 		        return false;
@@ -1385,7 +1385,7 @@ hr.soften {
 
 		 		//Descripcion - text
 		        newElem.find('.labelDescripcion').attr('for','ID'+newNum+'_descripcion');
-		        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').attr('name','ID'+newNum+'_descripcion').val('');
+		        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').attr('name','ID'+newNum+'_descripcion').attr('disabled',true).val('');
 
 		        //Checkbox - remover
 	        	newElem.find('.claseCheckboxExpProfesional').attr('style','').attr('id','checkboxExpProfesional'+newNum).attr('checked',false);
@@ -1414,14 +1414,13 @@ hr.soften {
 		        
 		                var num = $('.blockExpProfesional').length;
 		                // cuantos inputs duplicados se tiene hasta el momento
+		                var eliminados=0;
 		                for (var i = 2 ; i<=num; i++) {
 		                	if ($('#checkboxExpProfesional'+i).is(':checked')) {
 								//alert('chequeado');
 								if (confirm("¿Esta seguro(a) que quiere remover esta sección?\nSeccion #"+i)){
+									eliminados++;
 									$('#formularioExpProfesional' + i).slideUp('slow', function () {$(this).remove();
-
-					                    if (num -1 === 1)
-					                		$('#btnRemoverExpProfesional').attr('disabled', true);
 
 						                $('#btnAgregarExpProfesional').attr('disabled', false).prop('value', "add section");
 
@@ -1456,8 +1455,9 @@ hr.soften {
 		                				};
 						            });
 								}
+								if (num - eliminados === 1)
+					                $('#btnRemoverExpProfesional').attr('disabled', true);
 		                	};
-
 		                };
 		        return false;
 		        $('#btnAgregarExpProfesional').attr('disabled', false);
