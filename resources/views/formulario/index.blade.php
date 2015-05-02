@@ -39,6 +39,12 @@
   content: "\e012";
 }
 
+.glyphicon-remove-sign:before {
+  content: "\e083";
+}
+
+
+
 /*funcion para la etiqueta <hr> personalizada*/
 hr.soften {
   height: 1px;
@@ -106,6 +112,10 @@ hr.soften {
 .nav-pills > li.active > a, .nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
     background-color:#6A913E;
 }
+
+.combobox option { color: black; }
+
+.empty { color: #B7B7B7; }
 
 </style>
 @endsection
@@ -189,9 +199,9 @@ hr.soften {
 									<div class="form-group">
 										<label for="genero" class="col-md-4 control-label">Género:</label>
 										<div class="col-md-8">
-											<select name="genero" id="" class="form-control">
+											<select name="genero" id="" class="form-control combobox">
 												@if(is_null($user->formulario->IPe_Genero) || empty($user->formulario->IPe_Genero))
-													<option value="" selected> Seleccione su género</option>
+													<option value="0" selected> Seleccione su género</option>
 					                                <option value="F"> Femenino</option>
 					                                <option value="M"> Másculino</option>
 					                            @else
@@ -286,9 +296,9 @@ hr.soften {
 									<div class="form-group">
 										<label for="enfasis" class="col-md-4 control-label">Énfasis de interes:</label>
 										<div class="col-md-8">
-											<select name="enfasis" id="" class="form-control">
+											<select name="enfasis" id="" class="form-control combobox">
 												@if(is_null($user->formulario->informacion_aspirante->Asp_ID_Enfasis) || empty($user->formulario->informacion_aspirante->Asp_ID_Enfasis))
-													<option value="" selected> Énfasis</option>
+													<option value="0" selected> Énfasis</option>
 													@foreach($enfasis as $enfasi)
 														<option value="{{ $enfasi->Enf_ID }}"> {{ $enfasi->Enf_Nombre }}</option>
 													@endforeach
@@ -423,8 +433,8 @@ hr.soften {
 										<div class="form-group">
 											<label for="gradoA" class="col-md-4 control-label labelGradoA">Grado académico:</label>
 											<div class="col-md-8">
-												<select id="gradoA" name="gradoA" class="form-control comboboxGradoAcademico">
-													<option value="z" selected> Seleccione su género</option>
+												<select id="gradoA" name="gradoA" class="form-control comboboxGradoAcademico combobox">
+													<option value="0" selected> Seleccione su género</option>
 					                                <option value="a">Bachiller</option>
 					                                <option value="b">Doctorado</option>
 					                                <option value="c">Maestría</option>
@@ -711,6 +721,7 @@ hr.soften {
 										<!--Termina col-md-6-->
 				    				</div>	
 				    				<div class="col-md-offset-11">
+				    					<!-- <span class="glyphicon glyphicon-remove-sign"></span>-->
 					    				<input type="checkbox" name="checkBox1" class="claseCheckboxCursosMasRelevantes" id="checkboxCursosMasRelevantes1" style="display:none">
 					    			</div>
 				    				<hr class="soften">
@@ -749,8 +760,8 @@ hr.soften {
 											<div class="form-group">
 											<label for="nivelEscritura" class="col-md-4 control-label labelNivelEscritura">Nivel de escritura:</label>
 												<div class="col-md-8">
-													<select name="nivelEscritura" id="nivelEscritura" class="form-control comboboxNivelEscritura">
-															<option value="" selected>Nivel</option>
+													<select name="nivelEscritura" id="nivelEscritura" class="form-control comboboxNivelEscritura combobox">
+															<option value="0" selected>Nivel</option>
 															<option value="">Basico</option>
 										        			<option value="">Itermedio</option>
 										        			<option value="">Avanzado</option>
@@ -766,8 +777,8 @@ hr.soften {
 											<div class="form-group">
 											<label for="nivelLectura" class="col-md-4 control-label labelNivelLectura">Nivel de lectura:</label>
 												<div class="col-md-8">
-													<select name="nivelLectura" id="nivelLectura" class="form-control comboboxNivelLectura">
-															<option value="" selected>Nivel</option>
+													<select name="nivelLectura" id="nivelLectura" class="form-control comboboxNivelLectura combobox">
+															<option value="0" selected>Nivel</option>
 															<option value="">Basico</option>
 										        			<option value="">Itermedio</option>
 										        			<option value="">Avanzado</option>
@@ -779,8 +790,8 @@ hr.soften {
 											<div class="form-group">
 											<label for="nivelConversacional" class="col-md-4 control-label labelNivelConversacional">Nivel conversacional:</label>
 												<div class="col-md-8">
-													<select name="nivelCoversacional" id="nivelConversacional" class="form-control comboboxNivelConversacional">
-															<option value="" selected>Nivel</option>
+													<select name="nivelCoversacional" id="nivelConversacional" class="form-control comboboxNivelConversacional combobox">
+															<option value="0" selected>Nivel</option>
 															<option value="">Basico</option>
 										        			<option value="">Itermedio</option>
 										        			<option value="">Avanzado</option>
@@ -827,10 +838,6 @@ hr.soften {
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-	<!--el input del email2 escondido desde que se carga la pagina-->
-	<!-- <script type="text/javascript">
-		$("#email2").fadeOut("fast");
-	</script> -->
 	<!-- Lista desplegable -->
 	<script src="/js/bootstrap-combobox.js"></script>
 	<!-- Calendario -->
@@ -839,6 +846,13 @@ hr.soften {
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 
 	
+	<script type="text/javascript">
+		$(".combobox").change(function () {
+	    if($(this).val() == "0") $(this).addClass("empty");
+	    else $(this).removeClass("empty")
+	});
+		$(".combobox").change();
+	</script>
 
 	<script type="text/javascript">
 	 	$('.datepicker_control').datepicker({
@@ -945,7 +959,7 @@ hr.soften {
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckboxCursosMasRelevantes').attr('style','').attr('id','checkboxCursosMasRelevantes'+newNum).attr('checked',false);
+		        newElem.find('.claseCheckboxCursosMasRelevantes').attr('style','cursor:pointer').attr('id','checkboxCursosMasRelevantes'+newNum).attr('checked',false);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1006,7 +1020,7 @@ hr.soften {
 										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
 
 										        //Checkbox - remover
-										        nElem.find('.claseCheckboxCursosMasRelevantes').attr('style','').attr('id','checkboxCursosMasRelevantes'+cont);
+										        nElem.find('.claseCheckboxCursosMasRelevantes').attr('style','cursor:pointer').attr('id','checkboxCursosMasRelevantes'+cont);
 
 						                		cont++;
 		                					};
@@ -1054,7 +1068,7 @@ hr.soften {
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckboxTrabajosPublicados').attr('style','').attr('id','checkboxTrabajosPublicados'+newNum).attr('checked',false);
+		        newElem.find('.claseCheckboxTrabajosPublicados').attr('style','cursor:pointer').attr('id','checkboxTrabajosPublicados'+newNum).attr('checked',false);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1118,7 +1132,7 @@ hr.soften {
 										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
 
 										        //Checkbox - remover
-										        nElem.find('.claseCheckboxTrabajosPublicados').attr('style','').attr('id','checkboxTrabajosPublicados'+cont);
+										        nElem.find('.claseCheckboxTrabajosPublicados').attr('style','cursor:pointer').attr('id','checkboxTrabajosPublicados'+cont);
 
 						                		cont++;
 		                					};
@@ -1166,7 +1180,7 @@ hr.soften {
 		        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkboxExpInvestigacion'+newNum).attr('checked',false);
+		        newElem.find('.claseCheckboxExpInvestigacion').attr('style','cursor:pointer').attr('id','checkboxExpInvestigacion'+newNum).attr('checked',false);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1227,7 +1241,7 @@ hr.soften {
 										        nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
 
 										        //Checkbox - remover
-										        nElem.find('.claseCheckboxExpInvestigacion').attr('style','').attr('id','checkboxExpInvestigacion'+cont);
+										        nElem.find('.claseCheckboxExpInvestigacion').attr('style','cursor:pointer').attr('id','checkboxExpInvestigacion'+cont);
 
 						                		cont++;
 		                					};
@@ -1278,7 +1292,7 @@ hr.soften {
 		        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('');		        
 
 		        //Checkbox - remover
-		        newElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkboxEduSuperior'+newNum).attr('checked',false);
+		        newElem.find('.claseCheckboxEduSuperior').attr('style','cursor:pointer').attr('id','checkboxEduSuperior'+newNum).attr('checked',false);
 
 
 		    // insert the new element after the last "duplicatable" input field
@@ -1342,7 +1356,7 @@ hr.soften {
 									        nElem.find('.comboboxGradoAcademico').attr('id','ID'+cont+'_gradoA').attr('name','ID'+cont+'_gradoA');		        
 
 									        //Checkbox - remover
-									        nElem.find('.claseCheckboxEduSuperior').attr('style','').attr('id','checkboxEduSuperior'+cont);
+									        nElem.find('.claseCheckboxEduSuperior').attr('style','cursor:pointer').attr('id','checkboxEduSuperior'+cont);
 
 									        cont++;
 					                	};
@@ -1388,7 +1402,7 @@ hr.soften {
 		        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').attr('name','ID'+newNum+'_descripcion').attr('disabled',true).val('');
 
 		        //Checkbox - remover
-	        	newElem.find('.claseCheckboxExpProfesional').attr('style','').attr('id','checkboxExpProfesional'+newNum).attr('checked',false);
+	        	newElem.find('.claseCheckboxExpProfesional').attr('style','cursor:pointer').attr('id','checkboxExpProfesional'+newNum).attr('checked',false);
 
 		    //insertar nuevo elemento despues del ultimo input duplicado
 		        $('#formularioExpProfesional' + num).after(newElem);
@@ -1447,7 +1461,7 @@ hr.soften {
 										        nElem.find('.textareaDescripcion').attr('id','ID'+cont+'_descripcion').attr('name','ID'+cont+'_descripcion');
 
 										        //Checkbox - remover
-										        nElem.find('.claseCheckboxExpProfesional').attr('style','').attr('id','checkboxExpProfesional'+cont);
+										        nElem.find('.claseCheckboxExpProfesional').attr('style','cursor:pointer').attr('id','checkboxExpProfesional'+cont);
 
 						                		cont++;
 		                					};
