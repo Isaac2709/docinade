@@ -43,6 +43,10 @@
   content: "\e083";
 }
 
+.glyphicon-floppy-disk:before {
+  content: "\e172";
+}
+
 
 
 /*funcion para la etiqueta <hr> personalizada*/
@@ -117,6 +121,10 @@ hr.soften {
 
 .empty { color: #B7B7B7; }
 
+/*clase que cambia la letra a la q usa bootstrap por default y ademas usa iconos de Font Aweson */
+.imagenSubmit{
+	font-family: sans-serif, FontAwesome;
+}
 </style>
 @endsection
 
@@ -452,11 +460,13 @@ hr.soften {
 			        		</div>
 			        		<!--BOTONES para agregar y remover formulario-->
 			            		<div  class="col-md-12">
+
 			            			<div >
 			            				<button id="btnRemoverEducacionSuperior" type="button" class="btn btn-danger btn-lg pull-right">-</button>
 			            			</div>
 			            			<div class="col-md-11">
 			            				<button id="btnAgregarEducacionSuperior" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+		            					<input id="btnActualizarEducacionSuperior" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 			            			</div>
 			            		</div>
 			            		<br/>
@@ -528,6 +538,7 @@ hr.soften {
 		            			</div>
 		            			<div class="col-md-11">
 		            				<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+		            				<input id="btnActualizarExpProfesional" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 		            			</div>
 		            		</div>
 		            		<br/>
@@ -597,6 +608,7 @@ hr.soften {
 			            			</div>
 			            			<div class="col-md-11">
 			            				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+			            				<input id="btnActualizarExpInvestigacion" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 			            			</div>
 			            		</div>
 
@@ -665,6 +677,7 @@ hr.soften {
 					    			</div>
 					    			<div class="col-md-11">
 					    				<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+					    				<input id="btnActualizarTrabajosPublicados" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 					    			</div>
 					    		</div>
 					    		<br/>
@@ -733,6 +746,7 @@ hr.soften {
 									</div>
 									<div class="col-md-11">
 										<button id="btnAgregarCursosMasRelevantes" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+										<input id="btnActualizarCursosMasRelevantes" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 									</div>
 								</div>
 								<br/>
@@ -814,11 +828,12 @@ hr.soften {
 									</div>
 									<div class="col-md-11">
 										<button id="btnAgregarConocimientoDeIdiomas" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+										<input id="btnActualizarConocimientoDeIdiomas" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 									</div>
 								</div>
 								<br/>
 				    		</form>
-				    	</div>
+				    	</div>n
 				    	<!-- Termina Conocimiento de Idiomas-->
 				    </div>
 					<!-- End Tabs -->
@@ -834,7 +849,7 @@ hr.soften {
 
 @section('scripts')
 
-
+	
 
 	<!--para agregar y remover divs-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -848,6 +863,7 @@ hr.soften {
 	<script src="/js/bootstrap-datepicker.js"></script>
 	<!-- Diccionario en español para el calendario -->
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+
 
 	
 	<script type="text/javascript">
