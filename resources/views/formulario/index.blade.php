@@ -125,6 +125,31 @@ hr.soften {
 .imagenSubmit{
 	font-family: sans-serif, FontAwesome;
 }
+
+
+.clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
+.clearfix:after{clear:both;}
+.hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0;}
+.input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+.btn-file{overflow:hidden;position:relative;vertical-align:middle;}.btn-file>input{position:absolute;top:0;right:0;margin:0;opacity:0;filter:alpha(opacity=0);transform:translate(-300px, 0) scale(4);font-size:23px;direction:ltr;cursor:pointer;}
+.fileupload{margin-bottom:9px;}.fileupload .uneditable-input{display:inline-block;margin-bottom:0px;vertical-align:middle;cursor:text;}
+.fileupload .thumbnail{overflow:hidden;display:inline-block;margin-bottom:5px;vertical-align:middle;text-align:center;}.fileupload .thumbnail>img{display:inline-block;vertical-align:middle;max-height:100%;}
+.fileupload .btn{vertical-align:middle;}
+.fileupload-exists .fileupload-new,.fileupload-new .fileupload-exists{display:none;}
+.fileupload-inline .fileupload-controls{display:inline;}
+.fileupload-new .input-append .btn-file{-webkit-border-radius:0 3px 3px 0;-moz-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
+.thumbnail-borderless .thumbnail{border:none;padding:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}
+.fileupload-new.thumbnail-borderless .thumbnail{border:1px solid #ddd;}
+.control-group.warning .fileupload .uneditable-input{color:#a47e3c;border-color:#a47e3c;}
+.control-group.warning .fileupload .fileupload-preview{color:#a47e3c;}
+.control-group.warning .fileupload .thumbnail{border-color:#a47e3c;}
+.control-group.error .fileupload .uneditable-input{color:#b94a48;border-color:#b94a48;}
+.control-group.error .fileupload .fileupload-preview{color:#b94a48;}
+.control-group.error .fileupload .thumbnail{border-color:#b94a48;}
+.control-group.success .fileupload .uneditable-input{color:#468847;border-color:#468847;}
+.control-group.success .fileupload .fileupload-preview{color:#468847;}
+.control-group.success .fileupload .thumbnail{border-color:#468847;}
+
 </style>
 @endsection
 
@@ -160,6 +185,7 @@ hr.soften {
 				        <li><a data-toggle="tab" href="#trabajosPublicados">Trabajos e Investigaciones Publicadas</a></li>
 				        <li><a data-toggle="tab" href="#cursosMasRelevantes">Cursos y Seminarios más Relevantes</a></li>
 				        <li><a data-toggle="tab" href="#conocimientoDeIdiomas">Conocimiento de Idiomas Distintos al Materno</a></li>
+				        <li><a data-toggle="tab" href="#accesoBibliotecas">Acceso a Bibliotecas / Prosesamiento de Datos</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
@@ -812,9 +838,21 @@ hr.soften {
 												    </select>
 												</div>
 											</div>	
-										</div>
+											
+											</div>
 										<!--Termina col-md-6-->
 									</div>
+									<!--Archivo-->
+										<div class="form-group col-md-12 seleccionArchivoConocimientoDeIdiomas">
+											<!-- <label for="archivoConocimientoDeIdiomas" class="labelArchivoConocimientoDeIdiomas">Con relación al dominio del idioma inglés, adjunte documentos que certifiquen los cursos y programas estudiados, según el Marco Común Europeo de Referencia para las Lenguas (MCERL) o su equivalente certificado por una universidad o institución reconocida.</label>-->
+											<small>Con relación al dominio del idioma inglés, adjunte documentos que certifiquen los cursos y programas estudiados, según el <em> Marco Común Europeo de Referencia para las Lenguas</em> (MCERL) o su equivalente certificado por una universidad o institución reconocida.</small>
+											<div class="fileupload fileupload-new " data-provides="fileupload">
+											    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+											    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoConocimientoDeIdiomas" name="archivoConocimientoDeIdiomas" /></span>
+											    <span class="fileupload-preview"></span>
+											    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+										  	</div>
+									  	</div>
 									<div class="col-md-offset-11">
 				    					<!-- <span class="glyphicon glyphicon-remove-sign"></span>-->
 					    				<input type="checkbox" name="checkBox1" class="claseCheckboxConocimientoDeIdiomas" id="checkboxConocimientoDeIdiomas1" style="display:none">
@@ -833,8 +871,99 @@ hr.soften {
 								</div>
 								<br/>
 				    		</form>
-				    	</div>n
+				    	</div>
 				    	<!-- Termina Conocimiento de Idiomas-->
+
+				    	<!-- Acceso a bibliotecas y Procesamiento de datos-->
+				    	<div id="accesoBibliotecas" class="tab-pane fade">
+				    		<form role="form" action="#" method="post" class="form-horizontal">
+				    			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				    			<div id="formularioEducacionSuperior1" class="row blockEducacionSuperior">
+				    				<div class="row">
+				    				<div class="col-md-12">
+				    					<div class="col-md-6">
+				    						<label>Si tiene acceso a biblioteca (s) o centros de documentación. Indique a cuáles</label>	
+				    					</div>
+				    					<div class="col-md-6">
+				    						<label>Si tiene acceso y conocimientos acerca de programas para el  procesamiento de datos. Nombre estos en forma  breve.</label>	
+				    					</div>
+				    				</div>
+				    					<div class="col-md-6">
+				    						<div class="container">
+											    <div class="row clearfix">
+													<div class="col-md-12 column">
+														<table class="table table-bordered table-hover" id="tab_logic_biblioteca">
+															<thead>
+																<tr >
+																	<th class="text-center">
+																		#
+																	</th>
+																	<th class="text-center">
+																		Bibliotecas
+																	</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr id='addrBiblioteca0'>
+																	<td>
+																	1
+																	</td>
+																	<td>
+																	<input type="text" name='biblioteca0'  placeholder='Biblioteca' class="form-control"/>
+																	</td>
+																</tr>
+											                    <tr id='addrBiblioteca1'></tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<a id="add_row_biblioteca" class="btn btn-primary pull-left">+</a><a id='delete_row_biblioteca' class="col-md-offset-1 btn btn-danger">-</a>
+											</div>
+				    					</div>
+				    					<!-- Termina col-md-6-->
+
+				    					<div class="col-md-6">
+				    						<div class="container">
+											    <div class="row clearfix">
+													<div class="col-md-12 column">
+														<table class="table table-bordered table-hover" id="tab_logic_procesamientoDatos">
+															<thead>
+																<tr >
+																	<th class="text-center">
+																		#
+																	</th>
+																	<th class="text-center">
+																		Procesamiento de Datos
+																	</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr id='addrProcesamientoDatos0'>
+																	<td>
+																	1
+																	</td>
+																	<td>
+																	<input type="text" name='procesamientoDatos0'  placeholder='Prosesamiento de Datos' class="form-control"/>
+																	</td>
+																</tr>
+											                    <tr id='addrProcesamientoDatos1'></tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<a id="add_row_procesamientoDatos" class="btn btn-primary pull-left">+</a><a id='delete_row_procesamientoDatos' class="col-md-offset-1 btn btn-danger">-</a>
+											</div>
+				    					</div>
+				    					<!-- Termina col-md-6-->
+				    				</div>
+				    				<hr class="soften">
+				    			</div>
+				    			<div class="col-md-11">
+									<input id="btnActualizarBibliotecasYprocesamientoDatos" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+								</div>
+								<br/>
+				    		</form>
+				    	</div>
 				    </div>
 					<!-- End Tabs -->
 				</div>
@@ -863,9 +992,53 @@ hr.soften {
 	<script src="/js/bootstrap-datepicker.js"></script>
 	<!-- Diccionario en español para el calendario -->
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+	<!--Para los inputs de tipo archivo-->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
 
 
-	
+	<!--Funciones para las tablas de Bibliotecas -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+		      var i=1;
+		     $("#add_row_biblioteca").click(function(){
+		      $('#addrBiblioteca'+i).html("<td>"+ (i+1) +"</td><td><input name='biblioteca"+i+"' type='text' placeholder='Biblioteca' class='form-control input-md'  /> </td>");
+
+		      $('#tab_logic_biblioteca').append('<tr id="addrBiblioteca'+(i+1)+'"></tr>');
+		      i++; 
+		  });
+		     $("#delete_row_biblioteca").click(function(){
+		    	 if(i>1){
+				 $("#addrBiblioteca"+(i-1)).html('');
+				 i--;
+				 }
+			 });
+
+		});
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+		      var i=1;
+		     $("#add_row_procesamientoDatos").click(function(){
+		      $('#addrProcesamientoDatos'+i).html("<td>"+ (i+1) +"</td><td><input name='procesamientoDatos"+i+"' type='text' placeholder='Procesamiento de Datos' class='form-control input-md'  /> </td>");
+
+		      $('#tab_logic_procesamientoDatos').append('<tr id="addrProcesamientoDatos'+(i+1)+'"></tr>');
+		      i++; 
+		  });
+		     $("#delete_row_procesamientoDatos").click(function(){
+		    	 if(i>1){
+				 $("#addrProcesamientoDatos"+(i-1)).html('');
+				 i--;
+				 }
+			 });
+
+		});
+	</script>
+
+	<script type="text/javascript">
+		!function(e){var t=function(t,n){this.$element=e(t),this.type=this.$element.data("uploadtype")||(this.$element.find(".thumbnail").length>0?"image":"file"),this.$input=this.$element.find(":file");if(this.$input.length===0)return;this.name=this.$input.attr("name")||n.name,this.$hidden=this.$element.find('input[type=hidden][name="'+this.name+'"]'),this.$hidden.length===0&&(this.$hidden=e('<input type="hidden" />'),this.$element.prepend(this.$hidden)),this.$preview=this.$element.find(".fileupload-preview");var r=this.$preview.css("height");this.$preview.css("display")!="inline"&&r!="0px"&&r!="none"&&this.$preview.css("line-height",r),this.original={exists:this.$element.hasClass("fileupload-exists"),preview:this.$preview.html(),hiddenVal:this.$hidden.val()},this.$remove=this.$element.find('[data-dismiss="fileupload"]'),this.$element.find('[data-trigger="fileupload"]').on("click.fileupload",e.proxy(this.trigger,this)),this.listen()};t.prototype={listen:function(){this.$input.on("change.fileupload",e.proxy(this.change,this)),e(this.$input[0].form).on("reset.fileupload",e.proxy(this.reset,this)),this.$remove&&this.$remove.on("click.fileupload",e.proxy(this.clear,this))},change:function(e,t){if(t==="clear")return;var n=e.target.files!==undefined?e.target.files[0]:e.target.value?{name:e.target.value.replace(/^.+\\/,"")}:null;if(!n){this.clear();return}this.$hidden.val(""),this.$hidden.attr("name",""),this.$input.attr("name",this.name);if(this.type==="image"&&this.$preview.length>0&&(typeof n.type!="undefined"?n.type.match("image.*"):n.name.match(/\.(gif|png|jpe?g)$/i))&&typeof FileReader!="undefined"){var r=new FileReader,i=this.$preview,s=this.$element;r.onload=function(e){i.html('<img src="'+e.target.result+'" '+(i.css("max-height")!="none"?'style="max-height: '+i.css("max-height")+';"':"")+" />"),s.addClass("fileupload-exists").removeClass("fileupload-new")},r.readAsDataURL(n)}else this.$preview.text(n.name),this.$element.addClass("fileupload-exists").removeClass("fileupload-new")},clear:function(e){this.$hidden.val(""),this.$hidden.attr("name",this.name),this.$input.attr("name","");if(navigator.userAgent.match(/msie/i)){var t=this.$input.clone(!0);this.$input.after(t),this.$input.remove(),this.$input=t}else this.$input.val("");this.$preview.html(""),this.$element.addClass("fileupload-new").removeClass("fileupload-exists"),e&&(this.$input.trigger("change",["clear"]),e.preventDefault())},reset:function(e){this.clear(),this.$hidden.val(this.original.hiddenVal),this.$preview.html(this.original.preview),this.original.exists?this.$element.addClass("fileupload-exists").removeClass("fileupload-new"):this.$element.addClass("fileupload-new").removeClass("fileupload-exists")},trigger:function(e){this.$input.trigger("click"),e.preventDefault()}},e.fn.fileupload=function(n){return this.each(function(){var r=e(this),i=r.data("fileupload");i||r.data("fileupload",i=new t(this,n)),typeof n=="string"&&i[n]()})},e.fn.fileupload.Constructor=t,e(document).on("click.fileupload.data-api",'[data-provides="fileupload"]',function(t){var n=e(this);if(n.data("fileupload"))return;n.fileupload(n.data());var r=e(t.target).closest('[data-dismiss="fileupload"],[data-trigger="fileupload"]');r.length>0&&(r.trigger("click.fileupload"),t.preventDefault())})}(window.jQuery)
+	</script>
+
 	<script type="text/javascript">
 		$(".combobox").change(function () {
 	    if($(this).val() == "0") $(this).addClass("empty");
@@ -980,6 +1153,11 @@ hr.soften {
 
 		        //Checkbox - remover
 		        newElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+newNum).attr('checked',false);
+
+		        //Archivo - file
+		        newElem.find('.seleccionArchivoConocimientoDeIdiomas').attr('style','display:none');
+
+
 
 		    // insert the new element after the last "duplicatable" input field
 		    //insertar nuevo elemento despues del ultimo input duplicado
