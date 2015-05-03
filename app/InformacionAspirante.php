@@ -79,6 +79,14 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y ExperienciaProfesional
+	 * @return [arrayEloquent] [Los modelos de ExperienciaProfesional que pertenecen a InformacionAspirante]
+	 */
+	public function experiencias_profesionales(){
+		return $this->hasMany('App\ExperienciaProfesional', 'Pro_ID_Asp');
+	}
+
+	/**
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              	[description]
 	 * @param  [array] $id_investigaciones 	[los id de las investigaciones que aun se mantienen]
@@ -106,7 +114,17 @@ class InformacionAspirante extends Model {
 		return $educacion->get();
 	}
 
-
-
-
+	/**
+	 * Devuelve las experiencias profesionales que se van a eliminar
+	 * @param  [type] $query              		[description]
+	 * @param  [array] $id_experiencia_profesional 	[los id de las educaciones que aun se mantienen]
+	 * @return [arrayEloquent]            		[los modelos de las educaciones que se van a eliminar]
+	 */
+	public function scopeSeleccionarExperienciaProfesionalAEliminar($query, $id_experiencias_profesionales){
+		$experiencia_profesional = $this->experiencias_profesionales();
+		foreach ($id_experiencias_profesionales as $id_experiencia_profesional) {
+			$experiencia_profesional = $experiencia_profesional->where('Pro_ID', '!=', $id_experiencia_profesional);
+		}
+		return $experiencia_profesional->get();
+	}
 }
