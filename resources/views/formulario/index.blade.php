@@ -990,6 +990,7 @@ hr.soften {
 				    						</div>
 				    					</div>
 				    					 <div class="col-md-6">
+				    					 	<label>Si utiliza programas de computación indique cuáles.</label>	
 				    						<div class="container">
 											    <div class="row clearfix">
 													<div class="col-md-12 column">
@@ -1043,7 +1044,8 @@ hr.soften {
 
 
 @section('scripts')
-
+	<!--Para los inputs de tipo archivo (ESTA LIBRERIA PRODUCE ERROR EN LOS DROPDOWN)-->
+	<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>-->
 	
 
 	<!--para agregar y remover divs-->
@@ -1058,10 +1060,10 @@ hr.soften {
 	<script src="/js/bootstrap-datepicker.js"></script>
 	<!-- Diccionario en español para el calendario -->
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
-	<!--Para los inputs de tipo archivo-->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+	
 	<!-- Para los checkbox animados-->
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
 
 
 
