@@ -141,6 +141,8 @@ $(document).ready(function(){
 		var paises = <?php echo "".($paises); ?>;
 		var nacionalidades = <?php echo "".($nacionalidades); ?>;
 		var areas_especialidad = <?php echo "".($areas_especialidad); ?>;
+		var ocupaciones = <?php echo "".($ocupaciones); ?>;
+
 		$('input.typeahead').typeahead({
 			name: 'pais_residencia',
 			local:  paises
@@ -156,6 +158,10 @@ $(document).ready(function(){
 		$('input.typeahead_area_especialidad').typeahead({
 			name: 'area_especialidad',
 			local:  areas_especialidad
+		});
+		$('input.typeahead_ocupacion').typeahead({
+			name: 'ocupacion',
+			local:  ocupaciones
 		});
 		if($("#email2").val()==null || $("#email2").val()==""){
 			$("#email2").hide();
@@ -181,6 +187,7 @@ $(document).ready(function(){
 	var areas_especialidadGlobal = <?php echo "".($areas_especialidad); ?>;
 	var paisesGlobal = <?php echo "".($paises); ?>;
 	var institucionesGlobal = <?php echo "".($instituciones); ?>;
+	var ocupacionesGlobal = <?php echo "".($ocupaciones); ?>;
 </script>
 <script  type="text/javascript" src="js/form.js"></script>
 
