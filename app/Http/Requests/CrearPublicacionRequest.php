@@ -1,6 +1,7 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Carbon\Carbon;
 
 class CrearPublicacionRequest extends Request {
 
@@ -11,7 +12,7 @@ class CrearPublicacionRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -21,9 +22,24 @@ class CrearPublicacionRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+		$rules = [];
+		foreach($this->request->get('titulo_publicacion') as $key => $val)
+		{
+			$rules['titulo_publicacion.'.$key] = 'string|max:400';
+		}
+		foreach($this->request->get('titulo_medio_publicacion') as $key => $val)
+		{
+			$rules['titulo_medio_publicacion.'.$key] = 'string|max:250';
+		}
+		foreach($this->request->get('pais') as $key => $val)
+		{
+			$rules['pais.'.$key] = 'exists:GEN_Pais,Pais_Nombre';
+		}
+		foreach($this->request->get('annio') as $key => $val)
+		{
+			$rules['annio.'.$key] = 'integer|max:'.Carbon::now()->format('Y');
+		}
+		return $rules;
 	}
 
 }
