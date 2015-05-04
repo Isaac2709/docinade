@@ -126,7 +126,7 @@ hr.soften {
 	font-family: sans-serif, FontAwesome;
 }
 
-
+/*bloque utilizado para el boton de seleccionar archivos*/
 .clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
 .clearfix:after{clear:both;}
 .hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0;}
@@ -186,6 +186,7 @@ hr.soften {
 				        <li><a data-toggle="tab" href="#cursosMasRelevantes">Cursos y Seminarios más Relevantes</a></li>
 				        <li><a data-toggle="tab" href="#conocimientoDeIdiomas">Conocimiento de Idiomas Distintos al Materno</a></li>
 				        <li><a data-toggle="tab" href="#accesoBibliotecas">Acceso a Bibliotecas / Prosesamiento de Datos</a></li>
+				        <li><a data-toggle="tab" href="#manejoDeProgramas">Manejo de Programas de Computación</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
@@ -878,7 +879,7 @@ hr.soften {
 				    	<div id="accesoBibliotecas" class="tab-pane fade">
 				    		<form role="form" action="#" method="post" class="form-horizontal">
 				    			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-				    			<div id="formularioEducacionSuperior1" class="row blockEducacionSuperior">
+				    			<div id="formularioAccesoBibliotecas1" class="row blockAccesoBibliotecas">
 				    				<div class="row">
 				    				<div class="col-md-12">
 				    					<div class="col-md-6">
@@ -964,6 +965,71 @@ hr.soften {
 								<br/>
 				    		</form>
 				    	</div>
+				    	<!--Termina Acceso a bibliotecas y Procesamiento de datos -->
+
+				    	<!-- Manejo de Programas de Computacion-->
+				    	<div id="manejoDeProgramas" class="tab-pane fade">
+				    		<form role="form" action="#" method="post" class="form-horizontal">
+				    			<input type="hidden" name="_token" value="{{ csrf_token() }}">	
+				    			<div id="formularioManejoDeProgramas1" class="row blockManejoDeProgramas">
+				    				<div class="row">
+				    					<div class="col-md-6">
+				    						<h2>Acceso y manejo de:</h2>
+				    						<div class="form-group">
+					        					<label for="windows" class="col-md-4 control-label labelWindows">Ambiente Windows:</label>
+					        					<div class="col-md-8">
+					        						<input type="checkbox" checked data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="windows" id="windows">
+					        					</div>
+				        					</div>
+				    					
+				    						<div class="form-group">
+					        					<label for="correoElectronico" class="col-md-4 control-label labelWindows">Correo Electrónico:</label>
+					        					<div class="col-md-8">
+					        						<input type="checkbox" checked data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="correoElectronico" id="correoElectronico">
+					        					</div>
+				    						</div>
+				    					</div>
+				    					 <div class="col-md-6">
+				    						<div class="container">
+											    <div class="row clearfix">
+													<div class="col-md-12 column">
+														<table class="table table-bordered table-hover" id="tab_logic_programas">
+															<thead>
+																<tr >
+																	<th class="text-center">
+																		#
+																	</th>
+																	<th class="text-center">
+																		Programas
+																	</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr id='addrProgramas0'>
+																	<td>
+																	1
+																	</td>
+																	<td>
+																	<input type="text" name='programas0'  placeholder='Programa' class="form-control"/>
+																	</td>
+																</tr>
+											                    <tr id='addrProgramas1'></tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<a id="add_row_programas" class="btn btn-primary pull-left">+</a><a id='delete_row_programas' class="col-md-offset-1 btn btn-danger">-</a>
+											</div>
+				    					</div>
+				    				</div>
+				    				<hr class="soften">
+				    			</div>
+				    			<div class="col-md-11">
+									<input id="btnActualizarBibliotecasYprocesamientoDatos" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+								</div>
+								<br/>
+				    		</form>
+				    	</div>
 				    </div>
 					<!-- End Tabs -->
 				</div>
@@ -994,6 +1060,30 @@ hr.soften {
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 	<!--Para los inputs de tipo archivo-->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+	<!-- Para los checkbox animados-->
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+
+
+	<!--Funciones para las tablas de Programas Computacionales -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+		      var i=1;
+		     $("#add_row_programas").click(function(){
+		      $('#addrProgramas'+i).html("<td>"+ (i+1) +"</td><td><input name='programas"+i+"' type='text' placeholder='Programa' class='form-control input-md'  /> </td>");
+
+		      $('#tab_logic_programas').append('<tr id="addrProgramas'+(i+1)+'"></tr>');
+		      i++; 
+		  });
+		     $("#delete_row_programas").click(function(){
+		    	 if(i>1){
+				 $("#addrProgramas"+(i-1)).html('');
+				 i--;
+				 }
+			 });
+
+		});
+	</script>
 
 
 	<!--Funciones para las tablas de Bibliotecas -->
@@ -1015,7 +1105,7 @@ hr.soften {
 
 		});
 	</script>
-
+	<!--Funciones para las tablas de Procesamiento de Datos -->
 	<script type="text/javascript">
 		$(document).ready(function(){
 		      var i=1;
