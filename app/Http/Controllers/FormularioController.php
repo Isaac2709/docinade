@@ -11,11 +11,11 @@ use App\DireccionActual;
 use App\AreaInteres;
 use App\Nacionalidad;
 use App\Email;
-use App\ExperienciaInvestigacion;
 use App\Institucion;
 use App\GradoAcademico;
 use App\EducacionSuperior;
 use App\AreaEspecialidad;
+use App\Ocupacion;
 use App\Http\Controllers\Controller;
 
 // PDFGenerate
@@ -27,8 +27,6 @@ use Carbon\Carbon;
 // REQUESTS
 use App\Http\Requests;
 use App\Http\Requests\CrearFormularioRequest;
-use App\Http\Requests\CrearExperienciaInvestigacionRequest;
-use App\Http\Requests\CrearEducacionSuperiorRequest;
 
 // use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
@@ -61,7 +59,8 @@ class FormularioController extends Controller {
 		$nacionalidades = Nacionalidad::all()->lists('Nac_Nombre');
 		$enfasis = Enfasis::all();
 		$grados_academicos = GradoAcademico::all();
-		$areas_especialidad = AreaEspecialidad::all();
+		$areas_especialidad = AreaEspecialidad::all()->lists('Esp_Area');
+		$ocupaciones = Ocupacion::all()->lists('Ocu_Ocupacion');
 		$instituciones = Institucion::all()->lists('Ins_Nombre');
 		$user = User::find(Auth::user()->Usu_ID);
 		if(!$user->usuarioTieneFormulario()){
@@ -82,7 +81,7 @@ class FormularioController extends Controller {
 			$informacion_aspirante->save();
 		}
 		// dd($areas_especialidad);
-		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('areas_especialidad', json_encode($areas_especialidad))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('grados_academicos', $grados_academicos)->with('user', $user);
+		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('areas_especialidad', json_encode($areas_especialidad))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('ocupaciones', json_encode($ocupaciones))->with('grados_academicos', $grados_academicos)->with('user', $user);
 	}
 
 	public function postIndex(CrearFormularioRequest $request)
@@ -219,56 +218,6 @@ class FormularioController extends Controller {
 		$user->formulario->save();
 		// Fin de la Información personal del aspirante
 
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
-	}
-
-	public function postExpInvestigacion(CrearExperienciaInvestigacionRequest $request){
-		$user = User::find(Auth::user()->Usu_ID);
-
-		$experiencias_investigaciones_a_eliminar = $user->formulario->informacion_aspirante->seleccionarInvestigacionesAEliminar($request->id_exp_inv);
-		foreach ($experiencias_investigaciones_a_eliminar as $investigacion) {
-			// echo "Elimino: ".$investigacion->Inv_Proyecto."<br />";
-			$investigacion->delete();
-		}
-
-		$pos = 0;
-		// For each para recorrer todas las experiencias en investigaciones
-		foreach ($request->nombre as $nombre) {
-			$experiencia_investigacion = null;
-			// Revisa si existe la experiencia
-			if(!empty($request->id_exp_inv[$pos])){
-				// Si existe, entonces la consulta y actualiza el nombre del Proyecto.
-				$experiencia_investigacion = ExperienciaInvestigacion::find($request->id_exp_inv[$pos]);
-				$experiencia_investigacion->Inv_Proyecto = $request->nombre[$pos];
-			}
-			else{
-				// Si no existe, crea un nuevo modelo, le asigna el nombre del proyecto y lo guarda en la base de datos.
-				$experiencia_investigacion = new ExperienciaInvestigacion();
-				$experiencia_investigacion->Inv_Proyecto = $request->nombre[$pos];
-				$user->formulario->informacion_aspirante->experiencias_investigaciones()->save($experiencia_investigacion);
-			}
-			// Revisa si se envia una institución en la investigación
-			if(!empty($request->institucion[$pos])){
-				// Si se envia, consulta si existe en la base de datos, dicha institución
-				$institucion = Institucion::where('Ins_Nombre', '=', trim($request->institucion[$pos], " \t."))->first();
-				if(is_null($institucion)){
-					// Si la institución no existe, la crea y la guarda en la base de datos.
-					$institucion = new Institucion();
-					$institucion->Ins_Nombre = trim($request->institucion[$pos], " \t.");
-					$institucion->save();
-				}
-				// Finalmente le asigna la institución a la experiencia en investigación
-				$experiencia_investigacion->Inv_ID_Institucion = $institucion->Ins_ID;
-			}
-			// Actualiza los datos faltantes
-			$experiencia_investigacion->Inv_Lugar = $request->lugar[$pos];
-			if(!empty($request->año[$pos])){
-				$experiencia_investigacion->Inv_Anio = $request->año[$pos];
-			}
-			$experiencia_investigacion->save();
-			$pos = $pos + 1;
-		}
 		$message = 'Sus datos han sido actualizados.';
 		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
