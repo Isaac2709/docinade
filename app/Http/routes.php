@@ -22,6 +22,7 @@ Route::controllers([
 
 Route::controller('formulario', 'FormularioController');
 
-Route::post('expInvestigacion', 'FormularioController@postExpInvestigacion');
+Route::post('expInvestigacion', 'ExperienciaInvestigacionController@store');
 Route::post('eduSuperior', 'EducacionSuperiorController@store');
 Route::post('expProfesional', 'ExperienciaProfesionalController@store');
+Route::post('invPublicada', 'PublicacionController@store');
