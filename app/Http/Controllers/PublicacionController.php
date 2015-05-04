@@ -8,6 +8,7 @@ use App\Publicacion;
 use App\Pais;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearPublicacionRequest;
 
 class PublicacionController extends Controller {
 
@@ -41,7 +42,7 @@ class PublicacionController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearPublicacionRequest $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 		// dd($request);
