@@ -52,7 +52,7 @@
 
 	@else
 		<?php $count = 1; ?>
-		@foreach($user->formulario->informacion_aspirante->experiencias_investigaciones as $investigacion)
+		@foreach($user->formulario->informacion_aspirante->experiencias_investigaciones_desc as $investigacion)
 	<div id="formularioExpInv{{ $count }}" class="blockExpInvestigacion">
 		<div class="row divider-h" >
 			<div class="col-lg-6">
