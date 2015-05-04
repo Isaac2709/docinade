@@ -34,19 +34,22 @@ $(function () {
 
         //Titulo de la publicacion - text
         newElem.find('.labelTituloP').attr('for','ID'+newNum+'_tituloP');
-        newElem.find('.inputTituloP').attr('id','ID'+newNum+'_tituloP').attr('name','ID'+newNum+'_tituloP').val('');
+        newElem.find('.inputTituloP').attr('id','ID'+newNum+'_tituloP').val('');
 
         //Titulo del medio de publicacion - text
         newElem.find('.labelTituloMP').attr('for','ID'+newNum+'_tituloMP');
-        newElem.find('.inputTituloMP').attr('id','ID'+newNum+'_tituloMP').attr('name','ID'+newNum+'_tituloMP').val('');
+        newElem.find('.inputTituloMP').attr('id','ID'+newNum+'_tituloMP').val('');
 
  		//Pais de publicacion - text
         newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
-        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').attr('name','ID'+newNum+'_pais').val('');
+        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').val('');
 
         //Año - text
         newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
-        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').val('');
+
+        // Formateo los ID
+        newElem.find('.id_pub').attr('value','');
 
 
     // insert the new element after the last "duplicatable" input field
@@ -68,6 +71,11 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        var paises = paisesGlobal;
+        $('input.typeahead').typeahead({
+            name: 'pais',
+            local:  paises
+        });
     });
 
     $('#btnRemoverTrabajosPublicados').click(function () {
@@ -86,8 +94,9 @@ $(function () {
 
         $('#btnAgregarTrabajosPublicados').attr('disabled', false);
     });
-
-    $('#btnRemoverTrabajosPublicados').attr('disabled', true);
+    if($('.blockTrabajosPublicados').length < 2){
+        $('#btnRemoverTrabajosPublicados').attr('disabled', true);
+    }
 });
 
 
@@ -308,21 +317,22 @@ $(function () {
 
         //Empresa - text
         newElem.find('.labelEmpresa').attr('for','ID'+newNum+'_empresa');
-        newElem.find('.inputEmpresa').attr('id','ID'+newNum+'_empresa').attr('name','ID'+newNum+'_empresa').val('');
+        newElem.find('.inputEmpresa').attr('id','ID'+newNum+'_empresa').val('');
 
         //Ocupacion - text
         newElem.find('.labelOcupacion').attr('for','ID'+newNum+'_ocupacion');
-        newElem.find('.inputOcupacion').attr('id','ID'+newNum+'_ocupacion').attr('name','ID'+newNum+'_ocupacion').val('');
+        newElem.find('.inputOcupacion').attr('id','ID'+newNum+'_ocupacion').val('');
 
         //Años de experiencia - text
         newElem.find('.labelAñosExp').attr('for','ID'+newNum+'_añosExp');
-        newElem.find('.año').attr('id','ID'+newNum+'_añosExp').attr('name','ID'+newNum+'_añosExp').val('');
+        newElem.find('.año').attr('id','ID'+newNum+'_añosExp').val('');
 
  		//Descripcion - text
         newElem.find('.labelDescripcion').attr('for','ID'+newNum+'_descripcion');
-        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').attr('name','ID'+newNum+'_descripcion').val('');
+        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').val('');
 
-
+        // Formateo el ID
+        newElem.find('.id_exp_prof').attr('value','');
 
 
     // insert the new element after the last "duplicatable" input field
@@ -344,6 +354,11 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        var ocupaciones = ocupacionesGlobal;
+        $('input.typeahead_ocupacion').typeahead({
+            name: 'ocupacion',
+            local:  ocupaciones
+        });
     });
 
     $('#btnRemoverExpProfesional').click(function () {
@@ -362,6 +377,7 @@ $(function () {
 
         $('#btnAgregarExpProfesional').attr('disabled', false);
     });
-
-    $('#btnRemoverExpProfesional').attr('disabled', true);
+    if($('.blockExpProfesional').length < 2){
+        $('#btnRemoverExpProfesional').attr('disabled', true);
+    }
 });
