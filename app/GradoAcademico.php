@@ -2,19 +2,18 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Institucion extends Model {
-
+class GradoAcademico extends Model {
 	/**
 	* Set a custom name to the table model
 	* @var string
 	*/
-	protected $table = 'GEN_Institucion';
+	protected $table = 'GEN_Grado_Acad';
 
 	/**
 	* Set a custom variable primary key
 	* @var string
 	*/
-	protected $primaryKey = 'Ins_ID';
+	protected $primaryKey = 'Gra_ID';
 
 	/**
 	* Set the variables timestamps to false
@@ -26,14 +25,9 @@ class Institucion extends Model {
 	* Specifies which attributes should be mass-assignable.
 	* @var string
 	*/
-	// protected $fillable = [ 'Ins_ID', 'Ins_Nombre'];
-
-	public function experiencia_investigacion(){
-		return $this->hasOne('App\ExperienciaInvestigacion', 'Inv_ID');
-	}
+	// protected  = [ 'Gra_ID', 'Gra_Nombre'];
 
 	public function educacion_superior(){
-		return $this->hasOne('App\EducacionSuperior', 'Inv_ID');
+		return $this->hasMany('App\EducacionSuperior', 'Sup_ID_Grado_Acad');
 	}
-
 }

@@ -34,19 +34,22 @@ $(function () {
 
         //Titulo de la publicacion - text
         newElem.find('.labelTituloP').attr('for','ID'+newNum+'_tituloP');
-        newElem.find('.inputTituloP').attr('id','ID'+newNum+'_tituloP').attr('name','ID'+newNum+'_tituloP').val('');
+        newElem.find('.inputTituloP').attr('id','ID'+newNum+'_tituloP').val('');
 
         //Titulo del medio de publicacion - text
         newElem.find('.labelTituloMP').attr('for','ID'+newNum+'_tituloMP');
-        newElem.find('.inputTituloMP').attr('id','ID'+newNum+'_tituloMP').attr('name','ID'+newNum+'_tituloMP').val('');
+        newElem.find('.inputTituloMP').attr('id','ID'+newNum+'_tituloMP').val('');
 
  		//Pais de publicacion - text
         newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
-        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').attr('name','ID'+newNum+'_pais').val('');
+        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').val('');
 
         //Año - text
         newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
-        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').val('');
+
+        // Formateo los ID
+        newElem.find('.id_pub').attr('value','');
 
 
     // insert the new element after the last "duplicatable" input field
@@ -68,6 +71,11 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        var paises = paisesGlobal;
+        $('input.typeahead').typeahead({
+            name: 'pais',
+            local:  paises
+        });
     });
 
     $('#btnRemoverTrabajosPublicados').click(function () {
@@ -86,8 +94,9 @@ $(function () {
 
         $('#btnAgregarTrabajosPublicados').attr('disabled', false);
     });
-
-    $('#btnRemoverTrabajosPublicados').attr('disabled', true);
+    if($('.blockTrabajosPublicados').length < 2){
+        $('#btnRemoverTrabajosPublicados').attr('disabled', true);
+    }
 });
 
 
@@ -187,6 +196,12 @@ $(function () {
     $('#id_file').parent('.form-group').find('.btn-change').click(function() {
         $('#id_file').parent('.form-group').html('<input type="file" name="id_file" id="id_file">');
     });
+    $('.btn-change.title_array').click(function() {
+        $(this).parent('div').parent('.form-group').html('<input type="file" name="title_file[]">');
+    });
+    // $('.btn-change').click(function() {
+    //     $(this).parent('div').parent('.form-group').html('<input type="file" name="id_file" id="id_file">');
+    // });
 });
 
 
@@ -200,27 +215,36 @@ $(function () {
     //Aqui se manipula los atributos name y id de los input dentro del elemento nuevo, esto para que a la hora de agregar otro clon
     // este no vaya con los atributos de los inputs anteriores
 
-
-
         //Institucion - text
         newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
-        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
+        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').val('');
 
         //Pais - text
         newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
-        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').attr('name','ID'+newNum+'_pais').val('');
+        newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').val('');
 
         //Año de graduacion - text
         newElem.find('.labelAñoG').attr('for','ID'+newNum+'_añoG');
-        newElem.find('.inputAñoG').attr('id','ID'+newNum+'_añoG').attr('name','ID'+newNum+'_añoG').val('');
+        newElem.find('.inputAñoG').attr('id','ID'+newNum+'_añoG').val('');
 
  		//Titulo Obtenido - text
         newElem.find('.labelTituloObtenido').attr('for','ID'+newNum+'_titulo');
-        newElem.find('.inputTituloObtenido').attr('id','ID'+newNum+'_titulo').attr('name','ID'+newNum+'_titulo').val('');
+        newElem.find('.inputTituloObtenido').attr('id','ID'+newNum+'_titulo').val('');
 
 		//Grado academico - text
         newElem.find('.labelGradoA').attr('for','ID'+newNum+'_gradoA');
-        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').attr('name','ID'+newNum+'_gradoA').val('');
+        newElem.find('.comboboxGradoAcademico').attr('id','ID'+newNum+'_gradoA').val('');
+
+        //Area de especialidad - text
+        newElem.find('.labelAreaEspecialidad').attr('for','ID'+newNum+'_areaEspecialidad');
+        newElem.find('.inputAreaEspecialidad').attr('id','ID'+newNum+'_areaEspecialidad').val('');
+
+        //Titulo obtenido - file
+        newElem.find('.labelAreaEspecialidad').attr('for','ID'+newNum+'_areaEspecialidad');
+        newElem.find('.div_title_file').html('<input type="file" name="title_file[]" id="title_file">');
+
+        // Formateo los ID
+        newElem.find('.id_edu_sup').attr('value','');
 
 
     // insert the new element after the last "duplicatable" input field
@@ -242,6 +266,21 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        var areas_especialidad = areas_especialidadGlobal;
+        $('input.typeahead_area_especialidad').typeahead({
+            name: 'area_especialidad',
+            local:  areas_especialidad
+        });
+        var paises = paisesGlobal;
+        $('input.typeahead').typeahead({
+            name: 'pais',
+            local:  paises
+        });
+        var instituciones = institucionesGlobal;
+        $('input.typeahead_institucion').typeahead({
+            name: 'institucion',
+            local:  instituciones
+        });
     });
 
     $('#btnRemoverEducacionSuperior').click(function () {
@@ -260,8 +299,9 @@ $(function () {
 
         $('#btnAgregarEducacionSuperior').attr('disabled', false);
     });
-
-    $('#btnRemoverEducacionSuperior').attr('disabled', true);
+    if($('.blockEducacionSuperior').length < 2){
+        $('#btnRemoverEducacionSuperior').attr('disabled', true);
+    }
 });
 
 
@@ -277,21 +317,22 @@ $(function () {
 
         //Empresa - text
         newElem.find('.labelEmpresa').attr('for','ID'+newNum+'_empresa');
-        newElem.find('.inputEmpresa').attr('id','ID'+newNum+'_empresa').attr('name','ID'+newNum+'_empresa').val('');
+        newElem.find('.inputEmpresa').attr('id','ID'+newNum+'_empresa').val('');
 
         //Ocupacion - text
         newElem.find('.labelOcupacion').attr('for','ID'+newNum+'_ocupacion');
-        newElem.find('.inputOcupacion').attr('id','ID'+newNum+'_ocupacion').attr('name','ID'+newNum+'_ocupacion').val('');
+        newElem.find('.inputOcupacion').attr('id','ID'+newNum+'_ocupacion').val('');
 
         //Años de experiencia - text
         newElem.find('.labelAñosExp').attr('for','ID'+newNum+'_añosExp');
-        newElem.find('.año').attr('id','ID'+newNum+'_añosExp').attr('name','ID'+newNum+'_añosExp').val('');
+        newElem.find('.año').attr('id','ID'+newNum+'_añosExp').val('');
 
  		//Descripcion - text
         newElem.find('.labelDescripcion').attr('for','ID'+newNum+'_descripcion');
-        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').attr('name','ID'+newNum+'_descripcion').val('');
+        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').val('');
 
-
+        // Formateo el ID
+        newElem.find('.id_exp_prof').attr('value','');
 
 
     // insert the new element after the last "duplicatable" input field
@@ -313,6 +354,11 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        var ocupaciones = ocupacionesGlobal;
+        $('input.typeahead_ocupacion').typeahead({
+            name: 'ocupacion',
+            local:  ocupaciones
+        });
     });
 
     $('#btnRemoverExpProfesional').click(function () {
@@ -331,6 +377,7 @@ $(function () {
 
         $('#btnAgregarExpProfesional').attr('disabled', false);
     });
-
-    $('#btnRemoverExpProfesional').attr('disabled', true);
+    if($('.blockExpProfesional').length < 2){
+        $('#btnRemoverExpProfesional').attr('disabled', true);
+    }
 });

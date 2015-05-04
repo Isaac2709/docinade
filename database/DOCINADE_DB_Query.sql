@@ -288,8 +288,8 @@ CREATE TABLE ASP_Educ_Sup(
 	Sup_ID_Pais SMALLINT NOT NULL,
 	Sup_ID_Area_Esp SMALLINT NOT NULL,
 	Sup_ID_Grado_Acad SMALLINT NOT NULL,
-	Sup_Anio_Grad YEAR(4),
-	Sup_Adjunto LONGBLOB,
+	Sup_Anio_Grad YEAR(4) NULL,
+	Sup_Adjunto VARCHAR(300) NULL,
 
     CONSTRAINT PK_Asp_Sup_ID PRIMARY KEY (Sup_ID),
     CONSTRAINT FK_Asp_Sup_Asp FOREIGN KEY (Sup_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
@@ -298,6 +298,8 @@ CREATE TABLE ASP_Educ_Sup(
     CONSTRAINT FK_Asp_Sup_Area FOREIGN KEY (Sup_ID_Area_Esp) REFERENCES ASP_Area_Esp(Esp_ID),
     CONSTRAINT FK_Asp_Sup_Grado FOREIGN KEY (Sup_ID_Grado_Acad) REFERENCES GEN_Grado_Acad(Gra_ID)
 );
+-- ALTER TABLE `asp_educ_sup` CHANGE `Sup_ID_Area_Esp` `Sup_ID_Area_Esp` SMALLINT(6) NULL;
+-- ALTER TABLE `asp_educ_sup` CHANGE `Sup_Adjunto` `Sup_Adjunto` VARCHAR(300) NULL DEFAULT NULL;
 
 CREATE TABLE ASP_Exp_Invest(
 	Inv_ID SMALLINT AUTO_INCREMENT NOT NULL,
