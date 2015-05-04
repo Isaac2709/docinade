@@ -80,17 +80,28 @@ class InformacionAspirante extends Model {
 
 	/**
 	 * Relacion uno a muchos entre los modelos InformacionAspirante y ExperienciaProfesional
-	 * @return [arrayEloquent] [Los modelos de ExperienciaProfesional que pertenecen a InformacionAspirante]
+	 * @return [arrayEloquent] [Los modelos de ExperienciaProfesional que pertenecen a
+	 * InformacionAspirante]
 	 */
 	public function experiencias_profesionales(){
 		return $this->hasMany('App\ExperienciaProfesional', 'Pro_ID_Asp');
 	}
 
 	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y Publicacion
+	 * @return [arrayEloquent] [Los modelos de Publicacion que pertenecen a
+	 * InformacionAspirante]
+	 */
+	public function publicaciones(){
+		return $this->hasMany('App\Publicacion', 'Pub_ID_Asp');
+	}
+
+	/**
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              	[description]
 	 * @param  [array] $id_investigaciones 	[los id de las investigaciones que aun se mantienen]
-	 * @return [arrayEloquent]            	[los modelos de las investigaciones que se van a eliminar]
+	 * @return [arrayEloquent]            	[los modelos de las investigaciones que se van a
+	 * eliminar]
 	 */
 	public function scopeSeleccionarInvestigacionesAEliminar($query, $id_investigaciones){
 		$investigaciones = $this->experiencias_investigaciones();
@@ -104,7 +115,8 @@ class InformacionAspirante extends Model {
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              		[description]
 	 * @param  [array] $id_educacion_superior 	[los id de las educaciones que aun se mantienen]
-	 * @return [arrayEloquent]            		[los modelos de las educaciones que se van a eliminar]
+	 * @return [arrayEloquent]            		[los modelos de las educaciones que se van a
+	 * eliminar]
 	 */
 	public function scopeSeleccionarEducacionSuperiorAEliminar($query, $id_educacion_superior){
 		$educacion = $this->educacion_superior();
@@ -118,7 +130,8 @@ class InformacionAspirante extends Model {
 	 * Devuelve las experiencias profesionales que se van a eliminar
 	 * @param  [type] $query              		[description]
 	 * @param  [array] $id_experiencia_profesional 	[los id de las educaciones que aun se mantienen]
-	 * @return [arrayEloquent]            		[los modelos de las educaciones que se van a eliminar]
+	 * @return [arrayEloquent]            		[los modelos de las educaciones que se van a
+	 * eliminar]
 	 */
 	public function scopeSeleccionarExperienciaProfesionalAEliminar($query, $id_experiencias_profesionales){
 		$experiencia_profesional = $this->experiencias_profesionales();
@@ -127,4 +140,49 @@ class InformacionAspirante extends Model {
 		}
 		return $experiencia_profesional->get();
 	}
+
+	/**
+	 * Devuelve las publicaciones que se van a eliminar
+	 * @param  [type] $query              		[description]
+	 * @param  [array] $id_experiencia_profesional 	[los id de las educaciones que aun se mantienen]
+	 * @return [arrayEloquent]            		[los modelos de las educaciones que se van a
+	 * eliminar]
+	 */
+	public function scopeSeleccionarPublicacionesAEliminar($query, $id_publicaciones){
+		$publicaciones = $this->publicaciones();
+		foreach ($id_publicaciones as $id_publicacion) {
+			$publicaciones = $publicaciones->where('Pub_ID', '!=', $id_publicacion);
+		}
+		return $publicaciones->get();
+	}
+
+	/**
+	 * Ordena descendentemente las experiencias profesionales según el año de fin e inicio.
+	 * @return [arrayEloquent] [Los modelos de ExperienciaProfesional que pertenecen a
+	 * InformacionAspirante ordenados descendentemente]
+	 */
+	public function experiencias_profesionales_desc(){
+		return $this->experiencias_profesionales()->orderBy('Pro_Anio_Fin', 'DESC')->orderBy('Pro_Anio_Inicio', 'DESC');
+	}
+
+	/**
+	 * Ordena descendentemente las experiencias en investigacion según el año de las
+	 * investigaciones.
+	 * @return [arrayEloquent] [Los modelos de ExperienciaInvestigacion que pertenecen a
+	 * InformacionAspirante ordenados descendentemente]
+	 */
+	public function experiencias_investigaciones_desc(){
+		return $this->experiencias_investigaciones()->orderBy('Inv_Anio', 'DESC');
+	}
+
+	/**
+	 * Ordena descendentemente las publicaciones del aspirante según el año de publicada.
+	 * @return [arrayEloquent] [Los modelos de Publicacion que pertenecen a InformacionAspirante
+	 * ordenados descendentemente]
+	 */
+	public function publicaciones_desc(){
+		return $this->publicaciones()->orderBy('Pub_Anio', 'DESC');
+	}
+
+
 }
