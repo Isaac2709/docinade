@@ -8,6 +8,7 @@ use App\ExperienciaProfesional;
 use App\Ocupacion;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearExperienciaProfesionalRequest;
 
 class ExperienciaProfesionalController extends Controller {
 
@@ -40,7 +41,7 @@ class ExperienciaProfesionalController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearExperienciaProfesionalRequest $request)
 	{
 		// dd($request);
 		$user = User::find(Auth::user()->Usu_ID);

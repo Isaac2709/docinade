@@ -164,7 +164,11 @@
 						<label for="areaEspecialidad" class="col-md-4 control-label labelAreaEspecialidad">Área de especialidad:</label>
 						<div class="col-md-8">
 							<div class="bs-example">
-	    						<input type="text" name="area_especialidad[]" class="form-control typeahead_area_especialidad inputAreaEspecialidad tt-query" autocomplete="off" spellcheck="false" id="area_especialidad" value="{{ $educacion->area_especialidad->Esp_Area }}" >
+								@if(!is_null($educacion->Sup_ID_Area_Esp))
+	    							<input type="text" name="area_especialidad[]" class="form-control typeahead_area_especialidad inputAreaEspecialidad tt-query" autocomplete="off" spellcheck="false" id="area_especialidad" value="{{ $educacion->area_especialidad->Esp_Area }}" >
+	    						@else
+	    							<input type="text" name="area_especialidad[]" class="form-control typeahead_area_especialidad inputAreaEspecialidad tt-query" autocomplete="off" spellcheck="false" id="area_especialidad">
+	    						@endif
 	    					</div>
 						</div>
 					</div>
