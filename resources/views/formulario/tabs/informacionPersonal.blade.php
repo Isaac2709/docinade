@@ -228,10 +228,10 @@
 
 	<!-- BOTON ACTUALIZAR -->
 	<div class="row">
-		<!--BOTONES para agregar y remover formulario-->
-		<div  class="col-md-7">
-				<input id="btnActualizar" type="submit" class="btn btn-success btn-lg pull-right" value="Actualizar">
-		</div>
+		<div class="col-md-11">
+            <input id="btnActualizarDatosPersonales" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+        </div>
+        <br/>
 	</div>
     <!-- End row -->
 </form>

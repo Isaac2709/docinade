@@ -2,6 +2,10 @@
 
 @section('styles')
 	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
+	<!-- Para el input de archivo -->
+  	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+  	<!-- para los checkbox animados -->
+  	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
 @endsection
 
 @section('page_title')
@@ -17,7 +21,7 @@
 	    <!-- <div class="widget-inner"> -->
 			<div class="panel panel-default">
 
-				<!-- <div class="panel-heading"><h2>Datos Personales</h2></div> -->
+				<div class="panel-heading"><h2>Formulario de Aspirante a Doctorado</h2></div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -40,7 +44,7 @@
 						@endif
 					@endif
 					<!-- TABS -->
-					<ul class="nav nav-tabs" id="myTab">
+					<ul class="nav nav-pills nav-justified" id="myTab">
 				        <li class="active"><a data-toggle="tab" href="#informacionPersonal">Informacion Personal</a></li>
 				        <li class="dropdown">
 				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Edu. Superior / Exp. Profesional<b class="caret"></b></a>
@@ -51,6 +55,11 @@
 				        </li>
 				        <li><a data-toggle="tab" href="#experienciaEnInvestigacion">Experiencia en Investigación</a></li>
 				        <li><a data-toggle="tab" href="#trabajosPublicados">Trabajos e Investigaciones Publicadas</a></li>
+				        <li><a data-toggle="tab" href="#cursosMasRelevantes">Cursos y Seminarios más Relevantes</a></li>
+				        <li><a data-toggle="tab" href="#conocimientoDeIdiomas">Conocimiento de Idiomas Distintos al Materno</a></li>
+				        <li><a data-toggle="tab" href="#accesoBibliotecas">Acceso a Bibliotecas / Prosesamiento de Datos</a></li>
+				        <li><a data-toggle="tab" href="#manejoDeProgramas">Manejo de Programas de Computación</a></li>
+				        <li><a data-toggle="tab" href="#recomendaciones">Recomendaciones</a></li>
 				        <li><a data-toggle="tab" href="#exportar">Exportar</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
@@ -68,9 +77,9 @@
 				        <!--Experiencia profesional-->
 				        <div id="experienciaProfesional" class="tab-pane fade">
 				        	@include('formulario.tabs.experienciaProfesional')
-
 				        </div>
 				        <!-- Termina  Experiencia profesional -->
+
 
 						<!-- Experiencia en Investigación -->
 				        <div id="experienciaEnInvestigacion" class="tab-pane fade">
@@ -82,7 +91,38 @@
 				    	<div id="trabajosPublicados" class="tab-pane fade">
 				    		@include('formulario.tabs.trabajosPublicados')
 				    	</div>
-				    	<!--Termina Experiencia en Investigacion-->
+						<!--Termina Trabajos Publicados-->
+
+				    	<!--Cursos mas relevantes-->
+				    	<div id="cursosMasRelevantes" class="tab-pane fade">
+				    		@include('formulario.tabs.cursosRelevantes')
+				    	</div>
+				    	<!--Termina Cursos mas Relevantes -->
+
+				    	<!-- Conocimiento de idiomas-->
+				    	<div id="conocimientoDeIdiomas" class="tab-pane fade">
+				    		@include('formulario.tabs.conocimientoDeIdiomas')
+				    	</div>
+				    	<!-- Termina Conocimiento de Idiomas-->
+
+				    	<!-- Acceso a bibliotecas y Procesamiento de datos-->
+				    	<div id="accesoBibliotecas" class="tab-pane fade">
+				    		@include('formulario.tabs.accesoBibliotecas')
+				    	</div>
+				    	<!--Termina Acceso a bibliotecas y Procesamiento de datos -->
+
+				    	<!-- Manejo de Programas de Computacion-->
+				    	<div id="manejoDeProgramas" class="tab-pane fade">
+				    		@include('formulario.tabs.manejoDeProgramas')
+				    	</div>
+				    	<!-- Termina Manejo de Programas de Computacion-->
+
+				    	<!-- Recomendaciones-->
+				    	<div id="recomendaciones" class="tab-pane fade">
+				    		@include('formulario.tabs.recomendaciones')
+				    	</div>
+				    	<!-- Termina Recomendaciones-->
+
 						<div id="exportar" class="tab-pane fade">
 							<div class="form-group">
 								<a class="btn btn-success btn-lg" href="formulario/pdfformulario" target="_blank" >Exportar formulario</a>
@@ -100,7 +140,10 @@
 
 
 @section('scripts')
-<!--para agregar y remover divs-->
+	<!--Para los inputs de tipo archivo (ESTA LIBRERIA PRODUCE ERROR EN LOS DROPDOWN)-->
+	<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>-->
+
+	<!--para agregar y remover divs-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -112,31 +155,12 @@
 	<!-- Diccionario en español para el calendario -->
 	<script src="/js/locales/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 
+	<!-- Para los checkbox animados-->
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 
 
 	<script type="text/javascript">
-		// http://eternicode.github.io/bootstrap-datepicker/?markup=input&format=&weekStart=&startDate=&endDate=&startView=0&minViewMode=0&todayBtn=false&clearBtn=false&language=en&orientation=auto&multidate=&multidateSeparator=&keyboardNavigation=on&forceParse=on#sandbox
-
-	 	$('.datepicker_control').datepicker({
-		    language: "es",
-		    autoclose: true,
-		    todayHighlight: true
-		});
-	</script>
-
-	<!-- -->
-	<script type="text/javascript">
-        $('.año').datepicker( {
-		    format: ' yyyy',
-		    viewMode: 'years',
-		    minViewMode: 'years',
-		    autoclose:true
-	  	});
-
-	</script>
-
-	<script type="text/javascript">
-$(document).ready(function(){
+	$(document).ready(function(){
 		var instituciones = <?php echo "".($instituciones); ?>;
 		var paises = <?php echo "".($paises); ?>;
 		var nacionalidades = <?php echo "".($nacionalidades); ?>;
@@ -174,12 +198,10 @@ $(document).ready(function(){
 			$("#agregarNuevoEmail").text('-');
 		}
 
-		// $("#informacionPersonal").find('input').change(function(){
-
-  //       });
-
 	});
+
 	</script>
+
 <script  type="text/javascript" src="typeahead.js"></script>
 
 <script type="text/javascript">
@@ -190,6 +212,5 @@ $(document).ready(function(){
 	var ocupacionesGlobal = <?php echo "".($ocupaciones); ?>;
 </script>
 <script  type="text/javascript" src="js/form.js"></script>
-
 
 @endsection

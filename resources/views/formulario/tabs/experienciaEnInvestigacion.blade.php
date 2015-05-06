@@ -47,6 +47,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-md-offset-11">
+			<input type="checkbox" name="checkBox1" class="claseCheckboxExpInvestigacion" id="checkboxExpInvestigacion1" style="display:none">
+		</div>
 		<hr class="soften">
 	</div>
 
@@ -107,6 +110,9 @@
 			<!--Termina col-lg-6-->
 		</div>
 		<!-- Termina row divider-h -->
+		<div class="col-md-offset-11">
+			<input type="checkbox" name="checkBox1" class="claseCheckboxExpInvestigacion" id="checkboxExpInvestigacion1" style="display:none">
+		</div>
 		<hr class="soften">
 	</div>
     		<!-- Termina row blockExpInvestigacion -->
@@ -117,20 +123,14 @@
 	<div class="row">
 		<!--BOTONES para agregar y remover formulario-->
 		<div  class="col-md-12">
-			<div >
+			 <div >
 				<button id="btnRemoverExpInvestigacion" type="button" class="btn btn-danger btn-lg pull-right">-</button>
 			</div>
 			<div class="col-md-11">
 				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+				<input id="btnActualizarExpInvestigacion" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 			</div>
 		</div>
 	</div>
-	<br />
-	<!-- BOTON ACTUALIZAR -->
-	<div class="row">
-		<!--BOTONES para agregar y remover formulario-->
-		<div  class="col-md-7">
-				<input id="btnActualizar" type="submit" class="btn btn-success btn-lg pull-right" value="Actualizar">
-		</div>
-	</div>
+	<br/>
 </form>

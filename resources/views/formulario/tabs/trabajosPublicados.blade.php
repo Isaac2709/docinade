@@ -47,6 +47,9 @@
 				<!--Termina col-md-6-->
 			</div>
 			<!-- Termina row -->
+			<div class="col-md-offset-11">
+				<input type="checkbox" name="checkBox1" class="claseCheckboxTrabajosPublicados" id="checkboxTrabajosPublicados1" style="display:none">
+			</div>
 			<hr class="soften">
 		</div>
 		<!-- Termina formularioTrabajosPublicados1 -->
@@ -102,6 +105,9 @@
 				<!--Termina col-md-6-->
 			</div>
 			<!-- Termina row -->
+			<div class="col-md-offset-11">
+				<input type="checkbox" name="checkBox1" class="claseCheckboxTrabajosPublicados" id="checkboxTrabajosPublicados1" style="display:none">
+			</div>
 			<hr class="soften">
 		</div>
 		<!-- Termina formularioTrabajosPublicados -->
@@ -111,19 +117,14 @@
 
 
 	<!--BOTONES para agregar y remover formulario-->
-	<div class="col-md-12">
+	<div  class="col-md-12">
 		<div >
 			<button id="btnRemoverTrabajosPublicados" type="button" class="btn btn-danger btn-lg pull-right">-</button>
 		</div>
 		<div class="col-md-11">
 			<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+			<input id="btnActualizarTrabajosPublicados" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 		</div>
 	</div>
 	<br/>
-	<!-- BOTON ACTUALIZAR -->
-	<div class="row">
-		<div  class="col-md-7">
-				<input id="btnActualizar" type="submit" class="btn btn-success btn-lg pull-right" value="Actualizar">
-		</div>
-	</div>
 </form>

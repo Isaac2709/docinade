@@ -54,6 +54,9 @@
     		</div>
     		<!--Termina col-md-6 -->
     	</div>
+        <div class="col-md-offset-11">
+            <input type="checkbox" name="checkBox1" class="claseCheckboxExpProfesional" id="checkboxExpProfesional1" style="display:none">
+        </div>
     	<hr class="soften">
 	</div>
     @else
@@ -107,26 +110,25 @@
                     </div>
                     <!--Termina col-md-6 -->
                 </div>
+                <div class="col-md-offset-11">
+                    <input type="checkbox" name="checkBox1" class="claseCheckboxExpProfesional" id="checkboxExpProfesional1" style="display:none">
+                </div>
                 <hr class="soften">
             </div>
             <?php $count = $count + 1; ?>
         @endforeach
     @endif
 	<!--BOTONES para agregar y remover formulario-->
-	<div  class="col-md-12">
-		<div >
-			<button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right">-</button>
-		</div>
-		<div class="col-md-11">
-			<button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-		</div>
-	</div>
-	<br/>
-	<!-- BOTON ACTUALIZAR -->
 	<div class="row">
-		<!--BOTONES para agregar y remover formulario-->
-		<div  class="col-md-7">
-				<input id="btnActualizar" type="submit" class="btn btn-success btn-lg pull-right" value="Actualizar">
-		</div>
+        <div  class="col-md-12">
+            <div >
+                <button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+            </div>
+            <div class="col-md-11">
+                <button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+                <input id="btnActualizarExpProfesional" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+            </div>
+        </div>
+        <br/>
 	</div>
 </form>
