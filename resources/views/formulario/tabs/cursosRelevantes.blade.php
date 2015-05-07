@@ -1,15 +1,16 @@
-<form role="form" action="#" method="post" class="form-horizontal">
+<form role="form" action="curRelevante" method="post" class="form-horizontal">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->cursos_seminarios->isEmpty())
 		<div id="formularioCursosMasRelevantes1" class="row blockCursosMasRelevantes">
 			<div class="row">
 				<div class="col-md-6">
+					<input type="hidden" name="id_cur_sem[]" class="id_cur_sem">
 					<!--Nombre de actividad-->
 					<div class="form-group">
-						<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de actividad:</label>
+						<label for="actividad" class="col-md-4 control-label labelNombre">Nombre de actividad:</label>
 						<div class="col-md-8">
-							<input type="text" class="form-control inputNombre" name="nombre[]" id="nombre">
+							<input type="text" class="form-control inputNombre" name="actividad[]" id="actividad">
 						</div>
 					</div>
 
@@ -59,11 +60,12 @@
 			<div id="formularioCursosMasRelevantes{{ $count }}" class="row blockCursosMasRelevantes">
 				<div class="row">
 					<div class="col-md-6">
+						<input type="hidden" name="id_cur_sem[]" class="id_cur_sem" value="{{ $curso_seminario->CSe_ID }}">
 						<!--Nombre de actividad-->
 						<div class="form-group">
-							<label for="nombre" class="col-md-4 control-label labelNombre">Nombre de actividad:</label>
+							<label for="actividad" class="col-md-4 control-label labelNombre">Nombre de actividad:</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control inputNombre" name="nombre[]" id="nombre" value="{{ $curso_seminario->CSe_Actividad }}">
+								<input type="text" class="form-control inputNombre" name="actividad[]" id="actividad" value="{{ $curso_seminario->CSe_Actividad }}">
 							</div>
 						</div>
 
