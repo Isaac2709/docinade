@@ -748,23 +748,26 @@ $(function () {
         // este no vaya con los atributos de los inputs anteriores
 
         //Nombre - text
-        newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
-        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+        newElem.find('.labelNombre').attr('for','ID'+newNum+'_actividad');
+        newElem.find('.inputNombre').attr('id','ID'+newNum+'_actividad').val('');
 
         //Institucion - text
         newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
-        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').attr('name','ID'+newNum+'_institucion').val('');
+        newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').val('');
 
         //Lugar - text
         newElem.find('.labelLugar').attr('for','ID'+newNum+'_lugar');
-        newElem.find('.inputLugar').attr('id','ID'+newNum+'_lugar').attr('name','ID'+newNum+'_lugar').val('');
+        newElem.find('.inputLugar').attr('id','ID'+newNum+'_lugar').val('');
 
         //Año - text
         newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
-        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').attr('name','ID'+newNum+'_año').val('');
+        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').val('');
 
         //Checkbox - remover
         newElem.find('.claseCheckboxCursosMasRelevantes').attr('style','cursor:pointer').attr('id','checkboxCursosMasRelevantes'+newNum).attr('checked',false);
+
+        // Formateo el ID
+        newElem.find('.id_cur_sem').attr('value','');
 
 
     // insert the new element after the last "duplicatable" input field
@@ -808,8 +811,8 @@ $(function () {
                                 nElem=$('#formularioCursosMasRelevantes'+i).attr('id', 'formularioCursosMasRelevantes' + cont);
 
                                 //Nombre - text
-                                nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
-                                nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+                                nElem.find('.labelNombre').attr('for','ID'+cont+'_actividad');
+                                nElem.find('.inputNombre').attr('id','ID'+cont+'_actividad').attr('name','ID'+cont+'_nombre');
 
                                 //Institucion - text
                                 nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
