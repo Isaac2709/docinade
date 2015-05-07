@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\CursoSeminario;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearCursoSeminarioRequest;
 
 class CursoSeminarioController extends Controller {
 
@@ -41,7 +42,7 @@ class CursoSeminarioController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearCursoSeminarioRequest $request)
 	{
 		// dd($request);
 		$user = User::find(Auth::user()->Usu_ID);
@@ -65,21 +66,7 @@ class CursoSeminarioController extends Controller {
 				// Si no existe, crea un nuevo modelo, le asigna el nombre del proyecto y lo guarda en la base de datos.
 				$curso_seminario = new CursoSeminario();
 				$curso_seminario->CSe_Actividad = $request->actividad[$pos];
-				// $user->formulario->informacion_aspirante->experiencias_investigaciones()->save($experiencia_investigacion);
 			}
-			// Revisa si se envia una institución en la investigación
-			// if(!empty($request->institucion[$pos])){
-				// Si se envia, consulta si existe en la base de datos, dicha institución
-				// $institucion = Institucion::where('Ins_Nombre', '=', trim($request->institucion[$pos], " \t."))->first();
-				// if(is_null($institucion)){
-					// Si la institución no existe, la crea y la guarda en la base de datos.
-					// $institucion = new Institucion();
-					// $institucion->Ins_Nombre = trim($request->institucion[$pos], " \t.");
-					// $institucion->save();
-				// }
-				// Finalmente le asigna la institución a la experiencia en investigación
-				// $curso_seminario->Sup_ID_Institucion = $institucion->Ins_ID;
-			// }
 			// Actualiza los datos faltantes
 			$curso_seminario->CSe_Institucion = $request->institucion[$pos];
 			$curso_seminario->CSe_Lugar = $request->lugar[$pos];

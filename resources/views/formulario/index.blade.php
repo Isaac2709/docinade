@@ -158,51 +158,49 @@
 	<!-- Para los checkbox animados-->
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 
+	<script  type="text/javascript" src="typeahead.js"></script>
 
 	<script type="text/javascript">
-	$(document).ready(function(){
-		var instituciones = <?php echo "".($instituciones); ?>;
-		var paises = <?php echo "".($paises); ?>;
-		var nacionalidades = <?php echo "".($nacionalidades); ?>;
-		var areas_especialidad = <?php echo "".($areas_especialidad); ?>;
-		var ocupaciones = <?php echo "".($ocupaciones); ?>;
+		$(document).ready(function(){
+			var instituciones = <?php echo "".($instituciones); ?>;
+			var paises = <?php echo "".($paises); ?>;
+			var nacionalidades = <?php echo "".($nacionalidades); ?>;
+			var areas_especialidad = <?php echo "".($areas_especialidad); ?>;
+			var ocupaciones = <?php echo "".($ocupaciones); ?>;
 
-		$('input.typeahead').typeahead({
-			name: 'pais_residencia',
-			local:  paises
+			$('input.typeahead').typeahead({
+				name: 'pais_residencia',
+				local:  paises
+			});
+			$('input.typeahead2').typeahead({
+				name: 'nacionalidad',
+				local:  nacionalidades
+			});
+			$('input.typeahead_institucion').typeahead({
+				name: 'institucion',
+				local:  instituciones
+			});
+			$('input.typeahead_area_especialidad').typeahead({
+				name: 'area_especialidad',
+				local:  areas_especialidad
+			});
+			$('input.typeahead_ocupacion').typeahead({
+				name: 'ocupacion',
+				local:  ocupaciones
+			});
+			if($("#email2").val()==null || $("#email2").val()==""){
+				$("#email2").hide();
+				$("#agregarNuevoEmail").removeClass("btn-danger").addClass("btn-primary");
+				$("#agregarNuevoEmail").text('+');
+			}
+			else{
+				$("#email2").show();
+				$("#agregarNuevoEmail").removeClass("btn-primary").addClass("btn-danger");
+				$("#agregarNuevoEmail").text('-');
+			}
 		});
-		$('input.typeahead2').typeahead({
-			name: 'nacionalidad',
-			local:  nacionalidades
-		});
-		$('input.typeahead_institucion').typeahead({
-			name: 'institucion',
-			local:  instituciones
-		});
-		$('input.typeahead_area_especialidad').typeahead({
-			name: 'area_especialidad',
-			local:  areas_especialidad
-		});
-		$('input.typeahead_ocupacion').typeahead({
-			name: 'ocupacion',
-			local:  ocupaciones
-		});
-		if($("#email2").val()==null || $("#email2").val()==""){
-			$("#email2").hide();
-			$("#agregarNuevoEmail").removeClass("btn-danger").addClass("btn-primary");
-			$("#agregarNuevoEmail").text('+');
-		}
-		else{
-			$("#email2").show();
-			$("#agregarNuevoEmail").removeClass("btn-primary").addClass("btn-danger");
-			$("#agregarNuevoEmail").text('-');
-		}
-
-	});
-
 	</script>
 
-<script  type="text/javascript" src="typeahead.js"></script>
 
 <script type="text/javascript">
 	var institucionesGlobal = <?php echo "".($instituciones); ?>;
