@@ -97,6 +97,15 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y CursoSeminario
+	 * @return [arrayEloquent] [Los modelos de CursoSeminario que pertenecen a
+	 * InformacionAspirante]
+	 */
+	public function cursos_seminarios(){
+		return $this->hasMany('App\CursoSeminario', 'CSe_ID_Asp');
+	}
+
+	/**
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              	[description]
 	 * @param  [array] $id_investigaciones 	[los id de las investigaciones que aun se mantienen]
@@ -157,6 +166,21 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Devuelve las publicaciones que se van a eliminar
+	 * @param  [type] $query              		[description]
+	 * @param  [array] $id_cursos_seminarios 	[los id de las cursos o seminarios que aun se mantienen]
+	 * @return [arrayEloquent]            		[los modelos de los cursos o seminarios que se van a
+	 * eliminar]
+	 */
+	public function scopeSeleccionarCursosSeminariosAEliminar($query, $id_cursos_seminarios){
+		$cursos_seminarios = $this->cursos_seminarios();
+		foreach ($id_cursos_seminarios as $id_curso_seminario) {
+			$cursos_seminarios = $cursos_seminarios->where('CSe_ID', '!=', $id_curso_seminario);
+		}
+		return $cursos_seminarios->get();
+	}
+
+	/**
 	 * Ordena descendentemente las experiencias profesionales según el año de fin e inicio.
 	 * @return [arrayEloquent] [Los modelos de ExperienciaProfesional que pertenecen a
 	 * InformacionAspirante ordenados descendentemente]
@@ -182,6 +206,15 @@ class InformacionAspirante extends Model {
 	 */
 	public function publicaciones_desc(){
 		return $this->publicaciones()->orderBy('Pub_Anio', 'DESC');
+	}
+
+	/**
+	 * Ordena descendentemente los cursos o seminarios del aspirante según el año.
+	 * @return [arrayEloquent] [Los modelos CursoSeminario que pertenecen a InformacionAspirante
+	 * ordenados descendentemente]
+	 */
+	public function cursos_seminarios_desc(){
+		return $this->cursos_seminarios()->orderBy('CSe_Annio', 'DESC');
 	}
 
 
