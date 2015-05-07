@@ -1,11 +1,20 @@
 @extends('index')
 
 @section('styles')
-	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
+	
 	<!-- Para el input de archivo -->
   	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
   	<!-- para los checkbox animados -->
   	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+  	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
+
+  	<style type="text/css">
+  		textarea
+		  {
+		    resize: vertical; 
+		  }
+  	</style>
+
 @endsection
 
 @section('page_title')
@@ -61,10 +70,12 @@
 				        <li><a data-toggle="tab" href="#manejoDeProgramas">Manejo de Programas de Computación</a></li>
 				        <li><a data-toggle="tab" href="#recomendaciones">Recomendaciones</a></li>
 				        <li><a data-toggle="tab" href="#exportar">Exportar</a></li>
+				        <li><a data-toggle="tab" href="#propuestaDeTesis">Propuesta de Tesis</a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
 				        <div id="informacionPersonal" class="tab-pane fade in active">
+				        
 							@include('formulario.tabs.informacionPersonal')
 				        </div>
 
@@ -123,11 +134,19 @@
 				    	</div>
 				    	<!-- Termina Recomendaciones-->
 
+				    	<!--Propuesta de tesis-->
+				    	<div id="propuestaDeTesis" class="tab-pane fade">
+				    		@include('formulario.tabs.propuestaDeTesis')
+				    	</div>
+				    	<!--Termina Propuesta de tesis-->
+
+				    	<!--Exportar-->
 						<div id="exportar" class="tab-pane fade">
 							<div class="form-group">
 								<a class="btn btn-success btn-lg" href="formulario/pdfformulario" target="_blank" >Exportar formulario</a>
 							</div>
 						</div>
+						<!--Termina exportar-->
 				    </div>
 					<!-- End Tabs -->
 				</div>
