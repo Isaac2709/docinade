@@ -26,7 +26,7 @@ class AreaEspecialidad extends Model {
 	* Specifies which attributes should be mass-assignable.
 	* @var string
 	*/
-	// protected  = [ 'Esp_ID', 'Esp_Area'];
+	// protected  $fillable = [ 'Esp_ID', 'Esp_Area'];
 
 	public function educacion_superior(){
 		return $this->hasMany('App\EducacionSuperior', 'Sup_ID_Area_Esp');
