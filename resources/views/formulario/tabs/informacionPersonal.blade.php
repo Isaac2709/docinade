@@ -23,13 +23,14 @@
     			<label for="id" class="col-md-4 control-label">Cédula o Pasaporte:</label>
     			<div class="col-md-8">
     				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
-                        <div class="fileupload fileupload-new text-center " data-provides="fileupload" id="fileupload1">
-                        <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
-                        <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoCedula" name="archivoCedula" /></span>
+                    <div class="fileupload fileupload-new text-center" data-provides="fileupload" id="fileupload1">
+                        <span class="btn btn-default btn-file claseBtnArchivoCedula" ><span class="fileupload-new">Buscar Archivo</span>
+                        <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoCedula" name="archivoCedula"  /></span>
                         <span class="fileupload-preview"></span>
                         <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
-                    </div>
+                </div>
     			</div>
+                
     		</div>
     		<!-- Genero del(la) aspirante -->
 			<div class="form-group">
