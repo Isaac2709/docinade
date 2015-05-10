@@ -42,11 +42,14 @@
 			<div class="col-lg-6">
 				<!--Titulo obtenido -->
 				<div class="form-group">
-					<label for="titulo" class="col-md-4 control-label labelTituloObtenido">Título obtenido:</label>
-					<div class="col-md-8 div_title_file">
-						<input type="file" name="title_file[]" id="title_file">
-					</div>
-				</div>
+					<label for="archivoTitulo1" class="col-md-4 control-label labelArchivoTitulo1">Título obtenido:</label>
+    				<div class="fileupload fileupload-new col-md-8" data-provides="fileupload" id="fileupload1">
+					    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+					    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoTitulo1" name="archivoTitulo1" /></span>
+					    <span class="fileupload-preview"></span>
+					    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+				  	</div>
+			  	</div>
 
 				<!-- Grado academico -->
 				<div class="form-group">

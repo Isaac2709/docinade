@@ -16,15 +16,14 @@
 
 		  /* Adjust Menu colors - Hover */
  
-
+/*bloque para cambiar el tamaño de las letras de los tabs cuando se acitva y sobrepone*/
 .nav-pills > li.active > a > font{
 	font-size: 120%;
 }
-
 .nav-pills > li > a :hover{
 	font-size: 120%;
 }
-
+/*---------------------------------------*/
   	</style>
 
 @endsection

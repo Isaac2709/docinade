@@ -20,24 +20,16 @@
 
     		<!-- ID or passport of aspirant -->
     		<div class="form-group">
-    			<label for="id" class="col-md-4 control-label">Cedula o Pasaporte:</label>
+    			<label for="id" class="col-md-4 control-label">Cédula o Pasaporte:</label>
     			<div class="col-md-8">
     				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
-    			</div>
-    			<div class="col-md-8 col-md-offset-4" style="height: 30px;">
-                    <div class="form-group">
-        				@if(!empty($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
-        					<div class="col-md-4 show-change-button" id="id_file">
-        					   <a class="btn btn-link"  target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}">Archivo adjunto</a>
-                            </div>
-        					<div class="col-md-4">
-        					   <a class="btn btn-warning btn-sm btn-change">Actualizar el archivo adjunto</a>
-        					</div>
-        				@else
-                        	<input type="file" name="id_file" id="id_file">
-                        @endif
+                        <div class="fileupload fileupload-new text-center " data-provides="fileupload" id="fileupload1">
+                        <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+                        <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoCedula" name="archivoCedula" /></span>
+                        <span class="fileupload-preview"></span>
+                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
                     </div>
-                </div>
+    			</div>
     		</div>
     		<!-- Genero del(la) aspirante -->
 			<div class="form-group">
@@ -137,23 +129,15 @@
 
 		<div class="col-lg-6">
 			<!-- Fotografía -->
-    		<div class="form-group">
-    			<label for="id" class="col-md-4 control-label">Fotografía:</label>
-    			<div class="col-md-8" style="height: 34px;">
-                    <div class="form-group">
-        				@if(!empty($user->formulario->informacion_aspirante->Asp_Fotografia))
-        					<div class="col-md-4 show-change-button" id="photo_file">
-        					   <a class="btn btn-link" target="_blank" href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Fotografia}}">Foto adjunta</a>
-                            </div>
-        					<div class="col-md-4">
-        					   <a class="btn btn-warning btn-sm btn-change">Actualizar la fotografía</a>
-        					</div>
-        				@else
-                        	<input type="file" name="photo_file" id="photo_file">
-                        @endif
-                    </div>
+            <div class="form-group">
+                <label for="archivoFoto1" class="col-md-4 control-label labelArchivoFoto1">Fotografía:</label>
+                <div class="fileupload fileupload-new col-md-8" data-provides="fileupload" >
+                    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+                    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoFoto1" name="archivoFoto1" /></span>
+                    <span class="fileupload-preview"></span>
+                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
                 </div>
-    		</div>
+            </div>
 			<!-- Enfasis de interes -->
 			<div class="form-group">
 				<label for="enfasis" class="col-md-4 control-label">Énfasis de interes:</label>
