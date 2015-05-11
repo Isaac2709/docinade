@@ -27,3 +27,4 @@ Route::post('eduSuperior', 'EducacionSuperiorController@store');
 Route::post('expProfesional', 'ExperienciaProfesionalController@store');
 Route::post('invPublicada', 'PublicacionController@store');
 Route::post('curRelevante', 'CursoSeminarioController@store');
+Route::post('conIdioma', 'ConocimientoIdiomaController@store');
