@@ -11,9 +11,12 @@ use Illuminate\Http\Request;
 
 class ConocimientoIdiomaController extends Controller {
 
+	private $destinationPath = "";
+
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->destinationPath = public_path().'/storage';
 	}
 
 	/**
@@ -70,8 +73,8 @@ class ConocimientoIdiomaController extends Controller {
 		        $name_file = $file->getClientOriginalName();
 		        $trozos = explode(".", $name_file);
 		        $extension = end($trozos);
-		        $id_filename = $user->Usu_Nombre.'_'.rand(10, 99999999).'.'.$file->getClientOriginalName();
-		        \Illuminate\Support\Facades\Request::file('archivo')[$pos]->move($this->destinationPath.'/images/', $id_filename);
+		        $id_filename = $user->Usu_Nombre.'_'.'certificate'.'_'.rand(10, 99999999).'.'.$extension;
+		        \Illuminate\Support\Facades\Request::file('archivo')[$pos]->move($this->destinationPath.'/certificates/', $id_filename);
 	            $conocimiento_idioma->Idm_Adjunto = $id_filename;
 	        }
 	        // Actualiza los datos faltantes
