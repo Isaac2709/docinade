@@ -132,7 +132,7 @@ CREATE TABLE ASP_Prop_Tesis(
 	PTe_Definicion TEXT,
 	PTe_Marco_Teorico MEDIUMTEXT,
 	PTe_Metodologia TEXT,
-	PTe_Adjunto LONGBLOB,
+	PTe_Adjunto VARCHAR(300),
 
     CONSTRAINT PK_Asp_Pte_ID PRIMARY KEY (PTe_ID)
 );
@@ -243,7 +243,7 @@ CREATE TABLE ASP_Idioma(
 	Idm_ID_Niv_Lect SMALLINT,
 	Idm_ID_Niv_Conv SMALLINT,
 	Idm_Posee_MCE BOOLEAN,
-	Idm_Adjunto LONGBLOB,
+	Idm_Adjunto VARCHAR(300),
 
     CONSTRAINT PK_Asp_Idm_ID PRIMARY KEY (Idm_ID),
     CONSTRAINT FK_Asp_Idm_Asp FOREIGN KEY (Idm_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
@@ -257,6 +257,7 @@ CREATE TABLE ASP_Idioma(
 -- ALTER TABLE `asp_idioma` ADD CONSTRAINT `FK_Asp_Idm_Lect` FOREIGN KEY (`Idm_ID_Niv_Lect`) REFERENCES `docinade_db`.`asp_nivel`(`Niv_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 -- ALTER TABLE `asp_idioma` DROP FOREIGN KEY `FK_Asp_Idm_Conv`;
 -- ALTER TABLE `asp_idioma` ADD CONSTRAINT `FK_Asp_Idm_Conv` FOREIGN KEY (`Idm_ID_Niv_Conv`) REFERENCES `docinade_db`.`asp_nivel`(`Niv_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `asp_idioma` CHANGE `Idm_Adjunto` `Idm_Adjunto` VARCHAR(300) NULL DEFAULT NULL;
 
 CREATE TABLE ASP_Curso_Sem(
 	CSe_ID SMALLINT AUTO_INCREMENT NOT NULL,
@@ -352,7 +353,7 @@ CREATE TABLE ASP_Recomendacion(
 	Rec_Fax VARCHAR(20),
     Rec_ID_Email SMALLINT,
 	Rec_ID_Ocupacion SMALLINT,
-	Rec_Adjunto LONGBLOB,
+	Rec_Adjunto VARCHAR(300),
 
     CONSTRAINT PK_Asp_Rec_ID PRIMARY KEY (Rec_ID),
     CONSTRAINT FK_Asp_Rec_Asp FOREIGN KEY (Rec_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
