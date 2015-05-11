@@ -1,4 +1,4 @@
-<form role="form" action="conIdioma" method="post" class="form-horizontal">
+<form role="form" action="conIdioma" method="post" class="form-horizontal" enctype="multipart/form-data">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->conocimiento_idiomas->isEmpty())
@@ -66,7 +66,7 @@
 				<p class="text-center"><small>Con relación al dominio del idioma inglés, adjunte documentos que certifiquen los cursos y programas estudiados, según el <em> Marco Común Europeo de Referencia para las Lenguas</em> (MCERL) o su equivalente certificado por una universidad o institución reconocida.</small></p>
 				<div class="fileupload fileupload-new " data-provides="fileupload">
 				    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
-				    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoConocimientoDeIdiomas" name="archivo[]" /></span>
+				    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoConocimientoDeIdiomas" name="archivo[]"/></span>
 				    <span class="fileupload-preview"></span>
 				    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
 			  	</div>
@@ -172,12 +172,21 @@
 					<div class="form-group col-md-12 seleccionArchivoConocimientoDeIdiomas">
 						<!-- <label for="archivoConocimientoDeIdiomas" class="labelArchivoConocimientoDeIdiomas">Con relación al dominio del idioma inglés, adjunte documentos que certifiquen los cursos y programas estudiados, según el Marco Común Europeo de Referencia para las Lenguas (MCERL) o su equivalente certificado por una universidad o institución reconocida.</label>-->
 						<p class="text-center"><small>Con relación al dominio del idioma inglés, adjunte documentos que certifiquen los cursos y programas estudiados, según el <em> Marco Común Europeo de Referencia para las Lenguas</em> (MCERL) o su equivalente certificado por una universidad o institución reconocida.</small></p>
-						<div class="fileupload fileupload-new " data-provides="fileupload">
-						    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
-						    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoConocimientoDeIdiomas" name="archivo[]" /></span>
-						    <span class="fileupload-preview"></span>
-						    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
-					  	</div>
+						@if(!is_null($idioma->Idm_Adjunto))
+							<div class="fileupload fileupload-exists" data-provides="fileupload">
+							    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+							    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoConocimientoDeIdiomas"/ name="archivo[]"></span>
+							    <span class="fileupload-preview"><a href="{{ '/storage/certificates/'.$idioma->Idm_Adjunto }}" target="_blank">{{ $idioma->Idm_Adjunto }}</a></span>
+							    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+						  	</div>
+					  	@else
+					  		<div class="fileupload fileupload-new" data-provides="fileupload">
+							    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+							    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoConocimientoDeIdiomas" name="archivo[]" value="{{ $idioma->Idm_Adjunto }}"/></span>
+							    <span class="fileupload-preview"></span>
+							    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+						  	</div>
+					  	@endif
 				  	</div>
 				<div class="col-md-offset-11">
 					<!-- <span class="glyphicon glyphicon-remove-sign"></span>-->
