@@ -633,19 +633,19 @@ $(function () {
 
         //Nombre - text
         newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
-        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').val('');
 
         //Nivel de escritura - combobox
         newElem.find('.labelNivelEscritura').attr('for','ID'+newNum+'_nivelEscritura');
-        newElem.find('.comboboxNivelEscritura').attr('id','ID'+newNum+'_nivelEscritura').attr('name','ID'+newNum+'_nivelEscritura').val('0');
+        newElem.find('.comboboxNivelEscritura').attr('id','ID'+newNum+'_nivelEscritura').val('');
 
         //Nivel de lectura - text
         newElem.find('.labelNivelLectura').attr('for','ID'+newNum+'_nivelLectura');
-        newElem.find('.comboboxNivelLectura').attr('id','ID'+newNum+'_nivelLectura').attr('name','ID'+newNum+'_nivelLectura').val('0');
+        newElem.find('.comboboxNivelLectura').attr('id','ID'+newNum+'_nivelLectura').val('');
 
         //Nivel conversacional - text
         newElem.find('.labelNivelConversacional').attr('for','ID'+newNum+'_nivelConversacional');
-        newElem.find('.comboboxNivelConversacional').attr('id','ID'+newNum+'_nivelConversacional').attr('name','ID'+newNum+'_nivelConversacional').val('0');
+        newElem.find('.comboboxNivelConversacional').attr('id','ID'+newNum+'_nivelConversacional').val('');
 
         //Checkbox - remover
         newElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+newNum).attr('checked',false);
@@ -653,6 +653,7 @@ $(function () {
         //Archivo - file
         newElem.find('.seleccionArchivoConocimientoDeIdiomas').attr('style','display:none');
 
+        newElem.find('.id_con_idioma').attr('value','');
 
         // insert the new element after the last "duplicatable" input field
         //insertar nuevo elemento despues del ultimo input duplicado

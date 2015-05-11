@@ -84,7 +84,7 @@
 			<div id="formularioConocimientoDeIdiomas{{ $count }}" class="row blockconocimientoDeIdiomas">
 				<div class="row">
 					<div class="col-md-6">
-						<input type="hidden" name="id_con_idioma[]" class="id_cur_sem" value="{{ $idioma->Idm_ID }}">
+						<input type="hidden" name="id_con_idioma[]" class="id_con_idioma" value="{{ $idioma->Idm_ID }}">
 						<!--Nombre-->
 						<div class="form-group">
 							<label for="nombre" class="col-md-4 control-label labelNombre">Idioma:</label>
