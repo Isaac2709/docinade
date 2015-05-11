@@ -53,6 +53,7 @@
 	    
 	}
 
+
 	
 
   	</style>
@@ -96,7 +97,7 @@
 					@endif
 					<!-- TABS -->
 					<ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
-				        <li class="active"><a data-toggle="tab" href="#informacionPersonal"><font size="1">Informacion Personal</font></a></li>
+				        <li class="active"><a data-toggle="tab" href="#informacionPersonal"><font size="1">Información Personal</font></a></li>
 				        <li class="dropdown">
 				            <a data-toggle="dropdown" class="dropdown-toggle" href="#"><font size="1">Edu. Superior / Exp. Profesional</font><b class="caret"></b></a>
 				            <ul class="dropdown-menu">

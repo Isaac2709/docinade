@@ -209,15 +209,12 @@
 		<br/>
 		<!-- End col-lg-6 -->
     </div>
+    <hr class="soften">
     <!-- End row -->
-
 	<!-- BOTON ACTUALIZAR -->
-	<div class="row">
-		<div class="col-md-11">
-            <input id="btnActualizarDatosPersonales" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-        </div>
-        <br/>
-	</div>
-    <!-- End row -->
+	<div class="col-md-11">
+        <input id="btnActualizarDatosPersonales" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+    </div>
+    <br/>
 </form>
 <!-- End Form -->

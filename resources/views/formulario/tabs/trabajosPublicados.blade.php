@@ -114,8 +114,6 @@
 			<?php $count = $count + 1; ?>
 		@endforeach
 	@endif
-
-
 	<!--BOTONES para agregar y remover formulario-->
 	<div  class="col-md-12">
 		<div >

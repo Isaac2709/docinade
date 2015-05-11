@@ -50,5 +50,10 @@
 			<!-- Termina Bibliografia-->
 			</div>
 		</div>
+		<hr class="soften">
 	</div>
+	<div class="col-md-11">
+		<input id="btnActualizarPropuestaDeTesis" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+	</div>
+	<br/>
 </form>

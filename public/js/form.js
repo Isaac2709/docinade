@@ -538,8 +538,8 @@ $(function () {
         newElem.find('.año').attr('id','ID'+newNum+'_añosExp').val('');
 
  		//Descripcion - text
-        newElem.find('.labelDescripcion').attr('for','ID'+newNum+'_descripcion');
-        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').val('');
+        newElem.find('.labelDescripcion').attr('style','display:none');
+        newElem.find('.textareaDescripcion').attr('style','display:none');
 
         // Formateo el ID
         newElem.find('.id_exp_prof').attr('value','');
