@@ -115,6 +115,31 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y AccesoBiblioteca
+	 * @return [arrayEloquent] [Los modelos de AccesoBiblioteca que pertenecen a InformacionAspirante]
+	 */
+	public function acceso_bibliotecas(){
+		return $this->hasMany('App\AccesoBiblioteca', 'Bib_ID_Asp');
+	}
+
+	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y AccesoProcesamientoDatos
+	 * @return [arrayEloquent] 		[Los modelos de AccesoProcesamientoDatos que pertenecen
+	 *                                a InformacionAspirante]
+	 */
+	public function acceso_procesamiento_datos(){
+		return $this->hasMany('App\AccesoProcesamientoDatos', 'PDa_ID_Asp');
+	}
+
+	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y AccesoProgramaComputacion
+	 * @return [arrayEloquent] [Los modelos de AccesoProgramaComputacion que pertenecen a InformacionAspirante]
+	 */
+	public function acceso_programas_computacionales(){
+		return $this->hasMany('App\AccesoProgramaComputacion', 'Prog_ID_Asp');
+	}
+
+	/**
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              	[description]
 	 * @param  [array] $id_investigaciones 	[los id de las investigaciones que aun se mantienen]
@@ -204,6 +229,51 @@ class InformacionAspirante extends Model {
 			$conocimiento_idiomas = $conocimiento_idiomas->where('Idm_ID', '!=', $id_conocimiento_idioma);
 		}
 		return $conocimiento_idiomas->get();
+	}
+
+	/**
+	 * Devuelve los models que se van a eliminar
+	 * @param  [type] $query              	[description]
+	 * @param  [array] $bibliotecas 		[Las bibliotecas que aún se mantienen]
+	 * @return [arrayEloquent]            	[los modelos de los accesos a bibliotecas que se van a
+	 *                                          eliminar]
+	 */
+	public function scopeSeleccionarAccesoBibliotecaAEliminar($query, $bibliotecas){
+		$acceso_bibliotecas = $this->acceso_bibliotecas();
+		foreach ($bibliotecas as $biblioteca) {
+			$acceso_bibliotecas = $acceso_bibliotecas->where('Bib_Nombre', '!=', $biblioteca);
+		}
+		return $acceso_bibliotecas->get();
+	}
+
+	/**
+	 * Devuelve los modelos de los procesamientos de datos que se van a eliminar
+	 * @param  [type] $query              	[description]
+	 * @param  [array] $procesamientos_datos 		[Los procesamientos de datos que aún se mantienen]
+	 * @return [arrayEloquent]            	[los modelos de los procesamientos de datos que se van a
+	 *                                          eliminar]
+	 */
+	public function scopeSeleccionarAccesoProcesamientoDatosAEliminar($query, $procesamientos_datos){
+		$acceso_procesamiento_datos = $this->acceso_procesamiento_datos();
+		foreach ($procesamientos_datos as $procesamiento_datos) {
+			$acceso_procesamiento_datos = $acceso_procesamiento_datos->where('PDa_Nombre', '!=', $procesamiento_datos);
+		}
+		return $acceso_procesamiento_datos->get();
+	}
+
+	/**
+	 * Devuelve los modelos de los procesamientos de datos que se van a eliminar
+	 * @param  [type] $query              	[description]
+	 * @param  [array] $procesamientos_datos 		[Los procesamientos de datos que aún se mantienen]
+	 * @return [arrayEloquent]            	[los modelos de los procesamientos de datos que se van a
+	 *                                          eliminar]
+	 */
+	public function scopeSeleccionarAccesoProgramaComputacionAEliminar($query, $programas_computacionales){
+		$acceso_programas_computacionales = $this->acceso_programas_computacionales();
+		foreach ($programas_computacionales as $programa_computacional) {
+			$acceso_programas_computacionales = $acceso_programas_computacionales->where('Prog_Nombre', '!=', $programa_computacional);
+		}
+		return $acceso_programas_computacionales->get();
 	}
 
 	/**
