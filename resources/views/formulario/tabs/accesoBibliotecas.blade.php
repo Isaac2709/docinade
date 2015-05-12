@@ -1,4 +1,4 @@
-<form role="form" action="#" method="post" class="form-horizontal">
+<form role="form" action="accBlibliotecaProcDatos" method="post" class="form-horizontal">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioAccesoBibliotecas1" class="row blockAccesoBibliotecas">
 		<div class="row">
@@ -26,15 +26,30 @@
 									</tr>
 								</thead>
 								<tbody>
+									<?php $count = 1; ?>
+									@if($user->formulario->informacion_aspirante->acceso_bibliotecas->isEmpty())
 									<tr id='addrBiblioteca0'>
 										<td>
-										1
+											1
 										</td>
 										<td>
-										<input type="text" name='biblioteca0'  placeholder='Biblioteca' class="form-control"/>
+											<input type="text" name='biblioteca[]'  placeholder='Biblioteca' class="form-control"/>
 										</td>
 									</tr>
-				                    <tr id='addrBiblioteca1'></tr>
+									@else
+										@foreach($user->formulario->informacion_aspirante->acceso_bibliotecas as $acceso_biblioteca)
+										<tr id='addrBiblioteca{{ $count-1 }}'>
+											<td>
+												{{ $count }}
+											</td>
+											<td>
+												<input type="text" name='biblioteca[]'  placeholder='Biblioteca' class="form-control" value="{{ $acceso_biblioteca->Bib_Nombre }}" />
+											</td>
+										</tr>
+											<?php $count = $count + 1; ?>
+										@endforeach
+									@endif
+									<tr id='addrBiblioteca{{ $count-1 }}'></tr>
 								</tbody>
 							</table>
 						</div>
@@ -60,15 +75,31 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr id='addrProcesamientoDatos0'>
-										<td>
-										1
-										</td>
-										<td>
-										<input type="text" name='procesamientoDatos0'  placeholder='Prosesamiento de Datos' class="form-control"/>
-										</td>
-									</tr>
-				                    <tr id='addrProcesamientoDatos1'></tr>
+									<?php $count = 1; ?>
+									@if($user->formulario->informacion_aspirante->acceso_procesamiento_datos->isEmpty())
+										<tr id='addrProcesamientoDatos0'>
+											<td>
+											1
+											</td>
+											<td>
+											<input type="text" name='procesamiento_datos[]'  placeholder='Prosesamiento de Datos' class="form-control"/>
+											</td>
+										</tr>
+										<tr id='addrProcesamientoDatos1'></tr>
+									@else
+										@foreach($user->formulario->informacion_aspirante->acceso_procesamiento_datos as $acceso_procesamiento_datos)
+											<tr id='addrProcesamientoDatos{{ $count-1 }}'>
+												<td>
+													{{ $count }}
+												</td>
+												<td>
+													<input type="text" name='procesamiento_datos[]'  placeholder='Prosesamiento de Datos' class="form-control" value="{{ $acceso_procesamiento_datos->PDa_Nombre }}"/>
+												</td>
+											</tr>
+											<?php $count = $count + 1; ?>
+										@endforeach
+										<tr id='addrProcesamientoDatos{{ $count-1 }}'></tr>
+									@endif
 								</tbody>
 							</table>
 						</div>
