@@ -3,3 +3,4 @@
 .env
 /.phpintel
 .phpintel
+.composer.lock

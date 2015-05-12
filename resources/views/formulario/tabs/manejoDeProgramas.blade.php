@@ -35,15 +35,30 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr id='addrProgramas0'>
-										<td>
-										1
-										</td>
-										<td>
-										<input type="text" name='programas0'  placeholder='Programa' class="form-control"/>
-										</td>
-									</tr>
-				                    <tr id='addrProgramas1'></tr>
+									<?php $count = 1; ?>
+									@if($user->formulario->informacion_aspirante->acceso_programas_computacionales->isEmpty())
+										<tr id='addrProgramas0'>
+											<td>
+											1
+											</td>
+											<td>
+											<input type="text" name='programa[]'  placeholder='Programa' class="form-control"/>
+											</td>
+										</tr>
+									@else
+										@foreach($user->formulario->informacion_aspirante->acceso_programas_computacionales as $acceso_programa_computacional)
+										<tr id='addrProgramas{{ $count-1 }}'>
+											<td>
+												{{ $count }}
+											</td>
+											<td>
+												<input type="text" name='programa[]'  placeholder='Programa' class="form-control" value="{{ $acceso_programa_computacional->Prog_Nombre }}" />
+											</td>
+										</tr>
+											<?php $count = $count + 1; ?>
+										@endforeach
+									@endif
+									<tr id='addrProgramas{{ $count-1 }}'></tr>
 								</tbody>
 							</table>
 						</div>
