@@ -46,7 +46,6 @@ class ConocimientoIdiomaController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		// dd($request);
 		$user = User::find(Auth::user()->Usu_ID);
 
 		$conocimiento_idioma_a_eliminar = $user->formulario->informacion_aspirante->seleccionarConocimientoIdiomasAEliminar($request->id_con_idioma);
