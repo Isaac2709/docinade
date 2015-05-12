@@ -1,11 +1,63 @@
 @extends('index')
 
 @section('styles')
-	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
+	
 	<!-- Para el input de archivo -->
   	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
   	<!-- para los checkbox animados -->
   	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+  	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
+
+  	<style type="text/css">
+		textarea
+		  {
+		    resize: vertical; 
+		  }
+/*bloque que se usa para cambiar color y tamaño de los botones para cargar archivos*/
+	.claseBtnArchivoCedula {
+		width: 30%;
+		color: #000000;
+		background-color: #FFFFFF;
+		font-size: 10px;
+	}
+	.btn-file{
+		color: #000000;
+		background-color: #FFFFFF;
+	}
+/*---------------------------------------------------------------------*/
+
+	/*bloque para cambiar el color de pestaña de los checkbox personalizados*/
+	.toggle-handle{
+		background-color: #FFFFFF;
+	}
+		 
+ 
+	/*bloque para cambiar el tamaño de las letras de los tabs cuando se acitva y sobrepone*/
+	.nav-pills > li.active > a > font{
+		font-size: 120%;
+	}
+	.nav-pills > li > a :hover{
+		font-size: 120%;
+	}
+	/*---------------------------------------*/
+
+	/*bloque q centra todas las etiquetas <td>*/
+	td{
+		text-align: center;
+	}
+
+	/*bloque q sobreescribe stilos de typeahead para poder arreglar el problema de despliegue*/
+	.twitter-typeahead .tt-hint
+	{
+	    height: 37px;
+	    
+	}
+
+
+	
+
+  	</style>
+
 @endsection
 
 @section('page_title')
@@ -22,7 +74,7 @@
 			<div class="panel panel-default">
 
 				<div class="panel-heading"><h2>Formulario de Aspirante a Doctorado</h2></div>
-				<div class="panel-body">
+				<div class="panel-body ">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> Tuvimos algunos problemas con sus entradas<br>
@@ -44,27 +96,29 @@
 						@endif
 					@endif
 					<!-- TABS -->
-					<ul class="nav nav-pills nav-justified" id="myTab">
-				        <li class="active"><a data-toggle="tab" href="#informacionPersonal">Informacion Personal</a></li>
+					<ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+				        <li class="active"><a data-toggle="tab" href="#informacionPersonal"><font size="1">Información Personal</font></a></li>
 				        <li class="dropdown">
-				            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Edu. Superior / Exp. Profesional<b class="caret"></b></a>
+				            <a data-toggle="dropdown" class="dropdown-toggle" href="#"><font size="1">Edu. Superior / Exp. Profesional</font><b class="caret"></b></a>
 				            <ul class="dropdown-menu">
 				                <li><a data-toggle="tab" href="#educacionSuperior">Educacion Superior</a></li>
 				                <li><a data-toggle="tab" href="#experienciaProfesional">Experiencia Profesional</a></li>
 				            </ul>
 				        </li>
-				        <li><a data-toggle="tab" href="#experienciaEnInvestigacion">Experiencia en Investigación</a></li>
-				        <li><a data-toggle="tab" href="#trabajosPublicados">Trabajos e Investigaciones Publicadas</a></li>
-				        <li><a data-toggle="tab" href="#cursosMasRelevantes">Cursos y Seminarios más Relevantes</a></li>
-				        <li><a data-toggle="tab" href="#conocimientoDeIdiomas">Conocimiento de Idiomas Distintos al Materno</a></li>
-				        <li><a data-toggle="tab" href="#accesoBibliotecas">Acceso a Bibliotecas / Prosesamiento de Datos</a></li>
-				        <li><a data-toggle="tab" href="#manejoDeProgramas">Manejo de Programas de Computación</a></li>
-				        <li><a data-toggle="tab" href="#recomendaciones">Recomendaciones</a></li>
-				        <li><a data-toggle="tab" href="#exportar">Exportar</a></li>
+				        <li><a class="pesta" data-toggle="tab" href="#experienciaEnInvestigacion"><font  size="1">Experiencia en Investigación</font></a></li>
+				        <li><a data-toggle="tab" href="#trabajosPublicados"><font size="1">Trabajos e Investigaciones Publicadas</font></a></li>
+				        <li><a data-toggle="tab" href="#cursosMasRelevantes"><font size="1">Cursos y Seminarios más Relevantes</font></a></li>
+				        <li><a data-toggle="tab" href="#conocimientoDeIdiomas"><font size="1">Conocimiento de Idiomas Distintos al Materno</font></a></li>
+				        <li><a data-toggle="tab" href="#accesoBibliotecas"><font size="1">Acceso a Bibliotecas / Prosesamiento de Datos</font></a></li>
+				        <li><a data-toggle="tab" href="#manejoDeProgramas"><font size="1">Manejo de Programas de Computación</font></a></li>
+				        <li><a data-toggle="tab" href="#recomendaciones"><font size="1">Recomendaciones</font></a></li>
+				        <li><a data-toggle="tab" href="#exportar"><font size="1">Exportar</font></a></li>
+				        <li><a data-toggle="tab" href="#propuestaDeTesis"><font size="1">Propuesta de Tesis</font></a></li>
 				    </ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
 				        <div id="informacionPersonal" class="tab-pane fade in active">
+				        
 							@include('formulario.tabs.informacionPersonal')
 				        </div>
 
@@ -123,11 +177,19 @@
 				    	</div>
 				    	<!-- Termina Recomendaciones-->
 
+				    	<!--Propuesta de tesis-->
+				    	<div id="propuestaDeTesis" class="tab-pane fade">
+				    		@include('formulario.tabs.propuestaDeTesis')
+				    	</div>
+				    	<!--Termina Propuesta de tesis-->
+
+				    	<!--Exportar-->
 						<div id="exportar" class="tab-pane fade">
 							<div class="form-group">
 								<a class="btn btn-success btn-lg" href="formulario/pdfformulario" target="_blank" >Exportar formulario</a>
 							</div>
 						</div>
+						<!--Termina exportar-->
 				    </div>
 					<!-- End Tabs -->
 				</div>
@@ -143,6 +205,8 @@
 	<!--Para los inputs de tipo archivo (ESTA LIBRERIA PRODUCE ERROR EN LOS DROPDOWN)-->
 	<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>-->
 
+	
+
 	<!--para agregar y remover divs-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
@@ -157,6 +221,7 @@
 
 	<!-- Para los checkbox animados-->
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
 
 
 	<script type="text/javascript">

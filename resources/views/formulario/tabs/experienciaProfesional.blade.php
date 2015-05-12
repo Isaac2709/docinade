@@ -1,4 +1,5 @@
 <form role="form" action="expProfesional" method="post" class="form-horizontal">
+    <br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="col-md-12">
 		<h1><small>Experiencia Profesional</small></h1>
@@ -20,11 +21,9 @@
     			<div class="form-group">
     				<label for="ocupacion" class="col-md-4 control-label labelOcupacion">Ocupación o posición:</label>
     				<div class="col-md-8">
-                        <div class="col-md-8">
-                                <div class="bs-example">
-                                    <input type="text" name="ocupacion[]" class="form-control typeahead_ocupacion inputOcupacion tt-query" autocomplete="off" spellcheck="false" id="ocupacion">
-                                </div>
-                            </div>
+                        <div class="bs-example">
+                            <input type="text" name="ocupacion[]" class="form-control typeahead_ocupacion tt-query inputOcupacion" autocomplete="off" spellcheck="false" id="ocupacion">
+                        </div>
     				</div>
     			</div>
 
@@ -119,7 +118,6 @@
         @endforeach
     @endif
 	<!--BOTONES para agregar y remover formulario-->
-	<div class="row">
         <div  class="col-md-12">
             <div >
                 <button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right">-</button>
@@ -129,6 +127,5 @@
                 <input id="btnActualizarExpProfesional" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
             </div>
         </div>
-        <br/>
-	</div>
+    <br/>   
 </form>

@@ -1,4 +1,5 @@
 <form role="form" action="eduSuperior" method="post" class="form-horizontal" enctype="multipart/form-data">
+	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="col-md-12">
 		<h1><small> Educación Superior</small></h1>
@@ -42,11 +43,14 @@
 			<div class="col-lg-6">
 				<!--Titulo obtenido -->
 				<div class="form-group">
-					<label for="titulo" class="col-md-4 control-label labelTituloObtenido">Título obtenido:</label>
-					<div class="col-md-8 div_title_file">
-						<input type="file" name="title_file[]" id="title_file">
-					</div>
-				</div>
+					<label for="archivoTitulo1" class="col-md-4 control-label labelArchivoTitulo1">Título obtenido:</label>
+    				<div class="fileupload fileupload-new col-md-8" data-provides="fileupload" id="fileupload1">
+					    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+					    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoTitulo1" name="archivoTitulo1" /></span>
+					    <span class="fileupload-preview"></span>
+					    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+				  	</div>
+			  	</div>
 
 				<!-- Grado academico -->
 				<div class="form-group">
@@ -188,16 +192,14 @@
 	@endif
 
 	<!--BOTONES para agregar y remover formulario-->
-	<div class="row">
-		<div  class="col-md-12">
-			<div>
-				<button id="btnRemoverEducacionSuperior" type="button" class="btn btn-danger btn-lg pull-right">-</button>
-			</div>
-			<div class="col-md-11">
-				<button id="btnAgregarEducacionSuperior" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-				<input id="btnActualizarEducacionSuperior" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-			</div>
+	<div  class="col-md-12">
+		<div>
+			<button id="btnRemoverEducacionSuperior" type="button" class="btn btn-danger btn-lg pull-right">-</button>
 		</div>
-	<br/>
+		<div class="col-md-11">
+			<button id="btnAgregarEducacionSuperior" type="button" class="btn btn-primary btn-lg pull-right">+</button>
+			<input id="btnActualizarEducacionSuperior" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+		</div>
 	</div>
+	<br/>
 </form>

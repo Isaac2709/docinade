@@ -61,12 +61,12 @@
 		<!--Archivo-->
 			<div class="form-group col-md-12 seleccionArchivoConocimientoDeIdiomas">
 				<!-- <label for="archivoConocimientoDeIdiomas" class="labelArchivoConocimientoDeIdiomas">Con relación al dominio del idioma inglés, adjunte documentos que certifiquen los cursos y programas estudiados, según el Marco Común Europeo de Referencia para las Lenguas (MCERL) o su equivalente certificado por una universidad o institución reconocida.</label>-->
-				<p class="text-center"><small>Con relación al dominio del idioma inglés, adjunte documentos que certifiquen los cursos y programas estudiados, según el <em> Marco Común Europeo de Referencia para las Lenguas</em> (MCERL) o su equivalente certificado por una universidad o institución reconocida.</small></p>
-				<div class="fileupload fileupload-new " data-provides="fileupload">
+				<p class="text-center"><small>Adjunte documentos que certifiquen los cursos y programas estudiados, según el <em> Marco Común Europeo de Referencia para las Lenguas</em> (MCERL) o su equivalente certificado por una universidad o institución reconocida.</small></p>
+				<div class="fileupload fileupload-new text-center " data-provides="fileupload" id="fileupload1">
 				    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
 				    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoConocimientoDeIdiomas" name="archivoConocimientoDeIdiomas" /></span>
 				    <span class="fileupload-preview"></span>
-				    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+				    <a href="#" class="close fileupload-exists claseArchivoConocimientoDeIdiomas" data-dismiss="fileupload" style="float: none">×</a>
 			  	</div>
 		  	</div>
 		<div class="col-md-offset-11">
