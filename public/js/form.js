@@ -1,6 +1,6 @@
 // <!--Funciones para las tablas de Programas Computacionales -->
 $(document).ready(function(){
-      var i=1;
+      var i=$('#tab_logic_programas tr').length-2;
      $("#add_row_programas").click(function(){
       $('#addrProgramas'+i).html("<td>"+ (i+1) +"</td><td><input name='programas[]' type='text' placeholder='Programa' class='form-control input-md'  /> </td>");
 
@@ -10,6 +10,7 @@ $(document).ready(function(){
      $("#delete_row_programas").click(function(){
          if(i>1){
              $("#addrProgramas"+(i-1)).html('');
+             $("#tab_logic_programas tr:last").remove();
              i--;
          }
      });
