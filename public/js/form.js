@@ -406,6 +406,9 @@ $(function () {
         //Checkbox - remover
         newElem.find('.claseCheckboxEduSuperior').attr('style','cursor:pointer').attr('id','checkboxEduSuperior'+newNum).attr('checked',false);
 
+        //Archivo - file
+        newElem.find('.fileupload').attr('id','fileupload'+newNum);
+
 
         // insert the new element after the last "duplicatable" input field
         //insertar nuevo elemento despues del ultimo input duplicado
@@ -447,6 +450,8 @@ $(function () {
             else $(this).removeClass("empty")
         });
         $(".combobox").change();
+
+        $('#fileupload'+newNum).fileupload('clear');
     });
 
     $('#btnRemoverEducacionSuperior').click(function () {
@@ -490,6 +495,9 @@ $(function () {
                             //Checkbox - remover
                             nElem.find('.claseCheckboxEduSuperior').attr('style','cursor:pointer').attr('id','checkboxEduSuperior'+cont);
 
+                            //Archivo - file
+                            nElem.find('.fileupload').attr('id','fileupload'+cont);
+
                             cont++;
                         };
                     };
@@ -531,8 +539,8 @@ $(function () {
         newElem.find('.año').attr('id','ID'+newNum+'_añosExp').val('');
 
  		//Descripcion - text
-        newElem.find('.labelDescripcion').attr('for','ID'+newNum+'_descripcion');
-        newElem.find('.textareaDescripcion').attr('id','ID'+newNum+'_descripcion').val('');
+        newElem.find('.labelDescripcion').attr('style','display:none');
+        newElem.find('.textareaDescripcion').attr('style','display:none');
 
         // Formateo el ID
         newElem.find('.id_exp_prof').attr('value','');
@@ -652,9 +660,11 @@ $(function () {
         newElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+newNum).attr('checked',false);
 
         //Archivo - file
-        newElem.find('.fileupload').attr('class','fileupload-new');
-        newElem.find('.input_archivo').val('');
-        newElem.find('.fileupload-preview').html('');
+        // newElem.find('.fileupload').attr('class','fileupload-new');
+        // newElem.find('.input_archivo').val('');
+        // newElem.find('.fileupload-preview').html('');
+        newElem.find('.fileupload').attr('id','fileupload'+newNum);
+
 
 
         newElem.find('.id_con_idioma').attr('value','');
@@ -664,12 +674,16 @@ $(function () {
         $('#formularioConocimientoDeIdiomas' + num).after(newElem);
         //$('#ID' + newNum + '_title').focus();
 
+
+
         // habilita el boton de remover
         $('#btnRemoverConocimientoDeIdiomas').attr('disabled', false);
 
         // condicion de cuantas duplicaciones estan permitidas hacer
         if (newNum == 5)
         $('#btnAgregarConocimientoDeIdiomas').attr('disabled', true);
+
+        $('#fileupload'+newNum).fileupload('clear');
 
         //FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
         $('.año').datepicker( {
@@ -684,6 +698,8 @@ $(function () {
             else $(this).removeClass("empty")
         });
         $(".combobox").change();
+
+
     });
 
     $('#btnRemoverConocimientoDeIdiomas').click(function () {
@@ -723,6 +739,9 @@ $(function () {
 
                                         //Checkbox - remover
                                         nElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+cont);
+
+                                        //Archivo - file
+                                        nElem.find('.fileupload').attr('id','fileupload'+cont);
 
                                         cont++;
                                     };

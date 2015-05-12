@@ -1,4 +1,5 @@
 <form role="form" action="expInvestigacion" method="post" class="form-horizontal">
+	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->experiencias_investigaciones->isEmpty())
 	<div id="formularioExpInv1" class="blockExpInvestigacion">
@@ -119,8 +120,6 @@
     		<?php $count = $count + 1; ?>
 		@endforeach
 	@endif
-
-	<div class="row">
 		<!--BOTONES para agregar y remover formulario-->
 		<div  class="col-md-12">
 			 <div >
@@ -131,6 +130,5 @@
 				<input id="btnActualizarExpInvestigacion" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 			</div>
 		</div>
-	</div>
 	<br/>
 </form>
