@@ -23,7 +23,12 @@ class CrearExperienciaProfesionalRequest extends Request {
 	public function rules()
 	{
 		$rules = [];
-		// dd($this->request);
+		$array_annios_fin = $this->request->get('annio_fin');
+		if(is_null($array_annios_fin)){
+			$array_annios_fin = [];
+		}
+		array_unshift( $array_annios_fin, Carbon::now()->format('Y') );
+		$this->request->set('annio_fin', $array_annios_fin);
 		$array = $this->request;
 		foreach($this->request->get('empresa') as $key => $val)
 		{
