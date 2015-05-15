@@ -44,7 +44,6 @@ class CursoSeminarioController extends Controller {
 	 */
 	public function store(CrearCursoSeminarioRequest $request)
 	{
-		// dd($request);
 		$user = User::find(Auth::user()->Usu_ID);
 
 		$cursos_seminarios_a_eliminar = $user->formulario->informacion_aspirante->seleccionarCursosSeminariosAEliminar($request->id_cur_sem);
