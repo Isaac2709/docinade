@@ -133,10 +133,29 @@ class InformacionAspirante extends Model {
 
 	/**
 	 * Relacion uno a muchos entre los modelos InformacionAspirante y AccesoProgramaComputacion
-	 * @return [arrayEloquent] [Los modelos de AccesoProgramaComputacion que pertenecen a InformacionAspirante]
+	 * @return [arrayEloquent] 		[Los modelos de AccesoProgramaComputacion que pertenecen
+	 *                                a InformacionAspirante]
 	 */
 	public function acceso_programas_computacionales(){
 		return $this->hasMany('App\AccesoProgramaComputacion', 'Prog_ID_Asp');
+	}
+
+	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y Recomendacion
+	 * @return [arrayEloquent] 		[Los modelos de Recomendacion que pertenecen
+	 *                                a InformacionAspirante]
+	 */
+	public function recomendaciones(){
+		return $this->hasMany('App\Recomendacion', 'Rec_ID_Asp');
+	}
+
+	/**
+	 * Relacion de pertenencia de uno a uno entre los modelos InformacionAspirante
+	 *  y PropuestaTesis
+	 * @return [arrayEloquent] [El modelo PropuestaTesis al que pertenece InformacionAspirante]
+	 */
+	public function propuesta_tesis(){
+		return $this->belongsTo('App\PropuestaTesis', 'ID_Prop_Tesis');
 	}
 
 	/**
