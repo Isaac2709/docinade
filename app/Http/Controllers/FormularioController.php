@@ -106,6 +106,7 @@ class FormularioController extends Controller {
 	        \Illuminate\Support\Facades\Request::file('id_file')->move($this->destinationPath.'/images/', $id_filename);
             $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj = $id_filename;
         }
+
         // Fotografía adjunta del aspirante
 		if ($request->hasFile('photo_file')) {
             $file = $request->file('photo_file');
