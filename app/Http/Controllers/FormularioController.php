@@ -87,11 +87,9 @@ class FormularioController extends Controller {
 	}
 
 	public function postIndex(CrearFormularioRequest $request)
-<<<<<<< HEAD
+
 	{		
-=======
-	{
->>>>>>> 930c3e07a1a3bd1deabfae2630a7dab21a708ec5
+
 		$user = User::find(Auth::user()->Usu_ID);
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
