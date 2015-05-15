@@ -112,7 +112,7 @@
 				</div>
 				<!-- Termina row divider-h -->
 				<div class="col-md-offset-11">
-					<input type="checkbox" name="checkBox1" class="claseCheckboxExpInvestigacion" id="checkboxExpInvestigacion1" style="display:none">
+					<input type="checkbox" name="checkBox1" class="claseCheckboxExpInvestigacion" id="checkboxExpInvestigacion{{ $count }}" @if($count == 1) style="display:none" @endif >
 				</div>
 				<hr class="soften">
 			</div>
