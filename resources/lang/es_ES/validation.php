@@ -42,7 +42,7 @@ return [
     "integer"              => "El campo :attribute debe ser un número entero.",
     "ip"                   => "El campo :attribute debe ser una dirección IP válida.",
     "max"                  => [
-        "numeric" => "El campo :attribute debe ser menor que :max.",
+        "numeric" => "El campo :attribute debe ser igual o menor que :max.",
         "file"    => "El archivo :attribute debe pesar meno que :max kilobytes.",
         "string"  => "El campo :attribute debe contener menos de :max caracteres.",
         "array"   => "El campo :attribute debe contener al menos :max elementos.",

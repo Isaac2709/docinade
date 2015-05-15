@@ -32,4 +32,12 @@ class Email extends Model {
 		return $this->belongsTo('App\Formulario', 'Email_ID_InfoPer');
 	}
 
+	/**
+	 * Relacion uno a uno entre los modelos Recomendacion y Email
+	 * @return [arrayEloquent] 		[El modelo Email que pertenece a Recomendacion]
+	 */
+	public function recomendacion(){
+		return $this->hasOne('App\Recomendacion', 'Rec_ID_Email');
+	}
+
 }

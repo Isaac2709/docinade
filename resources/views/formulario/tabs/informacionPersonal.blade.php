@@ -22,15 +22,30 @@
     		<div class="form-group">
     			<label for="id" class="col-md-4 control-label">Cédula o Pasaporte:</label>
     			<div class="col-md-8">
-    				<input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
-                    <div class="fileupload fileupload-new text-center" data-provides="fileupload" id="fileupload1">
-                        <span class="btn btn-default btn-file claseBtnArchivoCedula" ><span class="fileupload-new">Buscar Archivo</span>
-                        <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoCedula" name="archivoCedula"  /></span>
-                        <span class="fileupload-preview"></span>
-                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
-                </div>
+                    <input type="text" class="form-control" name="id" value="{{ $user->formulario->IPe_Pasaporte }}">
+                    @if(!empty($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
+                            <div class="fileupload fileupload-exists" data-provides="fileupload" >
+                                <span class="btn btn-default btn-file claseBtnArchivoCedula" ><span class="fileupload-new">Buscar Archivo</span>
+                                <span class="fileupload-exists">Cambiar</span>
+                                    <input type="file" id="archivoCedula" name="id_file"  />
+                                </span>
+                                <span class="fileupload-preview">
+                                    <a href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj }}" target="_blank">{{ $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj}}</a>
+                                </span>
+                                <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                            </div>
+                        @else
+                            <div class="fileupload fileupload-new text-center" data-provides="fileupload" id="fileupload1">
+                                <span class="btn btn-default btn-file claseBtnArchivoCedula" ><span class="fileupload-new">Buscar Archivo</span>
+                                <span class="fileupload-exists">Cambiar</span>
+                                    <input type="file" id="archivoCedula" name="id_file"  />
+                                </span>
+                                <span class="fileupload-preview"></span>
+                                <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                            </div>
+                        @endif
     			</div>
-                
+
     		</div>
     		<!-- Genero del(la) aspirante -->
 			<div class="form-group">
@@ -132,12 +147,27 @@
 			<!-- Fotografía -->
             <div class="form-group">
                 <label for="archivoFoto1" class="col-md-4 control-label labelArchivoFoto1">Fotografía:</label>
-                <div class="fileupload fileupload-new col-md-8" data-provides="fileupload" >
-                    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
-                    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoFoto1" name="archivoFoto1" /></span>
-                    <span class="fileupload-preview"></span>
-                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
-                </div>
+                @if(!empty($user->formulario->informacion_aspirante->Asp_Fotografia))
+                    <div class="fileupload fileupload-exists col-md-8" data-provides="fileupload" >
+                        <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+                        <span class="fileupload-exists">Cambiar</span>
+                            <input type="file" id="archivoFoto1" name="photo_file" />
+                        </span>
+                        <span class="fileupload-preview">
+                            <a href="{{ '/storage/images/'.$user->formulario->informacion_aspirante->Asp_Fotografia }}" target="_blank">{{ $user->formulario->informacion_aspirante->Asp_Fotografia }}</a>
+                        </span>
+                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                    </div>
+                @else
+                    <div class="fileupload fileupload-new col-md-8" data-provides="fileupload" >
+                        <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+                        <span class="fileupload-exists">Cambiar</span>
+                            <input type="file" id="archivoFoto1" name="photo_file" />
+                        </span>
+                        <span class="fileupload-preview"></span>
+                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                    </div>
+                @endif
             </div>
 			<!-- Enfasis de interes -->
 			<div class="form-group">

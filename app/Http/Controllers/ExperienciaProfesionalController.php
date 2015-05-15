@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ExperienciaProfesional;
 use App\Ocupacion;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearExperienciaProfesionalRequest;
@@ -43,7 +44,6 @@ class ExperienciaProfesionalController extends Controller {
 	 */
 	public function store(CrearExperienciaProfesionalRequest $request)
 	{
-		// dd($request);
 		$user = User::find(Auth::user()->Usu_ID);
 
 		$experiencia_profesional_a_eliminar = $user->formulario->informacion_aspirante->seleccionarExperienciaProfesionalAEliminar($request->id_exp_prof);
@@ -73,11 +73,9 @@ class ExperienciaProfesionalController extends Controller {
 				$experiencia_profesional->Pro_Institucion = trim($institucion,
 					" \t.");
 			}
-			if(!empty($request->annio_inicio[$pos])){
+			$annio_inicio = $request->annio_inicio[$pos];
+			if(!empty($annio_inicio)){
 				$experiencia_profesional->Pro_Anio_Inicio = $request->annio_inicio[$pos];
-			}
-			if(!empty($request->annio_fin[$pos])){
-				$experiencia_profesional->Pro_Anio_Fin = $request->annio_fin[$pos];
 			}
 			// Ocupacion
 			// Revisa si se envia una area de especialidad en la investigación
@@ -93,6 +91,19 @@ class ExperienciaProfesionalController extends Controller {
 				}
 				// Finalmente le asigna la institución a la experiencia en investigación
 				$experiencia_profesional->Pro_ID_Ocupacion = $ocupacion->Ocu_ID;
+			}
+
+			// Funciones que realiza en el trabajo actual
+			if($pos == 0){
+				$experiencia_profesional->Pro_Funciones = $request->descripcion_funciones;
+				$experiencia_profesional->Pro_Actual = true;
+				$experiencia_profesional->Pro_Anio_Fin = Carbon::now()->format('Y');
+			}
+			else{
+				$annio_fin = $request->annio_fin[$pos-1];
+				if(!empty($annio_fin)){
+					$experiencia_profesional->Pro_Anio_Fin = $request->annio_fin[$pos-1];
+				}
 			}
 
 			// Guardar en la base de datos

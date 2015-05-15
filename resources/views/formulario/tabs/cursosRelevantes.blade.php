@@ -105,7 +105,7 @@
 					<!--Termina col-md-6-->
 				</div>
 				<div class="col-md-offset-11">
-					<input type="checkbox" name="checkBox1" class="claseCheckboxCursosMasRelevantes" id="checkboxCursosMasRelevantes{{ $count }}" style="display:none">
+					<input type="checkbox" name="checkBox1" class="claseCheckboxCursosMasRelevantes" id="checkboxCursosMasRelevantes{{ $count }}" @if($count == 1) style="display:none" @endif >
 				</div>
 				<hr class="soften">
 			</div>

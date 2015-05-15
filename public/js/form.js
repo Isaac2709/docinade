@@ -1,16 +1,17 @@
 // <!--Funciones para las tablas de Programas Computacionales -->
 $(document).ready(function(){
-      var i=1;
+      var i=$('#tab_logic_programas tr').length-2;
      $("#add_row_programas").click(function(){
-      $('#addrProgramas'+i).html("<td>"+ (i+1) +"</td><td><input name='programas"+i+"' type='text' placeholder='Programa' class='form-control input-md'  /> </td>");
+      $('#addrProgramas'+i).html("<td>"+ (i+1) +"</td><td><input name='programa[]' type='text' placeholder='Programa' class='form-control input-md'  /> </td>");
 
       $('#tab_logic_programas').append('<tr id="addrProgramas'+(i+1)+'"></tr>');
       i++;
   });
      $("#delete_row_programas").click(function(){
          if(i>1){
-         $("#addrProgramas"+(i-1)).html('');
-         i--;
+             $("#addrProgramas"+(i-1)).html('');
+             $("#tab_logic_programas tr:last").remove();
+             i--;
          }
      });
 
@@ -18,37 +19,38 @@ $(document).ready(function(){
 
 // <!--Funciones para las tablas de Bibliotecas -->
 $(document).ready(function(){
-      var i=1;
-     $("#add_row_biblioteca").click(function(){
-      $('#addrBiblioteca'+i).html("<td>"+ (i+1) +"</td><td><input name='biblioteca"+i+"' type='text' placeholder='Biblioteca' class='form-control input-md'  /> </td>");
+    var i= $('#tab_logic_biblioteca tr').length-2;
+    $("#add_row_biblioteca").click(function(){
+        $('#addrBiblioteca'+i).html("<td>"+ (i+1) +"</td><td><input name='biblioteca[]' type='text' placeholder='Biblioteca' class='form-control input-md'  /> </td>");
 
-      $('#tab_logic_biblioteca').append('<tr id="addrBiblioteca'+(i+1)+'"></tr>');
-      i++;
-  });
-     $("#delete_row_biblioteca").click(function(){
-         if(i>1){
-         $("#addrBiblioteca"+(i-1)).html('');
-         i--;
-         }
-     });
+        $('#tab_logic_biblioteca').append('<tr id="addrBiblioteca'+(i+1)+'"></tr>');
+        i++;
+    });
+    $("#delete_row_biblioteca").click(function(){
+        if(i>1){
+            $("#addrBiblioteca"+(i-1)).html('');
+            $("#tab_logic_biblioteca tr:last").remove();
+            i--;
+        }
+    });
 });
 
 // <!--Funciones para las tablas de Procesamiento de Datos -->
 $(document).ready(function(){
-      var i=1;
-     $("#add_row_procesamientoDatos").click(function(){
-      $('#addrProcesamientoDatos'+i).html("<td>"+ (i+1) +"</td><td><input name='procesamientoDatos"+i+"' type='text' placeholder='Procesamiento de Datos' class='form-control input-md'  /> </td>");
+    var i=$('#tab_logic_procesamientoDatos tr').length-2;
+    $("#add_row_procesamientoDatos").click(function(){
+        $('#addrProcesamientoDatos'+i).html("<td>"+ (i+1) +"</td><td><input name='procesamiento_datos[]' type='text' placeholder='Procesamiento de Datos' class='form-control input-md'  /> </td>");
 
-      $('#tab_logic_procesamientoDatos').append('<tr id="addrProcesamientoDatos'+(i+1)+'"></tr>');
-      i++;
-  });
-     $("#delete_row_procesamientoDatos").click(function(){
-         if(i>1){
-         $("#addrProcesamientoDatos"+(i-1)).html('');
-         i--;
-         }
-     });
-
+        $('#tab_logic_procesamientoDatos').append('<tr id="addrProcesamientoDatos'+(i+1)+'"></tr>');
+        i++;
+    });
+    $("#delete_row_procesamientoDatos").click(function(){
+        if(i>1){
+            $("#addrProcesamientoDatos"+(i-1)).html('');
+            $("#tab_logic_procesamientoDatos tr:last").remove();
+            i--;
+        }
+    });
 });
 
 !function(e){var t=function(t,n){this.$element=e(t),this.type=this.$element.data("uploadtype")||(this.$element.find(".thumbnail").length>0?"image":"file"),this.$input=this.$element.find(":file");if(this.$input.length===0)return;this.name=this.$input.attr("name")||n.name,this.$hidden=this.$element.find('input[type=hidden][name="'+this.name+'"]'),this.$hidden.length===0&&(this.$hidden=e('<input type="hidden" />'),this.$element.prepend(this.$hidden)),this.$preview=this.$element.find(".fileupload-preview");var r=this.$preview.css("height");this.$preview.css("display")!="inline"&&r!="0px"&&r!="none"&&this.$preview.css("line-height",r),this.original={exists:this.$element.hasClass("fileupload-exists"),preview:this.$preview.html(),hiddenVal:this.$hidden.val()},this.$remove=this.$element.find('[data-dismiss="fileupload"]'),this.$element.find('[data-trigger="fileupload"]').on("click.fileupload",e.proxy(this.trigger,this)),this.listen()};t.prototype={listen:function(){this.$input.on("change.fileupload",e.proxy(this.change,this)),e(this.$input[0].form).on("reset.fileupload",e.proxy(this.reset,this)),this.$remove&&this.$remove.on("click.fileupload",e.proxy(this.clear,this))},change:function(e,t){if(t==="clear")return;var n=e.target.files!==undefined?e.target.files[0]:e.target.value?{name:e.target.value.replace(/^.+\\/,"")}:null;if(!n){this.clear();return}this.$hidden.val(""),this.$hidden.attr("name",""),this.$input.attr("name",this.name);if(this.type==="image"&&this.$preview.length>0&&(typeof n.type!="undefined"?n.type.match("image.*"):n.name.match(/\.(gif|png|jpe?g)$/i))&&typeof FileReader!="undefined"){var r=new FileReader,i=this.$preview,s=this.$element;r.onload=function(e){i.html('<img src="'+e.target.result+'" '+(i.css("max-height")!="none"?'style="max-height: '+i.css("max-height")+';"':"")+" />"),s.addClass("fileupload-exists").removeClass("fileupload-new")},r.readAsDataURL(n)}else this.$preview.text(n.name),this.$element.addClass("fileupload-exists").removeClass("fileupload-new")},clear:function(e){this.$hidden.val(""),this.$hidden.attr("name",this.name),this.$input.attr("name","");if(navigator.userAgent.match(/msie/i)){var t=this.$input.clone(!0);this.$input.after(t),this.$input.remove(),this.$input=t}else this.$input.val("");this.$preview.html(""),this.$element.addClass("fileupload-new").removeClass("fileupload-exists"),e&&(this.$input.trigger("change",["clear"]),e.preventDefault())},reset:function(e){this.clear(),this.$hidden.val(this.original.hiddenVal),this.$preview.html(this.original.preview),this.original.exists?this.$element.addClass("fileupload-exists").removeClass("fileupload-new"):this.$element.addClass("fileupload-new").removeClass("fileupload-exists")},trigger:function(e){this.$input.trigger("click"),e.preventDefault()}},e.fn.fileupload=function(n){return this.each(function(){var r=e(this),i=r.data("fileupload");i||r.data("fileupload",i=new t(this,n)),typeof n=="string"&&i[n]()})},e.fn.fileupload.Constructor=t,e(document).on("click.fileupload.data-api",'[data-provides="fileupload"]',function(t){var n=e(this);if(n.data("fileupload"))return;n.fileupload(n.data());var r=e(t.target).closest('[data-dismiss="fileupload"],[data-trigger="fileupload"]');r.length>0&&(r.trigger("click.fileupload"),t.preventDefault())})}(window.jQuery)
@@ -536,6 +538,7 @@ $(function () {
         //Años de experiencia - text
         newElem.find('.labelAñosExp').attr('for','ID'+newNum+'_añosExp');
         newElem.find('.año').attr('id','ID'+newNum+'_añosExp').val('');
+        newElem.find('.annio_fin').html('<input type="text" class="form-control año" name="annio_fin[]">');
 
  		//Descripcion - text
         newElem.find('.labelDescripcion').attr('style','display:none');
@@ -641,27 +644,32 @@ $(function () {
 
         //Nombre - text
         newElem.find('.labelNombre').attr('for','ID'+newNum+'_nombre');
-        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').attr('name','ID'+newNum+'_nombre').val('');
+        newElem.find('.inputNombre').attr('id','ID'+newNum+'_nombre').val('');
 
         //Nivel de escritura - combobox
         newElem.find('.labelNivelEscritura').attr('for','ID'+newNum+'_nivelEscritura');
-        newElem.find('.comboboxNivelEscritura').attr('id','ID'+newNum+'_nivelEscritura').attr('name','ID'+newNum+'_nivelEscritura').val('0');
+        newElem.find('.comboboxNivelEscritura').attr('id','ID'+newNum+'_nivelEscritura').val('');
 
         //Nivel de lectura - text
         newElem.find('.labelNivelLectura').attr('for','ID'+newNum+'_nivelLectura');
-        newElem.find('.comboboxNivelLectura').attr('id','ID'+newNum+'_nivelLectura').attr('name','ID'+newNum+'_nivelLectura').val('0');
+        newElem.find('.comboboxNivelLectura').attr('id','ID'+newNum+'_nivelLectura').val('');
 
         //Nivel conversacional - text
         newElem.find('.labelNivelConversacional').attr('for','ID'+newNum+'_nivelConversacional');
-        newElem.find('.comboboxNivelConversacional').attr('id','ID'+newNum+'_nivelConversacional').attr('name','ID'+newNum+'_nivelConversacional').val('0');
+        newElem.find('.comboboxNivelConversacional').attr('id','ID'+newNum+'_nivelConversacional').val('');
 
         //Checkbox - remover
         newElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+newNum).attr('checked',false);
 
         //Archivo - file
+        // newElem.find('.fileupload').attr('class','fileupload-new');
+        // newElem.find('.input_archivo').val('');
+        // newElem.find('.fileupload-preview').html('');
         newElem.find('.fileupload').attr('id','fileupload'+newNum);
 
 
+
+        newElem.find('.id_con_idioma').attr('value','');
 
         // insert the new element after the last "duplicatable" input field
         //insertar nuevo elemento despues del ultimo input duplicado
@@ -693,7 +701,7 @@ $(function () {
         });
         $(".combobox").change();
 
-        
+
     });
 
     $('#btnRemoverConocimientoDeIdiomas').click(function () {
