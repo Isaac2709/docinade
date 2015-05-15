@@ -189,8 +189,7 @@
 					  	@endif
 				  	</div>
 				<div class="col-md-offset-11">
-					<!-- <span class="glyphicon glyphicon-remove-sign"></span>-->
-					<input type="checkbox" name="checkBox{{ $count }}" class="claseCheckboxConocimientoDeIdiomas" id="checkboxConocimientoDeIdiomas{{ $count }}" style="display:none">
+                    <input type="checkbox" name="checkBox1" class="claseCheckboxExpProfesional" id="checkboxConocimientoDeIdiomas{{ $count }}" @if($count == 1) style="display:none" @endif >
 				</div>
 				<hr class="soften">
 			</div>
