@@ -46,7 +46,7 @@
 					<label for="archivoTitulo1" class="col-md-4 control-label labelArchivoTitulo1">Título obtenido:</label>
     				<div class="fileupload fileupload-new col-md-8" data-provides="fileupload" id="fileupload1">
 					    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
-					    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoTitulo1" name="archivoTitulo1" /></span>
+					    <span class="fileupload-exists">Cambiar</span><input type="file" id="archivoTitulo1" name="title_file[]" /></span>
 					    <span class="fileupload-preview"></span>
 					    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
 				  	</div>
@@ -126,26 +126,23 @@
 				<div class="col-lg-6">
 					<!--Titulo obtenido -->
 					<div class="form-group">
-						<label for="titulo" class="col-md-4 control-label labelTituloObtenido">Título obtenido:</label>
-						<!-- <div class="col-md-8">
-							<input type="text" class="form-control inputTituloObtenido" name="titulo[]" id="titulo">
-						</div> -->
-						<div class="col-md-8 col-md-offset-4" style="height: 30px;">
-	                    <div class="form-group div_title_file">
-	        				@if(!empty($educacion->Sup_Adjunto))
-	        					<div class="col-md-4 show-change-button" id="title_file">
-	        					   <a class="btn btn-link"  target="_blank" href="{{ '/storage/images/'.$educacion->Sup_Adjunto}}">Archivo adjunto</a>
-	                            </div>
-	        					<div class="col-md-4">
-	        					   <a class="btn btn-warning btn-sm btn-change title_array">Actualizar el archivo adjunto</a>
-	        					</div>
-	        					<input type="file" name="title_file[]" class="title_file" style="display: none;">
-	        				@else
-	                        	<input type="file" name="title_file[]" id="title_file">
-	                        @endif
-	                    </div>
-	                </div>
-					</div>
+						<label for="archivoTitulo1" class="col-md-4 control-label labelArchivoTitulo1">Título obtenido:</label>
+        				@if(!empty($educacion->Sup_Adjunto))
+        					<div class="fileupload fileupload-exists col-md-8" data-provides="fileupload" >
+							    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+							    <span class="fileupload-exists">Cambiar</span><input class="input_archivo" type="file" id="title_file" name="title_file[]" /></span>
+							    <span class="fileupload-preview"><a href="{{ '/storage/images/'.$educacion->Sup_Adjunto}}" target="_blank">{{ $educacion->Sup_Adjunto}}</a></span>
+							    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+						  	</div>
+        				@else
+        					<div class="fileupload fileupload-new col-md-8" data-provides="fileupload" >
+							    <span class="btn btn-default btn-file"><span class="fileupload-new">Buscar Archivo</span>
+							    <span class="fileupload-exists">Cambiar</span><input type="file" id="title_file" name="title_file[]" /></span>
+							    <span class="fileupload-preview"></span>
+							    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+						  	</div>
+                        @endif
+                    </div>
 
 					<!-- Grado academico -->
 					<div class="form-group">
@@ -182,7 +179,7 @@
 			</div>
 			<!-- End row -->
 			<div class="col-md-offset-11">
-				<input type="checkbox" name="checkBox1" class="claseCheckboxEduSuperior" id="checkboxEduSuperior{{ $count }}" style="display:none">
+				<input type="checkbox" name="checkBox1" class="claseCheckboxEduSuperior" id="checkboxEduSuperior{{ $count }}" @if($count == 1) style="display:none" @endif >
 			</div>
 			<hr class="soften">
 		</div>
