@@ -59,14 +59,14 @@
     			<div class="col-md-8">
     				<div class="input-group date datepicker_control">
     					@if($user->formulario->IPe_Fecha_Nac == "0000-00-00" || is_null($user->formulario->IPe_Fecha_Nac))
-    						<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="">
+    						<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="" placeholder="01/01/2015">
     					@else
     						<!-- Conversión del formato de la fecha -->
     						<?php
 								$date_obj = date_create_from_format('Y-m-d',$user->formulario->IPe_Fecha_Nac);
 								$fecha_nacimiento = date_format($date_obj, 'd/m/Y');
     						?>
-							<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="{{ $fecha_nacimiento }}">
+							<input type="text" class="datepicker_control form-control" name="fecha_nacimiento" value="{{ $fecha_nacimiento }}" placeholder="01/01/2015">
 						@endif
 						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
@@ -96,7 +96,7 @@
 			<div class="form-group">
 				<label for="telefono" class="col-md-4 control-label">Teléfono:</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" name="telefono" value="{{ $user->formulario->IPe_Telefono }}">
+					<input type="text" class="form-control" name="telefono" value="{{ $user->formulario->IPe_Telefono }}" placeholder="(506)88436723">
 				</div>
 			</div>
 			<!--Email-->

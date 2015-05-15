@@ -78,7 +78,7 @@
                             <label for="ocupacion" class="col-md-4 control-label labelOcupacion">Ocupación o posición:</label>
                             <div class="col-md-8">
                                 <div class="bs-example">
-                                    <input type="text" name="ocupacion[]" class="form-control typeahead_ocupacion inputOcupacion tt-query" autocomplete="off" spellcheck="false" id="ocupacion" value="{{ $experiencia_profesional->ocupacion->Ocu_Ocupacion }}">
+                                    <input type="text" name="ocupacion[]" class="form-control typeahead_ocupacion inputOcupacion tt-query" autocomplete="off" spellcheck="false" id="ocupacion" value="{{ $experiencia_profesional->ocupacion->Ocu_Ocupacion or '' }}">
                                 </div>
                             </div>
                         </div>

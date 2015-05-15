@@ -25,7 +25,7 @@
 				<div class="form-group">
 					<label for="telefono1" class="col-md-4 control-label labelTelefono1">Teléfono:</label>
 					<div class="col-md-8">
-						<input type="text" class="form-control inputTelefono1" name="telefono1" id="telefono1" placeholder="Persona 1">
+						<input type="text" class="form-control inputTelefono1" name="telefono1" id="telefono1" placeholder="(506)88345261">
 					</div>
 				</div>
 
@@ -85,7 +85,7 @@
 				<div class="form-group">
 					<label for="telefono2" class="col-md-4 control-label labelTelefono2">Teléfono:</label>
 					<div class="col-md-8">
-						<input type="text" class="form-control inputTelefono2" name="telefono2" id="telefono2" placeholder="Persona 2">
+						<input type="text" class="form-control inputTelefono2" name="telefono2" id="telefono2" placeholder="(506)88345261">
 					</div>
 				</div>
 

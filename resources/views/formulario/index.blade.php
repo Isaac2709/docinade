@@ -9,50 +9,7 @@
   	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
 
   	<style type="text/css">
-		textarea
-		  {
-		    resize: vertical; 
-		  }
-/*bloque que se usa para cambiar color y tamaño de los botones para cargar archivos*/
-	.claseBtnArchivoCedula {
-		width: 30%;
-		color: #000000;
-		background-color: #FFFFFF;
-		font-size: 10px;
-	}
-	.btn-file{
-		color: #000000;
-		background-color: #FFFFFF;
-	}
-/*---------------------------------------------------------------------*/
-
-	/*bloque para cambiar el color de pestaña de los checkbox personalizados*/
-	.toggle-handle{
-		background-color: #FFFFFF;
-	}
-		 
- 
-	/*bloque para cambiar el tamaño de las letras de los tabs cuando se acitva y sobrepone*/
-	.nav-pills > li.active > a > font{
-		font-size: 120%;
-	}
-	.nav-pills > li > a :hover{
-		font-size: 120%;
-	}
-	/*---------------------------------------*/
-
-	/*bloque q centra todas las etiquetas <td>*/
-	td{
-		text-align: center;
-	}
-
-	/*bloque q sobreescribe stilos de typeahead para poder arreglar el problema de despliegue*/
-	.twitter-typeahead .tt-hint
-	{
-	    height: 37px;
-	    
-	}
-
+		
 
 	
 

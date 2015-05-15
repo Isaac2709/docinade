@@ -85,9 +85,7 @@ class FormularioController extends Controller {
 	}
 
 	public function postIndex(CrearFormularioRequest $request)
-	{
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+	{		
 		$user = User::find(Auth::user()->Usu_ID);
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
