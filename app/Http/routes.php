@@ -29,3 +29,6 @@ Route::post('invPublicada', 'PublicacionController@store');
 Route::post('curRelevante', 'CursoSeminarioController@store');
 Route::post('conIdioma', 'ConocimientoIdiomaController@store');
 Route::post('accBlibliotecaProcDatos', 'BibliotecaProcesamientoDatosController@store');
+Route::post('accProgramasComputo', 'ProgramaComputacionController@store');
+Route::post('proTesis', 'PropuestaTesisController@store');
+Route::post('recomendacion', 'RecomendacionController@store');
