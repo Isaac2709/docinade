@@ -26,7 +26,7 @@ class AccesoProgramaComputacion extends Model {
 	* Specifies which attributes should be mass-assignable.
 	* @var string
 	*/
-	protected $fillable = [ 'Prog_ID', 'Prog_ID_Asp', 'Prog_Nombre'];
+	// protected $fillable = [ 'Prog_ID', 'Prog_ID_Asp', 'Prog_Nombre'];
 
 	/**
 	 * Relacion de pertenencia de uno a uno entre los modelos AccesoProgramaComputacion
