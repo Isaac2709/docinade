@@ -106,6 +106,59 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y ConocimientoIdioma
+	 * @return [arrayEloquent] [Los modelos de ConocimientoIdioma que pertenecen a
+	 * InformacionAspirante]
+	 */
+	public function conocimiento_idiomas(){
+		return $this->hasMany('App\ConocimientoIdioma', 'Idm_ID_Asp');
+	}
+
+	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y AccesoBiblioteca
+	 * @return [arrayEloquent] [Los modelos de AccesoBiblioteca que pertenecen a InformacionAspirante]
+	 */
+	public function acceso_bibliotecas(){
+		return $this->hasMany('App\AccesoBiblioteca', 'Bib_ID_Asp');
+	}
+
+	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y AccesoProcesamientoDatos
+	 * @return [arrayEloquent] 		[Los modelos de AccesoProcesamientoDatos que pertenecen
+	 *                                a InformacionAspirante]
+	 */
+	public function acceso_procesamiento_datos(){
+		return $this->hasMany('App\AccesoProcesamientoDatos', 'PDa_ID_Asp');
+	}
+
+	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y AccesoProgramaComputacion
+	 * @return [arrayEloquent] 		[Los modelos de AccesoProgramaComputacion que pertenecen
+	 *                                a InformacionAspirante]
+	 */
+	public function acceso_programas_computacionales(){
+		return $this->hasMany('App\AccesoProgramaComputacion', 'Prog_ID_Asp');
+	}
+
+	/**
+	 * Relacion uno a muchos entre los modelos InformacionAspirante y Recomendacion
+	 * @return [arrayEloquent] 		[Los modelos de Recomendacion que pertenecen
+	 *                                a InformacionAspirante]
+	 */
+	public function recomendaciones(){
+		return $this->hasMany('App\Recomendacion', 'Rec_ID_Asp');
+	}
+
+	/**
+	 * Relacion de pertenencia de uno a uno entre los modelos InformacionAspirante
+	 *  y PropuestaTesis
+	 * @return [arrayEloquent] [El modelo PropuestaTesis al que pertenece InformacionAspirante]
+	 */
+	public function propuesta_tesis(){
+		return $this->belongsTo('App\PropuestaTesis', 'ID_Prop_Tesis');
+	}
+
+	/**
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              	[description]
 	 * @param  [array] $id_investigaciones 	[los id de las investigaciones que aun se mantienen]
@@ -168,9 +221,10 @@ class InformacionAspirante extends Model {
 	/**
 	 * Devuelve las publicaciones que se van a eliminar
 	 * @param  [type] $query              		[description]
-	 * @param  [array] $id_cursos_seminarios 	[los id de las cursos o seminarios que aun se mantienen]
-	 * @return [arrayEloquent]            		[los modelos de los cursos o seminarios que se van a
-	 * eliminar]
+	 * @param  [array] $id_cursos_seminarios 	[los id de las cursos o seminarios que aun se
+	 *                                        	 mantienen]
+	 * @return [arrayEloquent]            		[los modelos de los cursos o seminarios que
+	 *                                           se van a eliminar]
 	 */
 	public function scopeSeleccionarCursosSeminariosAEliminar($query, $id_cursos_seminarios){
 		$cursos_seminarios = $this->cursos_seminarios();
@@ -181,9 +235,70 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Devuelve los conocimientos de idiomas que se van a eliminar
+	 * @param  [type]               			[description]
+	 * @param  [array]$id_conocimiento_idiomas  [los id de las conocimientos de idiomas
+	 *                                           que aun se mantienen]
+	 * @return [arrayEloquent]            		[los modelos de los conocimientos de idiomas
+	 *                                           que se van a eliminar]
+	 */
+	public function scopeSeleccionarConocimientoIdiomasAEliminar($query, $id_conocimiento_idiomas){
+		$conocimiento_idiomas = $this->conocimiento_idiomas();
+		foreach ($id_conocimiento_idiomas as $id_conocimiento_idioma) {
+			$conocimiento_idiomas = $conocimiento_idiomas->where('Idm_ID', '!=', $id_conocimiento_idioma);
+		}
+		return $conocimiento_idiomas->get();
+	}
+
+	/**
+	 * Devuelve los models que se van a eliminar
+	 * @param  [type] $query              	[description]
+	 * @param  [array] $bibliotecas 		[Las bibliotecas que aún se mantienen]
+	 * @return [arrayEloquent]            	[los modelos de los accesos a bibliotecas que se van a
+	 *                                          eliminar]
+	 */
+	public function scopeSeleccionarAccesoBibliotecaAEliminar($query, $bibliotecas){
+		$acceso_bibliotecas = $this->acceso_bibliotecas();
+		foreach ($bibliotecas as $biblioteca) {
+			$acceso_bibliotecas = $acceso_bibliotecas->where('Bib_Nombre', '!=', $biblioteca);
+		}
+		return $acceso_bibliotecas->get();
+	}
+
+	/**
+	 * Devuelve los modelos de los procesamientos de datos que se van a eliminar
+	 * @param  [type] $query              	[description]
+	 * @param  [array] $procesamientos_datos 		[Los procesamientos de datos que aún se mantienen]
+	 * @return [arrayEloquent]            	[los modelos de los procesamientos de datos que se van a
+	 *                                          eliminar]
+	 */
+	public function scopeSeleccionarAccesoProcesamientoDatosAEliminar($query, $procesamientos_datos){
+		$acceso_procesamiento_datos = $this->acceso_procesamiento_datos();
+		foreach ($procesamientos_datos as $procesamiento_datos) {
+			$acceso_procesamiento_datos = $acceso_procesamiento_datos->where('PDa_Nombre', '!=', $procesamiento_datos);
+		}
+		return $acceso_procesamiento_datos->get();
+	}
+
+	/**
+	 * Devuelve los modelos de los procesamientos de datos que se van a eliminar
+	 * @param  [type] $query              	[description]
+	 * @param  [array] $procesamientos_datos 		[Los procesamientos de datos que aún se mantienen]
+	 * @return [arrayEloquent]            	[los modelos de los procesamientos de datos que se van a
+	 *                                          eliminar]
+	 */
+	public function scopeSeleccionarAccesoProgramaComputacionAEliminar($query, $programas_computacionales){
+		$acceso_programas_computacionales = $this->acceso_programas_computacionales();
+		foreach ($programas_computacionales as $programa_computacional) {
+			$acceso_programas_computacionales = $acceso_programas_computacionales->where('Prog_Nombre', '!=', $programa_computacional);
+		}
+		return $acceso_programas_computacionales->get();
+	}
+
+	/**
 	 * Ordena descendentemente las experiencias profesionales según el año de fin e inicio.
-	 * @return [arrayEloquent] [Los modelos de ExperienciaProfesional que pertenecen a
-	 * InformacionAspirante ordenados descendentemente]
+	 * @return [arrayEloquent] 		[Los modelos de ExperienciaProfesional que pertenecen a
+	 *                               InformacionAspirante ordenados descendentemente]
 	 */
 	public function experiencias_profesionales_desc(){
 		return $this->experiencias_profesionales()->orderBy('Pro_Anio_Fin', 'DESC')->orderBy('Pro_Anio_Inicio', 'DESC');
@@ -192,8 +307,8 @@ class InformacionAspirante extends Model {
 	/**
 	 * Ordena descendentemente las experiencias en investigacion según el año de las
 	 * investigaciones.
-	 * @return [arrayEloquent] [Los modelos de ExperienciaInvestigacion que pertenecen a
-	 * InformacionAspirante ordenados descendentemente]
+	 * @return [arrayEloquent] 		[Los modelos de ExperienciaInvestigacion que pertenecen a
+	 *                               InformacionAspirante ordenados descendentemente]
 	 */
 	public function experiencias_investigaciones_desc(){
 		return $this->experiencias_investigaciones()->orderBy('Inv_Anio', 'DESC');
@@ -201,8 +316,8 @@ class InformacionAspirante extends Model {
 
 	/**
 	 * Ordena descendentemente las publicaciones del aspirante según el año de publicada.
-	 * @return [arrayEloquent] [Los modelos de Publicacion que pertenecen a InformacionAspirante
-	 * ordenados descendentemente]
+	 * @return [arrayEloquent] 		[Los modelos de Publicacion que pertenecen a
+	 *                                InformacionAspirante ordenados descendentemente]
 	 */
 	public function publicaciones_desc(){
 		return $this->publicaciones()->orderBy('Pub_Anio', 'DESC');
@@ -210,8 +325,8 @@ class InformacionAspirante extends Model {
 
 	/**
 	 * Ordena descendentemente los cursos o seminarios del aspirante según el año.
-	 * @return [arrayEloquent] [Los modelos CursoSeminario que pertenecen a InformacionAspirante
-	 * ordenados descendentemente]
+	 * @return [arrayEloquent] 		[Los modelos CursoSeminario que pertenecen a
+	 *                                InformacionAspirante ordenados descendentemente]
 	 */
 	public function cursos_seminarios_desc(){
 		return $this->cursos_seminarios()->orderBy('CSe_Annio', 'DESC');

@@ -16,6 +16,7 @@ use App\GradoAcademico;
 use App\EducacionSuperior;
 use App\AreaEspecialidad;
 use App\Ocupacion;
+use App\NivelIdioma;
 use App\Http\Controllers\Controller;
 
 // PDFGenerate
@@ -60,6 +61,7 @@ class FormularioController extends Controller {
 		$enfasis = Enfasis::all();
 		$grados_academicos = GradoAcademico::all();
 		$areas_especialidad = AreaEspecialidad::all()->lists('Esp_Area');
+		$niveles_idioma = NivelIdioma::orderBy('Niv_ID','asc')->get();
 		$ocupaciones = Ocupacion::all()->lists('Ocu_Ocupacion');
 		$instituciones = Institucion::all()->lists('Ins_Nombre');
 		$user = User::find(Auth::user()->Usu_ID);
@@ -81,11 +83,15 @@ class FormularioController extends Controller {
 			$informacion_aspirante->save();
 		}
 		// dd($areas_especialidad);
-		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('areas_especialidad', json_encode($areas_especialidad))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('ocupaciones', json_encode($ocupaciones))->with('grados_academicos', $grados_academicos)->with('user', $user);
+		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('areas_especialidad', json_encode($areas_especialidad))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('ocupaciones', json_encode($ocupaciones))->with('grados_academicos', $grados_academicos)->with('niveles_idioma', $niveles_idioma)->with('user', $user);
 	}
 
 	public function postIndex(CrearFormularioRequest $request)
+<<<<<<< HEAD
 	{		
+=======
+	{
+>>>>>>> 930c3e07a1a3bd1deabfae2630a7dab21a708ec5
 		$user = User::find(Auth::user()->Usu_ID);
 		// Informacion Personal
 		$user->formulario->IPe_Nombre = $request->nombre;
@@ -116,7 +122,6 @@ class FormularioController extends Controller {
 	        \Illuminate\Support\Facades\Request::file('photo_file')->move($this->destinationPath.'/images/', $id_filename);
             $user->formulario->informacion_aspirante->Asp_Fotografia = $id_filename;
         }
-
 
 		// Revisa si la fecha de nacimiento es enviada
 		$fecha_nacimiento = $request->fecha_nacimiento;

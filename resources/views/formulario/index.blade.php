@@ -1,17 +1,64 @@
 @extends('index')
 
 @section('styles')
-	
+
 	<!-- Para el input de archivo -->
-  	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+  	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet"> -->
   	<!-- para los checkbox animados -->
   	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
   	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
 
   	<style type="text/css">
+<<<<<<< HEAD
 		
+=======
+		textarea
+		  {
+		    resize: vertical;
+		  }
+/*bloque que se usa para cambiar color y tamaño de los botones para cargar archivos*/
+	.claseBtnArchivoCedula {
+		width: 30%;
+		color: #000000;
+		background-color: #FFFFFF;
+		font-size: 10px;
+	}
+	.btn-file{
+		color: #000000;
+		background-color: #FFFFFF;
+	}
+/*---------------------------------------------------------------------*/
 
-	
+	/*bloque para cambiar el color de pestaña de los checkbox personalizados*/
+	.toggle-handle{
+		background-color: #FFFFFF;
+	}
+
+
+	/*bloque para cambiar el tamaño de las letras de los tabs cuando se acitva y sobrepone*/
+	.nav-pills > li.active > a > font{
+		font-size: 120%;
+	}
+	.nav-pills > li > a :hover{
+		font-size: 120%;
+	}
+	/*---------------------------------------*/
+
+	/*bloque q centra todas las etiquetas <td>*/
+	td{
+		text-align: center;
+	}
+
+	/*bloque q sobreescribe stilos de typeahead para poder arreglar el problema de despliegue*/
+	.twitter-typeahead .tt-hint
+	{
+	    height: 37px;
+
+	}
+
+>>>>>>> 930c3e07a1a3bd1deabfae2630a7dab21a708ec5
+
+
 
   	</style>
 
@@ -75,7 +122,7 @@
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
 				        <div id="informacionPersonal" class="tab-pane fade in active">
-				        
+
 							@include('formulario.tabs.informacionPersonal')
 				        </div>
 
@@ -162,7 +209,7 @@
 	<!--Para los inputs de tipo archivo (ESTA LIBRERIA PRODUCE ERROR EN LOS DROPDOWN)-->
 	<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>-->
 
-	
+
 
 	<!--para agregar y remover divs-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -179,52 +226,50 @@
 	<!-- Para los checkbox animados-->
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 
+	<script  type="text/javascript" src="typeahead.js"></script>
 
 
 	<script type="text/javascript">
-	$(document).ready(function(){
-		var instituciones = <?php echo "".($instituciones); ?>;
-		var paises = <?php echo "".($paises); ?>;
-		var nacionalidades = <?php echo "".($nacionalidades); ?>;
-		var areas_especialidad = <?php echo "".($areas_especialidad); ?>;
-		var ocupaciones = <?php echo "".($ocupaciones); ?>;
+		$(document).ready(function(){
+			var instituciones = <?php echo "".($instituciones); ?>;
+			var paises = <?php echo "".($paises); ?>;
+			var nacionalidades = <?php echo "".($nacionalidades); ?>;
+			var areas_especialidad = <?php echo "".($areas_especialidad); ?>;
+			var ocupaciones = <?php echo "".($ocupaciones); ?>;
 
-		$('input.typeahead').typeahead({
-			name: 'pais_residencia',
-			local:  paises
+			$('input.typeahead').typeahead({
+				name: 'pais_residencia',
+				local:  paises
+			});
+			$('input.typeahead2').typeahead({
+				name: 'nacionalidad',
+				local:  nacionalidades
+			});
+			$('input.typeahead_institucion').typeahead({
+				name: 'institucion',
+				local:  instituciones
+			});
+			$('input.typeahead_area_especialidad').typeahead({
+				name: 'area_especialidad',
+				local:  areas_especialidad
+			});
+			$('input.typeahead_ocupacion').typeahead({
+				name: 'ocupacion',
+				local:  ocupaciones
+			});
+			if($("#email2").val()==null || $("#email2").val()==""){
+				$("#email2").hide();
+				$("#agregarNuevoEmail").removeClass("btn-danger").addClass("btn-primary");
+				$("#agregarNuevoEmail").text('+');
+			}
+			else{
+				$("#email2").show();
+				$("#agregarNuevoEmail").removeClass("btn-primary").addClass("btn-danger");
+				$("#agregarNuevoEmail").text('-');
+			}
 		});
-		$('input.typeahead2').typeahead({
-			name: 'nacionalidad',
-			local:  nacionalidades
-		});
-		$('input.typeahead_institucion').typeahead({
-			name: 'institucion',
-			local:  instituciones
-		});
-		$('input.typeahead_area_especialidad').typeahead({
-			name: 'area_especialidad',
-			local:  areas_especialidad
-		});
-		$('input.typeahead_ocupacion').typeahead({
-			name: 'ocupacion',
-			local:  ocupaciones
-		});
-		if($("#email2").val()==null || $("#email2").val()==""){
-			$("#email2").hide();
-			$("#agregarNuevoEmail").removeClass("btn-danger").addClass("btn-primary");
-			$("#agregarNuevoEmail").text('+');
-		}
-		else{
-			$("#email2").show();
-			$("#agregarNuevoEmail").removeClass("btn-primary").addClass("btn-danger");
-			$("#agregarNuevoEmail").text('-');
-		}
-
-	});
-
 	</script>
 
-<script  type="text/javascript" src="typeahead.js"></script>
 
 <script type="text/javascript">
 	var institucionesGlobal = <?php echo "".($instituciones); ?>;

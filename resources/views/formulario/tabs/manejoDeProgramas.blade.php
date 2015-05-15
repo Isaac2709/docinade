@@ -1,4 +1,4 @@
-<form role="form" action="#" method="post" class="form-horizontal">
+<form role="form" action="accProgramasComputo" method="post" class="form-horizontal">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioManejoDeProgramas1" class="row blockManejoDeProgramas">
 		<div class="row">
@@ -7,14 +7,14 @@
 				<div class="form-group">
 					<label for="windows" class="col-md-4 control-label labelWindows">Ambiente Windows:</label>
 					<div class="col-md-8">
-						<input type="checkbox" checked data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="windows" id="windows">
+						<input type="checkbox" @if($user->formulario->informacion_aspirante->Asp_Acceso_Windows) checked @endif data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="windows" id="windows">
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="correoElectronico" class="col-md-4 control-label labelWindows">Correo Electrónico:</label>
 					<div class="col-md-8">
-						<input type="checkbox" checked data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="correoElectronico" id="correoElectronico">
+						<input type="checkbox" @if($user->formulario->informacion_aspirante->Asp_Acceso_Email) checked @endif data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="correoElectronico" id="correoElectronico">
 					</div>
 				</div>
 			</div>
@@ -35,15 +35,31 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr id='addrProgramas0'>
-										<td>
-										1
-										</td>
-										<td>
-										<input type="text" name='programas0'  placeholder='Programa' class="form-control"/>
-										</td>
-									</tr>
-				                    <tr id='addrProgramas1'></tr>
+									@if($user->formulario->informacion_aspirante->acceso_programas_computacionales->isEmpty())
+										<tr id='addrProgramas0'>
+											<td>
+											1
+											</td>
+											<td>
+											<input type="text" name='programa[]'  placeholder='Programa' class="form-control"/>
+											</td>
+										</tr>
+										<tr id='addrProgramas1'></tr>
+									@else
+										<?php $count = 1; ?>
+										@foreach($user->formulario->informacion_aspirante->acceso_programas_computacionales as $acceso_programa_computacional)
+										<tr id='addrProgramas{{ $count-1 }}'>
+											<td>
+												{{ $count }}
+											</td>
+											<td>
+												<input type="text" name='programa[]'  placeholder='Programa' class="form-control" value="{{ $acceso_programa_computacional->Prog_Nombre }}" />
+											</td>
+										</tr>
+											<?php $count = $count + 1; ?>
+										@endforeach
+										<tr id='addrProgramas{{ $count-1 }}'></tr>
+									@endif
 								</tbody>
 							</table>
 						</div>

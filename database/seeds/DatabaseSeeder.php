@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('GradoAcademicoTableSeeder');
+		$this->call('NivelIdiomaTableSeeder');
 
 		$this->command->info('Table seeded!');
 	}

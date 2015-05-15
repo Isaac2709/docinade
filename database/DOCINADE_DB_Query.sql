@@ -131,11 +131,15 @@ CREATE TABLE ASP_Prop_Tesis(
 	PTe_Titulo VARCHAR(250),
 	PTe_Definicion TEXT,
 	PTe_Marco_Teorico MEDIUMTEXT,
+	PTe_Objetivos MEDIUMTEXT,
 	PTe_Metodologia TEXT,
-	PTe_Adjunto LONGBLOB,
+	PTe_Bibliografia MEDIUMTEXT,
+	PTe_Adjunto VARCHAR(300),
 
     CONSTRAINT PK_Asp_Pte_ID PRIMARY KEY (PTe_ID)
 );
+-- ALTER TABLE `asp_prop_tesis` ADD `PTe_Objetivos` MEDIUMTEXT NULL AFTER `PTe_Marco_Teorico`;
+-- ALTER TABLE `asp_prop_tesis` ADD `PTe_Bibliografia` MEDIUMTEXT NULL AFTER `PTe_Metodologia`;
 
 CREATE TABLE ASP_Bibliografia(
 	Bib_ID SMALLINT AUTO_INCREMENT NOT NULL,
@@ -243,14 +247,21 @@ CREATE TABLE ASP_Idioma(
 	Idm_ID_Niv_Lect SMALLINT,
 	Idm_ID_Niv_Conv SMALLINT,
 	Idm_Posee_MCE BOOLEAN,
-	Idm_Adjunto LONGBLOB,
+	Idm_Adjunto VARCHAR(300),
 
     CONSTRAINT PK_Asp_Idm_ID PRIMARY KEY (Idm_ID),
     CONSTRAINT FK_Asp_Idm_Asp FOREIGN KEY (Idm_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
-    CONSTRAINT FK_Asp_Idm_Escr FOREIGN KEY (Idm_ID_Niv_Escr) REFERENCES ASP_Idioma(Idm_ID),
-    CONSTRAINT FK_Asp_Idm_Lect FOREIGN KEY (Idm_ID_Niv_Lect) REFERENCES ASP_Idioma(Idm_ID),
-    CONSTRAINT FK_Asp_Idm_Conv FOREIGN KEY (Idm_ID_Niv_Conv) REFERENCES ASP_Idioma(Idm_ID)
+    CONSTRAINT FK_Asp_Idm_Escr FOREIGN KEY (Idm_ID_Niv_Escr) REFERENCES ASP_Nivel(Niv_ID),
+    CONSTRAINT FK_Asp_Idm_Lect FOREIGN KEY (Idm_ID_Niv_Lect) REFERENCES ASP_Nivel(Niv_ID),
+    CONSTRAINT FK_Asp_Idm_Conv FOREIGN KEY (Idm_ID_Niv_Conv) REFERENCES ASP_Nivel(Niv_ID)
 );
+-- ALTER TABLE `asp_idioma` DROP FOREIGN KEY `FK_Asp_Idm_Escr`;
+-- ALTER TABLE `asp_idioma` ADD CONSTRAINT `FK_Asp_Idm_Escr` FOREIGN KEY (`Idm_ID_Niv_Escr`) REFERENCES `docinade_db`.`asp_nivel`(`Niv_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `asp_idioma` DROP FOREIGN KEY `FK_Asp_Idm_Lect`;
+-- ALTER TABLE `asp_idioma` ADD CONSTRAINT `FK_Asp_Idm_Lect` FOREIGN KEY (`Idm_ID_Niv_Lect`) REFERENCES `docinade_db`.`asp_nivel`(`Niv_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `asp_idioma` DROP FOREIGN KEY `FK_Asp_Idm_Conv`;
+-- ALTER TABLE `asp_idioma` ADD CONSTRAINT `FK_Asp_Idm_Conv` FOREIGN KEY (`Idm_ID_Niv_Conv`) REFERENCES `docinade_db`.`asp_nivel`(`Niv_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `asp_idioma` CHANGE `Idm_Adjunto` `Idm_Adjunto` VARCHAR(300) NULL DEFAULT NULL;
 
 CREATE TABLE ASP_Curso_Sem(
 	CSe_ID SMALLINT AUTO_INCREMENT NOT NULL,
@@ -322,11 +333,13 @@ CREATE TABLE ASP_Exp_Profesional( -- Para obtener el más reciente se calcula co
 	Pro_Anio_Inicio YEAR(4),
     Pro_Actual BOOLEAN,
 	Pro_Anio_Fin YEAR(4),
+	Pro_Funciones VARCHAR(500),
 
     CONSTRAINT PK_Asp_Pro_ID PRIMARY KEY (Pro_ID),
     CONSTRAINT FK_Asp_Pro_Asp FOREIGN KEY (Pro_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
     CONSTRAINT FK_Asp_Pro_Ocupacion FOREIGN KEY (Pro_ID_Ocupacion) REFERENCES GEN_Ocupacion(Ocu_ID)
 );
+-- ALTER TABLE `asp_exp_profesional` ADD `Pro_Funciones` VARCHAR(500) NULL AFTER `Pro_ID_Ocupacion`;
 
 CREATE TABLE ASP_Exp_Funcion(
 	EFu_ID_Exp_Prof SMALLINT NOT NULL,
@@ -345,14 +358,21 @@ CREATE TABLE ASP_Recomendacion(
 	Rec_Telefono VARCHAR(20),
 	Rec_Fax VARCHAR(20),
     Rec_ID_Email SMALLINT,
-	Rec_ID_Ocupacion SMALLINT,
-	Rec_Adjunto LONGBLOB,
+    Rec_Ocupacion VARCHAR(150),
+	-- Rec_ID_Ocupacion SMALLINT,
+	Rec_Adjunto VARCHAR(300),
 
     CONSTRAINT PK_Asp_Rec_ID PRIMARY KEY (Rec_ID),
     CONSTRAINT FK_Asp_Rec_Asp FOREIGN KEY (Rec_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
-    CONSTRAINT FK_Asp_Rec_Email FOREIGN KEY (Rec_ID_Email) REFERENCES ASP_Aspirante(Asp_ID),
-    CONSTRAINT FK_Asp_Rec_Ocupacion FOREIGN KEY (Rec_ID_Ocupacion) REFERENCES GEN_Email(Email_ID)
+    CONSTRAINT FK_Asp_Rec_Email FOREIGN KEY (Rec_ID_Email) REFERENCES GEN_Email(Email_ID),
+    -- CONSTRAINT FK_Asp_Rec_Ocupacion FOREIGN KEY (Rec_ID_Ocupacion) REFERENCES GEN_Ocupacion(Ocu_ID)
 );
+-- ALTER TABLE `asp_recomendacion` DROP FOREIGN KEY `FK_Asp_Rec_Email`;
+-- ALTER TABLE `asp_recomendacion` ADD CONSTRAINT `FK_Asp_Rec_Email` FOREIGN KEY (`Rec_ID_Email`) REFERENCES `docinade_db`.`gen_email`(`Email_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `asp_recomendacion` DROP FOREIGN KEY `FK_Asp_Rec_Ocupacion`;
+-- ALTER TABLE `asp_recomendacion` ADD CONSTRAINT `FK_Asp_Rec_Ocupacion` FOREIGN KEY (`Rec_ID_Ocupacion`) REFERENCES `docinade_db`.`gen_ocupacion`(`Ocu_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+-- ALTER TABLE `asp_recomendacion` DROP FOREIGN KEY `FK_Asp_Rec_Ocupacion`
+-- ALTER TABLE `asp_recomendacion` CHANGE `Rec_ID_Ocupacion` `Rec_Ocupacion` VARCHAR(150) NULL DEFAULT NULL;
 
 -- ************************ TABLAS GENERALES CON DEPENDENCIA ************************ --
 
