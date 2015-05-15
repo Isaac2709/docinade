@@ -2,7 +2,7 @@
 $(document).ready(function(){
       var i=$('#tab_logic_programas tr').length-2;
      $("#add_row_programas").click(function(){
-      $('#addrProgramas'+i).html("<td>"+ (i+1) +"</td><td><input name='programas[]' type='text' placeholder='Programa' class='form-control input-md'  /> </td>");
+      $('#addrProgramas'+i).html("<td>"+ (i+1) +"</td><td><input name='programa[]' type='text' placeholder='Programa' class='form-control input-md'  /> </td>");
 
       $('#tab_logic_programas').append('<tr id="addrProgramas'+(i+1)+'"></tr>');
       i++;
@@ -538,6 +538,7 @@ $(function () {
         //Años de experiencia - text
         newElem.find('.labelAñosExp').attr('for','ID'+newNum+'_añosExp');
         newElem.find('.año').attr('id','ID'+newNum+'_añosExp').val('');
+        newElem.find('.annio_fin').html('<input type="text" class="form-control año" name="annio_fin[]">');
 
  		//Descripcion - text
         newElem.find('.labelDescripcion').attr('style','display:none');
