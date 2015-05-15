@@ -28,14 +28,15 @@
 								<tbody>
 									<?php $count = 1; ?>
 									@if($user->formulario->informacion_aspirante->acceso_bibliotecas->isEmpty())
-									<tr id='addrBiblioteca0'>
-										<td>
-											1
-										</td>
-										<td>
-											<input type="text" name='biblioteca[]'  placeholder='Biblioteca' class="form-control"/>
-										</td>
-									</tr>
+										<tr id='addrBiblioteca0'>
+											<td>
+												1
+											</td>
+											<td>
+												<input type="text" name='biblioteca[]'  placeholder='Biblioteca' class="form-control"/>
+											</td>
+										</tr>
+										<?php $count = $count + 1; ?>
 									@else
 										@foreach($user->formulario->informacion_aspirante->acceso_bibliotecas as $acceso_biblioteca)
 										<tr id='addrBiblioteca{{ $count-1 }}'>
@@ -85,7 +86,7 @@
 											<input type="text" name='procesamiento_datos[]'  placeholder='Prosesamiento de Datos' class="form-control"/>
 											</td>
 										</tr>
-										<tr id='addrProcesamientoDatos1'></tr>
+										<?php $count = $count + 1; ?>
 									@else
 										@foreach($user->formulario->informacion_aspirante->acceso_procesamiento_datos as $acceso_procesamiento_datos)
 											<tr id='addrProcesamientoDatos{{ $count-1 }}'>
@@ -98,8 +99,8 @@
 											</tr>
 											<?php $count = $count + 1; ?>
 										@endforeach
-										<tr id='addrProcesamientoDatos{{ $count-1 }}'></tr>
 									@endif
+									<tr id='addrProcesamientoDatos{{ $count-1 }}'></tr>
 								</tbody>
 							</table>
 						</div>
