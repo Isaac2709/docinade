@@ -193,7 +193,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-		'PDF' => 'Vsmoraes\Pdf\PdfFacade',
+		'PDF' 		=> 'Vsmoraes\Pdf\PdfFacade',
 	],
 
 ];
