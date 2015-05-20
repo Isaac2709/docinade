@@ -1,4 +1,4 @@
-<form role="form" action="accBlibliotecaProcDatos" method="post" class="form-horizontal">
+<form role="form" action="formulario/accBlibliotecaProcDatos" method="post" class="form-horizontal">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioAccesoBibliotecas1" class="row blockAccesoBibliotecas">
 		<div class="row">

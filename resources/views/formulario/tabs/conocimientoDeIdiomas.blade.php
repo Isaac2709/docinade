@@ -1,4 +1,4 @@
-<form role="form" action="conIdioma" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="formulario/conIdioma" method="post" class="form-horizontal" enctype="multipart/form-data">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->conocimiento_idiomas->isEmpty())

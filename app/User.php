@@ -57,4 +57,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         );
     }
 
+    public function esAdministrador(){
+    	return $this->Usu_Tipo == 'Administrador';
+    }
+
+    public function esAspirante(){
+    	return $this->Usu_Tipo == 'Aspirante';
+    }
+
+    public function esProfesor(){
+    	return $this->Usu_Tipo == 'Profesor';
+    }
 }
