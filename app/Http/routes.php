@@ -25,7 +25,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namesp
 });
 
 
-Route::group(['prefix' => 'formulario', 'middleware' => ['auth'], 'namespace' => 'Formulario'], function(){
+Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'], 'namespace' => 'Formulario'], function(){
 	// Route::controller('/', 'FormularioController');
 	Route::post('expInvestigacion', 'ExperienciaInvestigacionController@store');
 	Route::post('eduSuperior', 'EducacionSuperiorController@store');
