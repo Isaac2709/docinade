@@ -20,7 +20,7 @@ use App\NivelIdioma;
 use App\Http\Controllers\Controller;
 
 // PDFGenerate
-use Vsmoraes\Pdf\Pdf;
+// use Vsmoraes\Pdf\Pdf;
 
 // CARBON
 use Carbon\Carbon;
@@ -35,15 +35,15 @@ use Illuminate\Http\Request;
 class FormularioController extends Controller {
 
 	private $destinationPath = "";
-	private $pdf;
+	// private $pdf;
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct(Pdf $dompdf)
+	public function __construct(/*Pdf $dompdf*/)
 	{
-		$this->pdf = $dompdf;
+		// $this->pdf = $dompdf;
 		$this->middleware('auth');
 		$this->destinationPath = public_path().'/storage';
 	}
@@ -224,9 +224,10 @@ class FormularioController extends Controller {
 	public function getPdfformulario(){
 		$user = User::find(Auth::user()->Usu_ID);
     	$html = view('formulario.pdf')->with('user',$user)->render();
-        return $this->pdf
-            ->load($html, 'Letter', 'portrait')
-            ->show();
+	    return \PDF::load($html, 'Letter', 'portrait')->show();
+        // return $this->pdf
+        //     ->load($html, 'Letter', 'portrait')
+        //     ->show();
 	}
 
 	/**
