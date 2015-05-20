@@ -25,8 +25,7 @@ CREATE TABLE GEN_Usuario(
 
     CONSTRAINT PK_Usu_ID PRIMARY KEY (Usu_ID)
     -- Alter table `asp_aspirante` CHANGE COLUMN `ASP_Usuario` `GEN_ID_Usuario` SMALLINT NOT NULL
-    -- Alter table `gen_usuario` ADD COLUMN `Usu_Tipo` ENUM('Administrador', 'Aspirante', 'Profesor') NOT NULL
-    -- ALTER TABLE `gen_usuario` CHANGE `Usu_Tipo` `Usu_Tipo` ENUM('Administrador','Aspirante','Profesor') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Aspirante';
+    -- Alter table `gen_usuario` ADD COLUMN `Usu_Tipo` ENUM('Administrador', 'Aspirante', 'Profesor') NOT NULL DEFAULT 'Aspirante';
 );
 
 CREATE TABLE GEN_Info_Personal(
