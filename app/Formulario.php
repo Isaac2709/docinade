@@ -42,4 +42,14 @@ class Formulario extends Model {
     public function formularioTieneEmail($input_email){
     	return !is_null($this->emails()->where('Email_Email', '=', $input_email)->first());
     }
+
+    public function scopeFormularioEstaLLeno(){
+    	// if($this->informacion_aspirante->isEmpty()){
+    	// 	return false;
+    	// }
+    	// if($this->aspirante->direccion_actual()->isEmpty() | $this->aspirante->area_interes()->isEmpty()){
+    	// 	return false;
+    	// }
+    	return true;
+    }
 }

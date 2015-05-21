@@ -216,15 +216,20 @@ class FormularioController extends Controller {
 		// Fin de la direccion actual
 		$user->formulario->save();
 		// Fin de la Información personal del aspirante
-
+		if($user->formulario->formularioEstaLLeno()){
+			$message = 'El formulario esta lleno';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		}
 		$message = 'Sus datos han sido actualizados.';
 		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
 	public function getPdfformulario(){
+		// echo "Cargando...";
 		$user = User::find(Auth::user()->Usu_ID);
     	$html = view('formulario.pdf')->with('user',$user)->render();
-	    return \PDF::load($html, 'Letter', 'portrait')->show();
+    	$pdf = \PDF::load($html, 'Letter', 'portrait');
+	    return $pdf->show();
         // return $this->pdf
         //     ->load($html, 'Letter', 'portrait')
         //     ->show();
