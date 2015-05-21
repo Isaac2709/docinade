@@ -1,4 +1,4 @@
-<form role="form" action="proTesis" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="formulario/proTesis" method="post" class="form-horizontal" enctype="multipart/form-data">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioPropuestaTesis" class="blockPropuestaTesis">
 		<div class="row">

@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Formulario;
 
 // MODELS
 use Auth;
@@ -41,9 +41,9 @@ class FormularioController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct(Pdf $pdf)
+	public function __construct(Pdf $dompdf)
 	{
-		$this->pdf = $pdf;
+		$this->pdf = $dompdf;
 		$this->middleware('auth');
 		$this->destinationPath = public_path().'/storage';
 	}

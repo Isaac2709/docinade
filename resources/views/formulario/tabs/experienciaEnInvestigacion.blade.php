@@ -1,4 +1,4 @@
-<form role="form" action="expInvestigacion" method="post" class="form-horizontal">
+<form role="form" action="formulario/expInvestigacion" method="post" class="form-horizontal">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->experiencias_investigaciones->isEmpty())

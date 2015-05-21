@@ -1,4 +1,4 @@
-<form role="form" action="eduSuperior" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="formulario/eduSuperior" method="post" class="form-horizontal" enctype="multipart/form-data">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="col-md-12">

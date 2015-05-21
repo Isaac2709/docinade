@@ -20,15 +20,24 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::controller('formulario', 'FormularioController');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namespace' => 'Administrador'], function(){
+	Route::resource('/', 'AdministradorController');
+});
 
-Route::post('expInvestigacion', 'ExperienciaInvestigacionController@store');
-Route::post('eduSuperior', 'EducacionSuperiorController@store');
-Route::post('expProfesional', 'ExperienciaProfesionalController@store');
-Route::post('invPublicada', 'PublicacionController@store');
-Route::post('curRelevante', 'CursoSeminarioController@store');
-Route::post('conIdioma', 'ConocimientoIdiomaController@store');
-Route::post('accBlibliotecaProcDatos', 'BibliotecaProcesamientoDatosController@store');
-Route::post('accProgramasComputo', 'ProgramaComputacionController@store');
-Route::post('proTesis', 'PropuestaTesisController@store');
-Route::post('recomendacion', 'RecomendacionController@store');
+
+Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'], 'namespace' => 'Formulario'], function(){
+	// Route::controller('/', 'FormularioController');
+	Route::post('expInvestigacion', 'ExperienciaInvestigacionController@store');
+	Route::post('eduSuperior', 'EducacionSuperiorController@store');
+	Route::post('expProfesional', 'ExperienciaProfesionalController@store');
+	Route::post('invPublicada', 'PublicacionController@store');
+	Route::post('curRelevante', 'CursoSeminarioController@store');
+	Route::post('conIdioma', 'ConocimientoIdiomaController@store');
+	Route::post('accBlibliotecaProcDatos', 'BibliotecaProcesamientoDatosController@store');
+	Route::post('accProgramasComputo', 'ProgramaComputacionController@store');
+	Route::post('proTesis', 'PropuestaTesisController@store');
+	Route::post('recomendacion', 'RecomendacionController@store');
+	Route::get('/', 'FormularioController@getIndex');
+	Route::post('/', 'FormularioController@postIndex');
+	Route::get('pdfformulario', 'FormularioController@getPdfformulario');
+});

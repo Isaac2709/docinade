@@ -206,7 +206,7 @@
 				@if(!$user->formulario->emails->isEmpty())
 					{{ $user->formulario->emails()->first()->Email_Email }},
 					@if ($user->formulario->emails()->count()>1)
-						{{ $user->formulario->emails()[1] }}
+						{{ $user->formulario->emails[1]->Email_Email }}
 					@endif
 				@endif
 			</td>

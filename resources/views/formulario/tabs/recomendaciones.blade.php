@@ -1,4 +1,4 @@
-<form role="form" action="recomendacion" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="formulario/recomendacion" method="post" class="form-horizontal" enctype="multipart/form-data">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioRecomendaciones1" class="row blockRecomendaciones">
 		<div class="row">
