@@ -23,7 +23,7 @@
 				<div class="form-group">
 					<label for="pais" class="col-md-4 control-label labelPais">País:</label>
 					<div class="col-md-8">
-						<input type="text" name="pais[]" id="pais" class="form-control typeahead tt-query" autocomplete="off" spellcheck="false">
+						<input type="text" name="pais[]" id="pais" class="form-control typeahead tt-query inputPais" autocomplete="off" spellcheck="false">
 					</div>
 				</div>
 

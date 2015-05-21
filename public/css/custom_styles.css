@@ -213,6 +213,6 @@ textarea
   /*bloque q sobreescribe stilos de typeahead para poder arreglar el problema de despliegue*/
   .twitter-typeahead .tt-hint
   {
-      height: 37px;
+      height: 34px;
       
   }
