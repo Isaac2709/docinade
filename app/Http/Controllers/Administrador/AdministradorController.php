@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+
 use Illuminate\Http\Request;
 
 class AdministradorController extends Controller {
@@ -14,7 +16,10 @@ class AdministradorController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		//where('Usu_Tipo','==','Administrador')->
+		$users=User::paginate();/*variable referente a la coleccion de usuarios*/
+		//dd($users);
+		return view('consultas.index', compact('users')); /*como segundo parametro se le puede dar las variables users donde esta la coleccion de usuarios*/
 	}
 
 	/**
