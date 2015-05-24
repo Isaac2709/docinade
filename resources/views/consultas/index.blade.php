@@ -1,5 +1,23 @@
 @extends('app')
 
+@section('styles')
+	<!--1 <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">-->
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" >
+	<link href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" >
+	
+	<!-- 3<link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" rel="stylesheet" >-->
+	<style type="text/css">
+
+		tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+	</style>
+
+	
+@endsection
 
 @section('content')
 <div class="container">
@@ -8,22 +26,21 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"><h2>Lista de Aspirantes</h2></div>
 				<div class="panel-body">
-					<!-- <form class="navbar-form navbar-left" role="search">-->
-					{!! Form::open(['route' => 'consultas.index', 'method'=>'GET', 'class'=>'navbar-form navbar-right', 'role'=>'search']) !!}
+					<!-- <form class="navbar-form navbar-right" role="search">
+					
 					  <div class="form-group">
-					  	<!-- <input type="text" class="form-control" placeholder="Search">-->
-					    {!! Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Nombre de Usuario']) !!}
+					  <input type="text" class="form-control" placeholder="Search">
+					    
 					  </div>
 					  <button type="submit" class="btn btn-default">Buscar</button>
-					{!! Form::close() !!}
-					<!-- </form>-->
-					<br />
-				<p>Hay {{$users->total()}} usuarios</p>
+					</form>
+					<br />-->
+				<!-- <p>Hay {{$users->total()}} usuarios</p>-->
 				<div class="table-responsive">
-					<table class="table table-striped table-hover table-condensed">
+					<table class="table table-striped table-hover table-condensed" id="tablaConsultas">
 						<thead>
 							<tr>
-								<th>#</th>
+								<!--<th>#</th>-->
 								<th>Nombre</th>
 								<th>Apellidos</th>
 								<th>Cédula/Pasaporte</th>
@@ -34,6 +51,19 @@
 								<th>Detalles</th>
 							</tr>
 						</thead>
+						<tfoot>
+							<tr>
+								<!--<th>#</th>-->
+								<th>Nombre</th>
+								<th>Apellidos</th>
+								<th>Cédula/Pasaporte</th>
+								<th>Género</th>
+								<th>Nacionalidad</th>
+								<th>Email principal</th>
+								<th>Estado Formulario</th>
+								<th>Detalles</th>
+							</tr>
+						</tfoot>
 						<tbody>
 						@foreach($users as $user)
 							<tr>
@@ -51,10 +81,97 @@
 						</tbody>
 					</table>
 					</div>
-					{!! $users->render() !!}
+					<!--{!! $users->render() !!} -->
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('scripts')
+<!-- 1<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+scrip
+
+<script type="text/javascript">
+	$(document).ready(function(){
+    $('#tablaConsultas').DataTable();
+});
+</script>-->
+
+
+<!-- 2<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+    $('#tablaConsultas').DataTable();
+});
+</script>-->
+
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#tablaConsultas tfoot th').each( function () {
+        var title = $('#tablaConsultas thead th').eq( $(this).index() ).text();
+        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#tablaConsultas').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            that
+                .search( this.value )
+                .draw();
+        } );
+    } );
+} );
+</script>
+
+<script type="text/javascript">
+	$('#tablaConsultas').dataTable( {
+  "language": {
+    "emptyTable":     "No hay datos disponibles en la tabla",
+    "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+    "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+    "infoFiltered":   "(filtrado de _MAX_ registros en total)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "Mostrar _MENU_ registros",
+    "loadingRecords": "Cargando...",
+    "processing":     "Procesando...",
+    "search":         "Buscar:",
+    "zeroRecords":    "No se encontraron registros relacionados",
+    "paginate": {
+        "first":      "Primero",
+        "last":       "Ultimo",
+        "next":       "Siguiente",
+        "previous":   "Anterior"
+    },
+    "aria": {
+        "sortAscending":  ": activar para ordenar columna ascendentemente",
+        "sortDescending": ": activar para ordenar columna descendentemente"
+    }
+  }
+} );
+</script>
+
+
+
+
+
+
+
+
 @endsection

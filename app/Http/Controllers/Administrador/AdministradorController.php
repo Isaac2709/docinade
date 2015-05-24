@@ -16,7 +16,7 @@ class AdministradorController extends Controller {
 	public function index()
 	{
 		//where('Usu_Tipo','==','Administrador')->
-		$users=User::where('Usu_Tipo', '=', 'Aspirante')->paginate(3);/*variable referente a la coleccion de usuarios*/
+		$users=User::where('Usu_Tipo', '=', 'Aspirante')->paginate();/*variable referente a la coleccion de usuarios*/
 		//dd($users);
 		return view('consultas.index', compact('users')); /*como segundo parametro se le puede dar las variables users donde esta la coleccion de usuarios*/
 	}

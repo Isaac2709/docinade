@@ -10,11 +10,7 @@
 
   	<style type="text/css">
 
-		
-
-
-
-
+	
   	</style>
 
 @endsection
