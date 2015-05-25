@@ -225,7 +225,6 @@ class FormularioController extends Controller {
 	}
 
 	public function getPdfformulario(){
-		// echo "Cargando...";
 		$user = User::find(Auth::user()->Usu_ID);
     	$html = view('formulario.pdf')->with('user',$user)->render();
     	$pdf = \PDF::load($html, 'Letter', 'portrait');
@@ -233,6 +232,10 @@ class FormularioController extends Controller {
         // return $this->pdf
         //     ->load($html, 'Letter', 'portrait')
         //     ->show();
+	}
+	public function getDocFormulario(){
+		$user = User::find(Auth::user()->Usu_ID);
+		return view('formulario.doc')->with('user',$user);
 	}
 
 	/**

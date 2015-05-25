@@ -1,15 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
-	<link href="{{ asset('/css/pdf.css') }}" rel="stylesheet">
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-	<style type="text/css">
-		/*Table 1: Para Registros Múltiples.*/
+<?php
+function this_url(){
+	$url="http://".$_SERVER['HTTP_HOST'];
+	return $url;
+}
+?>
+<html
+    xmlns:o='urn:schemas-microsoft-com:office:office'
+    xmlns:w='urn:schemas-microsoft-com:office:word'
+    xmlns='http://www.w3.org/TR/REC-html40'>
+    <head>
+        <title>Generate a document Word</title>
+        <!--[if gte mso 9]-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <xml>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>100</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <!-- [endif]-->
+    <!-- <link href="{{ asset('/css/pdf.css') }}" rel="stylesheet"> -->
+    <style>
+        p.MsoFooter, li.MsoFooter, div.MsoFooter{
+            margin: 0cm;
+            margin-bottom: 0001pt;
+            mso-pagination:widow-orphan;
+            font-size: 12.0 pt;
+            text-align: right;
+        }
+
+		@font-face {
+		  font-family: 'Roboto';
+		  font-style: normal;
+		  font-weight: 300;
+		  src: local('Roboto Light'), local('Roboto-Light'), url(http://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2'), url(http://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+		}
+		@font-face {
+		  font-family: 'Roboto';
+		  font-style: normal;
+		  font-weight: 400;
+		  src: local('Roboto'), local('Roboto-Regular'), url(http://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2'), url(http://fonts.gstatic.com/s/roboto/v15/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+		}
+
+
+        @page Section1{
+            size: 29.7cm 21cm;
+            margin: 2cm 2cm 2cm 2cm;
+            mso-page-orientation: landscape;
+            mso-footer:f1;
+        }
+        div.Section1 { page:Section1;}
+        /*Table 1: Para Registros Múltiples.*/
 		table.table1{
    			border: 1px solid black;
    			border-collapse: collapse;
@@ -39,15 +81,15 @@
     		vertical-align: middle;
     		text-align: left;
 		}
-	</style>
+    </style>
 </head>
 <body>
-	<p class="text-center"><img src="images/DOCINADE.png" align="middle"></p>
+    <p class="text-center"><img src="{{this_url()}}/images/DOCINADE.png" align="middle"></p>
 	<table width="100%">
 		<tr>
-			<td align="center"><img src="images/UNED.png"></td>
-			<td align="center"><img src="images/TEC.png"></td>
-			<td align="center"><img src="images/UNA.png"></td>
+			<td align="center"><img src="{{this_url()}}/images/UNED.png"></td>
+			<td align="center"><img src="{{this_url()}}/images/TEC.png"></td>
+			<td align="center"><img src="{{this_url()}}/images/UNA.png"></td>
 		</tr>
 	</table>
 	<p class="text-center"><font size="17">DOCTORADO EN CIENCIAS NATURALES PARA EL DESARROLLO</font></p>
@@ -59,7 +101,7 @@
 				@if(is_null($user->formulario->informacion_aspirante->Asp_Fotografia))
 					<img src="images/NoDisponible.jpg" height="160px" width="160px" border="1px">
 				@else
-					<img src="{{'storage/images/'.$user->formulario->informacion_aspirante->Asp_Fotografia}}" height="160px" width="160px" border="1px">
+					<img src="{{this_url()}}/{{'storage/images/'.$user->formulario->informacion_aspirante->Asp_Fotografia}}" height="160px" width="160px" border="1px">
 				@endif
 			</td>
 			<td><p><font size="2">Este formulario deberá ser enviado necesariamente por correo electrónico a:<br />
@@ -538,10 +580,11 @@
 		Cedula o Pasaporte:
 	</font></b>
 	@if(!is_null($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
-		<?php $pasaporte_adj = 'storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj ?>
+		<?php $pasaporte_adj = this_url().'/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj ?>
+		{{ $pasaporte_adj or ''}}
 		<p class="text-center"><img src="{{ $pasaporte_adj or ''}}" align="middle"  width="100%"></p>
 	@else
-		<p class="text-center"><img src="images/image_not_found.png" align="middle"></p>
+		<p class="text-center"><img src="{{this_url()}}/images/image_not_found.png" align="middle"></p>
 	@endif
 	<br />
 	<br><table style='page-break-after:always;'></br></table><br>
@@ -554,10 +597,21 @@
 			<b class="text-left"><font size="2">
 				Titulo de: {{ $educacion->area_especialidad->Esp_Area or '' }}
 			</font></b>
-			<!-- <p class="text-center"><img src="{{ 'storage/images/'.$educacion->Sup_Adjunto}}" align="middle"  width="100%"></p> -->
+			<p class="text-center"><img src="{{this_url()}}/{{ 'storage/images/'.$educacion->Sup_Adjunto}}" align="middle"  width="100%"></p>
 			<br><table style='page-break-after:always;'></br></table><br>
 		@endif
 	@endforeach
 	<br />
+
+    <br clear=all style='mso-special-character:line-break;page-break-after:always' />
+    <!-- <div style='mso-element:footer' id="f1">
+        <p class=MsoFooter>
+            Page <span style='mso-field-code:" PAGE "'></span>
+        </p>
+    </div> -->
 </body>
 </html>
+<?php
+header("Content-type: application/vnd.ms-word");
+header("Content-Disposition: attachment;Filename=HelloWorld.doc");
+?>

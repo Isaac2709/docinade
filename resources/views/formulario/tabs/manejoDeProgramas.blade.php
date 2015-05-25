@@ -17,6 +17,20 @@
 						<input type="checkbox" @if($user->formulario->informacion_aspirante->Asp_Acceso_Email) checked @endif data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="correoElectronico" id="correoElectronico">
 					</div>
 				</div>
+
+				<h2>Educación a distancia o Plataformas virtuales:</h2>
+				<div class="form-group">
+					<label for="correoElectronico" class="col-md-4 control-label labelWindows">Conoce de educación a distancia o de plataformas virtuales:</label>
+					<div class="col-md-8">
+						<input type="checkbox" class="checkbox_edu" @if($user->formulario->informacion_aspirante->Asp_Conoc_Educacion_Dist) checked @endif data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="educacionDistancia" id="educacionDistancia">
+					</div>
+				</div>
+				<div class="form-group textarea_comment" @if(!$user->formulario->informacion_aspirante->Asp_Conoc_Educacion_Dist) style="display: none;" @endif >
+					<label for="educacionDistancia" class="col-md-4 control-label labelEducacionDistancia">Comente:</label>
+					<div class="col-md-8">
+						<textarea name="edu_distancia_descripcion" class="form-control " rows="3">{{ $user->formulario->informacion_aspirante->educacion_distancia->EDi_Descripcion or '' }}</textarea>
+					</div>
+				</div>
 			</div>
 			 <div class="col-md-6">
 			 	<label>Si utiliza programas de computación indique cuáles.</label>

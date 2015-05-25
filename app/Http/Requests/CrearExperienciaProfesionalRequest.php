@@ -23,12 +23,12 @@ class CrearExperienciaProfesionalRequest extends Request {
 	public function rules()
 	{
 		$rules = [];
-		$array_annios_fin = $this->request->get('annio_fin');
-		if(is_null($array_annios_fin)){
-			$array_annios_fin = [];
-		}
-		array_unshift( $array_annios_fin, Carbon::now()->format('Y') );
-		$this->request->set('annio_fin', $array_annios_fin);
+		// $array_annios_fin = $this->request->get('annio_fin');
+		// if(is_null($array_annios_fin)){
+		// 	$array_annios_fin = [];
+		// }
+		// array_unshift( $array_annios_fin, Carbon::now()->format('Y') );
+		// $this->request->set('annio_fin', $array_annios_fin);
 		$array = $this->request;
 		foreach($this->request->get('empresa') as $key => $val)
 		{
@@ -43,12 +43,14 @@ class CrearExperienciaProfesionalRequest extends Request {
 			$rules['annio_inicio.'.$key] = 'integer|max:'.Carbon::now()->format('Y');
 
 		}
-		$pos = 0;
+		// $pos = 0;
 		foreach($this->request->get('annio_fin') as $key => $val)
 		{
-			$rules['annio_fin.'.$key] = 'integer|max:'.Carbon::now()->format('Y').'|min:'.$array->get('annio_inicio')[$pos];
-			$pos = $pos + 1;
+			$rules['annio_fin.'.$key] = 'integer|max:'.Carbon::now()->format('Y').'|min:'.$array->get('annio_inicio')[$key];
+			// $pos = $pos + 1;
 		}
+		// dd($this->request);
+		// dd($rules);
 		return $rules;
 	}
 

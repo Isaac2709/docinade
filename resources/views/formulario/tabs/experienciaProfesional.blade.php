@@ -1,3 +1,4 @@
+<?php use \Carbon\Carbon; ?>
 <form role="form" action="formulario/expProfesional" method="post" class="form-horizontal">
     <br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -38,7 +39,8 @@
         				<span class="input-group-addon" >a</span>
                         <div class="annio_fin">
                             <fieldset disabled>
-                                <input type="text" class="form-control" name="annio_fin[]" placeholder="Actualidad">
+                                <input type="text" class="form-control" placeholder="Actualidad">
+                                <input type="hidden" name="annio_fin[]" value="{{Carbon::now()->format('Y')}}">
                             </fieldset>
                         </div>
         				<!-- <input type"text" class="form-control año" name="annio_fin[]"> -->
@@ -103,8 +105,9 @@
                                 <div class="annio_fin">
                                 @if($count==1)
                                     <fieldset disabled>
-                                        <input type="text" class="form-control" name="annio_fin[]" placeholder="Actualidad">
+                                        <input type="text" class="form-control" placeholder="Actualidad">
                                     </fieldset>
+                                    <input type="hidden" name="annio_fin[]" value="{{ Carbon::now()->format('Y') }}">
                                 @else
                                     <input type="text" class="form-control año" name="annio_fin[]" value="{{ $experiencia_profesional->Pro_Anio_Fin }}">
                                 @endif

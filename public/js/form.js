@@ -1,3 +1,16 @@
+$(document).ready(function(){
+    $(".checkbox_edu" ).change(function(){
+        if($(this).is(":checked")){
+            $(".textarea_comment").show();
+        }
+        else{
+            $(".textarea_comment").hide();
+            $(".textarea_comment").find('textarea').val('');
+        }
+    });
+});
+
+
 // <!--Funciones para las tablas de Programas Computacionales -->
 $(document).ready(function(){
       var i=$('#tab_logic_programas tr').length-2;
@@ -183,19 +196,19 @@ $(function () {
 
                                 //Titulo de la publicacion - text
                                 nElem.find('.labelTituloP').attr('for','ID'+cont+'_tituloP');
-                                nElem.find('.inputTituloP').attr('id','ID'+cont+'_tituloP').attr('name','ID'+cont+'_tituloP');
+                                nElem.find('.inputTituloP').attr('id','ID'+cont+'_tituloP');
 
                                 //Titulo del medio de publicacion - text
                                 nElem.find('.labelTituloMP').attr('for','ID'+cont+'_tituloMP');
-                                nElem.find('.inputTituloMP').attr('id','ID'+cont+'_tituloMP').attr('name','ID'+cont+'_tituloMP');
+                                nElem.find('.inputTituloMP').attr('id','ID'+cont+'_tituloMP');
 
                                 //Pais de publicacion - text
                                 nElem.find('.labelPais').attr('for','ID'+cont+'_pais');
-                                nElem.find('.inputPais').attr('id','ID'+cont+'_pais').attr('name','ID'+cont+'_pais');
+                                nElem.find('.inputPais').attr('id','ID'+cont+'_pais');
 
                                 //Año - text
                                 nElem.find('.labelAño').attr('for','ID'+cont+'_año');
-                                nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+                                nElem.find('.inputAño').attr('id','ID'+cont+'_año');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxTrabajosPublicados').attr('style','cursor:pointer').attr('id','checkboxTrabajosPublicados'+cont);
@@ -299,19 +312,19 @@ $(function () {
 
                                 //Nombre - text
                                 nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
-                                nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+                                nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre');
 
                                 //Institucion - text
                                 nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
-                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion');
 
                                 //Lugar - text
                                 nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
-                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
+                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar');
 
                                 //Año - text
                                 nElem.find('.labelAño').attr('for','ID'+cont+'_año');
-                                nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+                                nElem.find('.inputAño').attr('id','ID'+cont+'_año');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxExpInvestigacion').attr('style','cursor:pointer').attr('id','checkboxExpInvestigacion'+cont);
@@ -475,23 +488,23 @@ $(function () {
 
                             //Institucion - text
                             nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
-                            nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+                            nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion');
 
                             //Pais - text
                             nElem.find('.labelPais').attr('for','ID'+cont+'_pais');
-                            nElem.find('.inputPais').attr('id','ID'+cont+'_pais').attr('name','ID'+cont+'_pais');
+                            nElem.find('.inputPais').attr('id','ID'+cont+'_pais');
 
                             //Año de graduacion - text
                             nElem.find('.labelAñoG').attr('for','ID'+cont+'_añoG');
-                            nElem.find('.inputAñoG').attr('id','ID'+cont+'_añoG').attr('name','ID'+cont+'_añoG');
+                            nElem.find('.inputAñoG').attr('id','ID'+cont+'_añoG');
 
                             //Titulo Obtenido - text
                             nElem.find('.labelTituloObtenido').attr('for','ID'+cont+'_titulo');
-                            nElem.find('.inputTituloObtenido').attr('id','ID'+cont+'_titulo').attr('name','ID'+cont+'_titulo');
+                            nElem.find('.inputTituloObtenido').attr('id','ID'+cont+'_titulo');
 
                             //Grado academico - text
                             nElem.find('.labelGradoA').attr('for','ID'+cont+'_gradoA');
-                            nElem.find('.comboboxGradoAcademico').attr('id','ID'+cont+'_gradoA').attr('name','ID'+cont+'_gradoA');
+                            nElem.find('.comboboxGradoAcademico').attr('id','ID'+cont+'_gradoA');
 
                             //Checkbox - remover
                             nElem.find('.claseCheckboxEduSuperior').attr('style','cursor:pointer').attr('id','checkboxEduSuperior'+cont);
@@ -597,19 +610,19 @@ $(function () {
 
                                 //Empresa - text
                                 nElem.find('.labelEmpresa').attr('for','ID'+cont+'_empresa');
-                                nElem.find('.inputEmpresa').attr('id','ID'+cont+'_empresa').attr('name','ID'+cont+'_empresa');
+                                nElem.find('.inputEmpresa').attr('id','ID'+cont+'_empresa');
 
                                 //Ocupacion - text
                                 nElem.find('.labelOcupacion').attr('for','ID'+cont+'_ocupacion');
-                                nElem.find('.inputOcupacion').attr('id','ID'+cont+'_ocupacion').attr('name','ID'+cont+'_ocupacion');
+                                nElem.find('.inputOcupacion').attr('id','ID'+cont+'_ocupacion');
 
                                 //Años de experiencia - text
                                 nElem.find('.labelAñosExp').attr('for','ID'+cont+'_añosExp');
-                                nElem.find('.año').attr('id','ID'+cont+'_añosExp').attr('name','ID'+cont+'_añosExp');
+                                nElem.find('.año').attr('id','ID'+cont+'_añosExp');
 
                                 //Descripcion - text
                                 nElem.find('.labelDescripcion').attr('for','ID'+cont+'_descripcion');
-                                nElem.find('.textareaDescripcion').attr('id','ID'+cont+'_descripcion').attr('name','ID'+cont+'_descripcion');
+                                nElem.find('.textareaDescripcion').attr('id','ID'+cont+'_descripcion');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxExpProfesional').attr('style','cursor:pointer').attr('id','checkboxExpProfesional'+cont);
@@ -725,19 +738,19 @@ $(function () {
 
                                         //Nombre - text
                                         nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
-                                        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+                                        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre');
 
                                         //Nivel de escritura - combobox
                                         nElem.find('.labelNivelEscritura').attr('for','ID'+cont+'_nivelEscritura');
-                                        nElem.find('.comboboxNivelEscritura').attr('id','ID'+cont+'_nivelEscritura').attr('name','ID'+cont+'_nivelEscritura');
+                                        nElem.find('.comboboxNivelEscritura').attr('id','ID'+cont+'_nivelEscritura');
 
                                         //Nivel de lectura - text
                                         nElem.find('.labelNivelLectura').attr('for','ID'+cont+'_nivelLectura');
-                                        nElem.find('.comboboxNivelLectura').attr('id','ID'+cont+'_nivelLectura').attr('name','ID'+cont+'_nivelLectura');
+                                        nElem.find('.comboboxNivelLectura').attr('id','ID'+cont+'_nivelLectura');
 
                                         //Nivel conversacional - text
                                         nElem.find('.labelNivelConversacional').attr('for','ID'+cont+'_nivelConversacional');
-                                        nElem.find('.comboboxNivelConversacional').attr('id','ID'+cont+'_nivelConversacional').attr('name','ID'+cont+'_nivelConversacional');
+                                        nElem.find('.comboboxNivelConversacional').attr('id','ID'+cont+'_nivelConversacional');
 
                                         //Checkbox - remover
                                         nElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+cont);
@@ -838,19 +851,19 @@ $(function () {
 
                                 //Nombre - text
                                 nElem.find('.labelNombre').attr('for','ID'+cont+'_actividad');
-                                nElem.find('.inputNombre').attr('id','ID'+cont+'_actividad').attr('name','ID'+cont+'_nombre');
+                                nElem.find('.inputNombre').attr('id','ID'+cont+'_actividad');
 
                                 //Institucion - text
                                 nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
-                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion');
 
                                 //Lugar - text
                                 nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
-                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
+                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar');
 
                                 //Año - text
                                 nElem.find('.labelAño').attr('for','ID'+cont+'_año');
-                                nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+                                nElem.find('.inputAño').attr('id','ID'+cont+'_año');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxCursosMasRelevantes').attr('style','cursor:pointer').attr('id','checkboxCursosMasRelevantes'+cont);

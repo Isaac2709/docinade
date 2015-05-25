@@ -159,6 +159,15 @@ class InformacionAspirante extends Model {
 	}
 
 	/**
+	 * Relacion uno a uno entre los modelos InformacionAspirante y EducacionDistancia
+	 * @return [arrayEloquent] [El modelo EducacionDistancia que pertenece a
+	 *                             InformacionAspirante]
+	 */
+	public function educacion_distancia(){
+		return $this->hasOne('App\EducacionDistancia', 'EDi_ID_Asp');
+	}
+
+	/**
 	 * Devuelve las experiencias en investigaciones que se van a eliminar
 	 * @param  [type] $query              	[description]
 	 * @param  [array] $id_investigaciones 	[los id de las investigaciones que aun se mantienen]

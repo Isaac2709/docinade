@@ -13,6 +13,17 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('pdf', function(){
+    $fpdf = new Fpdf();
+    $fpdf->AddPage();
+    $fpdf->SetFont('Arial','B',16);
+    $fpdf->Cell(40,20,'Hello World!');
+    $fpdf->Cell(40,20,'Hola Mundo!');
+    $fpdf->Output();
+    exit;
+
+});
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
