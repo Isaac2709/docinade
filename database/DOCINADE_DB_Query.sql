@@ -193,6 +193,8 @@ CREATE TABLE ASP_Aspirante(
 	Asp_Utilizacion_Progra_Comp BOOLEAN,
 	Asp_Conoc_Educacion_Dist BOOLEAN,
 
+	Asp_Estado_Formulario ENUM('Incompleto', 'No enviado','Enviado','Revisado') NOT NULL DEFAULT 'No enviado',
+
 	ID_Prop_Tesis SMALLINT,
 
     CONSTRAINT PK_Asp_Asp_ID PRIMARY KEY (Asp_ID),
@@ -214,6 +216,7 @@ CREATE TABLE ASP_Aspirante(
 -- ALTER TABLE `Asp_Aspirante` CHANGE `Asp_ID_Area_Interes` `Asp_Area_Interes` VARCHAR(150) NULL DEFAULT NULL;
 -- ALTER TABLE `asp_aspirante` CHANGE `Asp_Pasaporte_Adj` `Asp_Pasaporte_Adj` VARCHAR(300) NULL DEFAULT NULL;
 -- ALTER TABLE `asp_aspirante` CHANGE `Asp_Fotografia` `Asp_Fotografia` VARCHAR(300) NULL DEFAULT NULL;
+-- ALTER TABLE `asp_aspirante` ADD `Asp_Estado_Formulario` ENUM('Incompleto', 'No enviado','Enviado','Revisado') NOT NULL DEFAULT 'Incompleto' AFTER `ID_Prop_Tesis`;
 
 CREATE TABLE ASP_Biblioteca(
 	Bib_ID SMALLINT AUTO_INCREMENT NOT NULL,
