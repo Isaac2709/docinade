@@ -44,12 +44,17 @@ class Formulario extends Model {
     }
 
     public function scopeFormularioEstaLLeno(){
-    	// if($this->informacion_aspirante->isEmpty()){
-    	// 	return false;
-    	// }
-    	// if($this->aspirante->direccion_actual()->isEmpty() | $this->aspirante->area_interes()->isEmpty()){
-    	// 	return false;
-    	// }
-    	return true;
+        $id = $this->informacion_aspirante->Asp_ID;
+        $data = \DB::select("select enviarForm(".$id.") as 'Resultado'");
+        if($data[0]->Resultado === 'Y'){
+            if($this->informacion_aspirante->Asp_Estado_Formulario != 'No enviado'){
+                $this->informacion_aspirante->Asp_Estado_Formulario = "No enviado";
+                $this->informacion_aspirante->save();
+            }
+        	return true;
+        }
+        else{
+            return $data[0]->Resultado;
+        }
     }
 }
