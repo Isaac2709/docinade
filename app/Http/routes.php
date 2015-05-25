@@ -51,4 +51,5 @@ Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'],
 	Route::get('/', 'FormularioController@getIndex');
 	Route::post('/', 'FormularioController@postIndex');
 	Route::get('pdfformulario', 'FormularioController@getPdfformulario');
+	Route::post('envFormulario', 'FormularioController@postEnviarFormulario');
 });
