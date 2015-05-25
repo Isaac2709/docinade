@@ -72,8 +72,22 @@
 	    <div class="widget-main2">
 	    <!-- <div class="widget-inner"> -->
 			<div class="panel panel-default">
-
-				<div class="panel-heading"><h2>Formulario de Aspirante a Doctorado</h2></div>
+<!-- display: none; -->
+				<div class="panel-heading">
+					<div>
+						<label class="control-label"><h2>Formulario de Aspirante a Doctorado</h2></label>
+						@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario == "No enviado")
+						<div class="form-group md-3 pull-right" style="margin-top: 15px;">
+							<form method="POST" action="formulario/envFormulario" style="">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<div class="form-group">
+									<input type="submit" value="Enviar Formulario" class="btn btn-success">
+								</div>
+							</form>
+						</div>
+						@endif
+					</div>
+				</div>
 				<div class="panel-body ">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
