@@ -89,6 +89,11 @@
 					</div>
 				</div>
 				<div class="panel-body ">
+					@if(count($user->formulario->ConsultarDatosFaltantes()) > 0)
+						<div class="alert alert-info">Datos faltantes:
+						{{ count($user->formulario->ConsultarDatosFaltantes()) }}
+						</div>
+					@endif
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> Tuvimos algunos problemas con sus entradas<br>
