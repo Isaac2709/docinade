@@ -5,6 +5,8 @@
 
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" >
 	<link href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" >
+	<!--para highlight -->
+	<link href="//cdn.datatables.net/plug-ins/1.10.7/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet" >
 	
 	<!-- 3<link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" rel="stylesheet" >-->
 	<style type="text/css">
@@ -74,8 +76,8 @@
 								<td>{{$user->formulario->IPe_Genero}}</td>
 								<td>{{$user->formulario->informacion_aspirante->nacionalidad->Nac_Nombre or ''}}</td>
 								<td>{{$user->formulario->emails()->first()->Email_Email or ''}}</td>
-								<td>Incompleto</td>
-								<td>X</td>
+								<td>{{$user->formulario->informacion_aspirante->Asp_Estado_Formulario}}</td>
+								<td><a href="#" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
 							</tr>
 						@endforeach
 						</tbody>
@@ -113,6 +115,9 @@ scrip
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<!-- para el highlight-->
+<script src="//cdn.datatables.net/plug-ins/1.10.7/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+<script src="//bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
 
 <script type="text/javascript">
 
@@ -125,6 +130,8 @@ scrip
  
     // DataTable
     var table = $('#tablaConsultas').DataTable();
+
+
  
     // Apply the search
     table.columns().every( function () {
@@ -136,11 +143,13 @@ scrip
                 .draw();
         } );
     } );
+
+
 } );
 </script>
 
 <script type="text/javascript">
-	$('#tablaConsultas').dataTable( {
+	$('#tablaConsultas').dataTable( { searchHighlight: true,
   "language": {
     "emptyTable":     "No hay datos disponibles en la tabla",
     "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
@@ -164,6 +173,7 @@ scrip
         "sortDescending": ": activar para ordenar columna descendentemente"
     }
   }
+
 } );
 </script>
 
