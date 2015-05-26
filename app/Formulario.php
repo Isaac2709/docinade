@@ -46,6 +46,7 @@ class Formulario extends Model {
     public function scopeFormularioEstaLLeno(){
         $id = $this->informacion_aspirante->Asp_ID;
         $data = \DB::select("select enviarForm(".$id.") as 'Resultado'");
+        // dd($data);
         if($data[0]->Resultado === 'Y'){
             if($this->informacion_aspirante->Asp_Estado_Formulario != 'No enviado'){
                 $this->informacion_aspirante->Asp_Estado_Formulario = "No enviado";
@@ -54,6 +55,10 @@ class Formulario extends Model {
         	return true;
         }
         else{
+            if($this->informacion_aspirante->Asp_Estado_Formulario != 'Incompleto'){
+                $this->informacion_aspirante->Asp_Estado_Formulario = "Incompleto";
+                $this->informacion_aspirante->save();
+            }
             return $data[0]->Resultado;
         }
     }
