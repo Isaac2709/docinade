@@ -62,4 +62,11 @@ class Formulario extends Model {
             return $data[0]->Resultado;
         }
     }
+
+    public function scopeConsultarDatosFaltantes(){
+        $id = $this->informacion_aspirante->Asp_ID;
+        \DB::connection()->getPdo()->setAttribute(\PDO::ATTR_EMULATE_PREPARES, true);
+        return \DB::select('Call consultarEstado(?)', array($id));
+
+    }
 }
