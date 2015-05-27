@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['Usu_Nombre', 'email', 'password'];//GEN_ID_Usuario
+	protected $fillable = ['Usu_Nombre', 'email', 'password', 'Usu_Tipo'];//GEN_ID_Usuario
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -68,4 +68,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function esProfesor(){
     	return $this->Usu_Tipo == 'Profesor';
     }
+
+    // public function setPasswordAttribute($value){
+    // 	if(!empty($value)){
+	   //  	$this->attributes['password'] = bcrypt($value);
+	   //  }
+    // }
 }
