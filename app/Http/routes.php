@@ -32,7 +32,8 @@ Route::controllers([
 ]);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namespace' => 'Administrador'], function(){
-	Route::resource('/', 'AdministradorController');
+	Route::resource('users', 'AdministradorController');
+	Route::get('/', 'AdministradorController@index');
 });
 
 
