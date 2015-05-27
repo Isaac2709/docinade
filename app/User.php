@@ -19,6 +19,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	protected $primaryKey = 'Usu_ID';
 
+	/*protected $perPage = 2;*//*linea para probar q la paginacion sirve con menos de 15 usuarios*/
+
 	/**
 	* Set the variables timestamps to false
 	*

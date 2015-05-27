@@ -7,6 +7,7 @@
 				<p class="text-center"><small>Indique el nombre y dirección de dos personas (uno de éstas debe ser un académico con nivel mínimo de Maestría) que lo (a) podrían recomendar a este  programa. Las recomendaciones deberán ser enviadas a nosotros,  por quien recomienda,  en sobre cerrado.</small></p>
 			</div>
 			<div class="col-md-6">
+
 				@if(!$user->formulario->informacion_aspirante->recomendaciones->isEmpty())
 					<!--Nombre-->
 					<div class="form-group">
