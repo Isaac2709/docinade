@@ -115,7 +115,7 @@ function cambiarTextoDeBoton(button_id)
 }
 
 
-// <!--FUNCION DE LOS BOTONES DE LA VISTA EXPERIENCIA_EN_INVESTIGACION-->
+// <!--FUNCION DE LOS BOTONES DE LA VISTA TRABAJOS_PUBLICADOS-->
 $(function () {
     $('#btnAgregarTrabajosPublicados').click(function () {
         var num     = $('.blockTrabajosPublicados').length, // how many "duplicatable" input fields we currently have
@@ -390,7 +390,7 @@ $(function () {
         newElem.find('.labelInstitucion').attr('for','ID'+newNum+'_institucion');
         newElem.find('.inputInstitucion').attr('id','ID'+newNum+'_institucion').val('');
 
-        //Pais - text
+        //Pais  - text
         newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
         newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').val('');
 

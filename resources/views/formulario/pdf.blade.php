@@ -251,6 +251,7 @@
 	<b class="text-left"><font size="2">
 		b. EXPERIENCIA PROFESIONAL
 	</font></b>
+	<?php $funciones = null; ?>
 	<table  class="table1"  width="100%">
 		<tr>
 			<th><b>Empresa, Centro o Institución</b></th>
@@ -259,6 +260,9 @@
 		</tr>
 		@foreach($user->formulario->informacion_aspirante->experiencias_profesionales_desc as $expPro)
 			<tr>
+				 @if($expPro->Pro_Actual)
+				  <?php $funciones = $expPro->Pro_Funciones; ?>
+				 @endif
 				<td>
 					{{ $expPro->Pro_Institucion }}
 				</td>
@@ -276,7 +280,11 @@
 	<br />
 	<table class="table2" width="100%">
 		<tr>
-			<td><b>Para el trabajo actual las funciones que desempeña: </b> </td>
+
+			<!-- <td><b>Para el trabajo actual las funciones que desempeña: </b> </td> -->
+			<td><b>Funciones que Desempeña en el Trabajo más Reciente: </b>
+				{{ $funciones }}
+			</td>
 		</tr>
 		<tr><td> {{ $expPro->ocupacion->Ocu_Ocupacion }} </td></tr>
 	</table>

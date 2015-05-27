@@ -18,6 +18,14 @@ class AdministradorController extends Controller {
 	{
 		$admins = User::where('Usu_Tipo', '=', 'Administrador')->get();
 		return view('administrador.index')->with('admins', $admins);
+
+	}
+
+	public function forms(){
+		//where('Usu_Tipo','==','Administrador')->
+		$users=User::where('Usu_Tipo', '=', 'Aspirante')->paginate();/*variable referente a la coleccion de usuarios*/
+		//dd($users);
+		return view('consultas.index', compact('users')); /*como segundo parametro se le puede dar las variables users donde esta la coleccion de usuarios*/
 	}
 
 	/**
