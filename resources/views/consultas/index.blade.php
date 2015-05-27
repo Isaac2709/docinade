@@ -144,6 +144,11 @@ scrip
         } );
     } );
 
+    //ordenamiento por una columna en especifico
+    table
+    .order( [ 6, 'asc' ] )
+    .draw();
+
 
 } );
 </script>
