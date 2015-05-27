@@ -117,7 +117,7 @@
 
 
 				<div class="panel-body ">
-				<?php $porcentaje_completado = $user->formulario->porcentajeFinalizado()+50; ?>
+				<?php $porcentaje_completado = $user->formulario->porcentajeFinalizado(); ?>
 					<div class="progress">
 						<div class="progress-bar" role="progressbar" aria-valuenow="{{ $porcentaje_completado }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $porcentaje_completado }}%;">
 						   @if($porcentaje_completado > 5)
