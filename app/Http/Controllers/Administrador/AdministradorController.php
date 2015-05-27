@@ -2,8 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearAdministradorRequest;
 
 class AdministradorController extends Controller {
 
@@ -14,7 +16,8 @@ class AdministradorController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$admins = User::where('Usu_Tipo', '=', 'Administrador')->get();
+		return view('administrador.index')->with('admins', $admins);
 	}
 
 	/**
@@ -24,7 +27,7 @@ class AdministradorController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('administrador.create');
 	}
 
 	/**
@@ -32,9 +35,17 @@ class AdministradorController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CrearAdministradorRequest $request)
 	{
-		//
+		$user = new User();
+		$user->Usu_Nombre = $request->nombre_completo;
+		$user->email = $request->email;
+		$user->password = bcrypt($request->password);
+		$user->Usu_Tipo = 'Administrador';
+		$user->save();
+
+		$message = 'El usuario de tipo administrador ha sido agregado.';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
 	/**
@@ -56,7 +67,8 @@ class AdministradorController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$admin = User::findOrFail($id);
+		return view('administrador.edit')->with('admin', $admin);
 	}
 
 	/**
@@ -65,9 +77,18 @@ class AdministradorController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request, $id)
 	{
-		//
+		$admin = User::findOrFail($id);
+		$admin->Usu_Nombre = $request->nombre_completo;
+		$admin->email = $request->email;
+		$password = $request->password;
+		if(!empty($password)){
+	    	$admin->password = bcrypt($request->password);
+	    }
+		$admin->save();
+		$message = 'El usuario de tipo administrador ha sido actualizado.';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
 	/**
