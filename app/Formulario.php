@@ -69,4 +69,14 @@ class Formulario extends Model {
         return \DB::select('Call consultarEstado(?)', array($id));
 
     }
+
+    public function scopePorcentajeFinalizado(){
+        $datos_faltantes = count($this->ConsultarDatosFaltantes());
+        $total_datos = 27;
+        $porcentaje = 100 - (($datos_faltantes * 100) / $total_datos);
+        if($porcentaje === 0)
+            return 1;
+        return round($porcentaje);
+
+    }
 }
