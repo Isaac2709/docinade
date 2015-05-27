@@ -44,12 +44,39 @@ class Formulario extends Model {
     }
 
     public function scopeFormularioEstaLLeno(){
-    	// if($this->informacion_aspirante->isEmpty()){
-    	// 	return false;
-    	// }
-    	// if($this->aspirante->direccion_actual()->isEmpty() | $this->aspirante->area_interes()->isEmpty()){
-    	// 	return false;
-    	// }
-    	return true;
+        $id = $this->informacion_aspirante->Asp_ID;
+        $data = \DB::select("select enviarForm(".$id.") as 'Resultado'");
+        // dd($data);
+        if($data[0]->Resultado === 'Y'){
+            if($this->informacion_aspirante->Asp_Estado_Formulario != 'No enviado'){
+                $this->informacion_aspirante->Asp_Estado_Formulario = "No enviado";
+                $this->informacion_aspirante->save();
+            }
+        	return true;
+        }
+        else{
+            if($this->informacion_aspirante->Asp_Estado_Formulario != 'Incompleto'){
+                $this->informacion_aspirante->Asp_Estado_Formulario = "Incompleto";
+                $this->informacion_aspirante->save();
+            }
+            return $data[0]->Resultado;
+        }
+    }
+
+    public function scopeConsultarDatosFaltantes(){
+        $id = $this->informacion_aspirante->Asp_ID;
+        \DB::connection()->getPdo()->setAttribute(\PDO::ATTR_EMULATE_PREPARES, true);
+        return \DB::select('Call consultarEstado(?)', array($id));
+
+    }
+
+    public function scopePorcentajeFinalizado(){
+        $datos_faltantes = count($this->ConsultarDatosFaltantes());
+        $total_datos = 27;
+        $porcentaje = 100 - (($datos_faltantes * 100) / $total_datos);
+        if($porcentaje === 0)
+            return 1;
+        return round($porcentaje);
+
     }
 }

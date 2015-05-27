@@ -42,7 +42,7 @@ class ConocimientoIdioma extends Model {
 	 * @return [arrayEloquent] [El modelo NivelIdioma que pertenece al ConocimientoIdioma]
 	 */
 	public function nivel_idioma_escritura(){
-		return $this->hasOne('App\NivelIdioma', 'Idm_ID_Niv_Escr');
+		return $this->belongsTo('App\NivelIdioma', 'Idm_ID_Niv_Escr');
 	}
 
 	/**
@@ -50,7 +50,7 @@ class ConocimientoIdioma extends Model {
 	 * @return [arrayEloquent] [El modelo NivelIdioma que pertenece al ConocimientoIdioma]
 	 */
 	public function nivel_idioma_lectura(){
-		return $this->hasOne('App\NivelIdioma', 'Idm_ID_Niv_Lect');
+		return $this->belongsTo('App\NivelIdioma', 'Idm_ID_Niv_Lect');
 	}
 
 	/**
@@ -58,6 +58,6 @@ class ConocimientoIdioma extends Model {
 	 * @return [arrayEloquent] [El modelo NivelIdioma que pertenece al ConocimientoIdioma]
 	 */
 	public function nivel_idioma_conversacional(){
-		return $this->hasOne('App\NivelIdioma', 'Idm_ID_Niv_Conv');
+		return $this->belongsTo('App\NivelIdioma', 'Idm_ID_Niv_Conv');
 	}
 }

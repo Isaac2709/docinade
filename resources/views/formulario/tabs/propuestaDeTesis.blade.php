@@ -3,6 +3,15 @@
 	<div id="formularioPropuestaTesis" class="blockPropuestaTesis">
 		<div class="row">
 			<div class="col-md-12">
+				<!-- Título de la propuesta de tesis -->
+				<label for="definicion" class="control-label labelDefinicion">Definición y pertenencia del problema:</label>
+				<div class="form-group">
+					<div class="col-md-12">
+						<input type="text" name="titulo_propuesta" class="form-control" value="{{ $user->formulario->informacion_aspirante->propuesta_tesis->PTe_Titulo or '' }}">
+					</div>
+				</div>
+				<!--Termian Título de la propuesta de tesis-->
+
 				<!--Definicion del problema-->
 				<label for="definicion" class="control-label labelDefinicion">Definición y pertenencia del problema:</label>
 				<div class="form-group">

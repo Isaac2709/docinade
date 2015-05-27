@@ -216,16 +216,15 @@ class FormularioController extends Controller {
 		// Fin de la direccion actual
 		$user->formulario->save();
 		// Fin de la Información personal del aspirante
-		if($user->formulario->formularioEstaLLeno()){
+		if($user->formulario->formularioEstaLLeno() === true){
 			$message = 'El formulario esta lleno';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+			return redirect()->back()->withInput()->with('successMessage', [$message]);
 		}
 		$message = 'Sus datos han sido actualizados.';
 		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
 	public function getPdfformulario(){
-		// echo "Cargando...";
 		$user = User::find(Auth::user()->Usu_ID);
     	$html = view('formulario.pdf')->with('user',$user)->render();
     	$pdf = \PDF::load($html, 'Letter', 'portrait');
@@ -233,6 +232,18 @@ class FormularioController extends Controller {
         // return $this->pdf
         //     ->load($html, 'Letter', 'portrait')
         //     ->show();
+	}
+	public function getDocFormulario(){
+		$user = User::find(Auth::user()->Usu_ID);
+		return view('formulario.doc')->with('user',$user);
+	}
+
+	public function postEnviarFormulario(){
+		$user = User::find(Auth::user()->Usu_ID);
+		$user->formulario->informacion_aspirante->Asp_Estado_Formulario = "Enviado";
+		$user->formulario->informacion_aspirante->save();
+		$message = 'El formulario ha sido enviado con éxito.';
+		return redirect()->back()->withInput()->with('successMessage', [$message]);
 	}
 
 	/**

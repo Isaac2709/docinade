@@ -72,9 +72,72 @@
 	    <div class="widget-main2">
 	    <!-- <div class="widget-inner"> -->
 			<div class="panel panel-default">
+<!-- display: none; -->
+				<div class="panel-heading">
+					<div>
+						<label class="control-label"><h2>Formulario de Aspirante a Doctorado</h2></label>
+						@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario == "No enviado")
+						<div class="form-group md-3 pull-right" style="margin-top: 15px;">
+							<form method="POST" action="formulario/envFormulario" style="">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<div class="form-group">
+									<input type="submit" value="Enviar Formulario" class="btn btn-success">
+								</div>
+							</form>
+						</div>
+						@endif
+					</div>
+				</div>
 
-				<div class="panel-heading"><h2>Formulario de Aspirante a Doctorado</h2></div>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title" id="myModalLabel">Datos faltantes</h3>
+                            </div>
+                            <div class="modal-body">
+                            	Es necesario que complete los siguientes datos para poder enviar el formulario:
+                            	<ul>
+                                @foreach($user->formulario->ConsultarDatosFaltantes() as $dato_faltante)
+									<li>{{ $dato_faltante->Res_Campo }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+
 				<div class="panel-body ">
+				<?php $porcentaje_completado = $user->formulario->porcentajeFinalizado()+50; ?>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" aria-valuenow="{{ $porcentaje_completado }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $porcentaje_completado }}%;">
+						   @if($porcentaje_completado > 5)
+								<span class="">
+									{{$user->formulario->porcentajeFinalizado()}}% completado
+								</span>
+								<!-- <a href="" class=""></a> -->
+								<a href="" class="fa fa-info-circle fa-info-custom" data-toggle="modal" data-target="#myModal">
+
+                				</a>
+							@endif
+						</div>
+					</div>
+
+
+					@if(count($user->formulario->ConsultarDatosFaltantes()) > 0)
+						<div class="alert alert-info">Datos faltantes:
+						{{ count($user->formulario->ConsultarDatosFaltantes()) }}
+						</div>
+					@endif
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> Tuvimos algunos problemas con sus entradas<br>

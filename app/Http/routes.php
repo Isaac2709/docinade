@@ -13,6 +13,17 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('pdf', function(){
+    $fpdf = new Fpdf();
+    $fpdf->AddPage();
+    $fpdf->SetFont('Arial','B',16);
+    $fpdf->Cell(40,20,'Hello World!');
+    $fpdf->Cell(40,20,'Hola Mundo!');
+    $fpdf->Output();
+    exit;
+
+});
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
@@ -21,7 +32,8 @@ Route::controllers([
 ]);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namespace' => 'Administrador'], function(){
-	Route::resource('/', 'AdministradorController');
+	Route::resource('users', 'AdministradorController');
+	Route::get('/', 'AdministradorController@index');
 });
 
 
@@ -40,4 +52,5 @@ Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'],
 	Route::get('/', 'FormularioController@getIndex');
 	Route::post('/', 'FormularioController@postIndex');
 	Route::get('pdfformulario', 'FormularioController@getPdfformulario');
+	Route::post('envFormulario', 'FormularioController@postEnviarFormulario');
 });

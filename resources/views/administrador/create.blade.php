@@ -1,11 +1,12 @@
 @extends('app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
-				<div class="panel-heading">Reestablecer Contraseña</div>
+				<div class="panel-heading">Crear Administrador</div>
+
 				<div class="panel-body">
 					@if (count($errors) > 0)
 						<div class="alert alert-danger">
@@ -16,26 +17,43 @@
 								@endforeach
 							</ul>
 						</div>
+					@else
+						@if (session()->has('successMessage'))
+							<div class="alert alert-success">
+							@foreach(session('successMessage') as $message)
+								<center><strong>{{ $message }}</strong></center>
+							@endforeach
+							</div>
+						@endif
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
+					<form class="form-horizontal" method="post" action="{{url('/admin/users') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="hidden" name="token" value="{{ $token }}">
-
+						<!-- Nombre Completo -->
 						<div class="form-group">
-							<label class="col-md-4 control-label">Correo Electrónico</label>
+							<label for="nombre_completo" class="col-md-4 control-label">Nombre Completo: </label>
 							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+								<input type="text" class="form-control" name="nombre_completo">
 							</div>
 						</div>
 
+						<!-- Email -->
 						<div class="form-group">
-							<label class="col-md-4 control-label">Contraseña</label>
+							<label for="email" class="col-md-4 control-label">Correo Electrónico: </label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="email">
+							</div>
+						</div>
+
+						<!-- Contraseña -->
+						<div class="form-group">
+							<label for="password" class="col-md-4 control-label">Contraseña: </label>
 							<div class="col-md-6">
 								<input type="password" class="form-control" name="password">
 							</div>
 						</div>
 
+						<!-- Confirmación de Contraseña -->
 						<div class="form-group">
 							<label class="col-md-4 control-label">Confirmar Contraseña</label>
 							<div class="col-md-6">
@@ -46,7 +64,7 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
-									Reestablecer Contraseña
+									Registrar
 								</button>
 							</div>
 						</div>

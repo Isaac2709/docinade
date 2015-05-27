@@ -145,7 +145,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'Vsmoraes\Pdf\PdfServiceProvider',
-
+		'Anouar\Fpdf\FpdfServiceProvider',
 	],
 
 	/*
@@ -194,6 +194,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'PDF' 		=> 'Vsmoraes\Pdf\PdfFacade',
+	    'Fpdf'    => 'Anouar\Fpdf\Fpdf',
 	],
 
 ];
