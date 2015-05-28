@@ -10,7 +10,7 @@
 
   	<style type="text/css">
 
-	
+
   	</style>
 
 @endsection
@@ -43,22 +43,35 @@
 						@endif
 					</div>
 				</div>
-
+				<?php $porcentaje_completado = $user->formulario->porcentajeFinalizado(); ?>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3 class="modal-title" id="myModalLabel">Datos faltantes</h3>
+                                @if($porcentaje_completado == 100)
+                                	<h3 class="modal-title" id="myModalLabel">Información minima del formulario completada</h3>
+                                @else
+                                	<h3 class="modal-title" id="myModalLabel">Datos faltantes</h3>
+                                @endif
                             </div>
                             <div class="modal-body">
-                            	Es necesario que complete los siguientes datos para poder enviar el formulario:
-                            	<ul>
-                                @foreach($user->formulario->ConsultarDatosFaltantes() as $dato_faltante)
-									<li>{{ $dato_faltante->Res_Campo }}</li>
-                                @endforeach
-                                </ul>
+                             	@if($porcentaje_completado == 100)
+	                             	<strong>¡Felicidades!</strong><br />
+	                             	Ha finalizado de completar la informacion mínima del formulario de adminisión para el doctorado.<br />
+	                             	Se le ha habilitado una opción para poder enviar el formulario para su respectivo análisis.
+	                            @else
+	                            	Es necesario que complete los siguientes datos para poder enviar el formulario: <br />
+	                            	@foreach($user->formulario->consultarDatosFaltantes() as $seccion)
+										<b>{{ $seccion->seccion }}</b>
+										<ul>
+										@foreach($seccion->campos_faltantes as $dato_faltante)
+												<li>{{ $dato_faltante->Res_Campo }}</li>
+										@endforeach
+										</ul>
+	                                @endforeach
+                                @endif
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -70,27 +83,24 @@
                 </div>
                 <!-- /.modal -->
 
-
 				<div class="panel-body ">
-				<?php $porcentaje_completado = $user->formulario->porcentajeFinalizado(); ?>
 					<div class="progress">
-						<div class="progress-bar" role="progressbar" aria-valuenow="{{ $porcentaje_completado }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $porcentaje_completado }}%;">
+						<div class="progress-bar  @if($porcentaje_completado == 100)progress-bar-success @endif" role="progressbar" aria-valuenow="{{ $porcentaje_completado }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $porcentaje_completado }}%;">
 						   @if($porcentaje_completado > 5)
 								<span class="">
-									{{$user->formulario->porcentajeFinalizado()}}% completado
+									{{$porcentaje_completado}}% completado
 								</span>
 								<!-- <a href="" class=""></a> -->
 								<a href="" class="fa fa-info-circle fa-info-custom" data-toggle="modal" data-target="#myModal">
-
                 				</a>
 							@endif
 						</div>
 					</div>
 
-
-					@if(count($user->formulario->ConsultarDatosFaltantes()) > 0)
+					<?php $cant_datos_faltantes = count($user->formulario->datosFaltantes()) - 1; ?>
+					@if($cant_datos_faltantes > 0)
 						<div class="alert alert-info">Datos faltantes:
-						{{ count($user->formulario->ConsultarDatosFaltantes()) }}
+						{{ $cant_datos_faltantes }}
 						</div>
 					@endif
 					@if (count($errors) > 0)
