@@ -46,7 +46,6 @@ class Formulario extends Model {
     public function scopeFormularioEstaLLeno(){
         $id = $this->informacion_aspirante->Asp_ID;
         $data = \DB::select("select enviarForm(".$id.") as 'Resultado'");
-        // dd($data);
         if($data[0]->Resultado === 'Y'){
             if($this->informacion_aspirante->Asp_Estado_Formulario != 'No enviado'){
                 $this->informacion_aspirante->Asp_Estado_Formulario = "No enviado";
@@ -63,7 +62,7 @@ class Formulario extends Model {
         }
     }
 
-    public function scopeConsultarDatosFaltantes(){
+    public function scopeDatosFaltantes(){
         $id = $this->informacion_aspirante->Asp_ID;
         \DB::connection()->getPdo()->setAttribute(\PDO::ATTR_EMULATE_PREPARES, true);
         return \DB::select('Call consultarEstado(?)', array($id));
@@ -71,12 +70,58 @@ class Formulario extends Model {
     }
 
     public function scopePorcentajeFinalizado(){
-        $datos_faltantes = count($this->ConsultarDatosFaltantes());
-        $total_datos = 27;
-        $porcentaje = 100 - (($datos_faltantes * 100) / $total_datos);
+        $datos_faltantes = $this->datosFaltantes();
+        $cant_datos_faltantes = count($datos_faltantes) - 1; // Le quito 1 por que siempre devuelve una fila para el total de campos
+        $total_datos = $this->totalDatos($datos_faltantes);
+        $porcentaje = 100 - (($cant_datos_faltantes * 100) / $total_datos);
         if($porcentaje === 0)
             return 1;
         return round($porcentaje);
 
+    }
+
+    public function scopeConsultarDatosFaltantes(){
+        $array = $this->datosFaltantes();
+        $array_secciones = $this->secciones($array);
+        $array_final = array();
+        foreach ($array_secciones as $seccion) {
+            $array_temp = array();
+            foreach ($array as $var) {
+                if($var->Res_Seccion == $seccion){
+                    $array_temp[] = $var;
+                }
+            }
+            $grupo_dato = new \stdClass();
+            $grupo_dato->seccion = $seccion;
+            $grupo_dato->campos_faltantes = $array_temp;
+            $array_final[] = $grupo_dato;
+        }
+        return $array_final;
+    }
+
+    public function secciones($array){
+        $array_secciones=array();
+        foreach ($array as $var) {
+            if($var->Res_Seccion != null){
+                $array_secciones[] = $var->Res_Seccion;
+            }
+        }
+        return array_unique($array_secciones);
+    }
+
+     public function totalDatos($array){
+        foreach ($array as $var) {
+            if($var->Res_Campo == "Total"){
+                return $var->Res_Cant;
+            }
+        }
+        return 0;
+    }
+
+    function pertenece($dato_faltante, $segmento){
+        if($dato_faltante->Res_Seccion == $segmento){
+            return true;
+        }
+        return false;
     }
 }
