@@ -18,7 +18,6 @@ class AdministradorController extends Controller {
 	{
 		$admins = User::where('Usu_Tipo', '=', 'Administrador')->get();
 		return view('administrador.index')->with('admins', $admins);
-
 	}
 
 	public function forms(){
