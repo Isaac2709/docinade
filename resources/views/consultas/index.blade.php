@@ -7,7 +7,7 @@
 	<link href="//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" >
 	<!--para highlight -->
 	<link href="//cdn.datatables.net/plug-ins/1.10.7/features/searchHighlight/dataTables.searchHighlight.css" rel="stylesheet" >
-	
+
 	<!-- 3<link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" rel="stylesheet" >-->
 	<style type="text/css">
 
@@ -18,7 +18,7 @@
     }
 	</style>
 
-	
+
 @endsection
 
 @section('content')
@@ -29,10 +29,10 @@
 				<div class="panel-heading"><h2>Lista de Aspirantes</h2></div>
 				<div class="panel-body">
 					<!-- <form class="navbar-form navbar-right" role="search">
-					
+
 					  <div class="form-group">
 					  <input type="text" class="form-control" placeholder="Search">
-					    
+
 					  </div>
 					  <button type="submit" class="btn btn-default">Buscar</button>
 					</form>
@@ -68,6 +68,7 @@
 						</tfoot>
 						<tbody>
 						@foreach($users as $user)
+						@if(!empty($user->formulario->IPe_Nombre))
 							<tr>
 								<!-- <td>{{$user->formulario->Usu_ID}}</td>-->
 								<td>{{$user->formulario->IPe_Nombre}}</td>
@@ -79,6 +80,7 @@
 								<td>{{$user->formulario->informacion_aspirante->Asp_Estado_Formulario}}</td>
 								<td><a href="#" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
 							</tr>
+							@endif
 						@endforeach
 						</tbody>
 					</table>
@@ -127,16 +129,16 @@ scrip
         var title = $('#tablaConsultas thead th').eq( $(this).index() ).text();
         $(this).html( '<input type="text" placeholder="'+title+'" />' );
     } );
- 
+
     // DataTable
     var table = $('#tablaConsultas').DataTable();
 
 
- 
+
     // Apply the search
     table.columns().every( function () {
         var that = this;
- 
+
         $( 'input', this.footer() ).on( 'keyup change', function () {
             that
                 .search( this.value )
