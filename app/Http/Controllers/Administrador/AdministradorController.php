@@ -6,6 +6,7 @@ use App\User;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearAdministradorRequest;
+use App\Http\Requests\ActualizarAdministradorRequest;
 
 class AdministradorController extends Controller {
 
@@ -84,7 +85,7 @@ class AdministradorController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Request $request, $id)
+	public function update(ActualizarAdministradorRequest $request, $id)
 	{
 		$admin = User::findOrFail($id);
 		$admin->Usu_Nombre = $request->nombre_completo;
