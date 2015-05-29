@@ -7,7 +7,7 @@ use App\User;
 use App\ConocimientoIdioma;
 
 use Illuminate\Http\Request;
-// use App\Http\Requests\CrearCursoSeminarioRequest;
+use App\Http\Requests\CrearConocimientoIdiomaRequest;
 
 class ConocimientoIdiomaController extends Controller {
 
@@ -44,7 +44,7 @@ class ConocimientoIdiomaController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearConocimientoIdiomaRequest $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 
