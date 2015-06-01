@@ -9,23 +9,11 @@
 
 				<div class="panel-body">
 					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> Hubieron algunos problemas con las entradas.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
+						@include('administrador.partials.alert_danger')
 					@else
-						@if (session()->has('successMessage'))
-							<div class="alert alert-success">
-							@foreach(session('successMessage') as $message)
-								<center><strong>{{ $message }}</strong></center>
-							@endforeach
-							</div>
-						@endif
+						@include('administrador.partials.alert_success')
 					@endif
+
 					<div class="dataTable_wrapper">
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
@@ -42,6 +30,12 @@
 	                                    <td>{{ $admin->email }}</td>
 	                                    <td>
 	                                    	<a href="{{URL::route('admin.users.edit', $admin->Usu_ID)}}" class="btn btn-info">Editar</a>
+
+	                                    	<form class="form" method="POST" action="{{ route('admin.users.destroy', $admin->Usu_ID) }}">
+	                                    		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	                                    		<input type="hidden" name="_method" value="DELETE">
+	                                    		<input type="submit" onclick="return confirm('¿Seguro que desea eliminar el registro?')" class="btn btn-danger" value="Eliminar">
+	                                    	</form>
 	                                    </td>
 	                                </tr>
 								@endforeach
