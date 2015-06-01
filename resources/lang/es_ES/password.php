@@ -12,7 +12,7 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-
+    "invalid_credentials" => "El usuario y/o contraseña no es válido",
     "password" => "La contraseña debe tener al menos 6 caracteres y coincidir con la confirmación.",
     "user" => "No se ha encontrado un usuario con esa dirección de correo.",
     "token" => "Este token de reestablecimiento de contraseña es inválido.",
