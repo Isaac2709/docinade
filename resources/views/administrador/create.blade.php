@@ -9,22 +9,9 @@
 
 				<div class="panel-body">
 					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> Hubieron algunos problemas con las entradas.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
+						@include('administrador.partials.alert_danger')
 					@else
-						@if (session()->has('successMessage'))
-							<div class="alert alert-success">
-							@foreach(session('successMessage') as $message)
-								<center><strong>{{ $message }}</strong></center>
-							@endforeach
-							</div>
-						@endif
+						@include('administrador.partials.alert_success')
 					@endif
 
 					<form class="form-horizontal" method="post" action="{{url('/admin/users') }}">
