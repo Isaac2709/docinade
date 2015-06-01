@@ -52,8 +52,7 @@ class AdministradorController extends Controller {
 		$user->Usu_Tipo = 'Administrador';
 		$user->save();
 
-		$message = 'El usuario de tipo administrador ha sido agregado.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_admin.created'));
 	}
 
 	/**
@@ -95,8 +94,7 @@ class AdministradorController extends Controller {
 	    	$admin->password = bcrypt($request->password);
 	    }
 		$admin->save();
-		$message = 'El usuario de tipo administrador ha sido actualizado.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_admin.updated'));
 	}
 
 	/**
@@ -107,7 +105,10 @@ class AdministradorController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$admin = User::findOrFail($id);
+		$admin->delete();
+		$message = 'El usuario de tipo administrador <b>'.$admin->Usu_Nombre.'</b> fue eliminado.';
+		return redirect()->back()->with('successMessage', $message);
 	}
 
 }
