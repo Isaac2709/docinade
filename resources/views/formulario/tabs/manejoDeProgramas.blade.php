@@ -72,6 +72,7 @@
 	</div>
 	<div class="col-md-11">
 		<input id="btnActualizarBibliotecasYprocesamientoDatos" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+		<input id="btnCancelarManejoDeProgamas" class="btn btn-warning btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 	</div>
 	<br/>
 </form>
