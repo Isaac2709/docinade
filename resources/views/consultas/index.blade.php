@@ -78,7 +78,7 @@
 								<td>{{$user->formulario->informacion_aspirante->nacionalidad->Nac_Nombre or ''}}</td>
 								<td>{{$user->formulario->emails()->first()->Email_Email or ''}}</td>
 								<td>{{$user->formulario->informacion_aspirante->Asp_Estado_Formulario}}</td>
-								<td><a href="#" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+								<td><a href="{{ url('/admin/aspirante/'.$user->Usu_ID) }}" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
 							</tr>
 							@endif
 						@endforeach
