@@ -8,11 +8,6 @@
   	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
   	<link href="{{ asset('/css/custom_styles.css') }}" rel="stylesheet">
 
-  	<style type="text/css">
-
-
-  	</style>
-
 @endsection
 
 @section('page_title')
@@ -57,6 +52,12 @@
                                 @endif
                             </div>
                             <div class="modal-body">
+                            <?php $cant_datos_faltantes = count($user->formulario->datosFaltantes()) - 1; ?>
+								@if($cant_datos_faltantes > 0)
+									<div class="alert alert-info">Datos faltantes:
+									{{ $cant_datos_faltantes }}
+									</div>
+								@endif
                              	@if($porcentaje_completado == 100)
 	                             	<strong>¡Felicidades!</strong><br />
 	                             	Ha finalizado de completar la informacion mínima del formulario de adminisión para el doctorado.<br />
@@ -72,6 +73,10 @@
 										</ul>
 	                                @endforeach
                                 @endif
+                                <div class="form-group">
+									<a class="btn btn-success" href="formulario/pdfformulario" target="_blank" >Exportar formulario a PDF</a>
+									<a class="btn btn-success" href="formulario/docformulario" target="_blank" >Exportar formulario a Word</a>
+								</div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -88,61 +93,45 @@
 						<div class="progress-bar  @if($porcentaje_completado == 100)progress-bar-success @endif" role="progressbar" aria-valuenow="{{ $porcentaje_completado }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $porcentaje_completado }}%;">
 						   @if($porcentaje_completado > 5)
 								<span class="">
-									{{$porcentaje_completado}}% completado
+									@if($porcentaje_completado == 100 && $user->formulario->informacion_aspirante->Asp_Estado_Formulario == "Enviado")
+										El formulario ha sido enviado
+									@else
+										{{$porcentaje_completado}}% completado
+									@endif
 								</span>
-								<!-- <a href="" class=""></a> -->
 								<a href="" class="fa fa-info-circle fa-info-custom" data-toggle="modal" data-target="#myModal">
                 				</a>
 							@endif
 						</div>
 					</div>
 
-					<?php $cant_datos_faltantes = count($user->formulario->datosFaltantes()) - 1; ?>
-					@if($cant_datos_faltantes > 0)
-						<div class="alert alert-info">Datos faltantes:
-						{{ $cant_datos_faltantes }}
-						</div>
-					@endif
 					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> Tuvimos algunos problemas con sus entradas<br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
+						@include('formulario.partials.alert_danger')
 					@else
-						@if (session()->has('successMessage'))
-							<div class="alert alert-success">
-							<!-- <ul> -->
-								@foreach(session('successMessage') as $message)
-									<center><strong>{{ $message }}</strong></center>
-								@endforeach
-							<!-- </ul> -->
-							</div>
-						@endif
+						@include('formulario.partials.alert_success')
 					@endif
+					<p class="anotacion" style="display: none;">
+						<a name="1"></a>
+						Para poder selecionar otra pestaña debe guardar los cambios realizados sobre esta pestaña o presionar el botón de cancelar.
+					</p>
 					<!-- TABS -->
 					<ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
-				        <li class="active"><a data-toggle="tab" href="#informacionPersonal"><font size="1">Información Personal</font></a></li>
-				        <li class="dropdown">
-				            <a data-toggle="dropdown" class="dropdown-toggle" href="#"><font size="1">Edu. Superior / Exp. Profesional</font><b class="caret"></b></a>
-				            <ul class="dropdown-menu">
-				                <li><a data-toggle="tab" href="#educacionSuperior">Educacion Superior</a></li>
-				                <li><a data-toggle="tab" href="#experienciaProfesional">Experiencia Profesional</a></li>
-				            </ul>
-				        </li>
-				        <li><a class="pesta" data-toggle="tab" href="#experienciaEnInvestigacion"><font  size="1">Experiencia en Investigación</font></a></li>
-				        <li><a data-toggle="tab" href="#trabajosPublicados"><font size="1">Trabajos e Investigaciones Publicadas</font></a></li>
-				        <li><a data-toggle="tab" href="#cursosMasRelevantes"><font size="1">Cursos y Seminarios más Relevantes</font></a></li>
-				        <li><a data-toggle="tab" href="#conocimientoDeIdiomas"><font size="1">Conocimiento de Idiomas Distintos al Materno</font></a></li>
-				        <li><a data-toggle="tab" href="#accesoBibliotecas"><font size="1">Acceso a Bibliotecas / Prosesamiento de Datos</font></a></li>
-				        <li><a data-toggle="tab" href="#manejoDeProgramas"><font size="1">Manejo de Programas de Computación</font></a></li>
-				        <li><a data-toggle="tab" href="#recomendaciones"><font size="1">Recomendaciones</font></a></li>
-				        <li><a data-toggle="tab" href="#exportar"><font size="1">Exportar</font></a></li>
-				        <li><a data-toggle="tab" href="#propuestaDeTesis"><font size="1">Propuesta de Tesis</font></a></li>
-				    </ul>
+						<li class="active"><a class="tab" data-toggle="tab" href="#informacionPersonal"><font size="1">Información Personal</font></a></li>
+						<li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#"><font size="1">Educación / Exp. Prof.</font><b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a class="tab" data-toggle="tab" href="#educacionSuperior">Educacion Superior</a></li>
+								<li><a class="tab" data-toggle="tab" href="#experienciaProfesional">Experiencia Profesional</a></li>
+							</ul>
+						</li>
+						<li><a class="tab" data-toggle="tab" href="#experienciaEnInvestigacion"><font  size="1">Experiencia Investigación</font></a></li>
+						<li><a class="tab" data-toggle="tab" href="#trabajosPublicados"><font size="1">Publicaciones</font></a></li>
+						<li><a class="tab" data-toggle="tab" href="#cursosMasRelevantes"><font size="1">Cursos y Seminarios</font></a></li>
+						<li><a class="tab" data-toggle="tab" href="#conocimientoDeIdiomas"><font size="1">Conocimiento Idiomas</font></a></li>
+						<li><a class="tab" data-toggle="tab" href="#accesoBibliotecas"><font size="1">Bibliotecas / Proc. Datos</font></a></li>
+						<li><a class="tab" data-toggle="tab" href="#manejoDeProgramas"><font size="1">Programas Computación</font></a></li>
+						<li><a class="tab" data-toggle="tab" href="#recomendaciones"><font size="1">Recomendaciones</font></a></li>
+						<li><a class="tab" data-toggle="tab" href="#propuestaDeTesis"><font size="1">Propuesta de Tesis</font></a></li>
+					</ul>
 				    <div class="tab-content" id="myTabContent">
 				    	<!-- PERSONAL INFO -->
 				        <div id="informacionPersonal" class="tab-pane fade in active">
@@ -215,6 +204,9 @@
 						<div id="exportar" class="tab-pane fade">
 							<div class="form-group">
 								<a class="btn btn-success btn-lg" href="formulario/pdfformulario" target="_blank" >Exportar formulario</a>
+							</div>
+							<div class="form-group">
+								<a class="btn btn-success btn-lg" href="formulario/docformulario" target="_blank" >Exportar formulario a Word</a>
 							</div>
 						</div>
 						<!--Termina exportar-->
@@ -293,7 +285,6 @@
 			}
 		});
 	</script>
-
 
 <script type="text/javascript">
 	var institucionesGlobal = <?php echo "".($instituciones); ?>;
