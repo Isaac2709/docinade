@@ -20,7 +20,7 @@ function this_url(){
         </w:WordDocument>
     </xml>
     <!-- [endif]-->
-    <!-- <link href="{{ asset('/css/pdf.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('/css/pdf.css') }}" rel="stylesheet">
     <style>
         p.MsoFooter, li.MsoFooter, div.MsoFooter{
             margin: 0cm;
@@ -293,6 +293,7 @@ function this_url(){
 	<b class="text-left"><font size="2">
 		b. EXPERIENCIA PROFESIONAL
 	</font></b>
+	<?php $funciones = null; ?>
 	<table  class="table1"  width="100%">
 		<tr>
 			<th><b>Empresa, Centro o Institución</b></th>
@@ -301,6 +302,9 @@ function this_url(){
 		</tr>
 		@foreach($user->formulario->informacion_aspirante->experiencias_profesionales_desc as $expPro)
 			<tr>
+				@if($expPro->Pro_Actual)
+				  <?php $funciones = $expPro->Pro_Funciones; ?>
+				 @endif
 				<td>
 					{{ $expPro->Pro_Institucion }}
 				</td>
@@ -320,7 +324,9 @@ function this_url(){
 		<tr>
 			<td><b>Para el trabajo actual las funciones que desempeña: </b> </td>
 		</tr>
-		<tr><td> {{ $expPro->ocupacion->Ocu_Ocupacion }} </td></tr>
+		<td><b>Funciones que Desempeña en el Trabajo más Reciente: </b>
+			{{ $funciones }}
+		</td>
 	</table>
 	<br />
 	<u class="text-left"><b><font size="3">
