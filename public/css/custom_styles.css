@@ -1,3 +1,31 @@
+#floater {
+            display:inline!important;
+            background-color:#f7f9fa;
+            border:2px solid #c1ccd9;
+            font-size:85%; width:250px;
+            margin-left:-100px;
+            margin-top:20px;
+            position:absolute;
+            z-index: 1;
+            border-radius: 10px;
+            color: red;
+        }
+        a.nota {
+            vertical-align:top; font-size:75%; padding:0 8px 0 5px; text-decoration:none;
+        }
+        .iconnotapie {
+            margin:-7px 140px 0;
+            display:block;
+            width:9px;
+        }
+        #floater_inside {
+            padding: 6px 6px 6px 6px;
+        }
+
+.disabled{
+    /*pointer-events: none;*/
+}
+
 .fa-info-custom{
   font-size: 18px;
   color: skyblue;
@@ -181,7 +209,7 @@ hr.soften {
 
 textarea
       {
-        resize: vertical; 
+        resize: vertical;
       }
 /*bloque que se usa para cambiar color y tamaño de los botones para cargar archivos*/
   .claseBtnArchivoCedula {
@@ -200,14 +228,14 @@ textarea
   .toggle-handle{
     background-color: #FFFFFF;
   }
-     
- 
+
+
   /*bloque para cambiar el tamaño de las letras de los tabs cuando se acitva y sobrepone*/
   .nav-pills > li.active > a > font{
     font-size: 120%;
   }
-  
-  
+
+
   /*---------------------------------------*/
 
   /*bloque q centra todas las etiquetas <td>*/
@@ -219,5 +247,5 @@ textarea
   .twitter-typeahead .tt-hint
   {
       height: 34px;
-      
+
   }
