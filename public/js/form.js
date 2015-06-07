@@ -1,3 +1,109 @@
+function showAlert(tab){
+    var index = $("a.tab").index("a.tab");
+    iconnotapie=$("#imgiconnotapie");
+    var floater=$("#floater");
+    var floater_inside=$("#floater_inside");
+
+    floater_inside
+        .empty()
+        .append($("p.anotacion").eq(index).html());
+    tab.after(floater);
+    floater.stop(true, true).animate({opacity: "show"}, "slow");
+
+    tab.bind("click",function(e){
+        e.preventDefault();
+    });
+
+    tab.mouseleave(function(e) {
+        var floater=$("#floater");
+        floater.delay(100).animate({opacity: "hide"}, "fast", function(){
+            $("#empty_div").append($("#floater"))
+        });
+    });
+}
+
+function setAlertToTabs(){
+    $(".nav-pills a[data-toggle=disabled_tab]").click(function(e) {
+      if ($(this).parent().hasClass("disabled")) {
+
+        showAlert($(this));
+        e.preventDefault();
+        return false;
+      }
+    });
+}
+
+function setDisableTabs(input){
+    $(input).parents('.panel-body').find('ul.nav li').not('.active').addClass('disabled');
+    $(input).parents('.panel-body').find('ul.nav li').not('.active').find('a[data-toggle=tab]').attr('data-toggle', 'disabled_tab');
+    $(input).parents('.form').find('.btn-success[type=submit]').prop('disabled', false);
+    $(input).parents('.form').find('.btn-cancel[type=button]').prop('disabled', false);
+    setAlertToTabs();
+}
+
+$(document).ready(function(){
+    $('.form').find('.btn-success[type=submit]').prop('disabled', true);
+    $('.form').find('.btn-cancel[type=button]').prop('disabled', true);
+
+    $('.form').find('input').change(function(){
+        setDisableTabs($(this));
+    });
+
+    $('.form').find('textarea').change(function(){
+        setDisableTabs($(this));
+    });
+
+    $('.form').find('select').change(function(){
+        setDisableTabs($(this));
+    });
+
+    $('.btn-cancel').click(function() {
+        $(this).parents('.panel-body').find('ul.nav li').not('.active').removeClass('disabled');
+        $(this).parents('.panel-body').find('ul.nav li').not('.active').find('a[data-toggle=disabled_tab]').attr('data-toggle', 'tab');
+        $(this).parents('.form').find('.btn-success[type=submit]').prop('disabled', true);
+        $(this).parents('.form').find('.btn-cancel[type=button]').prop('disabled', true);
+    });
+
+    jQuery("<div/>",
+    {
+        id: "empty_div", css:
+        {
+            display: "none"
+        }
+    }).appendTo("body");
+
+    jQuery("<div/>",
+    {
+        id: "floater",
+        mouseenter: function(){
+            floater=$("#floater");
+            floater.stop(true, true).animate({opacity: "show"});
+            $("#floater").stop(true, true).animate({opacity: "show"});
+        },
+        mouseleave: function(){
+            $("#floater").delay(100).animate({opacity: "hide"}, "fast", function(){
+                $("#empty_div").append($("#floater"))
+            });
+        }
+    }
+    ).appendTo("#empty_div");
+
+    jQuery("<img/>",
+    {
+        id: "imgiconnotapie",
+        src: "iconnotaspie.gif",
+        class: "iconnotapie"
+    }
+    ).appendTo("#floater");
+
+    jQuery("<div/>",
+    {
+        id: "floater_inside"
+    }
+    ).appendTo("#floater");
+
+});
+
 $(document).ready(function(){
     $(".checkbox_edu" ).change(function(){
         if($(this).is(":checked")){
