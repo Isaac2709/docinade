@@ -37,9 +37,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namesp
 	Route::get('aspirante/{Asp_ID}', 'AspiranteController@index');
 });
 
-
-
-
 Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'], 'namespace' => 'Formulario'], function(){
 	// Route::controller('/', 'FormularioController');
 	Route::post('expInvestigacion', 'ExperienciaInvestigacionController@store');
