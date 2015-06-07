@@ -34,7 +34,10 @@ Route::controllers([
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namespace' => 'Administrador'], function(){
 	Route::resource('users', 'AdministradorController');
 	Route::get('/', 'AdministradorController@forms');
+	Route::get('aspirante/{Asp_ID}', 'AspiranteController@index');
 });
+
+
 
 
 Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'], 'namespace' => 'Formulario'], function(){
@@ -52,5 +55,6 @@ Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'],
 	Route::get('/', 'FormularioController@getIndex');
 	Route::post('/', 'FormularioController@postIndex');
 	Route::get('pdfformulario', 'FormularioController@getPdfformulario');
+	Route::get('docformulario', 'FormularioController@getDocFormulario');
 	Route::post('envFormulario', 'FormularioController@postEnviarFormulario');
 });
