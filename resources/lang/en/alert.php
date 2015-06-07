@@ -14,9 +14,9 @@ return [
     */
 
     'alert_admin' => [
-        'updated' => 'El usuario de tipo administrador ha sido actualizado.',
-        'deleted' => 'El usuario de tipo administrador fue eliminado.',
-        'created' => 'El usuario de tipo administrador ha sido agregado.'
+        'updated' => 'The administrator has been updated.',
+        'deleted' => 'The administrator has been removed.',
+        'created' => 'The administrator has been added.'
     ]
 
 ];

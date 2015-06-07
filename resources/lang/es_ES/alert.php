@@ -14,9 +14,19 @@ return [
     */
 
     'alert_admin' => [
-        'updated' => 'The administrator has been updated.',
-        'deleted' => 'The administrator has been removed.',
-        'created' => 'The administrator has been added.'
+        'updated' => 'El usuario de tipo administrador ha sido actualizado.',
+        'deleted' => 'El usuario de tipo administrador fue eliminado.',
+        'created' => 'El usuario de tipo administrador ha sido agregado.'
+    ],
+
+    'alert_form' => [
+        'updated' => 'Sus datos han sido actualizados.',
+        'completed' => 'El formulario ha sido completado.',
+        'sent' => 'El formulario ha sido enviado con éxito.',
+        'errors' => [
+            'error_message' => '<strong>Whoops!</strong> Hubieron algunos problemas con sus entradas.',
+            'already_been_sent' => 'El formulario ya ha sido enviado'
+        ]
     ]
 
 ];
