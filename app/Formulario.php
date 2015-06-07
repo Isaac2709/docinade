@@ -105,6 +105,11 @@ class Formulario extends Model {
             if($var->Res_Seccion != null){
                 $array_secciones[] = $var->Res_Seccion;
             }
+            else{
+                if($var->Res_Campo != "Total"){
+                    $array_secciones[] = $var->Res_Campo;
+                }
+            }
         }
         return array_unique($array_secciones);
     }
