@@ -63,7 +63,8 @@ class AdministradorController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$admin = User::findOrFail($id);
+		return view('administrador.profile')->with('admin', $admin);
 	}
 
 	/**
