@@ -1,4 +1,4 @@
-<form role="form" action="formulario/conIdioma" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="formulario/conIdioma" method="post" class="form form-horizontal" enctype="multipart/form-data">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->conocimiento_idiomas->isEmpty())
@@ -205,6 +205,7 @@
 		<div class="col-md-11">
 			<button id="btnAgregarConocimientoDeIdiomas" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			<input id="btnActualizarConocimientoDeIdiomas" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+			<input type="button" class="btn btn-warning btn-cancel btn-lg" value="Cancelar">
 		</div>
 	</div>
 	<br/>

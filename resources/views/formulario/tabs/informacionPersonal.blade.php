@@ -1,4 +1,4 @@
-<form role="form" action="#" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="#" method="post" class="form form form-horizontal" enctype="multipart/form-data">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="row">
@@ -244,6 +244,7 @@
 	<!-- BOTON ACTUALIZAR -->
 	<div class="col-md-11">
         <input id="btnActualizarDatosPersonales" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+        <input type="button" class="btn btn-warning btn-cancel btn-lg" value="Cancelar">
     </div>
     <br/>
 </form>
