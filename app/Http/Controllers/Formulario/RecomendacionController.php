@@ -144,8 +144,7 @@ class RecomendacionController extends Controller {
 			$recomendacion2->save();
 		}
 
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	/**

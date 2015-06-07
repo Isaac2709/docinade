@@ -88,8 +88,7 @@ class ExperienciaInvestigacionController extends Controller {
 			$experiencia_investigacion->save();
 			$pos = $pos + 1;
 		}
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	/**

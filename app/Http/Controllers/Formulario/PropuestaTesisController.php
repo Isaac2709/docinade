@@ -59,8 +59,7 @@ class PropuestaTesisController extends Controller {
 
 		$user->formulario->informacion_aspirante->propuesta_tesis->save();
 
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	/**

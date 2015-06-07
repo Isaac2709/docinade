@@ -82,6 +82,7 @@ class FormularioController extends Controller {
 			$informacion_aspirante->direccion_actual()->associate($direccion_actual);
 			$informacion_aspirante->save();
 		}
+
 		// dd($areas_especialidad);
 		return view('formulario.index')->with('paises', json_encode($paises))->with('nacionalidades', json_encode($nacionalidades))->with('areas_especialidad', json_encode($areas_especialidad))->with('instituciones', json_encode($instituciones))->with('enfasis', $enfasis)->with('ocupaciones', json_encode($ocupaciones))->with('grados_academicos', $grados_academicos)->with('niveles_idioma', $niveles_idioma)->with('user', $user);
 	}
@@ -217,11 +218,9 @@ class FormularioController extends Controller {
 		$user->formulario->save();
 		// Fin de la Información personal del aspirante
 		if($user->formulario->formularioEstaLLeno() === true){
-			$message = 'El formulario esta lleno';
-			return redirect()->back()->withInput()->with('successMessage', [$message]);
+			return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.completed'));
 		}
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	public function getPdfformulario(){
@@ -242,8 +241,7 @@ class FormularioController extends Controller {
 		$user = User::find(Auth::user()->Usu_ID);
 		$user->formulario->informacion_aspirante->Asp_Estado_Formulario = "Enviado";
 		$user->formulario->informacion_aspirante->save();
-		$message = 'El formulario ha sido enviado con éxito.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.sent'));
 	}
 
 	/**
