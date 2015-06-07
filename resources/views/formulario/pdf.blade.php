@@ -286,7 +286,6 @@
 				{{ $funciones }}
 			</td>
 		</tr>
-		<tr><td> {{ $expPro->ocupacion->Ocu_Ocupacion }} </td></tr>
 	</table>
 	<br />
 	<u class="text-left"><b><font size="3">
