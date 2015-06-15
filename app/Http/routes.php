@@ -34,6 +34,7 @@ Route::controllers([
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namespace' => 'Administrador'], function(){
 	Route::resource('users', 'AdministradorController');
 	Route::get('/', 'AdministradorController@forms');
+	Route::get('aspirantFormData', 'AdministradorController@aspirantFormData');
 	Route::get('aspirante/{Asp_ID}', 'AspiranteController@index');
 });
 
