@@ -242,10 +242,17 @@
     <hr class="soften">
     <!-- End row -->
 	<!-- BOTON ACTUALIZAR -->
-	<div class="col-md-11">
+	<div>
         <input id="btnActualizarDatosPersonales" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+<<<<<<< HEAD
         <input type="button" class="btn btn-warning btn-cancel btn-lg" value="Cancelar">
+=======
+        <input id="btnCancelarDatosPersonales" class="btn btn-warning btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+>>>>>>> 21747b1b7b060525ac3008379017dd2dcdd5f76d
     </div>
+    
+        
+    
     <br/>
 </form>
 <!-- End Form -->
