@@ -16,6 +16,16 @@
         padding: 3px;
         box-sizing: border-box;
     }
+
+    .btn-circle {
+	  width: 30px;
+	  height: 30px;
+	  text-align: center;
+	  padding: 6px 0;
+	  font-size: 12px;
+	  line-height: 1.428571429;
+	  border-radius: 15px;
+	}
 	</style>
 
 	
@@ -77,7 +87,7 @@
 								<td>{{$user->formulario->informacion_aspirante->nacionalidad->Nac_Nombre or ''}}</td>
 								<td>{{$user->formulario->emails()->first()->Email_Email or ''}}</td>
 								<td>{{$user->formulario->informacion_aspirante->Asp_Estado_Formulario}}</td>
-								<td><a href="#" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+								<td><a href="#" class="btn btn-info btn-circle" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
 							</tr>
 						@endforeach
 						</tbody>
@@ -143,6 +153,11 @@ scrip
                 .draw();
         } );
     } );
+
+    //ordenamiento por una columna en especifico
+    table
+    .order( [ 6, 'asc' ] )
+    .draw();
 
 
 } );
