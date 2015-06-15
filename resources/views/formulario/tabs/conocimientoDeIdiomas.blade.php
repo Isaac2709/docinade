@@ -205,6 +205,7 @@
 		<div class="col-md-11">
 			<button id="btnAgregarConocimientoDeIdiomas" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			<input id="btnActualizarConocimientoDeIdiomas" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+			<input id="btnCancelarConocimientoDeIdiomas" class="btn btn-warning btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 		</div>
 	</div>
 	<br/>

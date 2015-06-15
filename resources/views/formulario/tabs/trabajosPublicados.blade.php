@@ -122,6 +122,7 @@
 		<div class="col-md-11">
 			<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			<input id="btnActualizarTrabajosPublicados" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+			<input id="btnCancelarTrabajosPublicados" class="btn btn-warning btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 		</div>
 	</div>
 	<br/>

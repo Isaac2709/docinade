@@ -4,10 +4,10 @@ $(function(){
     $('form').find(':input').each(function(i, elem) {
          var input = $(elem);
          if(elem.type=="checkbox"){
-            input.data('initialState',input.is(":checked"));
+            input.data('estadoInicial',input.is(":checked"));
          }
          else{
-            input.data('initialState', input.val());}
+            input.data('estadoInicial', input.val());}
     });
 });
 
@@ -15,15 +15,12 @@ function cancelarActualizacion() {
     $('form').find(':input').each(function(i, elem) {
          var input = $(elem);
          if(elem.type=="checkbox"){
-            input.prop('checked', input.data('initialState'));
+            input.prop('checked', input.data('estadoInicial'));
          }
          else{
-            input.val(input.data('initialState'));}
+            input.val(input.data('estadoInicial'));}
     });
 }
-
-
-
 
 
 
