@@ -116,6 +116,29 @@ $(document).ready(function(){
     });
 });
 
+//funciones para guardar los valores establecidos y depsues volver a postearlos en caso de q se cancele el Submit
+$(function(){
+    $('form').find(':input').each(function(i, elem) {
+         var input = $(elem);
+         if(elem.type=="checkbox"){
+            input.data('estadoInicial',input.is(":checked"));
+         }
+         else{
+            input.data('estadoInicial', input.val());}
+    });
+});
+
+function cancelarActualizacion() {
+    $('form').find(':input').each(function(i, elem) {
+         var input = $(elem);
+         if(elem.type=="checkbox"){
+            input.prop('checked', input.data('estadoInicial'));
+         }
+         else{
+            input.val(input.data('estadoInicial'));}
+    });
+}
+
 
 // <!--Funciones para las tablas de Programas Computacionales -->
 $(document).ready(function(){

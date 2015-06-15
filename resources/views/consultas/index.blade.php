@@ -16,6 +16,16 @@
         padding: 3px;
         box-sizing: border-box;
     }
+
+    .btn-circle {
+	  width: 30px;
+	  height: 30px;
+	  text-align: center;
+	  padding: 6px 0;
+	  font-size: 12px;
+	  line-height: 1.428571429;
+	  border-radius: 15px;
+	}
 	</style>
 	<link href="{{ asset('/dashboard/css/bootstrap-table.css') }}" rel="stylesheet">
 @endsection
@@ -117,25 +127,32 @@ scrip
 <script type="text/javascript">
 
 	$(document).ready(function() {
-	    // Setup - add a text input to each footer cell
-	    $('#tablaConsultas tfoot th').each( function () {
-	        var title = $('#tablaConsultas thead th').eq( $(this).index() ).text();
-	        $(this).html( '<input type="text" placeholder="'+title+'" />' );
-	    } );
+    // Setup - add a text input to each footer cell
+    $('#tablaConsultas tfoot th').each( function () {
+        var title = $('#tablaConsultas thead th').eq( $(this).index() ).text();
+        $(this).html( '<input type="text" placeholder="'+title+'" />' );
+    } );
 
-	    // DataTable
-	    var table = $('#tablaConsultas').DataTable();
+    // DataTable
+    var table = $('#tablaConsultas').DataTable();
 
-	    // Apply the search
-	    table.columns().every( function () {
-	        var that = this;
 
-	        $( 'input', this.footer() ).on( 'keyup change', function () {
-	            that
-	                .search( this.value )
-	                .draw();
-	        } );
-	    } );
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            that
+                .search( this.value )
+                .draw();
+        } );
+    } );
+
+    //ordenamiento por una columna en especifico
+    table
+    .order( [ 6, 'asc' ] )
+    .draw();
 } );
 </script>
 

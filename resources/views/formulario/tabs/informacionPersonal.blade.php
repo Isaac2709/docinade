@@ -247,6 +247,9 @@
 
         <input id="btnCancelarDatosPersonales" class="btn btn-warning btn-lg btn-cancel pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
     </div>
+
+
+
     <br/>
 </form>
 <!-- End Form -->

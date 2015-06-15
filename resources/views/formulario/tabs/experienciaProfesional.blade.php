@@ -153,6 +153,7 @@
             <div class="col-md-11">
                 <button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
                 <input id="btnActualizarExpProfesional" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+
                 <input id="btnCancelarExpProfesional" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
             </div>
         </div>

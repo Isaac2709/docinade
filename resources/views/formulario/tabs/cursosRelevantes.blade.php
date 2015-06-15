@@ -120,7 +120,8 @@
 		<div class="col-md-11">
 			<button id="btnAgregarCursosMasRelevantes" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			<input id="btnActualizarCursosMasRelevantes" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-			<input type="button" class="btn btn-warning btn-cancel btn-lg" value="Cancelar">
+
+			<input id="btnCancelarCursosRelevantes" class="btn btn-warning btn-lg btn-cancel" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 		</div>
 	</div>
 	<br/>
