@@ -1,4 +1,4 @@
-@extends('app')
+@extends('dashboard.dashboard')
 
 @section('styles')
 
@@ -60,11 +60,19 @@
 	Información Aspirante
 @endsection
 
+@section('page_header')
+	Información Formulario
+@endsection
+
+@section('parent_pages')
+	<li><a href="{{ url('/admin/')}}">Formularios</a></li>
+@endsection
+
 @section('content')
-	<div class="post-45 page type-page status-publish hentry">
+	<!-- <div class="post-45 page type-page status-publish hentry">
 	<div class="widget-main2">
-	<div class="panel panel-default">
-	<div class="panel-heading"><h2>Información Aspirante</h2></div>
+	<div class="panel panel-default"> -->
+	<!-- <div class="panel-heading"><h2>Información Aspirante</h2></div> -->
 	<div class="panel-body ">
 	@if (count($errors) > 0)
 		<div class="alert alert-danger">
