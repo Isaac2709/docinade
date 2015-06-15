@@ -1,4 +1,4 @@
-<form role="form" action="formulario/accProgramasComputo" method="post" class="form-horizontal">
+<form role="form" action="formulario/accProgramasComputo" method="post" class="form form-horizontal">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioManejoDeProgramas1" class="row blockManejoDeProgramas">
 		<div class="row">
@@ -15,6 +15,20 @@
 					<label for="correoElectronico" class="col-md-4 control-label labelWindows">Correo Electrónico:</label>
 					<div class="col-md-8">
 						<input type="checkbox" @if($user->formulario->informacion_aspirante->Asp_Acceso_Email) checked @endif data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="correoElectronico" id="correoElectronico">
+					</div>
+				</div>
+
+				<h2>Educación a distancia o Plataformas virtuales:</h2>
+				<div class="form-group">
+					<label for="correoElectronico" class="col-md-4 control-label labelWindows">Conoce de educación a distancia o de plataformas virtuales:</label>
+					<div class="col-md-8">
+						<input type="checkbox" class="checkbox_edu" @if($user->formulario->informacion_aspirante->Asp_Conoc_Educacion_Dist) checked @endif data-toggle="toggle" data-on="Si" data-off="No" data-onstyle="primary" data-offstyle="danger" name="educacionDistancia" id="educacionDistancia">
+					</div>
+				</div>
+				<div class="form-group textarea_comment" @if(!$user->formulario->informacion_aspirante->Asp_Conoc_Educacion_Dist) style="display: none;" @endif >
+					<label for="educacionDistancia" class="col-md-4 control-label labelEducacionDistancia">Comente:</label>
+					<div class="col-md-8">
+						<textarea name="edu_distancia_descripcion" class="form-control " rows="3">{{ $user->formulario->informacion_aspirante->educacion_distancia->EDi_Descripcion or '' }}</textarea>
 					</div>
 				</div>
 			</div>
@@ -72,6 +86,7 @@
 	</div>
 	<div>
 		<input id="btnActualizarBibliotecasYprocesamientoDatos" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-		<input id="btnCancelarManejoDeProgamas" class="btn btn-warning btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+
+		<input id="btnCancelarManejoDeProgamas" class="btn btn-warning btn-cancel btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 	</div>
 </form>

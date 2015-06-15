@@ -50,6 +50,7 @@ class PropuestaTesisController extends Controller {
 			$user->formulario->informacion_aspirante->propuesta_tesis()->associate($propuesta_tesis);
 			$user->formulario->informacion_aspirante->save();
 		}
+		$user->formulario->informacion_aspirante->propuesta_tesis->PTe_Titulo = $request->titulo_propuesta;
 		$user->formulario->informacion_aspirante->propuesta_tesis->PTe_Definicion = $request->definicion;
 		$user->formulario->informacion_aspirante->propuesta_tesis->PTe_Marco_Teorico = $request->marco_teorico;
 		$user->formulario->informacion_aspirante->propuesta_tesis->PTe_Metodologia = $request->metodologia;
@@ -58,8 +59,7 @@ class PropuestaTesisController extends Controller {
 
 		$user->formulario->informacion_aspirante->propuesta_tesis->save();
 
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	/**

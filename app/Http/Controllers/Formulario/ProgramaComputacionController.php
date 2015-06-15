@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\AccesoProgramaComputacion;
+use App\EducacionDistancia;
 
 use Illuminate\Http\Request;
 
@@ -77,10 +78,33 @@ class ProgramaComputacionController extends Controller {
 		else{
 			$user->formulario->informacion_aspirante->Asp_Acceso_Email = false;
 		}
+		$edu_distancia = $request->educacionDistancia;
+		if(isset($edu_distancia) && $edu_distancia == 'on'){
+			$user->formulario->informacion_aspirante->Asp_Conoc_Educacion_Dist = true;
+			$edu_distancia_descripcion = $request->edu_distancia_descripcion;
+			if(isset($edu_distancia_descripcion) && !empty($edu_distancia_descripcion)){
+				// dd($user->formulario->informacion_aspirante->educacion_distancia);
+				if(is_null($user->formulario->informacion_aspirante->educacion_distancia)){
+					$edu_distancia = new EducacionDistancia();
+					$edu_distancia->EDi_Descripcion = $edu_distancia_descripcion;
+					$user->formulario->informacion_aspirante->educacion_distancia()->save($edu_distancia);
+				}
+				else{
+					$user->formulario->informacion_aspirante->educacion_distancia->EDi_Descripcion = $edu_distancia_descripcion;
+					$user->formulario->informacion_aspirante->educacion_distancia->save();
+				}
+			}
+			$user->formulario->informacion_aspirante->save();
+		}
+		else{
+			$user->formulario->informacion_aspirante->Asp_Conoc_Educacion_Dist = false;
+			if(!is_null($user->formulario->informacion_aspirante->educacion_distancia)){
+				$user->formulario->informacion_aspirante->educacion_distancia->delete();
+			}
+		}
 		$user->formulario->informacion_aspirante->save();
 
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	/**

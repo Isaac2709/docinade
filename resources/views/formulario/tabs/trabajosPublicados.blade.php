@@ -1,4 +1,4 @@
-<form role="form" action="formulario/invPublicada" method="post" class="form-horizontal">
+<form role="form" action="formulario/invPublicada" method="post" class="form form-horizontal">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->publicaciones->isEmpty())
@@ -122,7 +122,12 @@
 		<div class="col-md-11">
 			<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right">+</button>
 			<input id="btnActualizarTrabajosPublicados" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+<<<<<<< HEAD
+
+			<input id="btnCancelarTrabajosPublicados" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+=======
 			<input id="btnCancelarTrabajosPublicados" class="btn btn-warning btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+>>>>>>> 21747b1b7b060525ac3008379017dd2dcdd5f76d
 		</div>
 	</div>
 	<br/>

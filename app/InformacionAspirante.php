@@ -20,7 +20,7 @@ class InformacionAspirante extends Model {
 	// 						'Asp_ID_Dir_Actual', 'Asp_ID_Area_Interes', 'Asp_Acceso_Biblioteca',
 	// 						'Asp_Acceso_Proc_DatoS', 'Asp_Acceso_Windows', 'Asp_Acceso_Email',
 	// 						'Asp_Utilizacion_Progra_Comp', 'Asp_Conoc_Educacion_Dist',
-	// 						'ID_Prop_Tesis', GEN_ID_Usuario];
+	// 						'ID_Prop_Tesis', GEN_ID_Usuario, Asp_Estado_Formulario];
 
 	/**
 	 * Relacion de pertenencia de uno a uno entre los modelos InformacionAspirante y Formulario
@@ -156,6 +156,15 @@ class InformacionAspirante extends Model {
 	 */
 	public function propuesta_tesis(){
 		return $this->belongsTo('App\PropuestaTesis', 'ID_Prop_Tesis');
+	}
+
+	/**
+	 * Relacion uno a uno entre los modelos InformacionAspirante y EducacionDistancia
+	 * @return [arrayEloquent] [El modelo EducacionDistancia que pertenece a
+	 *                             InformacionAspirante]
+	 */
+	public function educacion_distancia(){
+		return $this->hasOne('App\EducacionDistancia', 'EDi_ID_Asp');
 	}
 
 	/**

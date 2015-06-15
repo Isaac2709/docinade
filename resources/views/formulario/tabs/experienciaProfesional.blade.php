@@ -1,4 +1,5 @@
-<form role="form" action="formulario/expProfesional" method="post" class="form-horizontal">
+<?php use \Carbon\Carbon; ?>
+<form role="form" action="formulario/expProfesional" method="post" class="form form-horizontal">
     <br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="col-md-12">
@@ -38,7 +39,8 @@
         				<span class="input-group-addon" >a</span>
                         <div class="annio_fin">
                             <fieldset disabled>
-                                <input type="text" class="form-control" name="annio_fin[]" placeholder="Actualidad">
+                                <input type="text" class="form-control" placeholder="Actualidad">
+                                <input type="hidden" name="annio_fin[]" value="{{Carbon::now()->format('Y')}}">
                             </fieldset>
                         </div>
         				<!-- <input type"text" class="form-control año" name="annio_fin[]"> -->
@@ -103,8 +105,9 @@
                                 <div class="annio_fin">
                                 @if($count==1)
                                     <fieldset disabled>
-                                        <input type="text" class="form-control" name="annio_fin[]" placeholder="Actualidad">
+                                        <input type="text" class="form-control" placeholder="Actualidad">
                                     </fieldset>
+                                    <input type="hidden" name="annio_fin[]" value="{{ Carbon::now()->format('Y') }}">
                                 @else
                                     <input type="text" class="form-control año" name="annio_fin[]" value="{{ $experiencia_profesional->Pro_Anio_Fin }}">
                                 @endif
@@ -150,7 +153,8 @@
             <div class="col-md-11">
                 <button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
                 <input id="btnActualizarExpProfesional" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-                <input id="btnCancelarExpProfesional" class="btn btn-warning btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+
+                <input id="btnCancelarExpProfesional" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
             </div>
         </div>
     <br/>

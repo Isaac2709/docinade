@@ -35,4 +35,14 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+	/**
+	 * Get the failed login message.
+	 *
+	 * @return string
+	 */
+	protected function getFailedLoginMessage()
+	{
+		return trans('password.invalid_credentials');
+	}
+
 }

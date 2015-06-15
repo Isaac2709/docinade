@@ -100,9 +100,9 @@ class ExperienciaProfesionalController extends Controller {
 				$experiencia_profesional->Pro_Anio_Fin = Carbon::now()->format('Y');
 			}
 			else{
-				$annio_fin = $request->annio_fin[$pos-1];
+				$annio_fin = $request->annio_fin[$pos];
 				if(!empty($annio_fin)){
-					$experiencia_profesional->Pro_Anio_Fin = $request->annio_fin[$pos-1];
+					$experiencia_profesional->Pro_Anio_Fin = $request->annio_fin[$pos];
 				}
 			}
 
@@ -116,8 +116,7 @@ class ExperienciaProfesionalController extends Controller {
 			}
 			$pos = $pos + 1;
 		}
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	/**

@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/pdf.css') }}" rel="stylesheet">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<style type="text/css">
 		/*Table 1: Para Registros Múltiples.*/
@@ -82,29 +83,29 @@
 				<tr>
 					<td><b>DIA </b>
 						@if(!is_null($user->formulario->informacion_aspirante->Asp_Fecha_Envio) && $user->formulario->informacion_aspirante->Asp_Fecha_Envio != "0000-00-00")
-						<?php
-							$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
-							$dia_envio = date_format($date_obj, 'd');
-						?>
-						{{ $dia_envio }}
+							<?php
+								$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
+								$dia_envio = date_format($date_obj, 'd');
+							?>
+							{{ $dia_envio }}
 						@endif
 					</td>
 					<td><b>MES </b>
 						@if(!is_null($user->formulario->informacion_aspirante->Asp_Fecha_Envio) && $user->formulario->informacion_aspirante->Asp_Fecha_Envio != "0000-00-00")
-						<?php
-							$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
-							$mes_envio = date_format($date_obj, 'm');
-						?>
-						{{ $mes_envio }}
+							<?php
+								$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
+								$mes_envio = date_format($date_obj, 'm');
+							?>
+							{{ $mes_envio }}
 						@endif
 					</td>
 					<td><b>AÑO </b>
 						@if(!is_null($user->formulario->informacion_aspirante->Asp_Fecha_Envio) && $user->formulario->informacion_aspirante->Asp_Fecha_Envio != "0000-00-00")
-						<?php
-							$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
-							$annio_envio = date_format($date_obj, 'Y');
-						?>
-						{{ $annio_envio }}
+							<?php
+								$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
+								$annio_envio = date_format($date_obj, 'Y');
+							?>
+							{{ $annio_envio }}
 						@endif
 					</td>
 				</tr>
@@ -152,7 +153,7 @@
 		<tr>
 			<td colspan=2><b> País de Residencia: </b>
 				@if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual) && !is_null($user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais))
-					{{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad }}
+					{{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}
 				@endif
 			</td>
 			<td ><b> N° de Cédula: </b>{{ $user->formulario->IPe_Pasaporte }}</td>
@@ -166,9 +167,7 @@
 		</tr>
 		<tr>
 			<td colspan=3><b> Área en que le interesaría desarrollar el tema de investigación: </b>
-				@if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Area_Interes))
-					{{ $user->formulario->informacion_aspirante->area_interes->Area_Nombre }}
-				@endif
+				{{ $user->formulario->informacion_aspirante->Asp_Area_Interes }}
 			</td>
 		</tr>
 	</table>
@@ -178,7 +177,7 @@
 		<tr>
 			<td width="33%"><b> País: </b>
 				@if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual) && !is_null($user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais))
-					{{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad }}
+					{{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}
 				@endif
 			</td>
 			<td width="33%"><b> Ciudad: </b>
@@ -223,10 +222,10 @@
 	</font></b>
 	<table class="table1" width="100%">
 		<tr>
-			<th><b>Institución, País</b></td>
-			<th><b>Área de Especialidad</b></td>
-			<th><b>Grado Académico</b></td>
-			<th><b>Año de Graduación</b></td>
+			<th><b>Institución, País</b></th>
+			<th><b>Área de Especialidad</b></th>
+			<th><b>Grado Académico</b></th>
+			<th><b>Año de Graduación</b></th>
 		</tr>
 		@foreach($user->formulario->informacion_aspirante->educacion_superior as $edSup)
 			<tr>
@@ -255,9 +254,9 @@
 	<?php $funciones = null; ?>
 	<table  class="table1"  width="100%">
 		<tr>
-			<th><b>Empresa, Centro o Institución</b></td>
-			<th><b>Ocupación o Posición</b></td>
-			<th><b>Años de Experiencia</b></td>
+			<th><b>Empresa, Centro o Institución</b></th>
+			<th><b>Ocupación o Posición</b></th>
+			<th><b>Años de Experiencia</b></th>
 		</tr>
 		@foreach($user->formulario->informacion_aspirante->experiencias_profesionales_desc as $expPro)
 			<tr>
@@ -281,6 +280,8 @@
 	<br />
 	<table class="table2" width="100%">
 		<tr>
+
+			<!-- <td><b>Para el trabajo actual las funciones que desempeña: </b> </td> -->
 			<td><b>Funciones que Desempeña en el Trabajo más Reciente: </b>
 				{{ $funciones }}
 			</td>
@@ -294,9 +295,9 @@
 	<br />
 	<table class="table1"  width="100%">
 		<tr>
-			<th><b>Nombre de Proyecto o Actividades Principales</b></td>
-			<th><b>Institución y Lugar</b></td>
-			<th><b>Año</b></td>
+			<th><b>Nombre de Proyecto o Actividades Principales</b></th>
+			<th><b>Institución y Lugar</b></th>
+			<th><b>Año</b></th>
 		</tr>
 		@foreach($user->formulario->informacion_aspirante->experiencias_investigaciones_desc as $expInv)
 			<tr>
@@ -326,11 +327,13 @@
 			<tr>
 				<td>{{ $public->Pub_Titulo }}</td>
 				<td>
-					{{ $public->Pub_Titulo }}
-					@if(!is_null($public->Pub_ID_Pais)) ,{{ $public->pais->Pais_Nombre }}
+					{{ $public->Pub_Medio }}
+					@if(!is_null($public->Pub_ID_Pais))
+
+					, {{ $public->pais->Pais_Nombre }}
 					@endif
 				</td>
-				<td>{{ $public->Inv_Anio }}</td>
+				<td>{{ $public->Pub_Anio }}</td>
 			</tr>
 		@endforeach
 	</table>
@@ -342,10 +345,23 @@
 	<br />
 	<table class="table1"  width="100%">
 		<tr>
-			<th><b>Nombre de Actividad</b></td>
-			<th><b>Institución y Lugar</b></td>
+			<th><b>Nombre de Actividad</b></th>
+			<th><b>Institución y Lugar</b></th>
 			<th><b>Año</b></td>
 		</tr>
+		@foreach($user->formulario->informacion_aspirante->cursos_seminarios_desc as $curso_relevante)
+			<tr>
+				<td>{{ $curso_relevante->CSe_Actividad }}</td>
+				<td>
+					{{ $curso_relevante->CSe_Institucion }}
+					@if(!empty($curso_relevante->CSe_Lugar))
+						 -
+						{{ $curso_relevante->CSe_Lugar}}
+					@endif
+				</td>
+				<td>{{ $curso_relevante->CSe_Annio }}</td>
+			</tr>
+		@endforeach
 	</table>
 	<br />
 	<u class="text-left"><b><font size="3">
@@ -355,11 +371,19 @@
 	<br />
 	<table class="table1"  width="100%">
 		<tr>
-			<th><b>Idioma</b></td>
-			<th><b>Nivel de Escritura</b></td>
-			<th><b>Nivel de Lectura</b></td>
-			<th><b>Nivel Conversacional</b></td>
+			<th><b>Idioma</b></th>
+			<th><b>Nivel de Escritura</b></th>
+			<th><b>Nivel de Lectura</b></th>
+			<th><b>Nivel Conversacional</b></th>
 		</tr>
+		@foreach($user->formulario->informacion_aspirante->conocimiento_idiomas as $idioma)
+			<tr>
+				<td> {{ $idioma->Idm_Idioma }} </td>
+				<td> {{ $idioma->nivel_idioma_escritura->Niv_Nombre or '' }}</td>
+				<td> {{ $idioma->nivel_idioma_lectura->Niv_Nombre or '' }}</td>
+				<td> {{ $idioma->nivel_idioma_conversacional->Niv_Nombre or '' }}</td>
+			</tr>
+		@endforeach
 	</table>
 	<br />
 	<u class="text-left"><b><font size="3">
@@ -369,24 +393,71 @@
 	<br />
 	<b class="text-left"><font size="2">
 		a. ¿TIENE ACCESO A BIBLIOTECA(S) O CENTRO(S) DE DOCUMENTACIÓN?
-	</font></b>
+	</font></b><br />
+	@if(!$user->formulario->informacion_aspirante->acceso_bibliotecas->isEmpty())
+		@foreach($user->formulario->informacion_aspirante->acceso_bibliotecas as $acceso_biblioteca)
+			{{ $acceso_biblioteca->Bib_Nombre }} <br />
+		@endforeach
+	@else
+		NO
+	@endif
 	<br />
 	<b class="text-left"><font size="2">
 		b. ¿TIENE ACCESO Y CONOCIMIENTOS ACERCA DE PROGRAMAS DE PROCESAMIENTO DE DATOS?
-	</font></b>
-	<br />
+	</font></b><br />
+	@if(!$user->formulario->informacion_aspirante->acceso_procesamiento_datos->isEmpty())
+		@foreach($user->formulario->informacion_aspirante->acceso_procesamiento_datos as $acceso_procesamiento_datos)
+			{{ $acceso_procesamiento_datos->PDa_Nombre }} <br />
+		@endforeach
+	@else
+		NO
+	@endif
 	<br />
 	<u class="text-left"><b><font size="3">
 		IX. MANEJO DE PROGRAMAS DE COMPUTACIÓN
 	</font></b></u>
 	<br />
 	<b class="text-left"><font size="2">
-		a. ¿TIENE ACCESO A WINDOWS?
+		a. ¿TIENE ACCESO A WINDOWS?:
 	</font></b>
+	@if($user->formulario->informacion_aspirante->Asp_Acceso_Windows)
+		 Si
+	@else
+		 NO
+	@endif
 	<br />
 	<b class="text-left"><font size="2">
 		b. ¿TIENE ACCESO A CORREO ELECTRÓNICO?
 	</font></b>
+	@if($user->formulario->informacion_aspirante->Asp_Acceso_Email)
+		 Si
+	@else
+		 NO
+	@endif
+	<br />
+	<b class="text-left"><font size="2">
+		c. ¿UTILIZA PROGRAMAS DE COMPUTACIÓN?
+	</font></b>
+	@if(!$user->formulario->informacion_aspirante->acceso_programas_computacionales->isEmpty())
+		Si
+		<br />
+		<table class="table1"  width="100%">
+		<tr>
+			<td>
+				<b>Cuales programas de computación utiliza.</b>
+			</td>
+		</tr>
+		@foreach($user->formulario->informacion_aspirante->acceso_programas_computacionales as $programa_computacion)
+			<tr>
+				<td>
+					{{$programa_computacion->Prog_Nombre}}
+				</td>
+		    </tr>
+		@endforeach
+		</table>
+	@else
+		No
+	@endif
 	<br />
 	<br />
 	<u class="text-left"><b><font size="3">
@@ -394,18 +465,106 @@
 	</font></b></u>
 	<br />
 	<br />
-	<table class="table1"  width="100%">
-		<tr>
-			<th><b>Nombre</b></td>
-			<th><b>Dirección</b></td>
-			<th><b>Teléfono</b></td>
-			<th><b>Email</b></td>
-			<th><b>Posición</b></td>
-		</tr>
-	</table>
+	@if(!$user->formulario->informacion_aspirante->recomendaciones->isEmpty())
+		@foreach($user->formulario->informacion_aspirante->recomendaciones as $recomendacion)
+			<table class="table2"  width="100%">
+				<tr>
+					<td width="20%">
+						<b>Nombre Completo: </b>
+					</td>
+					<td colspan=3>
+						{{$recomendacion->Rec_Nombre_Completo}}
+					</td>
+			    </tr>
+			    <tr>
+					<td width="20%">
+						<b>Dirección: </b>
+					</td>
+					<td colspan=3>
+						{{ $recomendacion->Rec_Direccion }}
+					</td>
+			    </tr>
+			    <tr>
+					<td width="20%">
+						<b>Teléfono: </b>
+					</td>
+					<td>
+						{{ $recomendacion->Rec_Telefono }}
+					</td>
+					<td width="20%">
+						<b>Fax: </b>
+					</td>
+					<td>
+						{{ $recomendacion->Rec_Fax }}
+					</td>
+			    </tr>
+			    <tr>
+					<td width="20%">
+						<b>Email: </b>
+					</td>
+					<td colspan=3>
+						{{ $recomendacion->email->Email_Email or '' }}
+					</td>
+			    </tr>
+			    <tr>
+					<td width="20%">
+						<b>Posición: </b>
+					</td>
+					<td colspan=3>
+						{{ $recomendacion->Rec_Ocupacion }}
+					</td>
+			    </tr>
+			</table>
+			<br />
+		@endforeach
+	@endif
 	<br />
 	<b class="text-left"><font size="2">
 		¿TIENE CONOCIMIENTO DE EDUCACIÓN A DISTANCIA O PLATAFORMAS VIRTUALES?
 	</font></b>
+	@if($user->formulario->informacion_aspirante->Asp_Conoc_Educacion_Dist)
+	 	Si
+	 	<br />
+		<table class="table1" width="100%">
+			<tr>
+				<td><b>Comente:</b></td>
+			</tr>
+			<tr>
+				<td> {{ $user->formulario->informacion_aspirante->educacion_distancia->EDi_Descripcion }} </td>
+			</tr>
+		</table>
+	@else
+		 NO
+	@endif
+	<br><table style='page-break-after:always;'></br></table><br>
+	<u class="text-left"><b><font size="3">
+		XI. DOCUMENTOS ADJUNTOS
+	</font></b></u>
+	<br />
+	<b class="text-left"><font size="2">
+		Cedula o Pasaporte:
+	</font></b>
+	@if(!is_null($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
+		<?php $pasaporte_adj = 'storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj ?>
+		<p class="text-center"><img src="{{ $pasaporte_adj or ''}}" align="middle"  width="100%"></p>
+	@else
+		<p class="text-center"><img src="images/image_not_found.png" align="middle"></p>
+	@endif
+	<br />
+	<br><table style='page-break-after:always;'></br></table><br>
+	<b class="text-left"><font size="2">
+		Titulos
+	</font></b>
+	<br />
+	@foreach($user->formulario->informacion_aspirante->educacion_superior as $educacion)
+		@if(!empty($educacion->Sup_Adjunto))
+			<b class="text-left"><font size="2">
+				Titulo de: {{ $educacion->area_especialidad->Esp_Area or '' }}
+			</font></b>
+			<!-- <p class="text-center"><img src="{{ 'storage/images/'.$educacion->Sup_Adjunto}}" align="middle"  width="100%"></p> -->
+			<br><table style='page-break-after:always;'></br></table><br>
+		@endif
+	@endforeach
+	<br />
 </body>
 </html>

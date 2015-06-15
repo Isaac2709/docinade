@@ -193,6 +193,8 @@ CREATE TABLE ASP_Aspirante(
 	Asp_Utilizacion_Progra_Comp BOOLEAN,
 	Asp_Conoc_Educacion_Dist BOOLEAN,
 
+	Asp_Estado_Formulario ENUM('Incompleto', 'No enviado','Enviado','Revisado') NOT NULL DEFAULT 'No enviado',
+
 	ID_Prop_Tesis SMALLINT,
 
     CONSTRAINT PK_Asp_Asp_ID PRIMARY KEY (Asp_ID),
@@ -214,6 +216,7 @@ CREATE TABLE ASP_Aspirante(
 -- ALTER TABLE `Asp_Aspirante` CHANGE `Asp_ID_Area_Interes` `Asp_Area_Interes` VARCHAR(150) NULL DEFAULT NULL;
 -- ALTER TABLE `asp_aspirante` CHANGE `Asp_Pasaporte_Adj` `Asp_Pasaporte_Adj` VARCHAR(300) NULL DEFAULT NULL;
 -- ALTER TABLE `asp_aspirante` CHANGE `Asp_Fotografia` `Asp_Fotografia` VARCHAR(300) NULL DEFAULT NULL;
+-- ALTER TABLE `asp_aspirante` ADD `Asp_Estado_Formulario` ENUM('Incompleto', 'No enviado','Enviado','Revisado') NOT NULL DEFAULT 'Incompleto' AFTER `ID_Prop_Tesis`;
 
 CREATE TABLE ASP_Biblioteca(
 	Bib_ID SMALLINT AUTO_INCREMENT NOT NULL,
@@ -222,6 +225,15 @@ CREATE TABLE ASP_Biblioteca(
 
     CONSTRAINT PK_Asp_Bib_ID PRIMARY KEY (Bib_ID),
     CONSTRAINT FK_Asp_Bib_Asp FOREIGN KEY (Bib_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID)
+);
+
+CREATE TABLE ASP_Edu_Distancia(
+	EDi_ID SMALLINT AUTO_INCREMENT NOT NULL,
+	EDi_ID_Asp SMALLINT NOT NULL,
+	EDi_Descripción VARCHAR (500) NOT NULL,
+
+    CONSTRAINT PK_Asp_EDi_ID PRIMARY KEY (EDi_ID),
+    CONSTRAINT FK_Asp_EDi_ID_Asp FOREIGN KEY (EDi_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID)
 );
 
 CREATE TABLE ASP_Proc_Datos(

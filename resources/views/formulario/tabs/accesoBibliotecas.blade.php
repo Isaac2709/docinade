@@ -1,4 +1,4 @@
-<form role="form" action="formulario/accBlibliotecaProcDatos" method="post" class="form-horizontal">
+<form role="form" action="formulario/accBlibliotecaProcDatos" method="post" class="form form-horizontal">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioAccesoBibliotecas1" class="row blockAccesoBibliotecas">
 		<div class="row">
@@ -114,6 +114,6 @@
 	</div>
 	<div>
 		<input id="btnActualizarBibliotecasYprocesamientoDatos" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-		<input id="btnCancelarBibliotecas" class="btn btn-warning btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+		<input id="btnCancelarBibliotecas" class="btn btn-warning btn-lg btn-cancel pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 	</div>
 </form>

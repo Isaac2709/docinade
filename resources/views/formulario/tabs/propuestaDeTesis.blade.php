@@ -1,8 +1,17 @@
-<form role="form" action="formulario/proTesis" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="formulario/proTesis" method="post" class="form form-horizontal" enctype="multipart/form-data">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioPropuestaTesis" class="blockPropuestaTesis">
 		<div class="row">
 			<div class="col-md-12">
+				<!-- Título de la propuesta de tesis -->
+				<label for="definicion" class="control-label labelDefinicion">Título:</label>
+				<div class="form-group">
+					<div class="col-md-12">
+						<input type="text" name="titulo_propuesta" class="form-control" value="{{ $user->formulario->informacion_aspirante->propuesta_tesis->PTe_Titulo or '' }}">
+					</div>
+				</div>
+				<!--Termian Título de la propuesta de tesis-->
+
 				<!--Definicion del problema-->
 				<label for="definicion" class="control-label labelDefinicion">Definición y pertenencia del problema:</label>
 				<div class="form-group">
@@ -53,6 +62,7 @@
 	</div>
 	<div >
 		<input id="btnActualizarPropuestaDeTesis" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-		<input id="btnCancelarPropuestaTesis" class="btn btn-warning btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+
+		<input id="btnCancelarPropuestaTesis" class="btn btn-warning btn-cancel btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 	</div>
 </form>

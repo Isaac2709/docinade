@@ -43,7 +43,7 @@ return [
     "ip"                   => "El campo :attribute debe ser una dirección IP válida.",
     "max"                  => [
         "numeric" => "El campo :attribute debe ser igual o menor que :max.",
-        "file"    => "El archivo :attribute debe pesar meno que :max kilobytes.",
+        "file"    => "El archivo :attribute debe pesar menos que :max kilobytes.",
         "string"  => "El campo :attribute debe contener menos de :max caracteres.",
         "array"   => "El campo :attribute debe contener al menos :max elementos.",
     ],
@@ -102,6 +102,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email' => 'Correo Electrónico',
+        'password' => 'Contraseña'
+    ],
 
 ];

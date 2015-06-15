@@ -1,3 +1,120 @@
+function showAlert(tab){
+    var index = $("a.tab").index("a.tab");
+    iconnotapie=$("#imgiconnotapie");
+    var floater=$("#floater");
+    var floater_inside=$("#floater_inside");
+
+    floater_inside
+        .empty()
+        .append($("p.anotacion").eq(index).html());
+    tab.after(floater);
+    floater.stop(true, true).animate({opacity: "show"}, "slow");
+
+    tab.bind("click",function(e){
+        e.preventDefault();
+    });
+
+    tab.mouseleave(function(e) {
+        var floater=$("#floater");
+        floater.delay(100).animate({opacity: "hide"}, "fast", function(){
+            $("#empty_div").append($("#floater"))
+        });
+    });
+}
+
+function setAlertToTabs(){
+    $(".nav-pills a[data-toggle=disabled_tab]").click(function(e) {
+      if ($(this).parent().hasClass("disabled")) {
+
+        showAlert($(this));
+        e.preventDefault();
+        return false;
+      }
+    });
+}
+
+function setDisableTabs(input){
+    $(input).parents('.panel-body').find('ul.nav li').not('.active').addClass('disabled');
+    $(input).parents('.panel-body').find('ul.nav li').not('.active').find('a[data-toggle=tab]').attr('data-toggle', 'disabled_tab');
+    $(input).parents('.form').find('.btn-success[type=submit]').prop('disabled', false);
+    $(input).parents('.form').find('.btn-cancel[type=button]').prop('disabled', false);
+    setAlertToTabs();
+}
+
+$(document).ready(function(){
+    $('.form').find('.btn-success[type=submit]').prop('disabled', true);
+    $('.form').find('.btn-cancel[type=button]').prop('disabled', true);
+
+    $('.form').find('input').change(function(){
+        setDisableTabs($(this));
+    });
+
+    $('.form').find('textarea').change(function(){
+        setDisableTabs($(this));
+    });
+
+    $('.form').find('select').change(function(){
+        setDisableTabs($(this));
+    });
+
+    $('.btn-cancel').click(function() {
+        $(this).parents('.panel-body').find('ul.nav li').not('.active').removeClass('disabled');
+        $(this).parents('.panel-body').find('ul.nav li').not('.active').find('a[data-toggle=disabled_tab]').attr('data-toggle', 'tab');
+        $(this).parents('.form').find('.btn-success[type=submit]').prop('disabled', true);
+        $(this).parents('.form').find('.btn-cancel[type=button]').prop('disabled', true);
+    });
+
+    jQuery("<div/>",
+    {
+        id: "empty_div", css:
+        {
+            display: "none"
+        }
+    }).appendTo("body");
+
+    jQuery("<div/>",
+    {
+        id: "floater",
+        mouseenter: function(){
+            floater=$("#floater");
+            floater.stop(true, true).animate({opacity: "show"});
+            $("#floater").stop(true, true).animate({opacity: "show"});
+        },
+        mouseleave: function(){
+            $("#floater").delay(100).animate({opacity: "hide"}, "fast", function(){
+                $("#empty_div").append($("#floater"))
+            });
+        }
+    }
+    ).appendTo("#empty_div");
+
+    jQuery("<img/>",
+    {
+        id: "imgiconnotapie",
+        src: "iconnotaspie.gif",
+        class: "iconnotapie"
+    }
+    ).appendTo("#floater");
+
+    jQuery("<div/>",
+    {
+        id: "floater_inside"
+    }
+    ).appendTo("#floater");
+
+});
+
+$(document).ready(function(){
+    $(".checkbox_edu" ).change(function(){
+        if($(this).is(":checked")){
+            $(".textarea_comment").show();
+        }
+        else{
+            $(".textarea_comment").hide();
+            $(".textarea_comment").find('textarea').val('');
+        }
+    });
+});
 
 //funciones para guardar los valores establecidos y depsues volver a postearlos en caso de q se cancele el Submit
 $(function(){
@@ -21,7 +138,6 @@ function cancelarActualizacion() {
             input.val(input.data('estadoInicial'));}
     });
 }
-
 
 
 // <!--Funciones para las tablas de Programas Computacionales -->
@@ -209,19 +325,19 @@ $(function () {
 
                                 //Titulo de la publicacion - text
                                 nElem.find('.labelTituloP').attr('for','ID'+cont+'_tituloP');
-                                nElem.find('.inputTituloP').attr('id','ID'+cont+'_tituloP').attr('name','ID'+cont+'_tituloP');
+                                nElem.find('.inputTituloP').attr('id','ID'+cont+'_tituloP');
 
                                 //Titulo del medio de publicacion - text
                                 nElem.find('.labelTituloMP').attr('for','ID'+cont+'_tituloMP');
-                                nElem.find('.inputTituloMP').attr('id','ID'+cont+'_tituloMP').attr('name','ID'+cont+'_tituloMP');
+                                nElem.find('.inputTituloMP').attr('id','ID'+cont+'_tituloMP');
 
                                 //Pais de publicacion - text
                                 nElem.find('.labelPais').attr('for','ID'+cont+'_pais');
-                                nElem.find('.inputPais').attr('id','ID'+cont+'_pais').attr('name','ID'+cont+'_pais');
+                                nElem.find('.inputPais').attr('id','ID'+cont+'_pais');
 
                                 //Año - text
                                 nElem.find('.labelAño').attr('for','ID'+cont+'_año');
-                                nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+                                nElem.find('.inputAño').attr('id','ID'+cont+'_año');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxTrabajosPublicados').attr('style','cursor:pointer').attr('id','checkboxTrabajosPublicados'+cont);
@@ -325,19 +441,19 @@ $(function () {
 
                                 //Nombre - text
                                 nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
-                                nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+                                nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre');
 
                                 //Institucion - text
                                 nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
-                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion');
 
                                 //Lugar - text
                                 nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
-                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
+                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar');
 
                                 //Año - text
                                 nElem.find('.labelAño').attr('for','ID'+cont+'_año');
-                                nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+                                nElem.find('.inputAño').attr('id','ID'+cont+'_año');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxExpInvestigacion').attr('style','cursor:pointer').attr('id','checkboxExpInvestigacion'+cont);
@@ -501,23 +617,23 @@ $(function () {
 
                             //Institucion - text
                             nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
-                            nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+                            nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion');
 
                             //Pais - text
                             nElem.find('.labelPais').attr('for','ID'+cont+'_pais');
-                            nElem.find('.inputPais').attr('id','ID'+cont+'_pais').attr('name','ID'+cont+'_pais');
+                            nElem.find('.inputPais').attr('id','ID'+cont+'_pais');
 
                             //Año de graduacion - text
                             nElem.find('.labelAñoG').attr('for','ID'+cont+'_añoG');
-                            nElem.find('.inputAñoG').attr('id','ID'+cont+'_añoG').attr('name','ID'+cont+'_añoG');
+                            nElem.find('.inputAñoG').attr('id','ID'+cont+'_añoG');
 
                             //Titulo Obtenido - text
                             nElem.find('.labelTituloObtenido').attr('for','ID'+cont+'_titulo');
-                            nElem.find('.inputTituloObtenido').attr('id','ID'+cont+'_titulo').attr('name','ID'+cont+'_titulo');
+                            nElem.find('.inputTituloObtenido').attr('id','ID'+cont+'_titulo');
 
                             //Grado academico - text
                             nElem.find('.labelGradoA').attr('for','ID'+cont+'_gradoA');
-                            nElem.find('.comboboxGradoAcademico').attr('id','ID'+cont+'_gradoA').attr('name','ID'+cont+'_gradoA');
+                            nElem.find('.comboboxGradoAcademico').attr('id','ID'+cont+'_gradoA');
 
                             //Checkbox - remover
                             nElem.find('.claseCheckboxEduSuperior').attr('style','cursor:pointer').attr('id','checkboxEduSuperior'+cont);
@@ -623,19 +739,19 @@ $(function () {
 
                                 //Empresa - text
                                 nElem.find('.labelEmpresa').attr('for','ID'+cont+'_empresa');
-                                nElem.find('.inputEmpresa').attr('id','ID'+cont+'_empresa').attr('name','ID'+cont+'_empresa');
+                                nElem.find('.inputEmpresa').attr('id','ID'+cont+'_empresa');
 
                                 //Ocupacion - text
                                 nElem.find('.labelOcupacion').attr('for','ID'+cont+'_ocupacion');
-                                nElem.find('.inputOcupacion').attr('id','ID'+cont+'_ocupacion').attr('name','ID'+cont+'_ocupacion');
+                                nElem.find('.inputOcupacion').attr('id','ID'+cont+'_ocupacion');
 
                                 //Años de experiencia - text
                                 nElem.find('.labelAñosExp').attr('for','ID'+cont+'_añosExp');
-                                nElem.find('.año').attr('id','ID'+cont+'_añosExp').attr('name','ID'+cont+'_añosExp');
+                                nElem.find('.año').attr('id','ID'+cont+'_añosExp');
 
                                 //Descripcion - text
                                 nElem.find('.labelDescripcion').attr('for','ID'+cont+'_descripcion');
-                                nElem.find('.textareaDescripcion').attr('id','ID'+cont+'_descripcion').attr('name','ID'+cont+'_descripcion');
+                                nElem.find('.textareaDescripcion').attr('id','ID'+cont+'_descripcion');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxExpProfesional').attr('style','cursor:pointer').attr('id','checkboxExpProfesional'+cont);
@@ -751,19 +867,19 @@ $(function () {
 
                                         //Nombre - text
                                         nElem.find('.labelNombre').attr('for','ID'+cont+'_nombre');
-                                        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre').attr('name','ID'+cont+'_nombre');
+                                        nElem.find('.inputNombre').attr('id','ID'+cont+'_nombre');
 
                                         //Nivel de escritura - combobox
                                         nElem.find('.labelNivelEscritura').attr('for','ID'+cont+'_nivelEscritura');
-                                        nElem.find('.comboboxNivelEscritura').attr('id','ID'+cont+'_nivelEscritura').attr('name','ID'+cont+'_nivelEscritura');
+                                        nElem.find('.comboboxNivelEscritura').attr('id','ID'+cont+'_nivelEscritura');
 
                                         //Nivel de lectura - text
                                         nElem.find('.labelNivelLectura').attr('for','ID'+cont+'_nivelLectura');
-                                        nElem.find('.comboboxNivelLectura').attr('id','ID'+cont+'_nivelLectura').attr('name','ID'+cont+'_nivelLectura');
+                                        nElem.find('.comboboxNivelLectura').attr('id','ID'+cont+'_nivelLectura');
 
                                         //Nivel conversacional - text
                                         nElem.find('.labelNivelConversacional').attr('for','ID'+cont+'_nivelConversacional');
-                                        nElem.find('.comboboxNivelConversacional').attr('id','ID'+cont+'_nivelConversacional').attr('name','ID'+cont+'_nivelConversacional');
+                                        nElem.find('.comboboxNivelConversacional').attr('id','ID'+cont+'_nivelConversacional');
 
                                         //Checkbox - remover
                                         nElem.find('.claseCheckboxConocimientoDeIdiomas').attr('style','cursor:pointer').attr('id','checkboxConocimientoDeIdiomas'+cont);
@@ -864,19 +980,19 @@ $(function () {
 
                                 //Nombre - text
                                 nElem.find('.labelNombre').attr('for','ID'+cont+'_actividad');
-                                nElem.find('.inputNombre').attr('id','ID'+cont+'_actividad').attr('name','ID'+cont+'_nombre');
+                                nElem.find('.inputNombre').attr('id','ID'+cont+'_actividad');
 
                                 //Institucion - text
                                 nElem.find('.labelInstitucion').attr('for','ID'+cont+'_institucion');
-                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion').attr('name','ID'+cont+'_institucion');
+                                nElem.find('.inputInstitucion').attr('id','ID'+cont+'_institucion');
 
                                 //Lugar - text
                                 nElem.find('.labelLugar').attr('for','ID'+cont+'_lugar');
-                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar').attr('name','ID'+cont+'_lugar');
+                                nElem.find('.inputLugar').attr('id','ID'+cont+'_lugar');
 
                                 //Año - text
                                 nElem.find('.labelAño').attr('for','ID'+cont+'_año');
-                                nElem.find('.inputAño').attr('id','ID'+cont+'_año').attr('name','ID'+cont+'_año');
+                                nElem.find('.inputAño').attr('id','ID'+cont+'_año');
 
                                 //Checkbox - remover
                                 nElem.find('.claseCheckboxCursosMasRelevantes').attr('style','cursor:pointer').attr('id','checkboxCursosMasRelevantes'+cont);

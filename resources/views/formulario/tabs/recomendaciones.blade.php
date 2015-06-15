@@ -1,4 +1,4 @@
-<form role="form" action="formulario/recomendacion" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form role="form" action="formulario/recomendacion" method="post" class="form form-horizontal" enctype="multipart/form-data">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div id="formularioRecomendaciones1" class="row blockRecomendaciones">
 		<div class="row">
@@ -276,6 +276,7 @@
 	</div>
 	<div >
 		<input id="btnActualizarRecomendaciones" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-		<input id="btnCancelarRecomendaciones" class="btn btn-warning btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+
+		<input id="btnCancelarRecomendaciones" class="btn btn-warning btn-cancel btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
 	</div>
 </form>

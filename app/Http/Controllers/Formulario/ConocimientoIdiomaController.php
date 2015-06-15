@@ -7,7 +7,7 @@ use App\User;
 use App\ConocimientoIdioma;
 
 use Illuminate\Http\Request;
-// use App\Http\Requests\CrearCursoSeminarioRequest;
+use App\Http\Requests\CrearConocimientoIdiomaRequest;
 
 class ConocimientoIdiomaController extends Controller {
 
@@ -44,7 +44,7 @@ class ConocimientoIdiomaController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearConocimientoIdiomaRequest $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 
@@ -100,8 +100,7 @@ class ConocimientoIdiomaController extends Controller {
 			}
 			$pos = $pos + 1;
 		}
-		$message = 'Sus datos han sido actualizados.';
-		return redirect()->back()->withInput()->with('successMessage', [$message]);
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
 	/**
