@@ -1,7 +1,6 @@
 @extends('dashboard.dashboard')
 
 @section('styles')
-
 	<!-- Para el input de archivo -->
   	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet"> -->
   	<!-- para los checkbox animados -->
