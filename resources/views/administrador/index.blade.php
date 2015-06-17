@@ -2,34 +2,6 @@
 
 @section('styles')
 	<link href="{{ asset('/dashboard/css/bootstrap-table.css') }}" rel="stylesheet">
-    <style type="text/css">
-    ::selection {
-    background: #7A9853;
-    color: #fff;
-    text-shadow: none;
-}
-
-
-.navbar-inverse{
-    background: #7A9853;
-}
-
-.navbar-brand{
-    padding: 0px 0px 0px 15px;
-}
-
-::-moz-selection {
-    background: #7A9853;
-    color: #fff;
-    text-shadow: none;
-}
-
-/**** Background Colors ****/
-body,
-.lightBtn {
-  background-color: #efefef;
-}
-    </style>
 @endsection
 
 @section('page_header')
