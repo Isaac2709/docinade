@@ -8,6 +8,7 @@
 <link href="{{ asset('/dashboard/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/dashboard/css/datepicker3.css') }}" rel="stylesheet">
 <link href="{{ asset('/dashboard/css/styles.css') }}" rel="stylesheet">
+<link href="{{ asset('/dashboard/css/custom_style.css') }}" rel="stylesheet">
 
 @yield('styles')
 
