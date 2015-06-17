@@ -60,9 +60,11 @@
 		</div>
 		<hr class="soften">
 	</div>
-	<div >
-		<input id="btnActualizarPropuestaDeTesis" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+	@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario != "Enviado")
+		<div >
+			<input id="btnActualizarPropuestaDeTesis" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 
-		<input id="btnCancelarPropuestaTesis" class="btn btn-warning btn-cancel btn-lg pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
-	</div>
+			<input id="btnCancelarPropuestaTesis" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+		</div>
+	@endif
 </form>

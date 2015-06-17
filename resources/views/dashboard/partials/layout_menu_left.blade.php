@@ -1,9 +1,9 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-	<form role="search">
+	<!-- <form role="search">
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Search">
 		</div>
-	</form>
+	</form> -->
 	<ul class="nav menu">
 		<li><a href="{{ url('/') }}"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
 		<!-- <li><a href="widgets.html"><span class="glyphicon glyphicon-th"></span> Widgets</a></li>

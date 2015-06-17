@@ -112,8 +112,10 @@
 		</div>
 		<hr class="soften">
 	</div>
-	<div>
-		<input id="btnActualizarBibliotecasYprocesamientoDatos" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-		<input id="btnCancelarBibliotecas" class="btn btn-warning btn-lg btn-cancel pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
-	</div>
+	@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario != "Enviado")
+		<div>
+			<input id="btnActualizarBibliotecasYprocesamientoDatos" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+			<input id="btnCancelarBibliotecas" class="btn btn-warning btn-lg btn-cancel" type="button" onClick="cancelarActualizacion()" value="Cancelar"><!-- pull-right -->
+		</div>
+	@endif
 </form>

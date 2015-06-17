@@ -41,10 +41,7 @@ function setDisableTabs(input){
     setAlertToTabs();
 }
 
-$(document).ready(function(){
-    $('.form').find('.btn-success[type=submit]').prop('disabled', true);
-    $('.form').find('.btn-cancel[type=button]').prop('disabled', true);
-
+function reloadFunctions(){
     $('.form').find('input').change(function(){
         setDisableTabs($(this));
     });
@@ -56,6 +53,21 @@ $(document).ready(function(){
     $('.form').find('select').change(function(){
         setDisableTabs($(this));
     });
+}
+
+$(document).ready(function(){
+    $('.form').find('.btn-success[type=submit]').prop('disabled', true);
+    $('.form').find('.btn-cancel[type=button]').prop('disabled', true);
+
+    $('.form').find('.btn-add').click(function(){
+       setDisableTabs($(this));
+    });
+
+    $('.form').find('.btn-delete').click(function(){
+        setDisableTabs($(this));
+    });
+
+    reloadFunctions();
 
     $('.btn-cancel').click(function() {
         $(this).parents('.panel-body').find('ul.nav li').not('.active').removeClass('disabled');
@@ -295,6 +307,7 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        reloadFunctions();
         var paises = paisesGlobal;
         $('input.typeahead').typeahead({
             name: 'pais',
@@ -408,11 +421,12 @@ $(function () {
 
     	//FUNCION QUE SE LLAMA DE NUEVO PARA QUE LOS CAMPOS DE AÑO SE PUEDAN EJECUTAR SIN PROBLEMA
 	    $('.inputAño').datepicker( {
-		    format: ' yyyy',
-		    viewMode: 'years',
-		    minViewMode: 'years',
-		    autoclose:true
-		  });
+            format: ' yyyy',
+            viewMode: 'years',
+            minViewMode: 'years',
+            autoclose:true
+        });
+        reloadFunctions();
 		var instituciones = institucionesGlobal;
 	    $('input.typeahead_institucion').typeahead({
 			name: 'institucion',
@@ -572,6 +586,7 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        reloadFunctions();
         var areas_especialidad = areas_especialidadGlobal;
         $('input.typeahead_area_especialidad').typeahead({
             name: 'area_especialidad',
@@ -711,6 +726,7 @@ $(function () {
 		    minViewMode: 'years',
 		    autoclose:true
 	  	});
+        reloadFunctions();
         var ocupaciones = ocupacionesGlobal;
         $('input.typeahead_ocupacion').typeahead({
             name: 'ocupacion',
@@ -836,7 +852,7 @@ $(function () {
             minViewMode: 'years',
             autoclose:true
         });
-
+        reloadFunctions();
         $(".combobox").change(function () {
             if($(this).val() == "0") $(this).addClass("empty");
             else $(this).removeClass("empty")
@@ -957,6 +973,7 @@ $(function () {
             minViewMode: 'years',
             autoclose:true
         });
+        reloadFunctions();
     });
 
     $('#btnRemoverCursosMasRelevantes').click(function () {

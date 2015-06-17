@@ -15,7 +15,7 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="{{ URL::route('admin.users.show', Auth::user()->Usu_ID) }}"><span class="glyphicon glyphicon-user"></span> {{ trans('dashboard.top_menu.profile') }}</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-cog"></span> {{ trans('dashboard.top_menu.settings') }}</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> {{ trans('dashboard.top_menu.logout') }}</a></li>
+						<li><a href="{{ url('/auth/logout') }}"><span class="glyphicon glyphicon-log-out"></span> {{ trans('dashboard.top_menu.logout') }}</a></li>
 					</ul>
 				</li>
 			</ul>

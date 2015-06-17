@@ -1,4 +1,4 @@
-<form role="form" action="formulario/expInvestigacion" method="post" class="form-horizontal">
+<form role="form" action="formulario/expInvestigacion" method="post" class="form form-horizontal">
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->experiencias_investigaciones->isEmpty())
@@ -127,8 +127,10 @@
 			</div>
 			<div class="col-md-11">
 				<button id="btnAgregarExpInvestigacion" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-				<input id="btnActualizarExpInvestigacion" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-				<input id="btnCancelarExpInvestigacion" class="btn btn-warning btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+				@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario != "Enviado")
+					<input id="btnActualizarExpInvestigacion" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+					<input id="btnCancelarExpInvestigacion" class="btn btn-warning btn-lg btn-cancel" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+				@endif
 			</div>
 		</div>
 	<br/>

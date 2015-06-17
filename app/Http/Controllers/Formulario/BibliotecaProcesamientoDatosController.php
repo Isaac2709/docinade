@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use App\AccesoBiblioteca;
 use App\AccesoProcesamientoDatos;
+use App\Http\Requests\CrearBibliotecaProcesamientoDatosRequest;
 
 use Illuminate\Http\Request;
 
@@ -41,7 +42,7 @@ class BibliotecaProcesamientoDatosController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearBibliotecaProcesamientoDatosRequest $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 

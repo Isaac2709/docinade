@@ -1,10 +1,9 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Carbon\Carbon;
 use Auth;
 
-class CrearPublicacionRequest extends Request {
+class CrearRecomendacionesRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -33,24 +32,23 @@ class CrearPublicacionRequest extends Request {
 	 */
 	public function rules()
 	{
-		$rules = [];
-		foreach($this->request->get('titulo_publicacion') as $key => $val)
-		{
-			$rules['titulo_publicacion.'.$key] = 'string|max:400';
-		}
-		foreach($this->request->get('titulo_medio_publicacion') as $key => $val)
-		{
-			$rules['titulo_medio_publicacion.'.$key] = 'string|max:250';
-		}
-		foreach($this->request->get('pais') as $key => $val)
-		{
-			$rules['pais.'.$key] = 'exists:GEN_Pais,Pais_Nombre';
-		}
-		foreach($this->request->get('annio') as $key => $val)
-		{
-			$rules['annio.'.$key] = 'integer|max:'.Carbon::now()->format('Y');
-		}
-		return $rules;
+		return [
+			'nombre1' => 'string|max:100',
+			'direccion1' => 'string|max:250',
+			'telefono1' => 'max:20',
+			'fax1' => 'max:20',
+			'email1' => 'email|max:50',
+			'posicion1' => 'string|max:150',
+			'archivo_recomendacion1' => 'image|max:3072',
+
+			'nombre2' => 'string|max:100',
+			'direccion2' => 'string|max:250',
+			'telefono2' => 'max:20',
+			'fax2' => 'max:20',
+			'email2' => 'email|max:50',
+			'posicion2' => 'string|max:150',
+			'archivo_recomendacion2' => 'image|max:3072'
+		];
 	}
 
 }

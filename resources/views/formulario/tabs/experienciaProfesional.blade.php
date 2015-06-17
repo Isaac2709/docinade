@@ -148,13 +148,15 @@
 	<!--BOTONES para agregar y remover formulario-->
         <div  class="col-md-12">
             <div >
-                <button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+                <button id="btnRemoverExpProfesional" type="button" class="btn btn-danger btn-lg pull-right btn-delete">-</button>
             </div>
             <div class="col-md-11">
-                <button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-                <input id="btnActualizarExpProfesional" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+                <button id="btnAgregarExpProfesional" type="button" class="btn btn-primary btn-lg pull-right btn-add">+</button>
+                @if($user->formulario->informacion_aspirante->Asp_Estado_Formulario != "Enviado")
+                    <input id="btnActualizarExpProfesional" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 
-                <input id="btnCancelarExpProfesional" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+                    <input id="btnCancelarExpProfesional" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+                @endif
             </div>
         </div>
     <br/>

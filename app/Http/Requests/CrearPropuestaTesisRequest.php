@@ -1,10 +1,9 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Carbon\Carbon;
 use Auth;
 
-class CrearPublicacionRequest extends Request {
+class CrearPropuestaTesisRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -33,24 +32,15 @@ class CrearPublicacionRequest extends Request {
 	 */
 	public function rules()
 	{
-		$rules = [];
-		foreach($this->request->get('titulo_publicacion') as $key => $val)
-		{
-			$rules['titulo_publicacion.'.$key] = 'string|max:400';
-		}
-		foreach($this->request->get('titulo_medio_publicacion') as $key => $val)
-		{
-			$rules['titulo_medio_publicacion.'.$key] = 'string|max:250';
-		}
-		foreach($this->request->get('pais') as $key => $val)
-		{
-			$rules['pais.'.$key] = 'exists:GEN_Pais,Pais_Nombre';
-		}
-		foreach($this->request->get('annio') as $key => $val)
-		{
-			$rules['annio.'.$key] = 'integer|max:'.Carbon::now()->format('Y');
-		}
-		return $rules;
+		return [
+			'titulo_propuesta' => 'string|max:250',
+			'definicion' => 'string|max: 65535',
+			'marco_teorico' => 'string|max:16777214',
+			'objetivos' => 'string|max:16777214',
+			'metodologia' => 'string|max: 65535',
+			'bibliografia' => 'string|max:16777214',
+			'adjunto' => 'mimes:doc,docx,pdf,odt|max:3072',
+		];
 	}
 
 }

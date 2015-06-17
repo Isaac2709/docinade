@@ -3,7 +3,7 @@
 use App\Http\Requests\Request;
 use Auth;
 
-class CrearConocimientoIdiomaRequest extends Request {
+class CrearProgramaComputacionRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -33,25 +33,15 @@ class CrearConocimientoIdiomaRequest extends Request {
 	public function rules()
 	{
 		$rules = [];
-		foreach($this->request->get('idioma') as $key => $val)
+		$rules[] = [
+			'edu_distancia_descripcion' => 'string|max:500',
+			'educacionDistancia' => 'boolean',
+			'correoElectronico' => 'boolean',
+			'windows' => 'boolean'
+		];
+		foreach($this->request->get('programa') as $key => $val)
 		{
-			$rules['idioma.'.$key] = 'string|max:30';
-		}
-		foreach($this->request->get('nivelEscritura') as $key => $val)
-		{
-			$rules['nivelEscritura.'.$key] = 'exists:ASP_Nivel,Niv_ID';
-		}
-		foreach($this->request->get('nivelLectura') as $key => $val)
-		{
-			$rules['nivelLectura.'.$key] = 'exists:ASP_Nivel,Niv_ID';
-		}
-		foreach($this->request->get('nivelCoversacional') as $key => $val)
-		{
-			$rules['nivelCoversacional.'.$key] = 'exists:ASP_Nivel,Niv_ID';
-		}
-		foreach($this->file('archivo') as $key => $val)
-		{
-			$rules['archivo.'.$key] = 'image|max:3072';
+			$rules['programa.'.$key] = 'required|string|max:100';
 		}
 		return $rules;
 	}
