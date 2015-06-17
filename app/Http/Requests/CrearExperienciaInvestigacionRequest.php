@@ -2,6 +2,7 @@
 
 use App\Http\Requests\Request;
 use Carbon\Carbon;
+use Auth;
 
 class CrearExperienciaInvestigacionRequest extends Request {
 
@@ -12,7 +13,17 @@ class CrearExperienciaInvestigacionRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return true;
+		$estado_formulario = Auth::user()->formulario->informacion_aspirante->Asp_Estado_Formulario;
+		if ($estado_formulario == "No enviado" || $estado_formulario == "Incompleto"){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public function forbiddenResponse(){
+		return redirect()->back()->withInput()->withErrors([ trans('alert.alert_form.errors.already_been_sent')]);
 	}
 
 	/**

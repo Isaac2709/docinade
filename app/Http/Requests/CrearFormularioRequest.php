@@ -38,7 +38,7 @@ class CrearFormularioRequest extends Request {
 			'apellidos' => 'string|max:50',
 			'genero' => 'in:M,F',
 			'id' => 'max:25',
-			'id_file' => 'mimes:jpeg,png,bmp,gif,pdf|max:3072',
+			'id_file' => 'image|max:3072',
 			'photo_file' => 'image|max:1024',
 			'fecha_nacimiento' => 'date_format:"d/m/Y"|before:'.Carbon::now()->format('d/m/Y'),
 			'nacionalidad' => 'exists:ASP_Nacionalidad,Nac_Nombre',
