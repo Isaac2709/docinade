@@ -117,17 +117,15 @@
 	<!--BOTONES para agregar y remover formulario-->
 	<div  class="col-md-12">
 		<div >
-			<button id="btnRemoverTrabajosPublicados" type="button" class="btn btn-danger btn-lg pull-right">-</button>
+			<button id="btnRemoverTrabajosPublicados" type="button" class="btn btn-danger btn-lg pull-right btn-delete">-</button>
 		</div>
 		<div class="col-md-11">
-			<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right">+</button>
-			<input id="btnActualizarTrabajosPublicados" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
-<<<<<<< HEAD
+			<button id="btnAgregarTrabajosPublicados" type="button" class="btn btn-primary btn-lg pull-right btn-add">+</button>
+			@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario != "Enviado")
+				<input id="btnActualizarTrabajosPublicados" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 
-			<input id="btnCancelarTrabajosPublicados" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
-=======
-			<input id="btnCancelarTrabajosPublicados" class="btn btn-warning btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
->>>>>>> 21747b1b7b060525ac3008379017dd2dcdd5f76d
+				<input id="btnCancelarTrabajosPublicados" class="btn btn-warning btn-cancel btn-lg" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+			@endif
 		</div>
 	</div>
 	<br/>

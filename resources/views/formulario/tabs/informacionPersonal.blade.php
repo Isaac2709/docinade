@@ -35,7 +35,7 @@
                                 <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
                             </div>
                         @else
-                            <div class="fileupload fileupload-new text-center" data-provides="fileupload" id="fileupload1">
+                            <div class="fileupload fileupload-new" data-provides="fileupload" id="fileupload1">
                                 <span class="btn btn-default btn-file claseBtnArchivoCedula" ><span class="fileupload-new">Buscar Archivo</span>
                                 <span class="fileupload-exists">Cambiar</span>
                                     <input type="file" id="archivoCedula" name="id_file"  />
@@ -242,11 +242,14 @@
     <hr class="soften">
     <!-- End row -->
 	<!-- BOTON ACTUALIZAR -->
-	<div>
-        <input id="btnActualizarDatosPersonales" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
+    @if($user->formulario->informacion_aspirante->Asp_Estado_Formulario != "Enviado")
+        <div>
+            <input id="btnActualizarDatosPersonales" class="btn btn-success btn-lg imagenSubmit" type="submit" value="&#xf0c7; Actualizar">
 
-        <input id="btnCancelarDatosPersonales" class="btn btn-warning btn-lg btn-cancel pull-right" type="button" onClick="cancelarActualizacion()" value="Cancelar">
-    </div>
+            <input id="btnCancelarDatosPersonales" class="btn btn-warning btn-lg btn-cancel" type="button" onClick="cancelarActualizacion()" value="Cancelar">
+        </div>
+    @endif
+
 
 
 
