@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearPropuestaTesisRequest;
 
 class PropuestaTesisController extends Controller {
 
@@ -41,7 +42,7 @@ class PropuestaTesisController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearPropuestaTesisRequest $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 		if(is_null($user->formulario->informacion_aspirante->ID_Prop_Tesis)){

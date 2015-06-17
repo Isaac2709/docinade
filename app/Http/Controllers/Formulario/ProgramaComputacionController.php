@@ -8,6 +8,7 @@ use App\AccesoProgramaComputacion;
 use App\EducacionDistancia;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearProgramaComputacionRequest;
 
 class ProgramaComputacionController extends Controller {
 
@@ -41,7 +42,7 @@ class ProgramaComputacionController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearProgramaComputacionRequest $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 

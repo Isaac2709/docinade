@@ -8,6 +8,7 @@ use App\Recomendacion;
 use App\Email;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CrearRecomendacionesRequest;
 
 class RecomendacionController extends Controller {
 
@@ -43,7 +44,7 @@ class RecomendacionController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CrearRecomendacionesRequest $request)
 	{
 		$user = User::find(Auth::user()->Usu_ID);
 		$recomendacion1 = null;
