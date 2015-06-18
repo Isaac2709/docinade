@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('home', 'HomeController@index');
 
 Route::get('pdf', function(){
     $fpdf = new Fpdf();
@@ -24,17 +25,24 @@ Route::get('pdf', function(){
 
 });
 
-Route::get('home', 'HomeController@index');
-
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namespace' => 'Administrador'], function(){
-	Route::resource('users', 'AdministradorController');
+	Route::resource('admins', 'AdministradorController');
+	Route::resource('profesores', 'ProfesorController');
 	Route::get('/', 'AdministradorController@forms');
 	Route::get('aspirantFormData', 'AdministradorController@aspirantFormData');
+	Route::get('aspirante/{Asp_ID}', 'AspiranteController@index');
+});
+
+Route::group(['prefix' => 'profesor', 'middleware' => ['auth', 'is_professor'], 'namespace' => 'Profesor'], function(){
+	Route::get('/', 'ProfesorController@forms');
+	// Route::get('perfil/{Prof_ID}', 'ProfesorController@show');
+	// Route::post('perfil/{Prof_ID}', 'ProfesorController@update');
+	Route::resource('perfil', 'ProfesorController');
 	Route::get('aspirante/{Asp_ID}', 'AspiranteController@index');
 });
 

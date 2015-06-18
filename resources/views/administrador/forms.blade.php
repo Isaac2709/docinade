@@ -1,4 +1,4 @@
-@extends('dashboard.dashboard')
+@extends('administrador.dashboard')
 
 @section('styles')
 	<!--1 <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">-->
@@ -28,6 +28,14 @@
 	}
 	</style>
 	<link href="{{ asset('/dashboard/css/bootstrap-table.css') }}" rel="stylesheet">
+@endsection
+
+@section('form_active')
+	class="active"
+@endsection
+
+@section('page_title')
+	Formularios
 @endsection
 
 @section('page_header')

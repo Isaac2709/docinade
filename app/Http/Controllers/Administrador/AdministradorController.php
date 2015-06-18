@@ -30,7 +30,7 @@ class AdministradorController extends Controller {
 			->join('ASP_Nacionalidad', 'ASP_Aspirante.Asp_ID_Nac', '=', 'ASP_Nacionalidad.Nac_ID')
 			->select('Gen_Usuario.Usu_Tipo','Gen_Usuario.Usu_ID', 'GEN_Info_Personal.IPe_Nombre', 'GEN_Info_Personal.IPe_Apellido', 'GEN_Info_Personal.IPe_Pasaporte', 'GEN_Info_Personal.IPe_Genero', 'GEN_Email.Email_Email', 'ASP_Aspirante.Asp_Estado_Formulario', 'ASP_Nacionalidad.Nac_Nombre')
 			->orderBy('Asp_Estado_Formulario', 'desc')
-			->paginate(5);
+			->get();
 
 		// $users=\DB::table('Gen_Usuario')
 		// 	->rightJoin('GEN_Info_Personal', 'Gen_Usuario.Usu_ID', '=', 'GEN_Info_Personal.GEN_ID_Usuario')
@@ -41,7 +41,7 @@ class AdministradorController extends Controller {
 		// 	->orderBy('Asp_Estado_Formulario', 'desc')
 		// 	->get();
 		// dd($users);
-		return view('consultas.index')->with('users', $users); /*como segundo parametro se le puede dar las variables users donde esta la coleccion de usuarios*/
+		return view('administrador.forms')->with('users', $users); /*como segundo parametro se le puede dar las variables users donde esta la coleccion de usuarios*/
 	}
 
 	public function aspirantFormData(){

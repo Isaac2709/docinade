@@ -13,7 +13,7 @@
 				<li class="dropdown pull-right">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->Usu_Nombre }} <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{ URL::route('admin.admins.show', Auth::user()->Usu_ID) }}"><span class="glyphicon glyphicon-user"></span> {{ trans('dashboard.top_menu.profile') }}</a></li>
+						<li><a href="{{ URL::route('profesor.perfil.show', Auth::user()->Usu_ID) }}"><span class="glyphicon glyphicon-user"></span> {{ trans('dashboard.top_menu.profile') }}</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-cog"></span> {{ trans('dashboard.top_menu.settings') }}</a></li>
 						<li><a href="{{ url('/auth/logout') }}"><span class="glyphicon glyphicon-log-out"></span> {{ trans('dashboard.top_menu.logout') }}</a></li>
 					</ul>

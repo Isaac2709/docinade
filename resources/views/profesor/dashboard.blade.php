@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lumino - Forms</title>
+<title>DOCINADE | @yield('page_title')</title>
 
 <link href="{{ asset('/dashboard/css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/dashboard/css/datepicker3.css') }}" rel="stylesheet">
@@ -20,10 +20,10 @@
 </head>
 
 <body>
-	@include('dashboard.partials.layout_menu_top')
+	@include('dashboard.partials.layout_menu_top_professor')
 	<!-- /.navbar-top -->
 
-	@include('dashboard.partials.layout_menu_left')
+	@include('dashboard.partials.layout_menu_left_professor')
 	<!--/.sidebar-->
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
