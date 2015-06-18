@@ -19,6 +19,12 @@ return [
         'created' => 'El usuario de tipo administrador ha sido agregado.'
     ],
 
+    'alert_professor' => [
+        'updated' => 'El usuario de tipo profesor ha sido actualizado.',
+        'deleted' => 'El usuario de tipo profesor fue eliminado.',
+        'created' => 'El usuario de tipo profesor ha sido agregado.'
+    ],
+
     'alert_form' => [
         'updated' => 'Sus datos han sido actualizados.',
         'completed' => 'El formulario ha sido completado.',

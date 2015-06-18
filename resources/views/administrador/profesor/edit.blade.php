@@ -5,7 +5,7 @@
 @endsection
 
 @section('page_title')
-	Registrar Profesor
+	Editar Profesor
 @endsection
 
 @section('parent_pages')
@@ -13,9 +13,8 @@
 @endsection
 
 @section('page_header')
-	Registrar Profesor
+	Editar Profesor
 @endsection
-
 @section('content')
 	<div class="panel-body">
 		@if (count($errors) > 0)
@@ -24,13 +23,14 @@
 			@include('administrador.partials.alert_success')
 		@endif
 
-		<form class="form-horizontal" method="post" action="{{url('/admin/profesores') }}">
+		<form class="form-horizontal" method="POST" action="{{ route('admin.admins.update', $admin->Usu_ID) }}">
+			<input type="hidden" name="_method" value="PUT">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<!-- Nombre Completo -->
 			<div class="form-group">
 				<label for="nombre_completo" class="col-md-4 control-label">Nombre Completo: </label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="nombre_completo">
+					<input type="text" class="form-control" name="nombre_completo" value="{{ $admin->Usu_Nombre }}">
 				</div>
 			</div>
 
@@ -38,7 +38,7 @@
 			<div class="form-group">
 				<label for="email" class="col-md-4 control-label">Correo Electrónico: </label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="email">
+					<input type="text" class="form-control" name="email" value="{{ $admin->email }}">
 				</div>
 			</div>
 
@@ -60,9 +60,7 @@
 
 			<div class="form-group">
 				<div class="col-md-6 col-md-offset-4">
-					<button type="submit" class="btn btn-primary">
-						Registrar
-					</button>
+					<input type="submit" class="btn btn-primary" value="Editar">
 				</div>
 			</div>
 		</form>

@@ -80,7 +80,7 @@
 									<td><strong>{{$user->IPe_Pasaporte}}</strong></td>
 									<td><strong>{{$user->IPe_Genero}}</strong></td>
 									<td><strong>{{$user->Nac_Nombre}}</strong></td>
-									<td><strong>{{$user->Email_Email}}</strong></td>
+									<td><strong>{{$user->formulario->emails()->first()->Email_Email or ''}}</strong></td>
 									<td><strong>{{$user->Asp_Estado_Formulario}}</strong></td>
 									<td><a href="{{ url('/admin/aspirante/'.$user->Usu_ID) }}" class="btn btn-warning btn-sm" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
 								</tr>
@@ -91,7 +91,7 @@
 									<td>{{$user->IPe_Pasaporte}}</td>
 									<td>{{$user->IPe_Genero}}</td>
 									<td>{{$user->Nac_Nombre}}</td>
-									<td>{{$user->Email_Email}}</td>
+									<td>{{$user->formulario->emails()->first()->Email_Email or ''}}</td>
 									<td>{{$user->Asp_Estado_Formulario}}</td>
 									<td><a href="{{ url('/admin/aspirante/'.$user->Usu_ID) }}" class="btn btn-info btn-sm" role="button"><span class="glyphicon glyphicon-info-sign"></span></a></td>
 								</tr>

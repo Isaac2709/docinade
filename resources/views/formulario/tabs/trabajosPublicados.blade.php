@@ -45,9 +45,9 @@
 					</div>
 				</div>
 				<!--Termina col-md-6-->
-
 			</div>
 			<!-- Termina row -->
+
 			<div class="row col-md-12">
 				<div class="form-group">
 	    			<label for="url" class="col-md-2 control-label labelUrl">URL:</label>
@@ -56,7 +56,8 @@
 					</div>
 	    		</div>
 			</div>
-			
+			<!-- Termina row -->
+
 			<div class="col-md-offset-11">
 				<input type="checkbox" name="checkBox1" class="claseCheckboxTrabajosPublicados" id="checkboxTrabajosPublicados1" style="display:none">
 			</div>
@@ -113,18 +114,20 @@
 						</div>
 					</div>
 					<!--Termina col-md-6-->
-					
+
 				</div>
 				<!-- Termina row -->
+
 				<div class="row col-md-12">
-						<div class="form-group">
-			    			<label for="name" class="col-md-2 control-label labelUrl">URL:</label>
-			    			<div class="col-md-10">
-								<input type="text" class="form-control" id="url" name="url[]"  value="{{ $publicacion->Pub_Enlace }}" >
-							</div>
-			    		</div>
-					</div>
-				
+					<div class="form-group">
+		    			<label for="name" class="col-md-2 control-label labelUrl">URL:</label>
+		    			<div class="col-md-10">
+							<input type="text" class="form-control" id="url" name="url[]"  value="{{ $publicacion->Pub_Enlace }}" >
+						</div>
+		    		</div>
+				</div>
+				<!-- Termina row -->
+
 				<div class="col-md-offset-11">
 					<input type="checkbox" name="checkBox1" class="claseCheckboxTrabajosPublicados" id="checkboxTrabajosPublicados{{ $count }}" @if($count == 1) style="display:none" @endif >
 				</div>
