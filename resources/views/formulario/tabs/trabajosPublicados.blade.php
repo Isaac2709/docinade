@@ -2,7 +2,7 @@
 	<br/>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	@if($user->formulario->informacion_aspirante->publicaciones->isEmpty())
-		<div id="formularioTrabajosPublicados1" class="row blockTrabajosPublicados">
+		<div id="formularioTrabajosPublicados1" class="blockTrabajosPublicados">
 			<div class="row">
 				<div class="col-md-6">
 					<input type="hidden" name="id_pub[]" class="id_pub">
@@ -45,19 +45,18 @@
 					</div>
 				</div>
 				<!--Termina col-md-6-->
-				<div class="col-md-offset-3">
-					<input type="checkbox" name="checkBox1" class="showURL" id="showURL">
-				</div>
-				<div class="col-md-6 enable-url" style="visibility: hidden;">
-						<div class="form-group enable-url">
-							<label for="año" class="col-md-4 control-label labelAño">URL:</label>
-							<div class="col-md-8 " id="añoT" >
-								<input type="text" class="form-control inputTituloMP" name="url[]" id="url" value="{{ $publicacion->Pub_Enlace }}">
-							</div>
-						</div>
-					</div>
+
 			</div>
 			<!-- Termina row -->
+			<div class="row col-md-12">
+				<div class="form-group">
+	    			<label for="url" class="col-md-2 control-label labelUrl">URL:</label>
+	    			<div class="col-md-10 ">
+						<input type="text" id="url" class="form-control" name="url[]">
+					</div>
+	    		</div>
+			</div>
+			
 			<div class="col-md-offset-11">
 				<input type="checkbox" name="checkBox1" class="claseCheckboxTrabajosPublicados" id="checkboxTrabajosPublicados1" style="display:none">
 			</div>
@@ -67,7 +66,7 @@
 	@else
 		<?php $count = 1; ?>
 		@foreach($user->formulario->informacion_aspirante->publicaciones_desc as $publicacion)
-			<div id="formularioTrabajosPublicados{{ $count }}" class="row blockTrabajosPublicados">
+			<div id="formularioTrabajosPublicados{{ $count }}" class=" blockTrabajosPublicados">
 				<div class="row">
 					<div class="col-md-6">
 						<input type="hidden" name="id_pub[]" class="id_pub">
@@ -113,27 +112,19 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-						<label class="col-md-4">
-							<input type="checkbox" name="checkBox1" class="showURL" id="showURL">
-                           	Checkbox 1
-                        </label>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group enable-url">
-							<label for="año" class="col-md-4 control-label labelAño">URL:</label>
-							<div class="col-md-8 " id="añoT" >
-								<input type="text" class="form-control inputTituloMP" name="url[]" id="url" value="{{ $publicacion->Pub_Enlace }}">
-							</div>
-						</div>
-					</div>
-					<!--URL-->
-
 					<!--Termina col-md-6-->
+					
 				</div>
 				<!-- Termina row -->
+				<div class="row col-md-12">
+						<div class="form-group">
+			    			<label for="name" class="col-md-2 control-label labelUrl">URL:</label>
+			    			<div class="col-md-10">
+								<input type="text" class="form-control" id="url" name="url[]"  value="{{ $publicacion->Pub_Enlace }}" >
+							</div>
+			    		</div>
+					</div>
+				
 				<div class="col-md-offset-11">
 					<input type="checkbox" name="checkBox1" class="claseCheckboxTrabajosPublicados" id="checkboxTrabajosPublicados{{ $count }}" @if($count == 1) style="display:none" @endif >
 				</div>
