@@ -2,9 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Http\Requests\CrearProfesorRequest;
 
 class ProfesorController extends Controller {
 
@@ -15,8 +16,8 @@ class ProfesorController extends Controller {
 	 */
 	public function index()
 	{
-		$professors = User::where('Usu_Tipo', '=', 'Profesor')->get();
-		return view('administrador.index')->with('professors', $professors);
+		$profesores = User::where('Usu_Tipo', '=', 'Profesor')->get();
+		return view('administrador.profesor.index')->with('profesores', $profesores);
 	}
 
 	/**
@@ -26,7 +27,7 @@ class ProfesorController extends Controller {
 	 */
 	public function create()
 	{
-		return view('profesor.create');
+		return view('administrador.profesor.create');
 	}
 
 	/**
@@ -34,16 +35,16 @@ class ProfesorController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CrearProfesorRequest $request)
 	{
 		$user = new User();
 		$user->Usu_Nombre = $request->nombre_completo;
 		$user->email = $request->email;
 		$user->password = bcrypt($request->password);
-		$user->Usu_Tipo = 'Administrador';
+		$user->Usu_Tipo = 'Profesor';
 		$user->save();
 
-		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_admin.created'));
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_professor.created'));
 	}
 
 	/**
@@ -54,8 +55,7 @@ class ProfesorController extends Controller {
 	 */
 	public function show($id)
 	{
-		$admin = User::findOrFail($id);
-		return view('profesor.profile')->with('admin', $admin);
+		//
 	}
 
 	/**
@@ -67,7 +67,7 @@ class ProfesorController extends Controller {
 	public function edit($id)
 	{
 		$admin = User::findOrFail($id);
-		return view('profesor.edit')->with('admin', $admin);
+		return view('administrador.profesor.edit')->with('admin', $admin);
 	}
 
 	/**
@@ -86,7 +86,7 @@ class ProfesorController extends Controller {
 	    	$admin->password = bcrypt($request->password);
 	    }
 		$admin->save();
-		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_admin.updated'));
+		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_professor.updated'));
 	}
 
 	/**
