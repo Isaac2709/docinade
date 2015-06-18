@@ -240,6 +240,7 @@ class FormularioController extends Controller {
 	public function postEnviarFormulario(){
 		$user = User::find(Auth::user()->Usu_ID);
 		$user->formulario->informacion_aspirante->Asp_Estado_Formulario = "Enviado";
+		$user->formulario->informacion_aspirante->Asp_Fecha_Envio = Carbon::now();
 		$user->formulario->informacion_aspirante->save();
 		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.sent'));
 	}
