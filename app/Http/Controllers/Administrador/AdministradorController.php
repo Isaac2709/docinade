@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Formulario;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearAdministradorRequest;
@@ -26,12 +27,12 @@ class AdministradorController extends Controller {
 		// $users=User::where('Usu_Tipo', '=', 'Aspirante')->paginate();/*variable referente a la coleccion de usuarios*/
 		$users=User::rightJoin('GEN_Info_Personal', 'Gen_Usuario.Usu_ID', '=', 'GEN_Info_Personal.GEN_ID_Usuario')
 			->join('ASP_Aspirante', 'GEN_Info_Personal.IPe_ID', '=', 'ASP_Aspirante.Asp_ID_InfoPer')
-			->join('GEN_Email', 'GEN_Info_Personal.IPe_ID', '=', 'GEN_Email.Email_ID_InfoPer')
 			->join('ASP_Nacionalidad', 'ASP_Aspirante.Asp_ID_Nac', '=', 'ASP_Nacionalidad.Nac_ID')
-			->select('Gen_Usuario.Usu_Tipo','Gen_Usuario.Usu_ID', 'GEN_Info_Personal.IPe_Nombre', 'GEN_Info_Personal.IPe_Apellido', 'GEN_Info_Personal.IPe_Pasaporte', 'GEN_Info_Personal.IPe_Genero', 'GEN_Email.Email_Email', 'ASP_Aspirante.Asp_Estado_Formulario', 'ASP_Nacionalidad.Nac_Nombre')
+			->select('Gen_Usuario.Usu_Tipo','Gen_Usuario.Usu_ID', 'GEN_Info_Personal.IPe_Nombre', 'GEN_Info_Personal.IPe_Apellido', 'GEN_Info_Personal.IPe_Pasaporte', 'GEN_Info_Personal.IPe_Genero', 'ASP_Aspirante.Asp_Estado_Formulario', 'ASP_Nacionalidad.Nac_Nombre')
+			->where('Gen_Usuario.Usu_Tipo', '=', 'Aspirante')
 			->orderBy('Asp_Estado_Formulario', 'desc')
 			->get();
-
+		$forms = Formulario::all();
 		// $users=\DB::table('Gen_Usuario')
 		// 	->rightJoin('GEN_Info_Personal', 'Gen_Usuario.Usu_ID', '=', 'GEN_Info_Personal.GEN_ID_Usuario')
 		// 	->join('ASP_Aspirante', 'GEN_Info_Personal.IPe_ID', '=', 'ASP_Aspirante.Asp_ID_InfoPer')
@@ -41,7 +42,7 @@ class AdministradorController extends Controller {
 		// 	->orderBy('Asp_Estado_Formulario', 'desc')
 		// 	->get();
 		// dd($users);
-		return view('administrador.forms')->with('users', $users); /*como segundo parametro se le puede dar las variables users donde esta la coleccion de usuarios*/
+		return view('administrador.forms')->with('users', $users)->with('forms', $forms); /*como segundo parametro se le puede dar las variables users donde esta la coleccion de usuarios*/
 	}
 
 	public function aspirantFormData(){
