@@ -52,7 +52,7 @@
 						<div class="form-group enable-url">
 							<label for="año" class="col-md-4 control-label labelAño">URL:</label>
 							<div class="col-md-8 " id="añoT" >
-								<input type="text" class="form-control inputTituloMP" name="url[]" id="url" value="{{ $publicacion->Pub_Enlace }}">
+								<input type="text" class="form-control inputTituloMP" name="url[]" id="url" value="">
 							</div>
 						</div>
 					</div>

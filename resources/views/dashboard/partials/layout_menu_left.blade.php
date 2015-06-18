@@ -12,6 +12,7 @@
 		<li><a href="charts.html"><span class="glyphicon glyphicon-stats"></span> Charts</a></li> -->
 		<li @yield('form_active')><a href="{{ url('/admin') }}"><span class="glyphicon glyphicon-list-alt"></span> Formularios</a></li>
 		<li @yield('admin_active')><a href="{{ url('/admin/admins') }}"><span class="glyphicon glyphicon-list-alt"></span> Administradores</a></li>
+		<li @yield('professor_active')><a href="{{ url('/admin/profesores') }}"><span class="glyphicon glyphicon-list-alt"></span> Profesores</a></li>
 		<!-- <li ><a href="forms.html"><span class="glyphicon glyphicon-pencil"></span> Forms</a></li>
 		<li><a href="panels.html"><span class="glyphicon glyphicon-info-sign"></span> Alerts &amp; Panels</a></li>
 		<li class="parent ">

@@ -27,14 +27,14 @@
 					<div>
 						<label class="control-label"><h2>Formulario de Aspirante a Doctorado</h2></label>
 						@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario == "No enviado")
-						<div class="form-group md-3 pull-right" style="margin-top: 15px;">
-							<form method="POST" action="formulario/envFormulario" style="">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<div class="form-group">
-									<input type="submit" value="Enviar Formulario" class="btn btn-success">
-								</div>
-							</form>
-						</div>
+							<div class="form-group md-3 pull-right" style="margin-top: 15px;">
+								<form method="POST" action="formulario/envFormulario" style="">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<div class="form-group">
+										<input type="submit" value="Enviar Formulario" class="btn btn-success">
+									</div>
+								</form>
+							</div>
 						@endif
 					</div>
 				</div>
@@ -222,6 +222,22 @@
 
 
 @section('scripts')
+	@if($user->formulario->informacion_aspirante->Asp_Estado_Formulario == "Enviado")
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('input').attr('disabled', true);
+			$('checkbox').attr('disabled', true);
+			$('textarea').attr('disabled', true);
+			$('button').attr('disabled', true);
+			$('select').attr('disabled', true);
+			$('input[type=file]').parent('span').attr('disabled', true);
+// pointer-events: none;
+// opacity: 0.65;
+// box-shadow: none;
+			// .btn.disabled
+		})
+		</script>
+	@endif
 	<!--Para los inputs de tipo archivo (ESTA LIBRERIA PRODUCE ERROR EN LOS DROPDOWN)-->
 	<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>-->
 
