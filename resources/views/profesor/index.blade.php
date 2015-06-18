@@ -1,4 +1,4 @@
-@extends('administrador.dashboard')
+@extends('profesor.dashboard')
 
 @section('admin_active')
     class="active"
@@ -41,9 +41,9 @@
                             <td>{{ $admin->Usu_Nombre }}</td>
                             <td>{{ $admin->email }}</td>
                             <td>
-                            	<a href="{{URL::route('admin.admins.edit', $admin->Usu_ID)}}" class="btn btn-info">Editar</a>
+                            	<a href="{{URL::route('admin.users.edit', $admin->Usu_ID)}}" class="btn btn-info">Editar</a>
 
-                            	<form class="form" method="POST" action="{{ route('admin.admins.destroy', $admin->Usu_ID) }}">
+                            	<form class="form" method="POST" action="{{ route('admin.users.destroy', $admin->Usu_ID) }}">
                             		<input type="hidden" name="_token" value="{{ csrf_token() }}">
                             		<input type="hidden" name="_method" value="DELETE">
                             		<input type="submit" onclick="return confirm('¿Seguro que desea eliminar el registro?')" class="btn btn-danger" value="Eliminar">
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group">
 			<div class="col-md-6 col-md-offset-4">
-				<a href="{{route('admin.admins.create')}}" class="btn btn-primary">Registrar Administrador</a>
+				<a href="{{route('admin.users.create')}}" class="btn btn-primary">Registrar Administrador</a>
 			</div>
 		</div>
     </div>

@@ -3,7 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class IsAspirant {
+class IsProfessor {
 
 	/**
 	 * The Guard implementation.
@@ -32,19 +32,8 @@ class IsAspirant {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if(! $this->auth->user()->esAspirante()){
-			if($this->auth->user()->esProfesor()){
-				if ($request->ajax())
-				{
-					return response('Unauthorized.', 401);
-				}
-				else
-				{
-					return redirect()->guest('/profesor')->withErrors('El usuario es de tipo profesor');
-				}
-			}
-
-			elseif($this->auth->user()->esAdministrador()){
+		if(! $this->auth->user()->esProfesor()){
+			if($this->auth->user()->esAdministrador()){
 				if ($request->ajax())
 				{
 					return response('Unauthorized.', 401);
@@ -52,6 +41,17 @@ class IsAspirant {
 				else
 				{
 					return redirect()->guest('/admin')->withErrors('El usuario es de tipo administrador');
+				}
+			}
+
+			elseif($this->auth->user()->esAspirante()){
+				if ($request->ajax())
+				{
+					return response('Unauthorized.', 401);
+				}
+				else
+				{
+					return redirect()->guest('/formulario')->withErrors('El usuario no tiene permisos de profesor');
 				}
 			}
 		}

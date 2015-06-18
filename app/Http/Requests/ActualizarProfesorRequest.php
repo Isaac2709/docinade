@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class ActualizarAdministradorRequest extends Request {
+class ActualizarProfesorRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class ActualizarAdministradorRequest extends Request {
 	{
 		return [
 			'nombre_completo' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:Gen_Usuario,email,'.$this->admins.',Usu_ID',
+			'email' => 'required|email|max:255|unique:Gen_Usuario,email,'.$this->perfil.',Usu_ID',
 			'password' => 'confirmed|min:6',
 		];
 	}

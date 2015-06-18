@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Administrador;
+<?php namespace App\Http\Controllers\Profesor;
 
 // MODELS
 use Auth;
@@ -57,7 +57,7 @@ class AspiranteController extends Controller {
 	public function index($Asp_ID)
 	{
 		$user = User::find($Asp_ID);
-		return view('administrador.aspirante.index')->with('user', $user);
+		return view('profesor.aspirante.index')->with('user', $user);
 	}
 
 	public function postIndex(CrearFormularioRequest $request)

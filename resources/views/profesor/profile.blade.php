@@ -1,4 +1,4 @@
-@extends('administrador.dashboard')
+@extends('profesor.dashboard')
 
 @section('page_title')
 	Perfil de Administrador
@@ -16,14 +16,14 @@
 			@include('administrador.partials.alert_success')
 		@endif
 
-		<form class="form-horizontal" method="POST" action="{{ route('admin.admins.update', $admin->Usu_ID) }}">
+		<form class="form-horizontal" method="POST" action="{{ route('profesor.perfil.update', $profesor->Usu_ID) }}">
 			<input type="hidden" name="_method" value="PUT">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<!-- Nombre Completo -->
 			<div class="form-group">
 				<label for="nombre_completo" class="col-md-4 control-label">Nombre Completo: </label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="nombre_completo" value="{{ $admin->Usu_Nombre }}" disabled="">
+					<input type="text" class="form-control" name="nombre_completo" value="{{ $profesor->Usu_Nombre }}" disabled="">
 				</div>
 			</div>
 
@@ -31,7 +31,7 @@
 			<div class="form-group">
 				<label for="email" class="col-md-4 control-label">Correo Electrónico: </label>
 				<div class="col-md-6">
-					<input type="text" class="form-control" name="email" value="{{ $admin->email }}" disabled="">
+					<input type="text" class="form-control" name="email" value="{{ $profesor->email }}" disabled="">
 				</div>
 			</div>
 

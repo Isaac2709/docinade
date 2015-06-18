@@ -40,7 +40,7 @@ class IsAdmin {
 				}
 				else
 				{
-					return redirect()->guest('/formulario')->withErrors('El usuario no tiene permisos de administrador');
+					return redirect()->guest('/profesor')->withErrors('El usuario no tiene permisos de administrador');
 				}
 			}
 

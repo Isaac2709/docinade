@@ -45,6 +45,17 @@
 					</div>
 				</div>
 				<!--Termina col-md-6-->
+				<div class="col-md-offset-3">
+					<input type="checkbox" name="checkBox1" class="showURL" id="showURL">
+				</div>
+				<div class="col-md-6 enable-url" style="visibility: hidden;">
+						<div class="form-group enable-url">
+							<label for="año" class="col-md-4 control-label labelAño">URL:</label>
+							<div class="col-md-8 " id="añoT" >
+								<input type="text" class="form-control inputTituloMP" name="url[]" id="url" value="{{ $publicacion->Pub_Enlace }}">
+							</div>
+						</div>
+					</div>
 			</div>
 			<!-- Termina row -->
 			<div class="col-md-offset-11">
@@ -102,6 +113,24 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+						<label class="col-md-4">
+							<input type="checkbox" name="checkBox1" class="showURL" id="showURL">
+                           	Checkbox 1
+                        </label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group enable-url">
+							<label for="año" class="col-md-4 control-label labelAño">URL:</label>
+							<div class="col-md-8 " id="añoT" >
+								<input type="text" class="form-control inputTituloMP" name="url[]" id="url" value="{{ $publicacion->Pub_Enlace }}">
+							</div>
+						</div>
+					</div>
+					<!--URL-->
+
 					<!--Termina col-md-6-->
 				</div>
 				<!-- Termina row -->

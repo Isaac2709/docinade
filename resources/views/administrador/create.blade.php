@@ -1,7 +1,19 @@
-@extends('dashboard.dashboard')
+@extends('administrador.dashboard')
+
+@section('admin_active')
+	class="active"
+@endsection
+
+@section('page_title')
+	Registrar Administrador
+@endsection
+
+@section('parent_pages')
+	<li><a href="{{ url('/admin/admins')}}">Administradores</a></li>
+@endsection
 
 @section('page_header')
-	Crear Administrador
+	Registrar Administrador
 @endsection
 
 @section('content')
@@ -12,7 +24,7 @@
 			@include('administrador.partials.alert_success')
 		@endif
 
-		<form class="form-horizontal" method="post" action="{{url('/admin/users') }}">
+		<form class="form-horizontal" method="post" action="{{url('/admin/admins') }}">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<!-- Nombre Completo -->
 			<div class="form-group">
