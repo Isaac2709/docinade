@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>Formulario - {{ $user->formulario->IPe_Nombre or ''}}</title>
 	<link href="{{ asset('/css/pdf.css') }}" rel="stylesheet">
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 	<style type="text/css">
@@ -307,7 +307,14 @@
 					@endif
 					- {{ $expInv->Inv_Lugar }}
 				</td>
-				<td>{{ $expInv->Inv_Anio }}</td>
+				<td>
+					@if($expInv->Inv_Anio_Inicio == $expInv->Inv_Anio_Fin)
+						{{ $expInv->Inv_Anio_Inicio }}
+					@else
+						Inicio: {{ $expInv->Inv_Anio_Inicio }} <br />
+						Fin: {{ $expInv->Inv_Anio_Fin }}
+					@endif
+				</td>
 			</tr>
 		@endforeach
 	</table>
@@ -536,35 +543,5 @@
 	@else
 		 NO
 	@endif
-	<br><table style='page-break-after:always;'></br></table><br>
-	<u class="text-left"><b><font size="3">
-		XI. DOCUMENTOS ADJUNTOS
-	</font></b></u>
-	<br />
-	<b class="text-left"><font size="2">
-		Cedula o Pasaporte:
-	</font></b>
-	@if(!is_null($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
-		<?php $pasaporte_adj = 'storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj ?>
-		<p class="text-center"><img src="{{ $pasaporte_adj or ''}}" align="middle"  width="100%"></p>
-	@else
-		<p class="text-center"><img src="images/image_not_found.png" align="middle"></p>
-	@endif
-	<br />
-	<br><table style='page-break-after:always;'></br></table><br>
-	<b class="text-left"><font size="2">
-		Titulos
-	</font></b>
-	<br />
-	@foreach($user->formulario->informacion_aspirante->educacion_superior as $educacion)
-		@if(!empty($educacion->Sup_Adjunto))
-			<b class="text-left"><font size="2">
-				Titulo de: {{ $educacion->area_especialidad->Esp_Area or '' }}
-			</font></b>
-			<!-- <p class="text-center"><img src="{{ 'storage/images/'.$educacion->Sup_Adjunto}}" align="middle"  width="100%"></p> -->
-			<br><table style='page-break-after:always;'></br></table><br>
-		@endif
-	@endforeach
-	<br />
 </body>
 </html>

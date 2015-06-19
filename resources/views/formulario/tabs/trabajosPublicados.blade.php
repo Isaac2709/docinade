@@ -52,7 +52,7 @@
 				<div class="form-group">
 	    			<label for="url" class="col-md-2 control-label labelUrl">URL:</label>
 	    			<div class="col-md-10 ">
-						<input type="text" id="url" class="form-control" name="url[]">
+						<input type="text" id="url" class="form-control inputPublicacion" name="url[]">
 					</div>
 	    		</div>
 			</div>
@@ -120,9 +120,9 @@
 
 				<div class="row col-md-12">
 					<div class="form-group">
-		    			<label for="name" class="col-md-2 control-label labelUrl">URL:</label>
+		    			<label for="name" class="col-md-2 control-label labelUrl">Enlace:</label>
 		    			<div class="col-md-10">
-							<input type="text" class="form-control" id="url" name="url[]"  value="{{ $publicacion->Pub_Enlace }}" >
+							<input type="text" class="form-control inputPublicacion" id="url" name="url[]"  value="{{ $publicacion->Pub_Enlace }}" >
 						</div>
 		    		</div>
 				</div>

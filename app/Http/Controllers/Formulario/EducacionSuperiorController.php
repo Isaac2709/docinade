@@ -130,6 +130,9 @@ class EducacionSuperiorController extends Controller {
 		        $extension = end($trozos);
 		        $id_filename = $user->Usu_Nombre.'_'.rand(10, 99999999).'.'.$file->getClientOriginalName();
 		        \Illuminate\Support\Facades\Request::file('title_file')[$pos]->move($this->destinationPath.'/images/', $id_filename);
+		        $path = public_path('/storage/images/' . $id_filename);
+            	$image = \Image::make($this->destinationPath.'/images/'.$id_filename);
+            	$image->resize(660, 800)->save($path);
 	            $educacion_superior->Sup_Adjunto = $id_filename;
 	        }
 			// Guardar en la base de datos
@@ -141,6 +144,9 @@ class EducacionSuperiorController extends Controller {
 				$user->formulario->informacion_aspirante->educacion_superior()->save($educacion_superior);
 			}
 			$pos = $pos + 1;
+		}
+		if($user->formulario->formularioEstaLLeno() === true){
+			return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.completed'));
 		}
 		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}

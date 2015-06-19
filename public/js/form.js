@@ -278,6 +278,8 @@ $(function () {
         newElem.find('.labelPais').attr('for','ID'+newNum+'_pais');
         newElem.find('.inputPais').attr('id','ID'+newNum+'_pais').val('');
 
+        newElem.find('.inputPublicacion').attr('id','ID'+newNum+'_publicacion').val('');
+
         //Año - text
         newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
         newElem.find('.inputAño').attr('id','ID'+newNum+'_año').val('');
@@ -366,7 +368,6 @@ $(function () {
             };
         };
         return false;
-        $('#btnAgregarTrabajosPublicados').attr('disabled', false);
     });
 
     if($('.blockTrabajosPublicados').length < 2){
@@ -399,7 +400,7 @@ $(function () {
 
         //Año - text
         newElem.find('.labelAño').attr('for','ID'+newNum+'_año');
-        newElem.find('.inputAño').attr('id','ID'+newNum+'_año').val('');
+        newElem.find('.año').attr('id','ID'+newNum+'_añosInv').val('');
 
         newElem.find('.id_institucion').attr('value','');
         newElem.find('.id_exp_inv').attr('value','');
@@ -483,7 +484,6 @@ $(function () {
             };
         };
         return false;
-        $('#btnAgregarExpInvestigacion').attr('disabled', false);
     });
     if($('.blockExpInvestigacion').length < 2){
     	$('#btnRemoverExpInvestigacion').attr('disabled', true);
@@ -666,7 +666,6 @@ $(function () {
             };
         };
         return false;
-        $('#btnAgregarEducacionSuperior').attr('disabled', false);
     });
     if($('.blockEducacionSuperior').length < 2){
         $('#btnRemoverEducacionSuperior').attr('disabled', true);
@@ -782,7 +781,6 @@ $(function () {
             };
         };
         return false;
-        $('#btnAgregarExpProfesional').attr('disabled', false);
     });
     if($('.blockExpProfesional').length < 2){
         $('#btnRemoverExpProfesional').attr('disabled', true);
@@ -914,7 +912,6 @@ $(function () {
                     };
                 };
         return false;
-        $('#btnAgregarConocimientoDeIdiomas').attr('disabled', false);
     });
     if($('.blockconocimientoDeIdiomas').length < 2){
         $('#btnRemoverConocimientoDeIdiomas').attr('disabled', true);
@@ -1025,7 +1022,6 @@ $(function () {
             };
         };
         return false;
-        $('#btnAgregarCursosMasRelevantes').attr('disabled', false);
     });
     if($('.blockCursosMasRelevantes').length < 2){
         $('#btnRemoverCursosMasRelevantes').attr('disabled', true);

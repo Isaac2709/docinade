@@ -51,10 +51,10 @@ class CrearEducacionSuperiorRequest extends Request {
 		{
 			$rules['gradoA.'.$key] = 'required|exists:GEN_Grado_Acad,Gra_ID';
 		}
-		// foreach($this->request->get('gradoA') as $key => $val)
-		// {
-		// 	$rules['gradoA.'.$key] = 'required|exists:GEN_Grado_Acad,Grad_Nombre';
-		// }
+		foreach($this->request->get('area_especialidad') as $key => $val)
+		{
+			$rules['area_especialidad.'.$key] = 'required';
+		}
 		return $rules;
 	}
 

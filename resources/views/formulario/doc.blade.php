@@ -15,7 +15,7 @@ function this_url(){
     <xml>
         <w:WordDocument>
             <w:View>Print</w:View>
-            <w:Zoom>100</w:Zoom>
+            <w:Zoom>110</w:Zoom>
             <w:DoNotOptimizeForBrowser/>
         </w:WordDocument>
     </xml>
@@ -46,15 +46,16 @@ function this_url(){
 
         @page Section1{
             size: 29.7cm 21cm;
-            margin: 2cm 2cm 2cm 2cm;
+            margin: 1cm 1cm 1cm 1cm;
             mso-page-orientation: landscape;
             mso-footer:f1;
         }
         div.Section1 { page:Section1;}
+
         /*Table 1: Para Registros Múltiples.*/
 		table.table1{
    			border: 1px solid black;
-   			border-collapse: collapse;
+   			/*border-collapse: collapse;*/
 		}
 		table.table1 th {
 
@@ -92,14 +93,14 @@ function this_url(){
 			<td align="center"><img src="{{this_url()}}/images/UNA.png"></td>
 		</tr>
 	</table>
-	<p class="text-center"><font size="17">DOCTORADO EN CIENCIAS NATURALES PARA EL DESARROLLO</font></p>
-	<p class="text-center"><font size="14">FORMULARIO DE SOLICITUD DE ADMISIÓN</font></p>
-	<p class="text-center"><font size="14">VIII PROMOCIÓN Universidad Estatal a Distancia 2015 (UNED, Costa Rica)</font></p>
+	<p class="text-center"><font size="6">DOCTORADO EN CIENCIAS NATURALES PARA EL DESARROLLO</font></p>
+	<p class="text-center"><font size="4">FORMULARIO DE SOLICITUD DE ADMISIÓN</font></p>
+	<p class="text-center"><font size="4">VIII PROMOCIÓN Universidad Estatal a Distancia 2015 (UNED, Costa Rica)</font></p>
 	<table width="100%">
 		<tr>
 			<td width="30%" align="center">
 				@if(is_null($user->formulario->informacion_aspirante->Asp_Fotografia))
-					<img src="images/NoDisponible.jpg" height="160px" width="160px" border="1px">
+					<img src="{{this_url()}}/images/NoDisponible.jpg" height="160px" width="160px" border="1px">
 				@else
 					<img src="{{this_url()}}/{{'storage/images/'.$user->formulario->informacion_aspirante->Asp_Fotografia}}" height="160px" width="160px" border="1px">
 				@endif
@@ -121,9 +122,9 @@ function this_url(){
 	<table>
 		<tr>
 			<td><u class="text-left"><b><font size="3">I. FECHA ENVÍO:</font></b></u></td>
-			<td><table cellpadding="20">
+			<td><table cellpadding="20" width="40%">
 				<tr>
-					<td><b>DIA </b>
+					<td width="13%"><b>DIA </b>
 						@if(!is_null($user->formulario->informacion_aspirante->Asp_Fecha_Envio) && $user->formulario->informacion_aspirante->Asp_Fecha_Envio != "0000-00-00")
 							<?php
 								$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
@@ -132,7 +133,7 @@ function this_url(){
 							{{ $dia_envio }}
 						@endif
 					</td>
-					<td><b>MES </b>
+					<td width="13%"><b>MES </b>
 						@if(!is_null($user->formulario->informacion_aspirante->Asp_Fecha_Envio) && $user->formulario->informacion_aspirante->Asp_Fecha_Envio != "0000-00-00")
 							<?php
 								$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
@@ -141,7 +142,7 @@ function this_url(){
 							{{ $mes_envio }}
 						@endif
 					</td>
-					<td><b>AÑO </b>
+					<td width="14%"><b>AÑO </b>
 						@if(!is_null($user->formulario->informacion_aspirante->Asp_Fecha_Envio) && $user->formulario->informacion_aspirante->Asp_Fecha_Envio != "0000-00-00")
 							<?php
 								$date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
@@ -577,6 +578,7 @@ function this_url(){
 	@else
 		 NO
 	@endif
+	<br />
 	<br><table style='page-break-after:always;'></br></table><br>
 	<u class="text-left"><b><font size="3">
 		XI. DOCUMENTOS ADJUNTOS
@@ -587,14 +589,13 @@ function this_url(){
 	</font></b>
 	@if(!is_null($user->formulario->informacion_aspirante->Asp_Pasaporte_Adj))
 		<?php $pasaporte_adj = this_url().'/storage/images/'.$user->formulario->informacion_aspirante->Asp_Pasaporte_Adj ?>
-		{{ $pasaporte_adj or ''}}
 		<p class="text-center"><img src="{{ $pasaporte_adj or ''}}" align="middle"  width="100%"></p>
 	@else
 		<p class="text-center"><img src="{{this_url()}}/images/image_not_found.png" align="middle"></p>
 	@endif
 	<br />
 	<br><table style='page-break-after:always;'></br></table><br>
-	<b class="text-left"><font size="2">
+	<b class="text-left"><font size="3">
 		Titulos
 	</font></b>
 	<br />
@@ -603,12 +604,11 @@ function this_url(){
 			<b class="text-left"><font size="2">
 				Titulo de: {{ $educacion->area_especialidad->Esp_Area or '' }}
 			</font></b>
-			<p class="text-center"><img src="{{this_url()}}/{{ 'storage/images/'.$educacion->Sup_Adjunto}}" align="middle"  width="100%"></p>
+			<p class="text-center"><img src="{{this_url().'/storage/images/'.$educacion->Sup_Adjunto}}" align="middle"  width="100%"></p>
 			<br><table style='page-break-after:always;'></br></table><br>
 		@endif
 	@endforeach
 	<br />
-
     <br clear=all style='mso-special-character:line-break;page-break-after:always' />
     <!-- <div style='mso-element:footer' id="f1">
         <p class=MsoFooter>
@@ -619,5 +619,5 @@ function this_url(){
 </html>
 <?php
 header("Content-type: application/vnd.ms-word");
-header("Content-Disposition: attachment;Filename=HelloWorld.doc");
+header("Content-Disposition: attachment;Filename=Formulario_DOCINADE_".$user->formulario->IPe_Nombre.".doc");
 ?>

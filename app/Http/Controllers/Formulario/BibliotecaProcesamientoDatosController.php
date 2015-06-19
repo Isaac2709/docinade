@@ -85,6 +85,9 @@ class BibliotecaProcesamientoDatosController extends Controller {
 				}
 			}
 		}
+		if($user->formulario->formularioEstaLLeno() === true){
+			return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.completed'));
+		}
 		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 

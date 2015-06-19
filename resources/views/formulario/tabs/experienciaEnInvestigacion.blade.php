@@ -38,11 +38,13 @@
 
 				<!--Año-->
 				<div class="form-group">
-					<label for="año" class="col-md-4 control-label labelAño">Año:</label>
+					<label for="año" class="col-md-4 control-label labelAño">Año(s):</label>
 					<div class="col-md-8 " id="añoI" >
     					<div class="input-group date año">
-    						<input type="text"  class="form-control inputAño" name="año[]" id="año">
-    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+    						<span class="input-group-addon" >Del</span>
+        					<input type"text" class="form-control año inputAño" name="annio_inicio[]" >
+	        				<span class="input-group-addon" >a</span>
+                        	<input type="text" class="form-control año inputAño" name="annio_fin[]" >
 						</div>
 					</div>
 				</div>
@@ -99,11 +101,13 @@
 
 						<!--Año-->
 						<div class="form-group">
-							<label for="año" class="col-md-4 control-label labelAño">Año:</label>
+							<label for="año" class="col-md-4 control-label labelAño">Año(s):</label>
 							<div class="col-md-8 " id="añoI" >
 		    					<div class="input-group date año">
-		    						<input type="text"  class="form-control inputAño" name="año[]" id="año" value="{{ $investigacion->Inv_Anio }}">
-		    						<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i>
+		    						<span class="input-group-addon" >Del</span>
+		        					<input type"text" class="form-control año inputAño" name="annio_inicio[]" value="{{ $investigacion->Inv_Anio_Inicio }}">
+			        				<span class="input-group-addon" >a</span>
+		                        	<input type="text" class="form-control año inputAño" name="annio_fin[]" value="{{ $investigacion->Inv_Anio_Fin }}">
 								</div>
 							</div>
 						</div>
