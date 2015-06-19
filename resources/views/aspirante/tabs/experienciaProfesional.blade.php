@@ -5,17 +5,17 @@
         <table class="table table-striped">
         <thead>
             <tr>
-                <th><b>Empresa, Centro o Institución</b></th>
-                <th><b>Ocupación o Posición</b></th>
-                <th><b>Años de Experiencia</b></th>
+                <th class="text-center"><b>Empresa, Centro o Institución</b></th>
+                <th class="text-center"><b>Ocupación o Posición</b></th>
+                <th class="text-center"><b>Años de Experiencia</b></th>
             </tr>
         </thead>
         <tbody>
             @foreach($user->formulario->informacion_aspirante->experiencias_profesionales_desc as $expPro)
                 <tr>
-                    @if($expPro->Pro_Actual)
-                      <?php $funciones = $expPro->Pro_Funciones; ?>
-                     @endif
+                        @if($expPro->Pro_Actual)
+                          <?php $funciones = $expPro->Pro_Funciones; ?>
+                         @endif
                     <td>
                         {{ $expPro->Pro_Institucion }}
                     </td>

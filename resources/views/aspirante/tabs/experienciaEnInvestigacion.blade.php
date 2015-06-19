@@ -4,10 +4,10 @@
 		<table class="table table-striped">
 		<thead>
 			<tr>
-				<th><b>Institución, País</b></th>
-				<th><b>Área de Especialidad</b></th>
-				<th><b>Grado Académico</b></th>
-				<th><b>Año de Graduación</b></th>
+				<th class="text-center"><b>Institución, País</b></th>
+				<th class="text-center"><b>Área de Especialidad</b></th>
+				<th class="text-center"><b>Grado Académico</b></th>
+				<th class="text-center"><b>Año de Graduación</b></th>
 			</tr>
 		</thead>
 		<tbody>

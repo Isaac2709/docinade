@@ -6,11 +6,11 @@
 	<table class="table table-striped">
 	<thead>
 		<tr>
-			<th><b>Idioma</b></th>
-			<th><b>Nivel de Escritura</b></th>
-			<th><b>Nivel de Lectura</b></th>
-			<th><b>Nivel Conversacional</b></th>
-			<th><b>¿Posee MCA?</b></th>
+			<th class="text-center"><b>Idioma</b></th>
+			<th class="text-center"><b>Nivel de Escritura</b></th>
+			<th class="text-center"><b>Nivel de Lectura</b></th>
+			<th class="text-center"><b>Nivel Conversacional</b></th>
+			<th class="text-center"><b>¿Posee MCA?</b></th>
 		</tr>
 	</thead>
 	<tbody>
