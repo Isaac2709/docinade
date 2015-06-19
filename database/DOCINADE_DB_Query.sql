@@ -332,12 +332,14 @@ CREATE TABLE ASP_Exp_Invest(
 	Inv_Proyecto VARCHAR(400) NOT NULL,
 	Inv_ID_Institucion SMALLINT,
 	Inv_Lugar VARCHAR(250),
-	Inv_Anio YEAR(4),
+	Inv_Anio_Inicio YEAR(4),
 
     CONSTRAINT PK_Asp_Inv_ID PRIMARY KEY (Inv_ID),
     CONSTRAINT FK_Asp_Inv_Asp FOREIGN KEY (Inv_ID_Asp) REFERENCES ASP_Aspirante(Asp_ID),
     CONSTRAINT FK_Asp_Inv_Institucion FOREIGN KEY (Inv_ID_Institucion) REFERENCES GEN_Institucion(Ins_ID)
 );
+-- ALTER TABLE `asp_exp_invest` CHANGE `Inv_Anio` `Inv_Anio_Inicio` YEAR(4) NULL DEFAULT NULL;
+-- ALTER TABLE `asp_exp_invest` ADD `Inv_Anio_Fin` YEAR(4) NULL DEFAULT NULL;
 
 CREATE TABLE ASP_Exp_Profesional( -- Para obtener el más reciente se calcula con los años.
 	Pro_ID SMALLINT AUTO_INCREMENT NOT NULL,

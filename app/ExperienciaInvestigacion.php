@@ -26,7 +26,7 @@ class ExperienciaInvestigacion extends Model {
 	* Specifies which attributes should be mass-assignable.
 	* @var string
 	*/
-	// protected $fillable = [ 'Inv_ID_Asp', 'Inv_Proyecto', 'Inv_ID_Institucion', 'Inv_Lugar', 'Inv_Anio'];
+	// protected $fillable = [ 'Inv_ID_Asp', 'Inv_Proyecto', 'Inv_ID_Institucion', 'Inv_Lugar', 'Inv_Anio_Inicio', 'Inv_Anio_Fin'];
 
 	public function informacion_aspirante(){
 		return $this->belongsTo('App\InformacionAspirante', 'Inv_ID_Asp');

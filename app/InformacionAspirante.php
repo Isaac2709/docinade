@@ -320,7 +320,7 @@ class InformacionAspirante extends Model {
 	 *                               InformacionAspirante ordenados descendentemente]
 	 */
 	public function experiencias_investigaciones_desc(){
-		return $this->experiencias_investigaciones()->orderBy('Inv_Anio', 'DESC');
+		return $this->experiencias_investigaciones()->orderBy('Inv_Anio_Inicio', 'DESC');
 	}
 
 	/**

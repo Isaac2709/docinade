@@ -42,9 +42,13 @@ class CrearExperienciaInvestigacionRequest extends Request {
 		{
 			$rules['lugar.'.$key] = 'string|max:250';
 		}
-		foreach($this->request->get('año') as $key => $val)
+		foreach($this->request->get('annio_inicio') as $key => $val)
 		{
-			$rules['año.'.$key] = 'integer|max:'.Carbon::now()->format('Y');
+			$rules['annio_inicio.'.$key] = 'integer|max:'.Carbon::now()->format('Y');
+		}
+		foreach($this->request->get('annio_fin') as $key => $val)
+		{
+			$rules['annio_fin.'.$key] = 'integer|max:'.Carbon::now()->format('Y').'|min:'.$this->request->get('annio_inicio')[$key];
 		}
 		return $rules;
 	}

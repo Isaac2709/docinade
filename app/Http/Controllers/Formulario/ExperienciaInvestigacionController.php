@@ -82,8 +82,11 @@ class ExperienciaInvestigacionController extends Controller {
 			}
 			// Actualiza los datos faltantes
 			$experiencia_investigacion->Inv_Lugar = $request->lugar[$pos];
-			if(!empty($request->año[$pos])){
-				$experiencia_investigacion->Inv_Anio = $request->año[$pos];
+			if(!empty($request->annio_inicio[$pos])){
+				$experiencia_investigacion->Inv_Anio_Inicio = $request->annio_inicio[$pos];
+			}
+			if(!empty($request->annio_fin[$pos])){
+				$experiencia_investigacion->Inv_Anio_Fin = $request->annio_fin[$pos];
 			}
 			$experiencia_investigacion->save();
 			$pos = $pos + 1;
