@@ -40,8 +40,8 @@
 				</thead>
 				<tbody>
 					@if(!$user->formulario->informacion_aspirante->acceso_programas_computacionales->isEmpty())
-						@foreach($user->formulario->informacion_aspirante->acceso_programas_computacionales as $acceso_programas)
-							<tr><td>{{ $acceso_programas->PDa_Nombre }}</td></tr>										
+						@foreach($user->formulario->informacion_aspirante->acceso_procesamiento_datos as $acceso_programas)
+							<tr><td>{{ $acceso_programas->PDa_Nombre }}</td></tr>
 						@endforeach
 					@endif
 				</tbody>

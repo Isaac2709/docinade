@@ -19,20 +19,23 @@
         @endif
     </div>
     <div class="col-md-8">
-        <label class="col-md-3 labelLeft">Apellidos:</label>
-        <label class="col-md-9 labelRight">{{ $user->formulario->IPe_Apellido }}</label>
-        <label class="col-md-3 labelLeft">Nombre:</label>
-        <label class="col-md-9 labelRight">{{ $user->formulario->IPe_Nombre }}</label>
-        <label class="col-md-3 labelLeft">Género:</label>
-        <label class="col-md-9 labelRight">
+        <label><u>Apellidos:</u></label>
+        <label>{{ $user->formulario->IPe_Apellido }}</label>
+        </br>
+        <label><u>Nombre:</u></label>
+        <label>{{ $user->formulario->IPe_Nombre }}</label>
+        </br>
+        <label><u>Género:</u></label>
+        <label>
             @if(!is_null($user->formulario->IPe_Genero) && !empty($user->formulario->IPe_Genero))
                 @if($user->formulario->IPe_Genero == "F") Femenino
                 @elseif($user->formulario->IPe_Genero == "M") Masculino
                 @endif
             @endif
         </label>
-        <label class="col-md-3 labelLeft">Fecha de Nacimiento:</label>
-        <label class="col-md-9 labelRight">
+        </br>
+        <label ><u>Fecha de Nacimiento:</u></label>
+        <label >
             @if(!is_null($user->formulario->IPe_Fecha_Nac) && $user->formulario->IPe_Fecha_Nac != "0000-00-00")
                 <?php
                     $date_obj = date_create_from_format('Y-m-d',$user->formulario->IPe_Fecha_Nac);
@@ -41,68 +44,89 @@
                 {{ $fecha_nacimiento }}
             @endif
         </label>
-        <label class="col-md-3 labelLeft">Lugar de Nacimiento:</label>
-        <label class="col-md-9 labelRight">{{ $user->formulario->informacion_aspirante->Asp_Lugar_Nac }}</label>
-        <label class="col-md-3 labelLeft">Nacionalidad:</label>
-        <label class="col-md-9 labelRight">
-            @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Nac))
-                {{ $user->formulario->informacion_aspirante->nacionalidad->Nac_Nombre }}
-            @endif
-        </label>
-        <label class="col-md-3 labelLeft" text-align="right">N° Cédula/Pasaporte:</label>
-        <label class="col-md-9 labelRight">{{ $user->formulario->IPe_Pasaporte }}</label>
-        <label class="col-md-3 labelLeft" text-align="right">Énfasis de Interés:</label>
-        <label class="col-md-9 labelRight">
-            @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Enfasis))
-                {{ $user->formulario->informacion_aspirante->enfasis->Enf_Nombre }}
-            @endif
-        </label>
     </div>
-    <label class="col-md-12">
-        <label class="col-md-5 labelLeft">Área de Interés para Tema de Investigación:</label>
-        <label class="col-md-7 labelRight">
-            @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Area_Interes))
-                {{ $user->formulario->informacion_aspirante->area_interes->Area_Nombre }}
-            @endif
-        </label>
-    </label>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <label ><u>Lugar de Nacimiento:</u></label>
+                <label >{{ $user->formulario->informacion_aspirante->Asp_Lugar_Nac }}</label>
+                </br>
+                <label ><u>Nacionalidad:</u></label>
+                <label >
+                    @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Nac))
+                        {{ $user->formulario->informacion_aspirante->nacionalidad->Nac_Nombre }}
+                    @endif
+                </label>
+                </br>
+                <label ><u>N° Cédula/Pasaporte:</u></label>
+                <label >{{ $user->formulario->IPe_Pasaporte }}</label>
+            </div>
+
+            <div class="col-md-6">
+                <label ><u>Énfasis de Interés:</u></label>
+                <label >
+                    @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Enfasis))
+                        {{ $user->formulario->informacion_aspirante->enfasis->Enf_Nombre }}
+                    @endif
+                </label>
+                </br>
+                <label ><u>Área de Interés para Tema de Investigación:</u></label>
+                <label >
+                    @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Area_Interes))
+                        {{ $user->formulario->informacion_aspirante->area_interes->Area_Nombre }}
+                    @endif
+                </label>
+            </div>
+        </div>
+
     <h3 class="col-md-12"><b>Dirección Actual:</b></h3>
-    <label class="col-md-1 labelLeft">País:</label>
-    <label class="col-md-3 labelRight">
-        @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual) && !is_null($user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais))
-            {{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}
-        @endif
-    </label>
-    <label class="col-md-1 labelLeft">Ciudad:</label>
-    <label class="col-md-3 labelRight">
-        @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual))
-            {{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad }}
-        @endif
-    </label>
-    <label class="col-md-2 labelLeft">Código Postal:</label>
-    <label class="col-md-2 labelRight">
-        @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual))
-            {{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Cod_Postal }}
-        @endif
-    </label>
-    <label class="col-md-1 labelLeft">Teléfono:</label>
-    <label class="col-md-3 labelRight">{{ $user->formulario->IPe_Telefono }}</label>
-    <label class="col-md-1 labelLeft">Fax:</label>
-    <label class="col-md-7 labelRight">{{ $user->formulario->IPe_Fax }}</label>
-    <label class="col-md-3 labelLeft">Correo(s) Electrónico(s):</label>
-    <label class="col-md-9 labelRight">
-        @if(!$user->formulario->emails->isEmpty())
-            {{ $user->formulario->emails()->first()->Email_Email }}
-            @if ($user->formulario->emails()->count()>1)
-                , {{ $user->formulario->emails[1]->Email_Email or '' }}
-            @endif
-        @endif
-    </label>
-    <label class="col-md-3 labelLeft">Dirección Envío Correspondencia:</label>
-    <label class="col-md-9 labelRight">
-        @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual))
-            {{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Dir_Corresp }}
-        @endif
-    </label>
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <label><u>País:</u></label>
+            <label>
+                @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual) && !is_null($user->formulario->informacion_aspirante->direccion_actual->DiA_ID_Pais))
+                    {{ $user->formulario->informacion_aspirante->direccion_actual->pais_residencia->Pais_Nombre }}
+                @endif
+            </label>
+            </br>
+            <label><u>Ciudad:</u></label>
+            <label>
+                @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual))
+                    {{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Ciudad }}
+                @endif
+            </label>
+            </br>
+            <label><u>Código Postal:</u></label>
+            <label>
+                @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual))
+                    {{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Cod_Postal }}
+                @endif
+            </label>
+            </br>
+            <label><u>Teléfono:</u></label>
+            <label>{{ $user->formulario->IPe_Telefono }}</label>
+        </div>
+
+        <div class="col-md-6">
+            <label><u>Fax:</u></label>
+            <label>{{ $user->formulario->IPe_Fax }}</label>
+            </br>
+            <label><u>Correo(s) Electrónico(s):</u></label>
+            <label>
+                @if(!$user->formulario->emails->isEmpty())
+                    {{ $user->formulario->emails()->first()->Email_Email }}
+                    @if ($user->formulario->emails()->count()>1)
+                        , {{ $user->formulario->emails[1]->Email_Email or '' }}
+                    @endif
+                @endif
+            </label>
+            </br>
+            <label><u>Dirección Envío Correspondencia:</u></label>
+            <label>
+                @if(!is_null($user->formulario->informacion_aspirante->Asp_ID_Dir_Actual))
+                    {{ $user->formulario->informacion_aspirante->direccion_actual->DiA_Dir_Corresp }}
+                @endif
+            </label>
+        </div>
+    </div>
     <br/>
 </div>

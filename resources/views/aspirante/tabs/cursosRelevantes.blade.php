@@ -4,9 +4,9 @@
 		<table class="table table-striped">
 		<thead>
 			<tr>				
-				<th><b>Nombre de Actividad</b></th>
-				<th><b>Institución y Lugar</b></th>
-				<th><b>Año</b></th>
+				<th class="text-center"><b>Nombre de Actividad</b></th>
+				<th class="text-center"><b>Institución y Lugar</b></th>
+				<th class="text-center"><b>Año</b></th>
 			</tr>
 		</thead>
 		<tbody>

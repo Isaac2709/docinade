@@ -20,12 +20,12 @@
 				<div class="col-md-12 column">
 					<table class="table table-bordered table-hover" id="tab_logic_biblioteca">
 						<thead>
-							<tr><th class="text-center"><b>Programas para Procesamiento de Datos</b></th></tr>
+							<tr><th class="text-center"><b>Programas de computación que utiliza</b></th></tr>
 						</thead>
 						<tbody>
 							@if(!$user->formulario->informacion_aspirante->acceso_programas_computacionales->isEmpty())	
 								@foreach($user->formulario->informacion_aspirante->acceso_programas_computacionales as $acceso_programas)
-									<tr><td>{{ $acceso_programas->PDa_Nombre }}</td></tr>
+									<tr><td>{{ $acceso_programas->Prog_Nombre }}</td></tr>
 								@endforeach
 							@endif
 						</tbody>
