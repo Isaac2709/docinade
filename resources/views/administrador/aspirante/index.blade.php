@@ -119,6 +119,7 @@
 			<!--Propuesta de tesis-->
 			<div id="propuestaDeTesis" class="tab-pane fade">@include('aspirante.tabs.propuestaDeTesis')</div>
 	</div>
+	@include('aspirante.butttons')
 </div>
 @endsection
 

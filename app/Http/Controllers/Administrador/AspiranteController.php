@@ -65,12 +65,24 @@ class AspiranteController extends Controller {
 		//
 	}
 
-	public function getPdfformulario(){
-		$user = User::find(Auth::user()->Usu_ID);
+	public function getPdfformulario($id){
+		$user = User::find($id);
     	$html = view('formulario.pdf')->with('user',$user)->render();
         return $this->pdf
             ->load($html, 'Letter', 'portrait')
             ->show();
+	}
+
+	public function getDocFormulario($id){
+		$user = User::find($id);
+		return view('formulario.doc')->with('user',$user);
+	}
+
+	public function getRevisarFormulario($id){
+		$user = User::find($id);
+		$user->formulario->informacion_aspirante->Asp_Estado_Formulario = "Revisado";
+		$user->formulario->informacion_aspirante->save();
+		return redirect()->back()->withInput()->with('successMessage', 'El formulario ha sido revisado');
 	}
 
 	/**

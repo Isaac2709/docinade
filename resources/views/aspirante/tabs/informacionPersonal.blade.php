@@ -1,8 +1,25 @@
 <div class="row">
     <label class="col-md-12 labelRight"><h3><b>FECHA ENVÍO:</b></h3></label>
-    <label class="col-md-3 labelRight">Día </label>
-    <label class="col-md-3 labelRight">Mes </label>
-    <label class="col-md-6 labelRight">Año </label>
+    <?php
+        if(!is_null($user->formulario->informacion_aspirante->Asp_Fecha_Envio)){
+            $date_obj = date_create_from_format('Y-m-d',$user->formulario->informacion_aspirante->Asp_Fecha_Envio);
+            $dia_envio = date_format($date_obj, 'd');
+            $mes_envio = date_format($date_obj, 'm');
+            $annio_envio = date_format($date_obj, 'Y');
+        }
+    ?>
+    <div class="col-md-3">
+        <label class="col-md-3 labelRight">Día: </label>
+        <div class="form-group">{{ $dia_envio or ''}}</div>
+    </div>
+    <div class="col-md-3">
+        <label class="col-md-3 labelRight">Mes: </label>
+        <div class="form-group">{{ $mes_envio or ''}}</div>
+    </div>
+    <div class="col-md-3">
+        <label class="col-md-3 labelRight">Año: </label>
+        <div class="form-group">{{ $annio_envio or ''}}</div>
+    </div>
     <br/>
     <br/>
     <h3 class="col-md-12"><b>INFORMACIÓN PERSONAL:</b></h3>

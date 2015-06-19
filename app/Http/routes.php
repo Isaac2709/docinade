@@ -36,6 +36,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'is_admin'], 'namesp
 	Route::get('/', 'AdministradorController@forms');
 	Route::get('aspirantFormData', 'AdministradorController@aspirantFormData');
 	Route::get('aspirante/{Asp_ID}', 'AspiranteController@index');
+	Route::get('revFormulario/{Asp_ID}', 'AspiranteController@getRevisarFormulario');
+	Route::get('pdfformulario/{Asp_ID}', 'AspiranteController@getPdfformulario');
+	Route::get('docformulario/{Asp_ID}', 'AspiranteController@getDocFormulario');
 });
 
 Route::group(['prefix' => 'profesor', 'middleware' => ['auth', 'is_professor'], 'namespace' => 'Profesor'], function(){
@@ -44,6 +47,9 @@ Route::group(['prefix' => 'profesor', 'middleware' => ['auth', 'is_professor'], 
 	// Route::post('perfil/{Prof_ID}', 'ProfesorController@update');
 	Route::resource('perfil', 'ProfesorController');
 	Route::get('aspirante/{Asp_ID}', 'AspiranteController@index');
+	Route::get('revFormulario/{Asp_ID}', 'AspiranteController@getRevisarFormulario');
+	Route::get('pdfformulario/{Asp_ID}', 'AspiranteController@getPdfformulario');
+	Route::get('docformulario/{Asp_ID}', 'AspiranteController@getDocFormulario');
 });
 
 Route::group(['prefix' => 'formulario', 'middleware' => ['auth', 'is_aspirant'], 'namespace' => 'Formulario'], function(){
