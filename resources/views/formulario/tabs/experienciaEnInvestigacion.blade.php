@@ -42,9 +42,9 @@
 					<div class="col-md-8 " id="añoI" >
     					<div class="input-group date año">
     						<span class="input-group-addon" >Del</span>
-        					<input type"text" class="form-control año" name="annio_inicio[]" >
+        					<input type"text" class="form-control año inputAño" name="annio_inicio[]" >
 	        				<span class="input-group-addon" >a</span>
-                        	<input type="text" class="form-control año" name="annio_fin[]" >
+                        	<input type="text" class="form-control año inputAño" name="annio_fin[]" >
 						</div>
 					</div>
 				</div>
@@ -105,9 +105,9 @@
 							<div class="col-md-8 " id="añoI" >
 		    					<div class="input-group date año">
 		    						<span class="input-group-addon" >Del</span>
-		        					<input type"text" class="form-control año" name="annio_inicio[]" value="{{ $investigacion->Inv_Anio_Inicio }}">
+		        					<input type"text" class="form-control año inputAño" name="annio_inicio[]" value="{{ $investigacion->Inv_Anio_Inicio }}">
 			        				<span class="input-group-addon" >a</span>
-		                        	<input type="text" class="form-control año" name="annio_fin[]" value="{{ $investigacion->Inv_Anio_Fin }}">
+		                        	<input type="text" class="form-control año inputAño" name="annio_fin[]" value="{{ $investigacion->Inv_Anio_Fin }}">
 								</div>
 							</div>
 						</div>

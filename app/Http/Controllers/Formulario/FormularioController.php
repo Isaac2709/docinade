@@ -104,8 +104,10 @@ class FormularioController extends Controller {
 	        $trozos = explode(".", $name_file);
 	        $extension = end($trozos);
 	        $id_filename = $user->Usu_Nombre.'_'.rand(10, 99999999).'.'.$file->getClientOriginalName();
-	        \Illuminate\Support\Facades\Request::file('id_file')->move($this->destinationPath.'/images/', $id_filename);
+	        // \Illuminate\Support\Facades\Request::file('id_file')->move($this->destinationPath.'/images/', $id_filename);
             $user->formulario->informacion_aspirante->Asp_Pasaporte_Adj = $id_filename;
+            $path = public_path('/storage/images/' . $id_filename);
+            \Image::make($request->file('id_file'))->resize(660, 800)->save($path);
         }
 
         // Fotografía adjunta del aspirante
@@ -116,7 +118,9 @@ class FormularioController extends Controller {
 	        $trozos = explode(".", $name_file);
 	        $extension = end($trozos);
 	        $id_filename = $user->Usu_Nombre.'_'.rand(10, 99999999).'.'.$file->getClientOriginalName();
-	        \Illuminate\Support\Facades\Request::file('photo_file')->move($this->destinationPath.'/images/', $id_filename);
+	        // \Illuminate\Support\Facades\Request::file('photo_file')->move($this->destinationPath.'/images/', $id_filename);
+            $path = public_path('/storage/images/' . $id_filename);
+            \Image::make($request->file('photo_file'))->resize(180, 180)->save($path);
             $user->formulario->informacion_aspirante->Asp_Fotografia = $id_filename;
         }
 
@@ -228,6 +232,7 @@ class FormularioController extends Controller {
     	$html = view('formulario.pdf')->with('user',$user)->render();
     	$pdf = \PDF::load($html, 'Letter', 'portrait');
 	    return $pdf->show();
+	    // return $pdf->download();
         // return $this->pdf
         //     ->load($html, 'Letter', 'portrait')
         //     ->show();

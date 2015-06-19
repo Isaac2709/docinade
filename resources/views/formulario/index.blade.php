@@ -231,10 +231,6 @@
 			$('button').attr('disabled', true);
 			$('select').attr('disabled', true);
 			$('input[type=file]').parent('span').attr('disabled', true);
-// pointer-events: none;
-// opacity: 0.65;
-// box-shadow: none;
-			// .btn.disabled
 		})
 		</script>
 	@endif

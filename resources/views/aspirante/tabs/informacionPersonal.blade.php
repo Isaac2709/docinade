@@ -14,7 +14,7 @@
         @else
             <p class="text-center">
                 <img src="{{url('storage/images/'.$user->formulario->informacion_aspirante->Asp_Fotografia)}}"
-                class="text-center img-thumbnail" height="180px" width="180px">
+                class="text-center img-thumbnail" height="160px" width="160px">
             </p>
         @endif
     </div>

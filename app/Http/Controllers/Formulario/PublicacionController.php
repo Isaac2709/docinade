@@ -84,11 +84,15 @@ class PublicacionController extends Controller {
 			}
 			// Actualiza los datos faltantes
 			$publicacion->Pub_Medio = $request->titulo_medio_publicacion[$pos];
+			$publicacion->Pub_Enlace = $request->url[$pos];
 			if(!empty($request->annio[$pos])){
 				$publicacion->Pub_Anio = $request->annio[$pos];
 			}
 			$publicacion->save();
 			$pos = $pos + 1;
+		}
+		if($user->formulario->formularioEstaLLeno() === true){
+			return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.completed'));
 		}
 		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}

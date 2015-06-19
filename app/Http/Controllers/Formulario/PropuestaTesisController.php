@@ -59,7 +59,9 @@ class PropuestaTesisController extends Controller {
 		$user->formulario->informacion_aspirante->propuesta_tesis->PTe_Bibliografia = $request->bibliografia;
 
 		$user->formulario->informacion_aspirante->propuesta_tesis->save();
-
+		if($user->formulario->formularioEstaLLeno() === true){
+			return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.completed'));
+		}
 		return redirect()->back()->withInput()->with('successMessage', trans('alert.alert_form.updated'));
 	}
 
