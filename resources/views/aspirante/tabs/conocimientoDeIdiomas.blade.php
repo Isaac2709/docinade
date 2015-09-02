@@ -14,13 +14,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($user->formulario->informacion_aspirante->conocimiento_idiomas as $public)
+		@foreach($user->formulario->informacion_aspirante->conocimiento_idiomas as $idioma)
 			<tr>
-				<td>{{ $public->Idm_Idioma }}</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>{{ $idioma->Idm_Idioma }}</td>
+				<td>{{ $idioma->nivel_idioma_escritura->Niv_Nombre }}</td>
+				<td>{{ $idioma->nivel_idioma_lectura->Niv_Nombre }}</td>
+				<td>{{ $idioma->nivel_idioma_conversacional->Niv_Nombre }}</td>
+				<td><a href="{{ '/storage/certificates/'.$idioma->Idm_Adjunto }}" target="_blank">{{ $idioma->Idm_Adjunto }}</a></td>
 			</tr>
 		@endforeach
 	</tbody>
